@@ -2,6 +2,7 @@ class RoutePaths {
   // ベースパス（親パス、スラッシュで始まる）
   static const String tuningList = '/tuningList';
   static const String settings = '/settings';
+  static const String splash = '/splash';
 
   // ネストされたパス用の子パス名（スラッシュなし）
   static const String tuningRegisterSegment = 'tuningRegister';

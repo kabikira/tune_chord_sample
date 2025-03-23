@@ -7,6 +7,7 @@ import 'package:tune_chord_sample/src/pages/code_form_list.dart';
 import 'package:tune_chord_sample/src/pages/code_form_register.dart';
 import 'package:tune_chord_sample/src/pages/nav_bar.dart';
 import 'package:tune_chord_sample/src/pages/settings.dart';
+import 'package:tune_chord_sample/src/pages/splash.dart';
 import 'package:tune_chord_sample/src/pages/tuning_list.dart';
 import 'package:tune_chord_sample/src/pages/tuning_register.dart';
 import 'package:tune_chord_sample/src/router/router_observer.dart';
@@ -17,9 +18,13 @@ final _settingsNavKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/tuningList',
+  initialLocation: RoutePaths.splash,
   observers: [RouterObserver()],
   routes: [
+    GoRoute(
+      path: RoutePaths.splash,
+      builder: (context, state) => const Splash(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return ScaffoldWithNavBar(navigationShell: navigationShell);

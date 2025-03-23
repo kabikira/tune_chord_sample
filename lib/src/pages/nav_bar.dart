@@ -16,7 +16,10 @@ class ScaffoldWithNavBar extends StatelessWidget {
           navigationShell.goBranch(index);
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'TuningList'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.music_note),
+            label: 'TuningList',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
