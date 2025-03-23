@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tune_chord_sample/src/config/route_paths.dart';
-import 'package:tune_chord_sample/src/pages/code_form_detail.dart';
-import 'package:tune_chord_sample/src/pages/code_form_edit.dart';
-import 'package:tune_chord_sample/src/pages/code_form_list.dart';
-import 'package:tune_chord_sample/src/pages/code_form_register.dart';
-import 'package:tune_chord_sample/src/pages/nav_bar.dart';
-import 'package:tune_chord_sample/src/pages/settings.dart';
-import 'package:tune_chord_sample/src/pages/splash.dart';
-import 'package:tune_chord_sample/src/pages/tuning_list.dart';
-import 'package:tune_chord_sample/src/pages/tuning_register.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/code_form_detail.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/code_form_edit.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/code_form_list.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/code_form_register.dart';
+import 'package:tune_chord_sample/src/pages/navBar/nav_bar.dart';
+import 'package:tune_chord_sample/src/pages/settings/settings.dart';
+import 'package:tune_chord_sample/src/pages/splash/splash.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_list.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
 import 'package:tune_chord_sample/src/router/router_observer.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
