@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:drift/native.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqlite3/sqlite3.dart';
@@ -11,7 +12,12 @@ import 'package:tune_chord_sample/src/db/code_form_tags/code_form_tags.dart';
 import 'package:tune_chord_sample/src/db/tag/tab.dart';
 import 'package:tune_chord_sample/src/db/tuning_tags/tuning_tags.dart';
 import 'package:tune_chord_sample/src/db/tunings/tunings.dart';
+
 part 'app_database.g.dart';
+
+final appDatabaseProvider = Provider<AppDatabase>((ref) {
+  return AppDatabase();
+});
 
 @DriftDatabase(tables: [Tunings, CodeForms, Tags, TuningTags, CodeFormTags])
 class AppDatabase extends _$AppDatabase {
