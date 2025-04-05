@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/config/route_paths.dart';
-import 'package:tune_chord_sample/src/utils/app_l10n.dart';
 
 class TuningList extends StatelessWidget {
   const TuningList({super.key});
@@ -10,7 +10,7 @@ class TuningList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Intl.defaultLocale = Localizations.localeOf(context).toString();
-    final l10n = AppL10n.of(context);
+    final l10n = L10n.of(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text('TuningList')),
