@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/config/route_paths.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
 
 class TuningList extends StatelessWidget {
   const TuningList({super.key});
@@ -20,9 +21,12 @@ class TuningList extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.push(RoutePaths.tuningRegister);
+                showDialog(
+                  context: context,
+                  builder: (context) => const TuningRegister(),
+                );
               },
-              child: const Text('Go to TuningRegister'),
+              child: const Text('Show TuningRegister Dialog'),
             ),
             ElevatedButton(
               onPressed: () {

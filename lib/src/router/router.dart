@@ -38,11 +38,11 @@ final GoRouter router = GoRouter(
               path: RoutePaths.tuningList,
               builder: (context, state) => const TuningList(),
               routes: [
-                GoRoute(
-                  // チューニング登録
-                  path: RoutePaths.tuningRegisterSegment,
-                  builder: (context, state) => const TuningRegister(),
-                ),
+                // GoRoute(
+                //   // チューニング登録
+                //   path: RoutePaths.tuningRegisterSegment,
+                //   builder: (context, state) => const TuningRegister(),
+                // ),
                 // コードフォームリスト
                 GoRoute(
                   path: RoutePaths.codeFormListSegment,

@@ -5,9 +5,15 @@ class TuningRegister extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('TuningRegister')),
-      body: const Center(child: Text('This is TuningRegister')),
+    return AlertDialog(
+      title: const Text('Tuning Register'),
+      content: const Text('This is TuningRegister dialog'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Close'),
+        ),
+      ],
     );
   }
 }
