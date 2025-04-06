@@ -1,44 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/config/route_paths.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
 
-class TuningList extends StatelessWidget {
+class TuningList extends HookConsumerWidget {
   const TuningList({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tuningAsync = ref.watch(tuningNotifierProvider);
+
     Intl.defaultLocale = Localizations.localeOf(context).toString();
     final l10n = L10n.of(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text('TuningList')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const TuningRegister(),
+      body: Column(
+        children: [
+          Expanded(
+            child: tuningAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (e, _) => Center(child: Text('エラー: $e')),
+              data: (tunings) {
+                if (tunings.isEmpty) {
+                  return const Center(child: Text('登録されたチューニングがありません'));
+                }
+                return ListView.builder(
+                  itemCount: tunings.length,
+                  itemBuilder:
+                      (_, index) => ListTile(
+                        title: Text(tunings[index].name),
+                        subtitle: Text(tunings[index].strings),
+                      ),
                 );
               },
-              child: const Text('Show TuningRegister Dialog'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                context.push(RoutePaths.codeFormList);
-              },
-              child: const Text('Go to CodeFormList'),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(RoutePaths.codeFormList);
+                  },
+                  child: const Text('Go to CodeFormList'),
+                ),
+                const TextField(),
+                Text(DateFormat.yMEd().format(DateTime.now())),
+                Text(l10n.helloWorld),
+              ],
             ),
-            const TextField(),
-            Text(DateFormat.yMEd().format(DateTime.now())),
-            Text(l10n.helloWorld),
-          ],
-        ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(context: context, builder: (_) => const TuningRegister());
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
