@@ -6,6 +6,7 @@ import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/config/route_paths.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_update.dart'; // ← 追加
 
 class TuningList extends HookConsumerWidget {
   const TuningList({super.key});
@@ -31,11 +32,22 @@ class TuningList extends HookConsumerWidget {
                 }
                 return ListView.builder(
                   itemCount: tunings.length,
-                  itemBuilder:
-                      (_, index) => ListTile(
-                        title: Text(tunings[index].name),
-                        subtitle: Text(tunings[index].strings),
+                  itemBuilder: (_, index) {
+                    final tuning = tunings[index];
+                    return ListTile(
+                      title: Text(tuning.name),
+                      subtitle: Text(tuning.strings),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => TuningUpdate(tuning: tuning),
+                          );
+                        },
                       ),
+                    );
+                  },
                 );
               },
             ),

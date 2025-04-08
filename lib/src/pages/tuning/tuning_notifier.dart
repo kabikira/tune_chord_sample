@@ -35,4 +35,27 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
       state = AsyncValue.error(e, st);
     }
   }
+
+  Future<void> updateTuning({
+    required int id,
+    required String name,
+    required String strings,
+  }) async {
+    try {
+      await db.updateTuning(
+        Tuning(
+          id: id,
+          name: name,
+          strings: strings,
+          memo: null,
+          isFavorite: false,
+          userId: null,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
 }
