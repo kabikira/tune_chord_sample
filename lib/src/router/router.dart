@@ -9,7 +9,6 @@ import 'package:tune_chord_sample/src/pages/navBar/nav_bar.dart';
 import 'package:tune_chord_sample/src/pages/settings/settings.dart';
 import 'package:tune_chord_sample/src/pages/splash/splash.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_list.dart';
-import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
 import 'package:tune_chord_sample/src/router/router_observer.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();

@@ -4,9 +4,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/config/route_paths.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
-import 'package:tune_chord_sample/src/pages/tuning/tuning_update.dart'; // ← 追加
+import 'package:tune_chord_sample/src/pages/tuning/tuning_update_dialog.dart'; // ← 追加
 
 class TuningList extends HookConsumerWidget {
   const TuningList({super.key});
@@ -37,14 +38,32 @@ class TuningList extends HookConsumerWidget {
                     return ListTile(
                       title: Text(tuning.name),
                       subtitle: Text(tuning.strings),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (_) => TuningUpdate(tuning: tuning),
-                          );
-                        },
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // 編集アイコン
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder:
+                                    (_) => TuningUpdateDialog(tuning: tuning),
+                              );
+                            },
+                          ),
+                          // 削除アイコン
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder:
+                                    (_) => TuningDeleteDialog(tuning: tuning),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     );
                   },

@@ -58,4 +58,12 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
       state = AsyncValue.error(e, st);
     }
   }
+
+  Future<void> deleteTuning(int id) async {
+    try {
+      await db.deleteTuning(id);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
 }

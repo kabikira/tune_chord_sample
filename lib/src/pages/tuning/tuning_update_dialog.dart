@@ -4,10 +4,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
-class TuningUpdate extends HookConsumerWidget {
+class TuningUpdateDialog extends HookConsumerWidget {
   final Tuning tuning;
 
-  const TuningUpdate({super.key, required this.tuning});
+  const TuningUpdateDialog({super.key, required this.tuning});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
