@@ -3,12 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:tune_chord_sample/src/config/route_paths.dart';
 
 class CodeFormList extends StatelessWidget {
-  const CodeFormList({super.key});
+  final int tuningId;
+  const CodeFormList({super.key, required this.tuningId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('CodeFormList')),
+      appBar: AppBar(title: Text('CodeFormList tuningId=$tuningId')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

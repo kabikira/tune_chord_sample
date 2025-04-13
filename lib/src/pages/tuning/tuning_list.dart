@@ -38,13 +38,17 @@ class TuningList extends HookConsumerWidget {
                       /// TODO:タップの範囲共通かできるあとで修正
                       title: GestureDetector(
                         onTap: () {
-                          context.push(RoutePaths.codeFormList);
+                          context.push(
+                            '${RoutePaths.codeFormList}/${tuning.id}',
+                          );
                         },
                         child: Text(tuning.name),
                       ),
                       subtitle: GestureDetector(
                         onTap: () {
-                          context.push(RoutePaths.codeFormList);
+                          context.push(
+                            '${RoutePaths.codeFormList}/${tuning.id}',
+                          );
                         },
                         child: Text(tuning.strings),
                       ),

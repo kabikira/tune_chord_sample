@@ -43,9 +43,15 @@ final GoRouter router = GoRouter(
                 //   builder: (context, state) => const TuningRegister(),
                 // ),
                 // コードフォームリスト
+                /// TODO: RoutePathsの書き方も変える必要あるかも
                 GoRoute(
-                  path: RoutePaths.codeFormListSegment,
-                  builder: (context, state) => const CodeFormList(),
+                  path: '${RoutePaths.codeFormListSegment}/:tuningId',
+                  builder: (context, state) {
+                    final tuningId = int.parse(
+                      state.pathParameters['tuningId']!,
+                    );
+                    return CodeFormList(tuningId: tuningId);
+                  },
                   routes: [
                     // コードフォーム登録、
                     GoRoute(
