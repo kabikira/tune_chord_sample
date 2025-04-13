@@ -7,7 +7,7 @@ import 'package:tune_chord_sample/src/config/route_paths.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
-import 'package:tune_chord_sample/src/pages/tuning/tuning_update_dialog.dart'; // ← 追加
+import 'package:tune_chord_sample/src/pages/tuning/tuning_update_dialog.dart';
 
 class TuningList extends HookConsumerWidget {
   const TuningList({super.key});
@@ -15,7 +15,6 @@ class TuningList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tuningAsync = ref.watch(tuningNotifierProvider);
-
     Intl.defaultLocale = Localizations.localeOf(context).toString();
     final l10n = L10n.of(context);
 
@@ -36,12 +35,22 @@ class TuningList extends HookConsumerWidget {
                   itemBuilder: (_, index) {
                     final tuning = tunings[index];
                     return ListTile(
-                      title: Text(tuning.name),
-                      subtitle: Text(tuning.strings),
+                      /// TODO:タップの範囲共通かできるあとで修正
+                      title: GestureDetector(
+                        onTap: () {
+                          context.push(RoutePaths.codeFormList);
+                        },
+                        child: Text(tuning.name),
+                      ),
+                      subtitle: GestureDetector(
+                        onTap: () {
+                          context.push(RoutePaths.codeFormList);
+                        },
+                        child: Text(tuning.strings),
+                      ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // 編集アイコン
                           IconButton(
                             icon: const Icon(Icons.edit),
                             onPressed: () {
@@ -52,7 +61,6 @@ class TuningList extends HookConsumerWidget {
                               );
                             },
                           ),
-                          // 削除アイコン
                           IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () {
