@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tune_chord_sample/src/config/route_paths.dart';
 
 class Splash extends HookWidget {
   const Splash({super.key});
@@ -10,7 +9,7 @@ class Splash extends HookWidget {
     useEffect(() {
       Future.delayed(const Duration(seconds: 2), () {
         if (context.mounted) {
-          context.go(RoutePaths.tuningList);
+          context.go('/tuningList');
         }
       });
       return null;

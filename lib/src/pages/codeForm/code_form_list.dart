@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tune_chord_sample/src/config/route_paths.dart';
 
 class CodeFormList extends StatelessWidget {
   final int tuningId;
@@ -16,13 +15,13 @@ class CodeFormList extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.push(RoutePaths.codeFormRegister);
+                context.push('codeFormRegister');
               },
               child: const Text('Go to CodeFormRegister'),
             ),
             ElevatedButton(
               onPressed: () {
-                context.push(RoutePaths.codeFormDetail);
+                context.push('codeFormDetail');
               },
               child: const Text('Go to CodeFormDetail'),
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tune_chord_sample/src/config/route_paths.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_detail.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_edit.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_list.dart';
@@ -17,35 +16,25 @@ final _settingsNavKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: RoutePaths.splash,
+  initialLocation: '/splash',
   observers: [RouterObserver()],
   routes: [
-    GoRoute(
-      path: RoutePaths.splash,
-      builder: (context, state) => const Splash(),
-    ),
+    GoRoute(path: '/splash', builder: (context, state) => const Splash()),
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        return ScaffoldWithNavBar(navigationShell: navigationShell);
-      },
+      builder:
+          (context, state, navigationShell) =>
+              ScaffoldWithNavBar(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           navigatorKey: _tuningNavKey,
           observers: [RouterObserver()],
           routes: [
             GoRoute(
-              path: RoutePaths.tuningList,
+              path: '/tuningList',
               builder: (context, state) => const TuningList(),
               routes: [
-                // GoRoute(
-                //   // チューニング登録
-                //   path: RoutePaths.tuningRegisterSegment,
-                //   builder: (context, state) => const TuningRegister(),
-                // ),
-                // コードフォームリスト
-                /// TODO: RoutePathsの書き方も変える必要あるかも
                 GoRoute(
-                  path: '${RoutePaths.codeFormListSegment}/:tuningId',
+                  path: 'codeFormList/:tuningId',
                   builder: (context, state) {
                     final tuningId = int.parse(
                       state.pathParameters['tuningId']!,
@@ -53,18 +42,16 @@ final GoRouter router = GoRouter(
                     return CodeFormList(tuningId: tuningId);
                   },
                   routes: [
-                    // コードフォーム登録、
                     GoRoute(
-                      path: RoutePaths.codeFormRegisterSegment,
+                      path: 'codeFormRegister',
                       builder: (context, state) => const CodeFormRegister(),
                     ),
-                    // コードフォーム詳細、
                     GoRoute(
-                      path: RoutePaths.codeFormDetailSegment,
+                      path: 'codeFormDetail',
                       builder: (context, state) => const CodeFormDetail(),
                       routes: [
                         GoRoute(
-                          path: RoutePaths.codeFormEditSegment,
+                          path: 'codeFormEdit',
                           builder: (context, state) => const CodeFormEdit(),
                         ),
                       ],
@@ -80,7 +67,7 @@ final GoRouter router = GoRouter(
           observers: [RouterObserver()],
           routes: [
             GoRoute(
-              path: RoutePaths.settings,
+              path: '/settings',
               builder: (context, state) => const Settings(),
             ),
           ],

@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/config/route_paths.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
@@ -38,17 +37,13 @@ class TuningList extends HookConsumerWidget {
                       /// TODO:タップの範囲共通かできるあとで修正
                       title: GestureDetector(
                         onTap: () {
-                          context.push(
-                            '${RoutePaths.codeFormList}/${tuning.id}',
-                          );
+                          context.push('/tuningList/codeFormList/${tuning.id}');
                         },
                         child: Text(tuning.name),
                       ),
                       subtitle: GestureDetector(
                         onTap: () {
-                          context.push(
-                            '${RoutePaths.codeFormList}/${tuning.id}',
-                          );
+                          context.push('/tuningList/codeFormList/${tuning.id}');
                         },
                         child: Text(tuning.strings),
                       ),
@@ -88,12 +83,6 @@ class TuningList extends HookConsumerWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    context.push(RoutePaths.codeFormList);
-                  },
-                  child: const Text('Go to CodeFormList'),
-                ),
                 const TextField(),
                 Text(DateFormat.yMEd().format(DateTime.now())),
                 Text(l10n.helloWorld),
