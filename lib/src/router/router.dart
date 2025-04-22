@@ -44,11 +44,17 @@ final GoRouter router = GoRouter(
                   routes: [
                     GoRoute(
                       path: 'codeFormRegister',
-                      builder: (context, state) => const CodeFormRegister(),
+                      builder: (context, state) {
+                        final tuningId = state.extra as int;
+                        return CodeFormRegister(tuningId: tuningId);
+                      },
                     ),
                     GoRoute(
                       path: 'codeFormDetail',
-                      builder: (context, state) => const CodeFormDetail(),
+                      builder: (context, state) {
+                        final tuningId = state.extra as int;
+                        return CodeFormDetail(tuningId: tuningId);
+                      },
                       routes: [
                         GoRoute(
                           path: 'codeFormEdit',

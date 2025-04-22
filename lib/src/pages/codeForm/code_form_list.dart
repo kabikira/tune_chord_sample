@@ -15,13 +15,19 @@ class CodeFormList extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.push('codeFormRegister');
+                context.push(
+                  '/tuningList/codeFormList/$tuningId/codeFormRegister',
+                  extra: tuningId,
+                );
               },
               child: const Text('Go to CodeFormRegister'),
             ),
             ElevatedButton(
               onPressed: () {
-                context.push('codeFormDetail');
+                context.push(
+                  '/tuningList/codeFormList/$tuningId/codeFormDetail',
+                  extra: tuningId,
+                );
               },
               child: const Text('Go to CodeFormDetail'),
             ),
