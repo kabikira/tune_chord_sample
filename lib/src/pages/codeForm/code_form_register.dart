@@ -26,7 +26,7 @@ class CodeFormRegister extends HookConsumerWidget {
                     .addCodeForm(
                       tuningId: tuningId,
                       fretPositions: fretString,
-                      label: 'Em',
+                      label: 'Em', // TODO: あとで修正
                     );
                 if (context.mounted) {
                   Navigator.of(context).pop();
