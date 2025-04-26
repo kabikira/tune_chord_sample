@@ -10,6 +10,8 @@ class CodeFormRegister extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final fretPositions = useState<List<int>>(List.filled(6, 0));
+    final labelController = useTextEditingController();
+
     return Scaffold(
       appBar: AppBar(title: Text('CodeFormRegister tuningId=$tuningId')),
       body: Center(
@@ -18,15 +20,33 @@ class CodeFormRegister extends HookConsumerWidget {
           children: [
             buildFretBoard(fretPositions),
             const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: TextField(
+                controller: labelController,
+                decoration: const InputDecoration(
+                  labelText: 'コード名（例：Em, C, G7など）',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
+                if (labelController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('コード名を入力してください')),
+                  );
+                  return;
+                }
+
                 final fretString = fretPositions.value.join(',');
                 await ref
                     .read(codeFormNotifierProvider.notifier)
                     .addCodeForm(
                       tuningId: tuningId,
                       fretPositions: fretString,
-                      label: 'Em', // TODO: あとで修正
+                      label: labelController.text,
                     );
                 if (context.mounted) {
                   Navigator.of(context).pop();
