@@ -175,22 +175,25 @@ class CodeFormList extends HookConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(
+                    IconButton(
+                      icon: const Icon(Icons.edit),
                       onPressed: () {
-                        // 編集画面へ遷移
-                        context.push(
-                          '/tuningList/codeFormList/${codeForm.tuningId}/codeFormEdit/${codeForm.id}',
+                        showDialog(
+                          context: context,
+                          builder:
+                              (_) => CodeFormUpdateDialog(codeForm: codeForm),
                         );
                       },
-                      child: const Text('編集'),
                     ),
-                    TextButton(
+                    IconButton(
+                      icon: const Icon(Icons.delete),
                       onPressed: () {
-                        // 削除確認ダイアログを表示
-                        _showDeleteConfirmDialog(context, ref, codeForm.id);
+                        showDialog(
+                          context: context,
+                          builder:
+                              (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                        );
                       },
-                      child: const Text('削除'),
-                      style: TextButton.styleFrom(foregroundColor: Colors.red),
                     ),
                   ],
                 ),
