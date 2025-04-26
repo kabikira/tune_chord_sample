@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/code_form_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/code_form_update_dialog.dart';
 
 class CodeFormList extends HookConsumerWidget {
   final int tuningId;
@@ -22,7 +24,6 @@ class CodeFormList extends HookConsumerWidget {
                 error: (error, _) => Center(child: Text('エラー: $error')),
                 data: (codeForms) {
                   // Filter code forms by tuning ID
-                  // TODO: これproviderでもつべき？
                   final filteredCodeForms =
                       codeForms
                           .where((form) => form.tuningId == tuningId)
@@ -40,6 +41,7 @@ class CodeFormList extends HookConsumerWidget {
                         title: Text(
                           '${codeForm.label} (${codeForm.fretPositions})',
                         ),
+
                         subtitle:
                             codeForm.memo != null ? Text(codeForm.memo!) : null,
                         onTap: () {
@@ -48,6 +50,37 @@ class CodeFormList extends HookConsumerWidget {
                             extra: codeForm.id,
                           );
                         },
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+
+                                  builder:
+                                      (_) => CodeFormUpdateDialog(
+                                        codeForm: codeForm,
+                                      ),
+                                );
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+
+                                  builder:
+                                      (_) => CodeFormDeleteDialog(
+                                        codeForm: codeForm,
+                                      ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       );
                     },
                   );
