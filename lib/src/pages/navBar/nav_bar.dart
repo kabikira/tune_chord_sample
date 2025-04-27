@@ -33,6 +33,9 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
                 context.go('/tuningList');
                 break;
               case 1:
+                context.go('/search');
+                break;
+              case 2:
                 context.go('/settings');
                 break;
             }
@@ -53,6 +56,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
             icon: Icon(Icons.music_note),
             label: 'TuningList',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
