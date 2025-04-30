@@ -74,42 +74,33 @@ class TuningList extends HookConsumerWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(16),
-                          child: Column(
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          tuning.name,
-                                          style: theme.textTheme.titleLarge
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          tuning.strings,
-                                          style: theme.textTheme.bodyMedium
-                                              ?.copyWith(
-                                                color: theme
-                                                    .colorScheme
-                                                    .onSurface
-                                                    .withOpacity(0.7),
-                                              ),
-                                        ),
-                                      ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tuning.name,
+                                      style: theme.textTheme.titleLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
-                                  ),
-                                  _buildInteractionButtons(context, tuning),
-                                ],
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      tuning.strings,
+                                      style: theme.textTheme.bodyMedium
+                                          ?.copyWith(
+                                            color: theme.colorScheme.onSurface
+                                                .withOpacity(0.7),
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const Divider(height: 32),
-                              _buildActionButtons(context, tuning),
+                              _buildInteractionButtons(context, tuning),
                             ],
                           ),
                         ),
@@ -177,56 +168,6 @@ class TuningList extends HookConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildActionButtons(BuildContext context, dynamic tuning) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            _buildIconButton(context, Icons.favorite_border, '0', onTap: () {}),
-            const SizedBox(width: 24),
-            _buildIconButton(context, Icons.repeat, '0', onTap: () {}),
-          ],
-        ),
-        _buildIconButton(context, Icons.bookmark_border, '', onTap: () {}),
-      ],
-    );
-  }
-
-  Widget _buildIconButton(
-    BuildContext context,
-    IconData icon,
-    String label, {
-    required VoidCallback onTap,
-  }) {
-    final theme = Theme.of(context);
-    return InkWell(
-      borderRadius: BorderRadius.circular(24),
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              size: 20,
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
-            ),
-            if (label.isNotEmpty) ...[
-              const SizedBox(width: 4),
-              Text(
-                label,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
-                ),
-              ),
-            ],
-          ],
-        ),
-      ),
     );
   }
 }
