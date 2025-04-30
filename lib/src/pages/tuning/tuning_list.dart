@@ -16,9 +16,18 @@ class TuningList extends HookConsumerWidget {
     final tuningAsync = ref.watch(tuningNotifierProvider);
     Intl.defaultLocale = Localizations.localeOf(context).toString();
     final l10n = L10n.of(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('TuningList')),
+      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      appBar: AppBar(
+        title: const Text('チューニング管理'),
+        elevation: 0,
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -27,66 +36,88 @@ class TuningList extends HookConsumerWidget {
               error: (e, _) => Center(child: Text('エラー: $e')),
               data: (tunings) {
                 if (tunings.isEmpty) {
-                  return const Center(child: Text('登録されたチューニングがありません'));
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.music_note,
+                          size: 64,
+                          color: theme.colorScheme.primary.withOpacity(0.5),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          '登録されたチューニングがありません',
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.colorScheme.onSurface.withOpacity(0.7),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 }
                 return ListView.builder(
+                  padding: const EdgeInsets.all(16),
                   itemCount: tunings.length,
                   itemBuilder: (_, index) {
                     final tuning = tunings[index];
-                    return ListTile(
-                      /// TODO:タップの範囲共通かできるあとで修正
-                      title: GestureDetector(
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
                         onTap: () {
                           context.push('/tuningList/codeFormList/${tuning.id}');
                         },
-                        child: Text(tuning.name),
-                      ),
-                      subtitle: GestureDetector(
-                        onTap: () {
-                          context.push('/tuningList/codeFormList/${tuning.id}');
-                        },
-                        child: Text(tuning.strings),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.edit),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder:
-                                    (_) => TuningUpdateDialog(tuning: tuning),
-                              );
-                            },
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          tuning.name,
+                                          style: theme.textTheme.titleLarge
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          tuning.strings,
+                                          style: theme.textTheme.bodyMedium
+                                              ?.copyWith(
+                                                color: theme
+                                                    .colorScheme
+                                                    .onSurface
+                                                    .withOpacity(0.7),
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  _buildInteractionButtons(context, tuning),
+                                ],
+                              ),
+                              const Divider(height: 32),
+                              _buildActionButtons(context, tuning),
+                            ],
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder:
-                                    (_) => TuningDeleteDialog(tuning: tuning),
-                              );
-                            },
-                          ),
-                        ],
+                        ),
                       ),
                     );
                   },
                 );
               },
-            ),
-          ),
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const TextField(),
-                Text(DateFormat.yMEd().format(DateTime.now())),
-                Text(l10n.helloWorld),
-              ],
             ),
           ),
         ],
@@ -95,7 +126,106 @@ class TuningList extends HookConsumerWidget {
         onPressed: () {
           showDialog(context: context, builder: (_) => const TuningRegister());
         },
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Widget _buildInteractionButtons(BuildContext context, dynamic tuning) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(24),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) => TuningUpdateDialog(tuning: tuning),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.edit_outlined,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(24),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) => TuningDeleteDialog(tuning: tuning),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.delete_outline,
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButtons(BuildContext context, dynamic tuning) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            _buildIconButton(context, Icons.favorite_border, '0', onTap: () {}),
+            const SizedBox(width: 24),
+            _buildIconButton(context, Icons.repeat, '0', onTap: () {}),
+          ],
+        ),
+        _buildIconButton(context, Icons.bookmark_border, '', onTap: () {}),
+      ],
+    );
+  }
+
+  Widget _buildIconButton(
+    BuildContext context,
+    IconData icon,
+    String label, {
+    required VoidCallback onTap,
+  }) {
+    final theme = Theme.of(context);
+    return InkWell(
+      borderRadius: BorderRadius.circular(24),
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: theme.colorScheme.onSurface.withOpacity(0.7),
+            ),
+            if (label.isNotEmpty) ...[
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
