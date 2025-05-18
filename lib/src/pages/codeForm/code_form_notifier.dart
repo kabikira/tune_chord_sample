@@ -2,6 +2,8 @@ import 'package:drift/drift.dart' as drift;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 
+// TODO: AsyncNotifierに書き換え
+
 final codeFormNotifierProvider =
     StateNotifierProvider<CodeFormNotifier, AsyncValue<List<CodeForm>>>((ref) {
       final db = ref.watch(appDatabaseProvider);

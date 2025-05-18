@@ -19,6 +19,7 @@ final searchResultsProvider = FutureProvider<List<dynamic>>((ref) {
 });
 
 // 検索処理を行うNotifier
+// TODO: AsyncNotifierに書き換え
 class SearchNotifier extends StateNotifier<AsyncValue<List<dynamic>>> {
   final AppDatabase _db;
 
