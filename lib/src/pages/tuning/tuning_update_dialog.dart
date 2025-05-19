@@ -49,7 +49,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
               controller: nameController,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -81,7 +81,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
               decoration: InputDecoration(
                 hintText: '例: C,G,D,G,C,D',
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -114,9 +114,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
           ),
           child: Text(
             'キャンセル',
-            style: TextStyle(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
-            ),
+            style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
         ElevatedButton(
