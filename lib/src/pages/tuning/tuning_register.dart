@@ -148,7 +148,7 @@ class TuningRegister extends HookConsumerWidget {
                   : () async {
                     final name = nameController.text.trim();
                     final strings = stringsController.text.trim();
-                    if (name.isEmpty || strings.isEmpty) return;
+                    if (strings.isEmpty) return;
 
                     isSaving.value = true;
                     await ref
