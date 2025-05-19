@@ -47,7 +47,7 @@ class TuningRegister extends HookConsumerWidget {
               decoration: InputDecoration(
                 hintText: 'Standard, Open G など',
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                fillColor: theme.colorScheme.surfaceContainer.withAlpha(77),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -79,7 +79,7 @@ class TuningRegister extends HookConsumerWidget {
               decoration: InputDecoration(
                 hintText: '例: E,A,D,G,B,E',
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                fillColor: theme.colorScheme.surfaceContainer.withAlpha(77),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -101,7 +101,7 @@ class TuningRegister extends HookConsumerWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: theme.colorScheme.primary.withOpacity(0.05),
+                color: theme.colorScheme.primary.withAlpha(13),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -109,14 +109,14 @@ class TuningRegister extends HookConsumerWidget {
                   Icon(
                     Icons.info_outline,
                     size: 20,
-                    color: theme.colorScheme.primary,
+                    color: theme.colorScheme.onSurface.withAlpha(179),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       '低音から高音の順に入力してください',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.7),
+                        color: theme.colorScheme.onSurface.withAlpha(179),
                       ),
                     ),
                   ),
@@ -138,9 +138,7 @@ class TuningRegister extends HookConsumerWidget {
           ),
           child: Text(
             'キャンセル',
-            style: TextStyle(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
-            ),
+            style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
         ElevatedButton(
