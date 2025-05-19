@@ -79,7 +79,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             TextField(
               controller: stringsController,
               decoration: InputDecoration(
-                hintText: '例: E,A,D,G,B,E',
+                hintText: '例: C,G,D,G,C,D',
                 filled: true,
                 fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
                 border: OutlineInputBorder(

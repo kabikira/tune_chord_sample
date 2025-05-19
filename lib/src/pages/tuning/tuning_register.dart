@@ -77,7 +77,7 @@ class TuningRegister extends HookConsumerWidget {
             TextField(
               controller: stringsController,
               decoration: InputDecoration(
-                hintText: '例: E,A,D,G,B,E',
+                hintText: '例: C,G,D,G,C,D',
                 filled: true,
                 fillColor: theme.colorScheme.surfaceContainer.withAlpha(77),
                 border: OutlineInputBorder(
