@@ -74,33 +74,77 @@ class TuningList extends HookConsumerWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(16),
-                          child: Row(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      tuning.name,
-                                      style: theme.textTheme.titleLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          tuning.name,
+                                          style: theme.textTheme.titleLarge
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          tuning.strings,
+                                          style: theme.textTheme.bodyMedium
+                                              ?.copyWith(
+                                                color: theme
+                                                    .colorScheme
+                                                    .onSurface
+                                                    .withOpacity(0.7),
+                                              ),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      tuning.strings,
-                                      style: theme.textTheme.bodyMedium
-                                          ?.copyWith(
-                                            color: theme.colorScheme.onSurface
-                                                .withOpacity(0.7),
-                                          ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  _buildInteractionButtons(context, tuning),
+                                ],
                               ),
-                              _buildInteractionButtons(context, tuning),
+                              const SizedBox(height: 12),
+                              // 日付情報を右寄せで表示
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today,
+                                    size: 14,
+                                    color: theme.colorScheme.onSurface
+                                        .withOpacity(0.5),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '登録日: ${_formatDate(tuning.createdAt)}',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurface
+                                          .withOpacity(0.5),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Icon(
+                                    Icons.update,
+                                    size: 14,
+                                    color: theme.colorScheme.onSurface
+                                        .withOpacity(0.5),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '更新日: ${_formatDate(tuning.updatedAt)}',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurface
+                                          .withOpacity(0.5),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -122,6 +166,12 @@ class TuningList extends HookConsumerWidget {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  // 日付をフォーマットするヘルパーメソッド
+  String _formatDate(DateTime date) {
+    final formatter = DateFormat('yyyy/MM/dd');
+    return formatter.format(date);
   }
 
   Widget _buildInteractionButtons(BuildContext context, dynamic tuning) {
