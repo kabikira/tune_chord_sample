@@ -10,6 +10,15 @@ final tuningNotifierProvider =
       return TuningNotifier(db);
     });
 
+// 単一のチューニングを取得するためのプロバイダー
+final singleTuningProvider = FutureProvider.family<Tuning, int>((
+  ref,
+  tuningId,
+) async {
+  final db = ref.watch(appDatabaseProvider);
+  return db.getTuningById(tuningId);
+});
+
 class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
   final AppDatabase db;
 
@@ -44,15 +53,21 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
     required String strings,
   }) async {
     try {
+      final tunings = await db.getAllTunings();
+      final existingTuning = tunings.firstWhere(
+        (tuning) => tuning.id == id,
+        orElse: () => throw Exception('チューニングが見つかりません'),
+      );
+
       await db.updateTuning(
         Tuning(
           id: id,
           name: name,
           strings: strings,
-          memo: null,
-          isFavorite: false,
-          userId: null,
-          createdAt: DateTime.now(),
+          memo: existingTuning.memo,
+          isFavorite: existingTuning.isFavorite,
+          userId: existingTuning.userId,
+          createdAt: existingTuning.createdAt,
           updatedAt: DateTime.now(),
         ),
       );

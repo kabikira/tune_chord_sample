@@ -28,6 +28,8 @@ class AppDatabase extends _$AppDatabase {
   // ---------- Tunings ----------
   Stream<List<Tuning>> watchTunings() => select(tunings).watch();
   Future<List<Tuning>> getAllTunings() => select(tunings).get();
+  Future<Tuning> getTuningById(int id) =>
+      (select(tunings)..where((t) => t.id.equals(id))).getSingle();
   Future<int> addTuning(TuningsCompanion tuning) =>
       into(tunings).insert(tuning);
   Future<bool> updateTuning(Tuning tuning) => update(tunings).replace(tuning);
