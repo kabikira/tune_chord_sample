@@ -3,6 +3,91 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
+class TuningKeyboard extends HookWidget {
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  final ThemeData theme;
+
+  const TuningKeyboard({
+    required this.controller,
+    required this.focusNode,
+    required this.theme,
+    super.key,
+  });
+
+  void insertText(String text) {
+    final currentText = controller.text;
+    final newText = currentText + text;
+    controller.text = newText;
+    controller.selection = TextSelection.fromPosition(
+      TextPosition(offset: newText.length),
+    );
+  }
+
+  void deleteText() {
+    final currentText = controller.text;
+    if (currentText.isNotEmpty) {
+      final newText = currentText.substring(0, currentText.length - 1);
+      controller.text = newText;
+      controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: newText.length),
+      );
+    }
+  }
+
+  Widget buildKey(String label, {VoidCallback? onTap}) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap ?? () => insertText(label),
+        child: Container(
+          margin: const EdgeInsets.all(4),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainer.withAlpha(77),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(children: [buildKey("A"), buildKey("B"), buildKey("C")]),
+          Row(children: [buildKey("D"), buildKey("E"), buildKey("F")]),
+          Row(children: [buildKey("G"), buildKey("#"), buildKey(",")]),
+          Row(
+            children: [
+              buildKey("⌫", onTap: deleteText),
+              buildKey(" "),
+              buildKey(
+                "完了",
+                onTap: () {
+                  focusNode.unfocus();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class TuningRegister extends HookConsumerWidget {
   const TuningRegister({super.key});
 
@@ -10,6 +95,7 @@ class TuningRegister extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final nameController = useTextEditingController();
     final stringsController = useTextEditingController();
+    final stringsFocusNode = useFocusNode();
     final isSaving = useState(false);
     final theme = Theme.of(context);
 
@@ -76,6 +162,9 @@ class TuningRegister extends HookConsumerWidget {
             const SizedBox(height: 8),
             TextField(
               controller: stringsController,
+              focusNode: stringsFocusNode,
+              readOnly: true,
+              showCursor: true,
               decoration: InputDecoration(
                 hintText: '例: C,G,D,G,C,D',
                 filled: true,
@@ -96,6 +185,20 @@ class TuningRegister extends HookConsumerWidget {
                   vertical: 14,
                 ),
               ),
+              onTap: () {
+                stringsFocusNode.requestFocus();
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.transparent,
+                  builder: (BuildContext context) {
+                    return TuningKeyboard(
+                      controller: stringsController,
+                      focusNode: stringsFocusNode,
+                      theme: theme,
+                    );
+                  },
+                ).whenComplete(() => stringsFocusNode.unfocus());
+              },
             ),
             const SizedBox(height: 24),
             Container(
