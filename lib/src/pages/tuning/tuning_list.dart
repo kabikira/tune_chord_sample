@@ -19,7 +19,7 @@ class TuningList extends HookConsumerWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
         title: const Text('チューニング管理'),
         elevation: 0,
@@ -43,13 +43,17 @@ class TuningList extends HookConsumerWidget {
                         Icon(
                           Icons.music_note,
                           size: 64,
-                          color: theme.colorScheme.primary.withOpacity(0.5),
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.5,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         Text(
                           '登録されたチューニングがありません',
                           style: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.7),
+                            color: theme.colorScheme.onSurface.withValues(
+                              alpha: 0.7,
+                            ),
                           ),
                         ),
                       ],
@@ -100,7 +104,7 @@ class TuningList extends HookConsumerWidget {
                                                 color: theme
                                                     .colorScheme
                                                     .onSurface
-                                                    .withOpacity(0.7),
+                                                    .withValues(alpha: 0.7),
                                               ),
                                         ),
                                       ],
@@ -118,14 +122,14 @@ class TuningList extends HookConsumerWidget {
                                     Icons.calendar_today,
                                     size: 14,
                                     color: theme.colorScheme.onSurface
-                                        .withOpacity(0.5),
+                                        .withValues(alpha: 0.5),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
                                     '登録日: ${_formatDate(tuning.createdAt)}',
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: theme.colorScheme.onSurface
-                                          .withOpacity(0.5),
+                                          .withValues(alpha: 0.5),
                                     ),
                                   ),
                                   const SizedBox(width: 12),
@@ -133,14 +137,14 @@ class TuningList extends HookConsumerWidget {
                                     Icons.update,
                                     size: 14,
                                     color: theme.colorScheme.onSurface
-                                        .withOpacity(0.5),
+                                        .withValues(alpha: 0.5),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
                                     '更新日: ${_formatDate(tuning.updatedAt)}',
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: theme.colorScheme.onSurface
-                                          .withOpacity(0.5),
+                                          .withValues(alpha: 0.5),
                                     ),
                                   ),
                                 ],

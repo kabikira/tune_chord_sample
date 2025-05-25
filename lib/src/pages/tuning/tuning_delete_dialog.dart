@@ -34,10 +34,10 @@ class TuningDeleteDialog extends HookConsumerWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: theme.colorScheme.error.withOpacity(0.05),
+              color: theme.colorScheme.error.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: theme.colorScheme.error.withOpacity(0.2),
+                color: theme.colorScheme.error.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
@@ -64,7 +64,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
           Text(
             'この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。',
             style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -82,7 +82,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
           child: Text(
             'キャンセル',
             style: TextStyle(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ),
