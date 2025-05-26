@@ -90,7 +90,7 @@ class TuningList extends HookConsumerWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          tuning.name,
+                                          tuning.strings,
                                           style: theme.textTheme.titleLarge
                                               ?.copyWith(
                                                 fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class TuningList extends HookConsumerWidget {
                                         ),
                                         const SizedBox(height: 8),
                                         Text(
-                                          tuning.strings,
+                                          tuning.name,
                                           style: theme.textTheme.bodyMedium
                                               ?.copyWith(
                                                 color: theme

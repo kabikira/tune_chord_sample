@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
@@ -68,7 +69,7 @@ class TuningKeyboard extends HookWidget {
         children: [
           Row(children: [buildKey("A"), buildKey("B"), buildKey("C")]),
           Row(children: [buildKey("D"), buildKey("E"), buildKey("F")]),
-          Row(children: [buildKey("G"), buildKey("#"), buildKey(",")]),
+          Row(children: [buildKey("G"), buildKey("#"), buildKey("")]),
           Row(
             children: [
               buildKey("⌫", onTap: deleteText),
@@ -121,38 +122,6 @@ class TuningRegister extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'チューニング名',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.primary,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                hintText: 'Standard, Open G など',
-                filled: true,
-                fillColor: theme.colorScheme.surfaceContainer.withAlpha(77),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
-                    color: theme.colorScheme.primary,
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
               '弦のチューニング',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
@@ -166,7 +135,7 @@ class TuningRegister extends HookConsumerWidget {
               readOnly: true,
               showCursor: true,
               decoration: InputDecoration(
-                hintText: '例: C,G,D,G,C,D',
+                hintText: '例: CGDGCD',
                 filled: true,
                 fillColor: theme.colorScheme.surfaceContainer.withAlpha(77),
                 border: OutlineInputBorder(
