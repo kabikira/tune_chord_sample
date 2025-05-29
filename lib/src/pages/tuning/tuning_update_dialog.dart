@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
@@ -15,6 +16,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
     final stringsController = useTextEditingController(text: tuning.strings);
     final isSaving = useState(false);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -23,7 +25,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
           Icon(Icons.edit, color: theme.colorScheme.primary),
           const SizedBox(width: 8),
           Text(
-            'チューニングを編集',
+            l10n.editTuning,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -38,7 +40,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'チューニング名',
+              l10n.tuningName,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
@@ -69,7 +71,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              '弦のチューニング',
+              l10n.stringTuning,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
@@ -79,7 +81,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             TextField(
               controller: stringsController,
               decoration: InputDecoration(
-                hintText: '例: C,G,D,G,C,D',
+                hintText: l10n.tuningExample,
                 filled: true,
                 fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
                 border: OutlineInputBorder(
@@ -113,7 +115,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            'キャンセル',
+            l10n.cancel,
             style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
@@ -158,7 +160,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                       color: theme.colorScheme.onPrimary,
                     ),
                   )
-                  : const Text('更新'),
+                  : Text(l10n.update),
         ),
       ],
     );

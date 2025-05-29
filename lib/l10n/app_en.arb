@@ -2,5 +2,37 @@
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "Classic greeting"
-  }
+  },
+  "tuningManagement": "Tuning Management",
+  "errorMessage": "Error: {error}",
+  "@errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noTuningsRegistered": "No tunings registered",
+  "registrationDate": "Created",
+  "updateDate": "Updated",
+  "registerTuning": "Register Tuning",
+  "stringTuning": "String Tuning",
+  "tuningExample": "Example: CGDGCD",
+  "tuningInputDescription": "Please input from low to high pitch",
+  "cancel": "Cancel",
+  "complete": "Complete",
+  "deleteConfirmation": "Delete Confirmation",
+  "deleteConfirmationMessage": "Are you sure you want to delete \"{name}\"?",
+  "@deleteConfirmationMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteWarningMessage": "This action cannot be undone. All chord forms associated with this tuning will also be deleted.",
+  "delete": "Delete",
+  "editTuning": "Edit Tuning",
+  "tuningName": "Tuning Name",
+  "update": "Update"
 }

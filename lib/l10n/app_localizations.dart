@@ -10,10 +10,10 @@ import 'app_localizations_ja.dart';
 
 // ignore_for_file: type=lint
 
-/// Callers can lookup localized strings with an instance of L10n
-/// returned by `L10n.of(context)`.
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
 ///
-/// Applications need to include `L10n.delegate()` in their app's
+/// Applications need to include `AppLocalizations.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
@@ -21,8 +21,8 @@ import 'app_localizations_ja.dart';
 /// import 'l10n/app_localizations.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: L10n.localizationsDelegates,
-///   supportedLocales: L10n.supportedLocales,
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -59,18 +59,18 @@ import 'app_localizations_ja.dart';
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the L10n.supportedLocales
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
-abstract class L10n {
-  L10n(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+abstract class AppLocalizations {
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static L10n of(BuildContext context) {
-    return Localizations.of<L10n>(context, L10n)!;
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<L10n> delegate = _L10nDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -95,39 +95,147 @@ abstract class L10n {
     Locale('ja')
   ];
 
-  /// お決まりの挨拶
+  /// Classic greeting
   ///
-  /// In ja, this message translates to:
-  /// **'こんにちは世界！'**
+  /// In en, this message translates to:
+  /// **'Hello World!'**
   String get helloWorld;
+
+  /// No description provided for @tuningManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning Management'**
+  String get tuningManagement;
+
+  /// No description provided for @errorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String errorMessage(String error);
+
+  /// No description provided for @noTuningsRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'No tunings registered'**
+  String get noTuningsRegistered;
+
+  /// No description provided for @registrationDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get registrationDate;
+
+  /// No description provided for @updateDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated'**
+  String get updateDate;
+
+  /// No description provided for @registerTuning.
+  ///
+  /// In en, this message translates to:
+  /// **'Register Tuning'**
+  String get registerTuning;
+
+  /// No description provided for @stringTuning.
+  ///
+  /// In en, this message translates to:
+  /// **'String Tuning'**
+  String get stringTuning;
+
+  /// No description provided for @tuningExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: CGDGCD'**
+  String get tuningExample;
+
+  /// No description provided for @tuningInputDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Please input from low to high pitch'**
+  String get tuningInputDescription;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @complete.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get complete;
+
+  /// No description provided for @deleteConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Confirmation'**
+  String get deleteConfirmation;
+
+  /// No description provided for @deleteConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{name}\"?'**
+  String deleteConfirmationMessage(String name);
+
+  /// No description provided for @deleteWarningMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone. All chord forms associated with this tuning will also be deleted.'**
+  String get deleteWarningMessage;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @editTuning.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Tuning'**
+  String get editTuning;
+
+  /// No description provided for @tuningName.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning Name'**
+  String get tuningName;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
 }
 
-class _L10nDelegate extends LocalizationsDelegate<L10n> {
-  const _L10nDelegate();
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
 
   @override
-  Future<L10n> load(Locale locale) {
-    return SynchronousFuture<L10n>(lookupL10n(locale));
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
   }
 
   @override
   bool isSupported(Locale locale) => <String>['en', 'ja'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_L10nDelegate old) => false;
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
-L10n lookupL10n(Locale locale) {
+AppLocalizations lookupAppLocalizations(Locale locale) {
 
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return L10nEn();
-    case 'ja': return L10nJa();
+    case 'en': return AppLocalizationsEn();
+    case 'ja': return AppLocalizationsJa();
   }
 
   throw FlutterError(
-    'L10n.delegate failed to load unsupported locale "$locale". This is likely '
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
     'that was used.'

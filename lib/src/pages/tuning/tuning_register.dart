@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
 class TuningKeyboard extends HookWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final ThemeData theme;
+  final AppLocalizations l10n;
 
   const TuningKeyboard({
     required this.controller,
     required this.focusNode,
     required this.theme,
+    required this.l10n,
     super.key,
   });
 
@@ -75,7 +77,7 @@ class TuningKeyboard extends HookWidget {
               buildKey("⌫", onTap: deleteText),
               buildKey(" "),
               buildKey(
-                "完了",
+                l10n.complete,
                 onTap: () {
                   focusNode.unfocus();
                   Navigator.of(context).pop();
@@ -99,6 +101,7 @@ class TuningRegister extends HookConsumerWidget {
     final stringsFocusNode = useFocusNode();
     final isSaving = useState(false);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -107,7 +110,7 @@ class TuningRegister extends HookConsumerWidget {
           Icon(Icons.music_note, color: theme.colorScheme.primary),
           const SizedBox(width: 8),
           Text(
-            'チューニングを登録',
+            l10n.registerTuning,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -122,7 +125,7 @@ class TuningRegister extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '弦のチューニング',
+              l10n.stringTuning,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
@@ -135,7 +138,7 @@ class TuningRegister extends HookConsumerWidget {
               readOnly: true,
               showCursor: true,
               decoration: InputDecoration(
-                hintText: '例: CGDGCD',
+                hintText: l10n.tuningExample,
                 filled: true,
                 fillColor: theme.colorScheme.surfaceContainer.withAlpha(77),
                 border: OutlineInputBorder(
@@ -164,6 +167,7 @@ class TuningRegister extends HookConsumerWidget {
                       controller: stringsController,
                       focusNode: stringsFocusNode,
                       theme: theme,
+                      l10n: l10n,
                     );
                   },
                 ).whenComplete(() => stringsFocusNode.unfocus());
@@ -186,7 +190,7 @@ class TuningRegister extends HookConsumerWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      '低音から高音の順に入力してください',
+                      l10n.tuningInputDescription,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withAlpha(179),
                       ),
@@ -209,7 +213,7 @@ class TuningRegister extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            'キャンセル',
+            l10n.cancel,
             style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
@@ -250,7 +254,7 @@ class TuningRegister extends HookConsumerWidget {
                       color: theme.colorScheme.onPrimary,
                     ),
                   )
-                  : const Text('保存'),
+                  : Text(l10n.complete),
         ),
       ],
     );
