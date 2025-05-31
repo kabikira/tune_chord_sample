@@ -61,39 +61,6 @@ class TuningUpdateDialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.tuningName,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.primary,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withValues(
-                  alpha: 0.3,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
-                    color: theme.colorScheme.primary,
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
               l10n.stringTuning,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
@@ -106,7 +73,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
               decoration: InputDecoration(
                 hintText: l10n.tuningExample,
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withValues(
+                fillColor: theme.colorScheme.surfaceContainerHighest.withValues(
                   alpha: 0.3,
                 ),
                 border: OutlineInputBorder(
@@ -203,7 +170,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                   : () async {
                     final name = nameController.text.trim();
                     final strings = stringsController.text.trim();
-                    if (name.isEmpty || strings.isEmpty) return;
+                    if (strings.isEmpty) return;
 
                     isSaving.value = true;
                     await ref
