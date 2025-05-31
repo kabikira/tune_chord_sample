@@ -47,7 +47,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
           Icon(Icons.edit, color: theme.colorScheme.primary),
           const Gap(8),
           Text(
-            l10n.editTuning,
+            l10n.editTuning, // チューニングを編集
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -62,7 +62,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.stringTuning,
+              l10n.stringTuning, // 弦のチューニング
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
@@ -72,7 +72,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             TextField(
               controller: stringsController,
               decoration: InputDecoration(
-                hintText: l10n.tuningExample,
+                hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,
                 fillColor: theme.colorScheme.surfaceContainerHighest.withValues(
                   alpha: 0.3,
@@ -96,7 +96,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             ),
             const Gap(24),
             Text(
-              l10n.tags,
+              l10n.tags, // タグ
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
@@ -160,7 +160,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            l10n.cancel,
+            l10n.cancel, // キャンセル
             style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
@@ -206,7 +206,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                       color: theme.colorScheme.onPrimary,
                     ),
                   )
-                  : Text(l10n.update),
+                  : Text(l10n.update), // 更新
         ),
       ],
     );

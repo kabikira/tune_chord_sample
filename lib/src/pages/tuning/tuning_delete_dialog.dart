@@ -21,7 +21,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
           Icon(Icons.delete_outline, color: theme.colorScheme.error),
           const SizedBox(width: 8),
           Text(
-            l10n.deleteConfirmation,
+            l10n.deleteConfirmation, // 削除確認
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -53,7 +53,9 @@ class TuningDeleteDialog extends HookConsumerWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    l10n.deleteConfirmationMessage(tuning.name),
+                    l10n.deleteConfirmationMessage(
+                      tuning.name,
+                    ), // 「{name}」を削除しますか？
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -64,7 +66,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            l10n.deleteWarningMessage,
+            l10n.deleteWarningMessage, // この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。
             style: theme.textTheme.bodySmall?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
@@ -82,7 +84,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            l10n.cancel,
+            l10n.cancel, // キャンセル
             style: TextStyle(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
@@ -106,7 +108,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             elevation: 0,
           ),
-          child: Text(l10n.delete),
+          child: Text(l10n.delete), // 削除
         ),
       ],
     );

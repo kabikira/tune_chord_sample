@@ -117,7 +117,7 @@ class TuningRegister extends HookConsumerWidget {
           Icon(Icons.music_note, color: theme.colorScheme.primary),
           const Gap(8),
           Text(
-            l10n.registerTuning,
+            l10n.registerTuning, // チューニングを登録
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -132,7 +132,7 @@ class TuningRegister extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.stringTuning,
+              l10n.stringTuning, // 弦のチューニング
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
@@ -145,7 +145,7 @@ class TuningRegister extends HookConsumerWidget {
               readOnly: true,
               showCursor: true,
               decoration: InputDecoration(
-                hintText: l10n.tuningExample,
+                hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,
                 fillColor: theme.colorScheme.surfaceContainer.withValues(
                   alpha: 0.3,
@@ -199,7 +199,7 @@ class TuningRegister extends HookConsumerWidget {
                   const Gap(8),
                   Expanded(
                     child: Text(
-                      l10n.tuningInputDescription,
+                      l10n.tuningInputDescription, // 低音から高音の順に入力してください
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withAlpha(179),
                       ),
@@ -211,7 +211,7 @@ class TuningRegister extends HookConsumerWidget {
             const Gap(16),
 
             Text(
-              l10n.tags,
+              l10n.tags, // タグ
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
@@ -227,18 +227,18 @@ class TuningRegister extends HookConsumerWidget {
                       context: context,
                       builder:
                           (context) => AlertDialog(
-                            title: Text(l10n.newTag),
+                            title: Text(l10n.newTag), // 新規タグ
                             content: TextField(
                               controller: controller,
                               autofocus: true,
                               decoration: InputDecoration(
-                                hintText: l10n.newTag,
+                                hintText: l10n.newTag, // 新規タグ
                               ),
                             ),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
-                                child: Text(l10n.cancel),
+                                child: Text(l10n.cancel), // キャンセル
                               ),
                               TextButton(
                                 onPressed: () {
@@ -249,7 +249,7 @@ class TuningRegister extends HookConsumerWidget {
                                     );
                                   }
                                 },
-                                child: Text(l10n.complete),
+                                child: Text(l10n.complete), // 完了
                               ),
                             ],
                           ),
@@ -324,7 +324,7 @@ class TuningRegister extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            l10n.cancel,
+            l10n.cancel, // キャンセル
             style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
@@ -365,7 +365,7 @@ class TuningRegister extends HookConsumerWidget {
                       color: theme.colorScheme.onPrimary,
                     ),
                   )
-                  : Text(l10n.complete),
+                  : Text(l10n.complete), // 完了
         ),
       ],
     );

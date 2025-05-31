@@ -21,7 +21,7 @@ class TuningList extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
-        title: Text(l10n.tuningManagement),
+        title: Text(l10n.tuningManagement), // チューニング管理
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -34,8 +34,9 @@ class TuningList extends HookConsumerWidget {
             child: tuningAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error:
-                  (e, _) =>
-                      Center(child: Text(l10n.errorMessage(e.toString()))),
+                  (e, _) => Center(
+                    child: Text(l10n.errorMessage(e.toString())),
+                  ), // エラー: {error}
               data: (tunings) {
                 if (tunings.isEmpty) {
                   return Center(
@@ -51,7 +52,7 @@ class TuningList extends HookConsumerWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          l10n.noTuningsRegistered,
+                          l10n.noTuningsRegistered, // 登録されたチューニングがありません
                           style: theme.textTheme.bodyLarge?.copyWith(
                             color: theme.colorScheme.onSurface.withValues(
                               alpha: 0.7,
@@ -128,7 +129,7 @@ class TuningList extends HookConsumerWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    '${l10n.registrationDate}: ${_formatDate(tuning.createdAt)}',
+                                    '${l10n.registrationDate}: ${_formatDate(tuning.createdAt)}', // 登録日
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: theme.colorScheme.onSurface
                                           .withValues(alpha: 0.5),
@@ -143,7 +144,7 @@ class TuningList extends HookConsumerWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    '${l10n.updateDate}: ${_formatDate(tuning.updatedAt)}',
+                                    '${l10n.updateDate}: ${_formatDate(tuning.updatedAt)}', // 更新日
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: theme.colorScheme.onSurface
                                           .withValues(alpha: 0.5),
