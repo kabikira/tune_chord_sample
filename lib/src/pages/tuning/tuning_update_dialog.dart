@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
+import 'package:gap/gap.dart';
 
 class TuningUpdateDialog extends HookConsumerWidget {
   final Tuning tuning;
@@ -44,7 +45,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
       title: Row(
         children: [
           Icon(Icons.edit, color: theme.colorScheme.primary),
-          const SizedBox(width: 8),
+          const Gap(8),
           Text(
             l10n.editTuning,
             style: theme.textTheme.titleLarge?.copyWith(
@@ -67,7 +68,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 8),
+            const Gap(8),
             TextField(
               controller: stringsController,
               decoration: InputDecoration(
@@ -93,7 +94,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const Gap(24),
             Text(
               l10n.tags,
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -101,7 +102,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 8),
+            const Gap(8),
             tagsAsync.when(
               data:
                   (tags) => Wrap(
