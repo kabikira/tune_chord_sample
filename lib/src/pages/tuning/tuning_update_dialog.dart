@@ -72,7 +72,9 @@ class TuningUpdateDialog extends HookConsumerWidget {
               controller: nameController,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
+                fillColor: theme.colorScheme.surfaceVariant.withValues(
+                  alpha: 0.3,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -104,7 +106,9 @@ class TuningUpdateDialog extends HookConsumerWidget {
               decoration: InputDecoration(
                 hintText: l10n.tuningExample,
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
+                fillColor: theme.colorScheme.surfaceVariant.withValues(
+                  alpha: 0.3,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -158,7 +162,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                               }
                             },
                             backgroundColor: theme.colorScheme.surfaceContainer
-                                .withAlpha(77),
+                                .withValues(alpha: 0.3),
                             selectedColor: theme.colorScheme.primaryContainer,
                             checkmarkColor:
                                 theme.colorScheme.onPrimaryContainer,
