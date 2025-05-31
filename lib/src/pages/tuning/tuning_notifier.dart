@@ -10,6 +10,12 @@ final tuningNotifierProvider =
       return TuningNotifier(db);
     });
 
+// タグの状態を管理するプロバイダー
+final tagsProvider = StreamProvider<List<Tag>>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return db.watchTags();
+});
+
 // 単一のチューニングを取得するためのプロバイダー
 final singleTuningProvider = FutureProvider.family<Tuning, int>((
   ref,
@@ -37,11 +43,23 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
     );
   }
 
-  Future<void> addTuning(String name, String strings) async {
+  Future<void> addTuning(
+    String name,
+    String strings, {
+    List<int>? tagIds,
+  }) async {
     try {
-      await db.addTuning(
+      final tuningId = await db.addTuning(
         TuningsCompanion(name: Value(name), strings: Value(strings)),
       );
+
+      if (tagIds != null && tagIds.isNotEmpty) {
+        for (final tagId in tagIds) {
+          await db.addTuningTag(
+            TuningTagsCompanion(tuningId: Value(tuningId), tagId: Value(tagId)),
+          );
+        }
+      }
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -51,6 +69,7 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
     required int id,
     required String name,
     required String strings,
+    List<int>? tagIds,
   }) async {
     try {
       final tunings = await db.getAllTunings();
@@ -71,6 +90,21 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
           updatedAt: DateTime.now(),
         ),
       );
+
+      // 既存のタグを削除
+      final existingTags = await db.getAllTuningTags();
+      for (final tag in existingTags.where((t) => t.tuningId == id)) {
+        await db.deleteTuningTag(tag.id);
+      }
+
+      // 新しいタグを追加
+      if (tagIds != null && tagIds.isNotEmpty) {
+        for (final tagId in tagIds) {
+          await db.addTuningTag(
+            TuningTagsCompanion(tuningId: Value(id), tagId: Value(tagId)),
+          );
+        }
+      }
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }

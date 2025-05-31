@@ -20,5 +20,7 @@
   "delete": "削除",
   "editTuning": "チューニングを編集",
   "tuningName": "チューニング名",
-  "update": "更新"
+  "update": "更新",
+  "tags": "タグ",
+  "newTag": "新規タグ"
 }

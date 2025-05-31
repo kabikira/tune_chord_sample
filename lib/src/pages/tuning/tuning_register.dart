@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:drift/drift.dart' as drift;
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
 class TuningKeyboard extends HookWidget {
@@ -100,15 +103,19 @@ class TuningRegister extends HookConsumerWidget {
     final stringsController = useTextEditingController();
     final stringsFocusNode = useFocusNode();
     final isSaving = useState(false);
+    final selectedTagIds = useState<List<int>>([]);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+
+    // タグ一覧を取得
+    final tagsAsync = ref.watch(tagsProvider);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Row(
         children: [
           Icon(Icons.music_note, color: theme.colorScheme.primary),
-          const SizedBox(width: 8),
+          const Gap(8),
           Text(
             l10n.registerTuning,
             style: theme.textTheme.titleLarge?.copyWith(
@@ -131,7 +138,7 @@ class TuningRegister extends HookConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 8),
+            const Gap(8),
             TextField(
               controller: stringsController,
               focusNode: stringsFocusNode,
@@ -173,7 +180,7 @@ class TuningRegister extends HookConsumerWidget {
                 ).whenComplete(() => stringsFocusNode.unfocus());
               },
             ),
-            const SizedBox(height: 24),
+            const Gap(8),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -187,7 +194,7 @@ class TuningRegister extends HookConsumerWidget {
                     size: 20,
                     color: theme.colorScheme.onSurface.withAlpha(179),
                   ),
-                  const SizedBox(width: 8),
+                  const Gap(8),
                   Expanded(
                     child: Text(
                       l10n.tuningInputDescription,
@@ -198,6 +205,108 @@ class TuningRegister extends HookConsumerWidget {
                   ),
                 ],
               ),
+            ),
+            const Gap(16),
+
+            Text(
+              l10n.tags,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const Gap(8),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    final controller = TextEditingController();
+                    final result = await showDialog<String>(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            title: Text(l10n.newTag),
+                            content: TextField(
+                              controller: controller,
+                              autofocus: true,
+                              decoration: InputDecoration(
+                                hintText: l10n.newTag,
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(l10n.cancel),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  if (controller.text.trim().isNotEmpty) {
+                                    Navigator.pop(
+                                      context,
+                                      controller.text.trim(),
+                                    );
+                                  }
+                                },
+                                child: Text(l10n.complete),
+                              ),
+                            ],
+                          ),
+                    );
+                    if (result != null) {
+                      final db = ref.read(appDatabaseProvider);
+                      final tagId = await db.addTag(
+                        TagsCompanion(name: drift.Value(result)),
+                      );
+                      selectedTagIds.value = [...selectedTagIds.value, tagId];
+                    }
+                  },
+                  icon: Icon(Icons.add, color: theme.colorScheme.primary),
+                ),
+              ],
+            ),
+            const Gap(8),
+            tagsAsync.when(
+              data:
+                  (tags) => Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children:
+                        tags.map((tag) {
+                          final isSelected = selectedTagIds.value.contains(
+                            tag.id,
+                          );
+                          return FilterChip(
+                            label: Text(tag.name),
+                            selected: isSelected,
+                            onSelected: (selected) {
+                              if (selected) {
+                                selectedTagIds.value = [
+                                  ...selectedTagIds.value,
+                                  tag.id,
+                                ];
+                              } else {
+                                selectedTagIds.value =
+                                    selectedTagIds.value
+                                        .where((id) => id != tag.id)
+                                        .toList();
+                              }
+                            },
+                            backgroundColor: theme.colorScheme.surfaceContainer
+                                .withAlpha(77),
+                            selectedColor: theme.colorScheme.primaryContainer,
+                            checkmarkColor:
+                                theme.colorScheme.onPrimaryContainer,
+                            labelStyle: theme.textTheme.bodyMedium?.copyWith(
+                              color:
+                                  isSelected
+                                      ? theme.colorScheme.onPrimaryContainer
+                                      : theme.colorScheme.onSurface,
+                            ),
+                          );
+                        }).toList(),
+                  ),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => Text('エラーが発生しました: $error'),
             ),
           ],
         ),
@@ -229,7 +338,7 @@ class TuningRegister extends HookConsumerWidget {
                     isSaving.value = true;
                     await ref
                         .read(tuningNotifierProvider.notifier)
-                        .addTuning(name, strings);
+                        .addTuning(name, strings, tagIds: selectedTagIds.value);
                     isSaving.value = false;
                     if (context.mounted) {
                       Navigator.of(context).pop();

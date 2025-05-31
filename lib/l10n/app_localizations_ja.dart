@@ -68,4 +68,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get update => '更新';
+
+  @override
+  String get tags => 'タグ';
+
+  @override
+  String get newTag => '新規タグ';
 }

@@ -15,8 +15,29 @@ class TuningUpdateDialog extends HookConsumerWidget {
     final nameController = useTextEditingController(text: tuning.name);
     final stringsController = useTextEditingController(text: tuning.strings);
     final isSaving = useState(false);
+    final selectedTagIds = useState<List<int>>([]);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+
+    // タグ一覧を取得
+    final tagsAsync = ref.watch(tagsProvider);
+
+    // 既存のタグを取得
+    useEffect(() {
+      Future<void> loadExistingTags() async {
+        final db = ref.read(appDatabaseProvider);
+        final tuningTags = await db.getAllTuningTags();
+        final existingTagIds =
+            tuningTags
+                .where((tag) => tag.tuningId == tuning.id)
+                .map((tag) => tag.tagId)
+                .toList();
+        selectedTagIds.value = existingTagIds;
+      }
+
+      loadExistingTags();
+      return null;
+    }, []);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -101,6 +122,58 @@ class TuningUpdateDialog extends HookConsumerWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 24),
+            Text(
+              l10n.tags,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            tagsAsync.when(
+              data:
+                  (tags) => Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children:
+                        tags.map((tag) {
+                          final isSelected = selectedTagIds.value.contains(
+                            tag.id,
+                          );
+                          return FilterChip(
+                            label: Text(tag.name),
+                            selected: isSelected,
+                            onSelected: (selected) {
+                              if (selected) {
+                                selectedTagIds.value = [
+                                  ...selectedTagIds.value,
+                                  tag.id,
+                                ];
+                              } else {
+                                selectedTagIds.value =
+                                    selectedTagIds.value
+                                        .where((id) => id != tag.id)
+                                        .toList();
+                              }
+                            },
+                            backgroundColor: theme.colorScheme.surfaceContainer
+                                .withAlpha(77),
+                            selectedColor: theme.colorScheme.primaryContainer,
+                            checkmarkColor:
+                                theme.colorScheme.onPrimaryContainer,
+                            labelStyle: theme.textTheme.bodyMedium?.copyWith(
+                              color:
+                                  isSelected
+                                      ? theme.colorScheme.onPrimaryContainer
+                                      : theme.colorScheme.onSurface,
+                            ),
+                          );
+                        }).toList(),
+                  ),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => Text('エラーが発生しました: $error'),
+            ),
           ],
         ),
       ),
@@ -135,6 +208,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                           id: tuning.id,
                           name: name,
                           strings: strings,
+                          tagIds: selectedTagIds.value,
                         );
                     isSaving.value = false;
                     if (context.mounted) {

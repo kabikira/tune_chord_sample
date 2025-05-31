@@ -68,4 +68,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update => 'Update';
+
+  @override
+  String get tags => 'Tags';
+
+  @override
+  String get newTag => 'New Tag';
 }
