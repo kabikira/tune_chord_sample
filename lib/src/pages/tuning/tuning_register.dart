@@ -49,7 +49,7 @@ class TuningKeyboard extends HookWidget {
           margin: const EdgeInsets.all(4),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: theme.colorScheme.surfaceContainer.withAlpha(77),
+            color: theme.colorScheme.surfaceContainer.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
@@ -147,7 +147,9 @@ class TuningRegister extends HookConsumerWidget {
               decoration: InputDecoration(
                 hintText: l10n.tuningExample,
                 filled: true,
-                fillColor: theme.colorScheme.surfaceContainer.withAlpha(77),
+                fillColor: theme.colorScheme.surfaceContainer.withValues(
+                  alpha: 0.3,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -292,7 +294,7 @@ class TuningRegister extends HookConsumerWidget {
                               }
                             },
                             backgroundColor: theme.colorScheme.surfaceContainer
-                                .withAlpha(77),
+                                .withValues(alpha: 0.3),
                             selectedColor: theme.colorScheme.primaryContainer,
                             checkmarkColor:
                                 theme.colorScheme.onPrimaryContainer,
