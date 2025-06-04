@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:drift/drift.dart' as drift;
+import 'package:flutter/services.dart';
+import 'package:tune_chord_sample/src/config/validation_constants.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
@@ -23,6 +25,8 @@ class TuningKeyboard extends HookWidget {
 
   void insertText(String text) {
     final currentText = controller.text;
+    if (currentText.length + text.length >
+        ValidationConstants.maxTuningLength) return;
     final newText = currentText + text;
     controller.text = newText;
     controller.selection = TextSelection.fromPosition(
@@ -144,6 +148,12 @@ class TuningRegister extends HookConsumerWidget {
               focusNode: stringsFocusNode,
               readOnly: true,
               showCursor: true,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(
+                  ValidationConstants.maxTuningLength,
+                ),
+              ],
+              maxLength: ValidationConstants.maxTuningLength,
               decoration: InputDecoration(
                 hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,
@@ -228,13 +238,19 @@ class TuningRegister extends HookConsumerWidget {
                       builder:
                           (context) => AlertDialog(
                             title: Text(l10n.newTag), // 新規タグ
-                            content: TextField(
-                              controller: controller,
-                              autofocus: true,
-                              decoration: InputDecoration(
-                                hintText: l10n.newTag, // 新規タグ
+                          content: TextField(
+                            controller: controller,
+                            autofocus: true,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(
+                                ValidationConstants.maxTagLength,
                               ),
+                            ],
+                            maxLength: ValidationConstants.maxTagLength,
+                            decoration: InputDecoration(
+                              hintText: l10n.newTag, // 新規タグ
                             ),
+                          ),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
@@ -242,10 +258,13 @@ class TuningRegister extends HookConsumerWidget {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  if (controller.text.trim().isNotEmpty) {
+                                  final text = controller.text.trim();
+                                  if (text.isNotEmpty &&
+                                      text.length <=
+                                          ValidationConstants.maxTagLength) {
                                     Navigator.pop(
                                       context,
-                                      controller.text.trim(),
+                                      text,
                                     );
                                   }
                                 },
