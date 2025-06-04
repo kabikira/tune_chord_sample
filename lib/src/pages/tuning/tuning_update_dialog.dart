@@ -5,6 +5,8 @@ import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter/services.dart';
+import 'package:tune_chord_sample/src/config/validation_constants.dart';
 
 class TuningUpdateDialog extends HookConsumerWidget {
   final Tuning tuning;
@@ -71,6 +73,12 @@ class TuningUpdateDialog extends HookConsumerWidget {
             const Gap(8),
             TextField(
               controller: stringsController,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(
+                  ValidationConstants.maxTuningLength,
+                ),
+              ],
+              maxLength: ValidationConstants.maxTuningLength,
               decoration: InputDecoration(
                 hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,
