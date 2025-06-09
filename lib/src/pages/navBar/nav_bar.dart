@@ -23,7 +23,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 13),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -66,7 +66,9 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
             },
             backgroundColor: Colors.white,
             selectedItemColor: theme.colorScheme.primary,
-            unselectedItemColor: theme.colorScheme.onSurface.withOpacity(0.6),
+            unselectedItemColor: theme.colorScheme.onSurface.withValues(
+              alpha: 153,
+            ),
             selectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 12,
