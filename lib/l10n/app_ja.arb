@@ -36,5 +36,17 @@
         "example": "DADGAD"
       }
     }
+  },
+  "navTuning": "チューニング",
+  "@navTuning": {
+    "description": "ナビゲーションバーのチューニングタブのラベル"
+  },
+  "navSearch": "検索",
+  "@navSearch": {
+    "description": "ナビゲーションバーの検索タブのラベル"
+  },
+  "navSettings": "設定",
+  "@navSettings": {
+    "description": "ナビゲーションバーの設定タブのラベル"
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
 class ScaffoldWithNavBar extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
@@ -80,19 +81,19 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
               _buildNavBarItem(
                 icon: Icons.music_note,
                 activeIcon: Icons.music_note,
-                label: 'チューニング',
+                label: AppLocalizations.of(context)!.navTuning,
                 index: 0,
               ),
               _buildNavBarItem(
                 icon: Icons.search,
                 activeIcon: Icons.search,
-                label: '検索',
+                label: AppLocalizations.of(context)!.navSearch,
                 index: 1,
               ),
               _buildNavBarItem(
                 icon: Icons.settings_outlined,
                 activeIcon: Icons.settings,
-                label: '設定',
+                label: AppLocalizations.of(context)!.navSettings,
                 index: 2,
               ),
             ],
