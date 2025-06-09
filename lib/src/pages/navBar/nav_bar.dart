@@ -35,13 +35,8 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
           child: BottomNavigationBar(
             currentIndex: widget.navigationShell.currentIndex,
             onTap: (index) {
-              final now = DateTime.now();
-
-              // 同じタブを短時間内に2回タップした場合
-              if (index == _lastTappedIndex &&
-                  _lastTapTime != null &&
-                  now.difference(_lastTapTime!).inMilliseconds < 500) {
-                // 現在のブランチのルートに移動
+              // 同じタブをタップした場合はルートに戻る
+              if (index == widget.navigationShell.currentIndex) {
                 switch (index) {
                   case 0:
                     context.go('/tuningList');
@@ -53,16 +48,9 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
                     context.go('/settings');
                     break;
                 }
-                // タップ情報をリセット
-                _lastTappedIndex = null;
-                _lastTapTime = null;
               } else {
-                // 異なるタブをタップした場合や初回タップの場合は通常通りブランチを切り替える
+                // 異なるタブをタップした場合は通常通りブランチを切り替える
                 widget.navigationShell.goBranch(index);
-
-                // タップ情報を更新
-                _lastTappedIndex = index;
-                _lastTapTime = now;
               }
             },
             backgroundColor: Colors.white,
