@@ -232,6 +232,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete {tagName}?'**
   String deleteTagConfirmation(String tagName);
+
+  /// Label for tuning tab in navigation bar
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning'**
+  String get navTuning;
+
+  /// Label for search tab in navigation bar
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get navSearch;
+
+  /// Label for settings tab in navigation bar
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get navSettings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

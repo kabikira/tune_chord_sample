@@ -50,5 +50,17 @@
         "example": "DADGAD"
       }
     }
+  },
+  "navTuning": "Tuning",
+  "@navTuning": {
+    "description": "Label for tuning tab in navigation bar"
+  },
+  "navSearch": "Search",
+  "@navSearch": {
+    "description": "Label for search tab in navigation bar"
+  },
+  "navSettings": "Settings",
+  "@navSettings": {
+    "description": "Label for settings tab in navigation bar"
   }
 }
