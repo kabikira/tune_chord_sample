@@ -82,4 +82,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String deleteTagConfirmation(String tagName) {
     return 'Are you sure you want to delete $tagName?';
   }
+
+  @override
+  String get navTuning => 'Tuning';
+
+  @override
+  String get navSearch => 'Search';
+
+  @override
+  String get navSettings => 'Settings';
 }

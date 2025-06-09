@@ -82,4 +82,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String deleteTagConfirmation(String tagName) {
     return '$tagNameを削除してもよろしいですか？';
   }
+
+  @override
+  String get navTuning => 'チューニング';
+
+  @override
+  String get navSearch => '検索';
+
+  @override
+  String get navSettings => '設定';
 }
