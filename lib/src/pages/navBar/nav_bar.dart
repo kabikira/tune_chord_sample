@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class ScaffoldWithNavBar extends StatefulWidget {
+class ScaffoldWithNavBar extends HookWidget {
   final StatefulNavigationShell navigationShell;
 
   const ScaffoldWithNavBar({super.key, required this.navigationShell});
 
   @override
-  State<ScaffoldWithNavBar> createState() => _ScaffoldWithNavBarState();
-}
-
-class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
-
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      body: widget.navigationShell,
+      body: navigationShell,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
+              color: Colors.black.withValues(alpha: 13),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -31,10 +26,10 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
         child: ClipRRect(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
           child: BottomNavigationBar(
-            currentIndex: widget.navigationShell.currentIndex,
+            currentIndex: navigationShell.currentIndex,
             onTap: (index) {
               // 同じタブをタップした場合はルートに戻る
-              if (index == widget.navigationShell.currentIndex) {
+              if (index == navigationShell.currentIndex) {
                 switch (index) {
                   case 0:
                     context.go('/tuningList');
@@ -48,7 +43,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
                 }
               } else {
                 // 異なるタブをタップした場合は通常通りブランチを切り替える
-                widget.navigationShell.goBranch(index);
+                navigationShell.goBranch(index);
               }
             },
             backgroundColor: Colors.white,
@@ -65,18 +60,21 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
             elevation: 0,
             items: [
               _buildNavBarItem(
+                context: context,
                 icon: Icons.music_note,
                 activeIcon: Icons.music_note,
                 label: AppLocalizations.of(context)!.navTuning,
                 index: 0,
               ),
               _buildNavBarItem(
+                context: context,
                 icon: Icons.search,
                 activeIcon: Icons.search,
                 label: AppLocalizations.of(context)!.navSearch,
                 index: 1,
               ),
               _buildNavBarItem(
+                context: context,
                 icon: Icons.settings_outlined,
                 activeIcon: Icons.settings,
                 label: AppLocalizations.of(context)!.navSettings,
@@ -91,12 +89,13 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
 
   // ナビゲーションバー項目を構築するヘルパーメソッド
   BottomNavigationBarItem _buildNavBarItem({
+    required BuildContext context,
     required IconData icon,
     required IconData activeIcon,
     required String label,
     required int index,
   }) {
-    final isSelected = widget.navigationShell.currentIndex == index;
+    final isSelected = navigationShell.currentIndex == index;
 
     return BottomNavigationBarItem(
       icon: Column(
