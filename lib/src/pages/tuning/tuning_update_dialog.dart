@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tag_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/services.dart';
@@ -121,32 +122,42 @@ class TuningUpdateDialog extends HookConsumerWidget {
                           final isSelected = selectedTagIds.value.contains(
                             tag.id,
                           );
-                          return FilterChip(
-                            label: Text(tag.name),
-                            selected: isSelected,
-                            onSelected: (selected) {
-                              if (selected) {
-                                selectedTagIds.value = [
-                                  ...selectedTagIds.value,
-                                  tag.id,
-                                ];
-                              } else {
-                                selectedTagIds.value =
-                                    selectedTagIds.value
-                                        .where((id) => id != tag.id)
-                                        .toList();
-                              }
+                          return GestureDetector(
+                            onLongPress: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => TagDeleteDialog(tag: tag),
+                              );
                             },
-                            backgroundColor: theme.colorScheme.surfaceContainer
-                                .withValues(alpha: 0.3),
-                            selectedColor: theme.colorScheme.primaryContainer,
-                            checkmarkColor:
-                                theme.colorScheme.onPrimaryContainer,
-                            labelStyle: theme.textTheme.bodyMedium?.copyWith(
-                              color:
-                                  isSelected
-                                      ? theme.colorScheme.onPrimaryContainer
-                                      : theme.colorScheme.onSurface,
+                            child: FilterChip(
+                              label: Text(tag.name),
+                              selected: isSelected,
+                              onSelected: (selected) {
+                                if (selected) {
+                                  selectedTagIds.value = [
+                                    ...selectedTagIds.value,
+                                    tag.id,
+                                  ];
+                                } else {
+                                  selectedTagIds.value =
+                                      selectedTagIds.value
+                                          .where((id) => id != tag.id)
+                                          .toList();
+                                }
+                              },
+                              backgroundColor: theme
+                                  .colorScheme
+                                  .surfaceContainer
+                                  .withValues(alpha: 0.3),
+                              selectedColor: theme.colorScheme.primaryContainer,
+                              checkmarkColor:
+                                  theme.colorScheme.onPrimaryContainer,
+                              labelStyle: theme.textTheme.bodyMedium?.copyWith(
+                                color:
+                                    isSelected
+                                        ? theme.colorScheme.onPrimaryContainer
+                                        : theme.colorScheme.onSurface,
+                              ),
                             ),
                           );
                         }).toList(),

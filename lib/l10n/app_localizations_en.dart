@@ -74,4 +74,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get newTag => 'New Tag';
+
+  @override
+  String get deleteTag => 'Delete Tag';
+
+  @override
+  String deleteTagConfirmation(String tagName) {
+    return 'Are you sure you want to delete $tagName?';
+  }
 }

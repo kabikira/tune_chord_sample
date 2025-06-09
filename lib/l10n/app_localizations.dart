@@ -220,6 +220,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New Tag'**
   String get newTag;
+
+  /// Title for tag deletion dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Tag'**
+  String get deleteTag;
+
+  /// Confirmation message for tag deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {tagName}?'**
+  String deleteTagConfirmation(String tagName);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

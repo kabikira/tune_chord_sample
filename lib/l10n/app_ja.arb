@@ -22,5 +22,19 @@
   "tuningName": "チューニング名",
   "update": "更新",
   "tags": "タグ",
-  "newTag": "新規タグ"
+  "newTag": "新規タグ",
+  "deleteTag": "タグの削除",
+  "@deleteTag": {
+    "description": "タグ削除ダイアログのタイトル"
+  },
+  "deleteTagConfirmation": "{tagName}を削除してもよろしいですか？",
+  "@deleteTagConfirmation": {
+    "description": "タグ削除の確認メッセージ",
+    "placeholders": {
+      "tagName": {
+        "type": "String",
+        "example": "DADGAD"
+      }
+    }
+  }
 }

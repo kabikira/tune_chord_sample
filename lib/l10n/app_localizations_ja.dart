@@ -74,4 +74,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get newTag => '新規タグ';
+
+  @override
+  String get deleteTag => 'タグの削除';
+
+  @override
+  String deleteTagConfirmation(String tagName) {
+    return '$tagNameを削除してもよろしいですか？';
+  }
 }

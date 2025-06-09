@@ -36,5 +36,19 @@
   "tuningName": "Tuning Name",
   "update": "Update",
   "tags": "Tags",
-  "newTag": "New Tag"
+  "newTag": "New Tag",
+  "deleteTag": "Delete Tag",
+  "@deleteTag": {
+    "description": "Title for tag deletion dialog"
+  },
+  "deleteTagConfirmation": "Are you sure you want to delete {tagName}?",
+  "@deleteTagConfirmation": {
+    "description": "Confirmation message for tag deletion",
+    "placeholders": {
+      "tagName": {
+        "type": "String",
+        "example": "DADGAD"
+      }
+    }
+  }
 }
