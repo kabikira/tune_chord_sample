@@ -2,5 +2,39 @@
   "helloWorld": "こんにちは世界！",
   "@helloWorld": {
     "description": "お決まりの挨拶"
+  },
+  "tuningManagement": "チューニング管理",
+  "errorMessage": "エラー: {error}",
+  "noTuningsRegistered": "登録されたチューニングがありません",
+  "registrationDate": "登録日",
+  "updateDate": "更新日",
+  "registerTuning": "チューニングを登録",
+  "stringTuning": "弦のチューニング",
+  "tuningExample": "例: CGDGCD",
+  "tuningInputDescription": "低音から高音の順に入力してください",
+  "cancel": "キャンセル",
+  "complete": "完了",
+  "deleteConfirmation": "削除確認",
+  "deleteConfirmationMessage": "「{name}」を削除しますか？",
+  "deleteWarningMessage": "この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。",
+  "delete": "削除",
+  "editTuning": "チューニングを編集",
+  "tuningName": "チューニング名",
+  "update": "更新",
+  "tags": "タグ",
+  "newTag": "新規タグ",
+  "deleteTag": "タグの削除",
+  "@deleteTag": {
+    "description": "タグ削除ダイアログのタイトル"
+  },
+  "deleteTagConfirmation": "{tagName}を削除してもよろしいですか？",
+  "@deleteTagConfirmation": {
+    "description": "タグ削除の確認メッセージ",
+    "placeholders": {
+      "tagName": {
+        "type": "String",
+        "example": "DADGAD"
+      }
+    }
   }
 }

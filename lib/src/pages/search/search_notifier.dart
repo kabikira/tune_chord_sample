@@ -114,14 +114,6 @@ class SearchNotifier extends StateNotifier<AsyncValue<List<dynamic>>> {
           return idB.compareTo(idA);
         });
         break;
-      default:
-        // デフォルトは作成日の新しい順
-        results.sort((a, b) {
-          final dateA = a is Tuning ? a.createdAt : (a as CodeForm).createdAt;
-          final dateB = b is Tuning ? b.createdAt : (b as CodeForm).createdAt;
-          return dateB.compareTo(dateA);
-        });
-        break;
     }
   }
 }

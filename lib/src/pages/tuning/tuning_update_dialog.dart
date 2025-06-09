@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tag_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
+import 'package:gap/gap.dart';
+import 'package:flutter/services.dart';
+import 'package:tune_chord_sample/src/config/validation_constants.dart';
 
 class TuningUpdateDialog extends HookConsumerWidget {
   final Tuning tuning;
@@ -14,16 +19,38 @@ class TuningUpdateDialog extends HookConsumerWidget {
     final nameController = useTextEditingController(text: tuning.name);
     final stringsController = useTextEditingController(text: tuning.strings);
     final isSaving = useState(false);
+    final selectedTagIds = useState<List<int>>([]);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    // タグ一覧を取得
+    final tagsAsync = ref.watch(tagsProvider);
+
+    // 既存のタグを取得
+    useEffect(() {
+      Future<void> loadExistingTags() async {
+        final db = ref.read(appDatabaseProvider);
+        final tuningTags = await db.getAllTuningTags();
+        final existingTagIds =
+            tuningTags
+                .where((tag) => tag.tuningId == tuning.id)
+                .map((tag) => tag.tagId)
+                .toList();
+        selectedTagIds.value = existingTagIds;
+      }
+
+      loadExistingTags();
+      return null;
+    }, []);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Row(
         children: [
           Icon(Icons.edit, color: theme.colorScheme.primary),
-          const SizedBox(width: 8),
+          const Gap(8),
           Text(
-            'チューニングを編集',
+            l10n.editTuning, // チューニングを編集
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -38,50 +65,27 @@ class TuningUpdateDialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'チューニング名',
+              l10n.stringTuning, // 弦のチューニング
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
-                    color: theme.colorScheme.primary,
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              '弦のチューニング',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.primary,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
+            const Gap(8),
             TextField(
               controller: stringsController,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(
+                  ValidationConstants.maxTuningLength,
+                ),
+              ],
+              maxLength: ValidationConstants.maxTuningLength,
               decoration: InputDecoration(
-                hintText: '例: C,G,D,G,C,D',
+                hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
+                fillColor: theme.colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.3,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
@@ -98,6 +102,68 @@ class TuningUpdateDialog extends HookConsumerWidget {
                   vertical: 14,
                 ),
               ),
+            ),
+            const Gap(24),
+            Text(
+              l10n.tags, // タグ
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const Gap(8),
+            tagsAsync.when(
+              data:
+                  (tags) => Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children:
+                        tags.map((tag) {
+                          final isSelected = selectedTagIds.value.contains(
+                            tag.id,
+                          );
+                          return GestureDetector(
+                            onLongPress: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => TagDeleteDialog(tag: tag),
+                              );
+                            },
+                            child: FilterChip(
+                              label: Text(tag.name),
+                              selected: isSelected,
+                              onSelected: (selected) {
+                                if (selected) {
+                                  selectedTagIds.value = [
+                                    ...selectedTagIds.value,
+                                    tag.id,
+                                  ];
+                                } else {
+                                  selectedTagIds.value =
+                                      selectedTagIds.value
+                                          .where((id) => id != tag.id)
+                                          .toList();
+                                }
+                              },
+                              backgroundColor: theme
+                                  .colorScheme
+                                  .surfaceContainer
+                                  .withValues(alpha: 0.3),
+                              selectedColor: theme.colorScheme.primaryContainer,
+                              checkmarkColor:
+                                  theme.colorScheme.onPrimaryContainer,
+                              labelStyle: theme.textTheme.bodyMedium?.copyWith(
+                                color:
+                                    isSelected
+                                        ? theme.colorScheme.onPrimaryContainer
+                                        : theme.colorScheme.onSurface,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                  ),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => Text('エラーが発生しました: $error'),
             ),
           ],
         ),
@@ -113,7 +179,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            'キャンセル',
+            l10n.cancel, // キャンセル
             style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
@@ -124,7 +190,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                   : () async {
                     final name = nameController.text.trim();
                     final strings = stringsController.text.trim();
-                    if (name.isEmpty || strings.isEmpty) return;
+                    if (strings.isEmpty) return;
 
                     isSaving.value = true;
                     await ref
@@ -133,6 +199,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                           id: tuning.id,
                           name: name,
                           strings: strings,
+                          tagIds: selectedTagIds.value,
                         );
                     isSaving.value = false;
                     if (context.mounted) {
@@ -158,7 +225,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                       color: theme.colorScheme.onPrimary,
                     ),
                   )
-                  : const Text('更新'),
+                  : Text(l10n.update), // 更新
         ),
       ],
     );

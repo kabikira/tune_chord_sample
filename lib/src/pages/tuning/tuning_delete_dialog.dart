@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
@@ -11,6 +12,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -19,7 +21,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
           Icon(Icons.delete_outline, color: theme.colorScheme.error),
           const SizedBox(width: 8),
           Text(
-            '削除確認',
+            l10n.deleteConfirmation, // 削除確認
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -34,10 +36,10 @@ class TuningDeleteDialog extends HookConsumerWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: theme.colorScheme.error.withOpacity(0.05),
+              color: theme.colorScheme.error.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: theme.colorScheme.error.withOpacity(0.2),
+                color: theme.colorScheme.error.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
@@ -51,7 +53,9 @@ class TuningDeleteDialog extends HookConsumerWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    '「${tuning.name}」を削除しますか？',
+                    l10n.deleteConfirmationMessage(
+                      tuning.name,
+                    ), // 「{name}」を削除しますか？
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -62,9 +66,9 @@ class TuningDeleteDialog extends HookConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。',
+            l10n.deleteWarningMessage, // この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。
             style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -80,9 +84,9 @@ class TuningDeleteDialog extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            'キャンセル',
+            l10n.cancel, // キャンセル
             style: TextStyle(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ),
@@ -104,7 +108,7 @@ class TuningDeleteDialog extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             elevation: 0,
           ),
-          child: const Text('削除'),
+          child: Text(l10n.delete), // 削除
         ),
       ],
     );

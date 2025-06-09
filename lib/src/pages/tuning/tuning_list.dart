@@ -15,13 +15,13 @@ class TuningList extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tuningAsync = ref.watch(tuningNotifierProvider);
     Intl.defaultLocale = Localizations.localeOf(context).toString();
-    final l10n = L10n.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
-        title: const Text('チューニング管理'),
+        title: Text(l10n.tuningManagement), // チューニング管理
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -33,7 +33,10 @@ class TuningList extends HookConsumerWidget {
           Expanded(
             child: tuningAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, _) => Center(child: Text('エラー: $e')),
+              error:
+                  (e, _) => Center(
+                    child: Text(l10n.errorMessage(e.toString())),
+                  ), // エラー: {error}
               data: (tunings) {
                 if (tunings.isEmpty) {
                   return Center(
@@ -43,13 +46,17 @@ class TuningList extends HookConsumerWidget {
                         Icon(
                           Icons.music_note,
                           size: 64,
-                          color: theme.colorScheme.primary.withOpacity(0.5),
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.5,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          '登録されたチューニングがありません',
+                          l10n.noTuningsRegistered, // 登録されたチューニングがありません
                           style: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.7),
+                            color: theme.colorScheme.onSurface.withValues(
+                              alpha: 0.7,
+                            ),
                           ),
                         ),
                       ],
@@ -74,33 +81,77 @@ class TuningList extends HookConsumerWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(16),
-                          child: Row(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      tuning.name,
-                                      style: theme.textTheme.titleLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          tuning.strings,
+                                          style: theme.textTheme.titleLarge
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          tuning.name,
+                                          style: theme.textTheme.bodyMedium
+                                              ?.copyWith(
+                                                color: theme
+                                                    .colorScheme
+                                                    .onSurface
+                                                    .withValues(alpha: 0.7),
+                                              ),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      tuning.strings,
-                                      style: theme.textTheme.bodyMedium
-                                          ?.copyWith(
-                                            color: theme.colorScheme.onSurface
-                                                .withOpacity(0.7),
-                                          ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  _buildInteractionButtons(context, tuning),
+                                ],
                               ),
-                              _buildInteractionButtons(context, tuning),
+                              const SizedBox(height: 12),
+                              // 日付情報を右寄せで表示
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today,
+                                    size: 14,
+                                    color: theme.colorScheme.onSurface
+                                        .withValues(alpha: 0.5),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '${l10n.registrationDate}: ${_formatDate(tuning.createdAt)}', // 登録日
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurface
+                                          .withValues(alpha: 0.5),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Icon(
+                                    Icons.update,
+                                    size: 14,
+                                    color: theme.colorScheme.onSurface
+                                        .withValues(alpha: 0.5),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '${l10n.updateDate}: ${_formatDate(tuning.updatedAt)}', // 更新日
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurface
+                                          .withValues(alpha: 0.5),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -122,6 +173,12 @@ class TuningList extends HookConsumerWidget {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  // 日付をフォーマットするヘルパーメソッド
+  String _formatDate(DateTime date) {
+    final formatter = DateFormat('yyyy/MM/dd');
+    return formatter.format(date);
   }
 
   Widget _buildInteractionButtons(BuildContext context, dynamic tuning) {
