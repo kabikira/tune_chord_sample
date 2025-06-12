@@ -113,7 +113,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: 'C, Am7, Em/G など',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
+                  fillColor: theme.colorScheme.surface.withAlpha(230),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -151,7 +151,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                   // フレット位置表示と移動ボタン
                   Card(
                     elevation: 0,
-                    color: theme.colorScheme.surfaceVariant.withAlpha(77),
+                    color: theme.colorScheme.surface.withAlpha(230),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -250,7 +250,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: '任意のメモを入力できます',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
+                  fillColor: theme.colorScheme.surface.withAlpha(230),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -284,9 +284,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
           ),
           child: Text(
             'キャンセル',
-            style: TextStyle(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
-            ),
+            style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
           ),
         ),
         ElevatedButton(
@@ -423,7 +421,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceVariant.withAlpha(77),
+                  color: theme.colorScheme.surface.withAlpha(230),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
