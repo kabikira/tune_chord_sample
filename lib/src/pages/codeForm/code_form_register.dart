@@ -20,7 +20,7 @@ class CodeFormRegister extends HookConsumerWidget {
     final tuningAsync = ref.watch(singleTuningProvider(tuningId));
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withAlpha(242),
       appBar: AppBar(
         title: const Text('コードフォーム登録'),
         elevation: 0,
@@ -50,9 +50,7 @@ class CodeFormRegister extends HookConsumerWidget {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: theme.colorScheme.primary.withOpacity(
-                                  0.1,
-                                ),
+                                color: theme.colorScheme.primary.withAlpha(128),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
@@ -69,7 +67,7 @@ class CodeFormRegister extends HookConsumerWidget {
                                     'チューニング',
                                     style: theme.textTheme.titleSmall?.copyWith(
                                       color: theme.colorScheme.onSurface
-                                          .withOpacity(0.7),
+                                          .withAlpha(179),
                                     ),
                                   ),
                                   const SizedBox(height: 4),
@@ -83,7 +81,7 @@ class CodeFormRegister extends HookConsumerWidget {
                                     tuning.strings,
                                     style: theme.textTheme.bodyMedium?.copyWith(
                                       color: theme.colorScheme.onSurface
-                                          .withOpacity(0.7),
+                                          .withAlpha(179),
                                     ),
                                   ),
                                 ],
@@ -124,7 +122,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: 'Em, C, G7など',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -162,7 +160,7 @@ class CodeFormRegister extends HookConsumerWidget {
                   // フレット位置表示と移動ボタン
                   Card(
                     elevation: 0,
-                    color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                    color: theme.colorScheme.surfaceVariant.withAlpha(77),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -189,7 +187,7 @@ class CodeFormRegister extends HookConsumerWidget {
                               vertical: 8,
                             ),
                             decoration: BoxDecoration(
-                              color: theme.colorScheme.primary.withOpacity(0.1),
+                              color: theme.colorScheme.primary.withAlpha(26),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -264,7 +262,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: 'コードに関するメモを入力...',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -372,10 +370,8 @@ class CodeFormRegister extends HookConsumerWidget {
                             decoration: BoxDecoration(
                               color:
                                   isStringMuted
-                                      ? theme.colorScheme.error.withOpacity(0.1)
-                                      : theme.colorScheme.primary.withOpacity(
-                                        0.1,
-                                      ),
+                                      ? theme.colorScheme.error.withAlpha(26)
+                                      : theme.colorScheme.primary.withAlpha(26),
                               shape: BoxShape.circle,
                             ),
                             child: Center(
@@ -408,7 +404,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                  color: theme.colorScheme.surfaceVariant.withAlpha(77),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -439,7 +435,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withAlpha(26),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -499,7 +495,7 @@ class CodeFormRegister extends HookConsumerWidget {
                                 width: 8,
                                 height: 8,
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.8),
+                                  color: Colors.white.withAlpha(204),
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -599,8 +595,8 @@ class CodeFormRegister extends HookConsumerWidget {
                                               height: stringThickness,
                                               color:
                                                   isMuted
-                                                      ? Colors.grey.withOpacity(
-                                                        0.3,
+                                                      ? Colors.grey.withAlpha(
+                                                        77,
                                                       )
                                                       : const Color(0xFF666666),
                                             ),
@@ -610,13 +606,14 @@ class CodeFormRegister extends HookConsumerWidget {
                                                 width: 28,
                                                 height: 28,
                                                 decoration: BoxDecoration(
-                                                  color: theme.colorScheme.error
-                                                      .withOpacity(0.8),
+                                                  color: Colors.black.withAlpha(
+                                                    51,
+                                                  ),
                                                   shape: BoxShape.circle,
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Colors.black
-                                                          .withOpacity(0.2),
+                                                          .withAlpha(51),
                                                       blurRadius: 3,
                                                       offset: const Offset(
                                                         0,
@@ -643,13 +640,15 @@ class CodeFormRegister extends HookConsumerWidget {
                                                 width: 28,
                                                 height: 28,
                                                 decoration: BoxDecoration(
-                                                  color:
-                                                      theme.colorScheme.primary,
+                                                  color: theme
+                                                      .colorScheme
+                                                      .primary
+                                                      .withAlpha(51),
                                                   shape: BoxShape.circle,
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Colors.black
-                                                          .withOpacity(0.2),
+                                                          .withAlpha(51),
                                                       blurRadius: 3,
                                                       offset: const Offset(
                                                         0,
@@ -695,7 +694,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 color: theme.colorScheme.surface,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: theme.colorScheme.primary.withOpacity(0.2),
+                  color: theme.colorScheme.primary.withAlpha(26),
                 ),
               ),
               padding: const EdgeInsets.all(12),
@@ -709,7 +708,7 @@ class CodeFormRegister extends HookConsumerWidget {
                       Text(
                         '現在の構成:',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.7),
+                          color: theme.colorScheme.onSurface.withAlpha(179),
                         ),
                       ),
                       const SizedBox(height: 4),

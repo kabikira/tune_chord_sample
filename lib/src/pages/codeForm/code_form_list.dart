@@ -25,7 +25,7 @@ class CodeFormList extends HookConsumerWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withAlpha(242),
       appBar: AppBar(
         title: const Text('コードフォーム一覧'),
         elevation: 0,
@@ -84,13 +84,13 @@ class CodeFormList extends HookConsumerWidget {
                         Icon(
                           Icons.music_note,
                           size: 64,
-                          color: theme.colorScheme.primary.withOpacity(0.5),
+                          color: theme.colorScheme.primary.withAlpha(128),
                         ),
                         const SizedBox(height: 16),
                         Text(
                           '登録されたコードフォームがありません',
                           style: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.7),
+                            color: theme.colorScheme.onSurface.withAlpha(179),
                           ),
                         ),
                       ],
@@ -186,7 +186,7 @@ class CodeFormList extends HookConsumerWidget {
                         Text(
                           'フレットポジション: ${codeForm.fretPositions}',
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.7),
+                            color: theme.colorScheme.onSurface.withAlpha(179),
                           ),
                         ),
                         if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
@@ -195,8 +195,8 @@ class CodeFormList extends HookConsumerWidget {
                             child: Text(
                               'メモ: ${codeForm.memo}',
                               style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurface.withOpacity(
-                                  0.5,
+                                color: theme.colorScheme.onSurface.withAlpha(
+                                  128,
                                 ),
                               ),
                             ),
@@ -254,9 +254,7 @@ class CodeFormList extends HookConsumerWidget {
                           Text(
                             'フレットポジション: ${codeForm.fretPositions}',
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.onSurface.withOpacity(
-                                0.7,
-                              ),
+                              color: theme.colorScheme.onSurface.withAlpha(179),
                             ),
                           ),
                         ],
@@ -276,7 +274,7 @@ class CodeFormList extends HookConsumerWidget {
                       color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: theme.colorScheme.outline.withOpacity(0.2),
+                        color: theme.colorScheme.outline.withAlpha(51),
                       ),
                     ),
                     child: Column(
@@ -360,7 +358,7 @@ class CodeFormList extends HookConsumerWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withAlpha(13),
             blurRadius: 10,
             spreadRadius: 1,
           ),
@@ -390,10 +388,8 @@ class CodeFormList extends HookConsumerWidget {
                           decoration: BoxDecoration(
                             color:
                                 isX
-                                    ? Colors.red.withOpacity(0.1)
-                                    : theme.colorScheme.primary.withOpacity(
-                                      0.1,
-                                    ),
+                                    ? Colors.red.withAlpha(26)
+                                    : theme.colorScheme.primary.withAlpha(26),
                             shape: BoxShape.circle,
                           ),
                           child: Text(

@@ -60,7 +60,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                     (tuning) => Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.primary.withOpacity(0.05),
+                        color: theme.colorScheme.primary.withAlpha(33),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -85,7 +85,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                                   tuning.strings,
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     color: theme.colorScheme.onSurface
-                                        .withOpacity(0.7),
+                                        .withAlpha(179),
                                   ),
                                 ),
                               ],
@@ -113,7 +113,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: 'C, Am7, Em/G など',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -151,7 +151,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                   // フレット位置表示と移動ボタン
                   Card(
                     elevation: 0,
-                    color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                    color: theme.colorScheme.surfaceVariant.withAlpha(77),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -178,7 +178,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                               vertical: 8,
                             ),
                             decoration: BoxDecoration(
-                              color: theme.colorScheme.primary.withOpacity(0.1),
+                              color: theme.colorScheme.primary.withAlpha(26),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -250,7 +250,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: '任意のメモを入力できます',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -389,10 +389,8 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                             decoration: BoxDecoration(
                               color:
                                   isStringMuted
-                                      ? theme.colorScheme.error.withOpacity(0.1)
-                                      : theme.colorScheme.primary.withOpacity(
-                                        0.1,
-                                      ),
+                                      ? theme.colorScheme.error.withAlpha(26)
+                                      : theme.colorScheme.primary.withAlpha(26),
                               shape: BoxShape.circle,
                             ),
                             child: Center(
@@ -425,7 +423,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                  color: theme.colorScheme.surfaceVariant.withAlpha(77),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -456,7 +454,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withAlpha(26),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -477,7 +475,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                           width: 8,
                           height: 8,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withAlpha(204),
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -576,7 +574,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                                         height: stringThickness,
                                         color:
                                             isMuted
-                                                ? Colors.grey.withOpacity(0.3)
+                                                ? Colors.grey.withAlpha(77)
                                                 : const Color(0xFF666666),
                                       ),
                                       // ミュート表示（0フレットのみ）
@@ -586,12 +584,12 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                                           height: 28,
                                           decoration: BoxDecoration(
                                             color: theme.colorScheme.error
-                                                .withOpacity(0.8),
+                                                .withAlpha(26),
                                             shape: BoxShape.circle,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.black.withOpacity(
-                                                  0.2,
+                                                color: Colors.black.withAlpha(
+                                                  51,
                                                 ),
                                                 blurRadius: 3,
                                                 offset: const Offset(0, 1),
@@ -615,12 +613,13 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                                           width: 28,
                                           height: 28,
                                           decoration: BoxDecoration(
-                                            color: theme.colorScheme.primary,
+                                            color: theme.colorScheme.primary
+                                                .withAlpha(26),
                                             shape: BoxShape.circle,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.black.withOpacity(
-                                                  0.2,
+                                                color: Colors.black.withAlpha(
+                                                  51,
                                                 ),
                                                 blurRadius: 3,
                                                 offset: const Offset(0, 1),
@@ -660,7 +659,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 color: theme.colorScheme.surface,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: theme.colorScheme.primary.withOpacity(0.2),
+                  color: theme.colorScheme.primary.withAlpha(51),
                 ),
               ),
               padding: const EdgeInsets.all(12),
@@ -674,7 +673,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                       Text(
                         '現在の構成:',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.7),
+                          color: theme.colorScheme.onSurface.withAlpha(179),
                         ),
                       ),
                       const SizedBox(height: 4),
