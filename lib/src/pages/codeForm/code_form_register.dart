@@ -122,7 +122,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: 'Em, C, G7など',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
+                  fillColor: theme.colorScheme.surface.withAlpha(230),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -160,7 +160,7 @@ class CodeFormRegister extends HookConsumerWidget {
                   // フレット位置表示と移動ボタン
                   Card(
                     elevation: 0,
-                    color: theme.colorScheme.surfaceVariant.withAlpha(77),
+                    color: theme.colorScheme.surface.withAlpha(230),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -262,7 +262,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: 'コードに関するメモを入力...',
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceVariant.withAlpha(77),
+                  fillColor: theme.colorScheme.surface.withAlpha(230),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -288,20 +288,16 @@ class CodeFormRegister extends HookConsumerWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (labelController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('コード名を入力してください')),
-                      );
-                      return;
-                    }
-
                     final fretString = fretPositions.value.join(',');
                     await ref
                         .read(codeFormNotifierProvider.notifier)
                         .addCodeForm(
                           tuningId: tuningId,
                           fretPositions: fretString,
-                          label: labelController.text,
+                          label:
+                              labelController.text.isEmpty
+                                  ? null
+                                  : labelController.text,
                           memo:
                               memoController.text.isEmpty
                                   ? null
@@ -404,7 +400,7 @@ class CodeFormRegister extends HookConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceVariant.withAlpha(77),
+                  color: theme.colorScheme.surface.withAlpha(230),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -453,7 +449,7 @@ class CodeFormRegister extends HookConsumerWidget {
                         bottomLeft: Radius.circular(8),
                       ),
                       border: Border.all(
-                        color: theme.colorScheme.surfaceVariant,
+                        color: theme.colorScheme.surface.withAlpha(230),
                         width: 1,
                       ),
                     ),
