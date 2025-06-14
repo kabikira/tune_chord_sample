@@ -34,10 +34,10 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: theme.colorScheme.error.withAlpha(13),
+              color: theme.colorScheme.error.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: theme.colorScheme.error.withAlpha(51),
+                color: theme.colorScheme.error.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
@@ -64,7 +64,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
           Text(
             'この操作は取り消せません。削除したコードフォームは復元できません。',
             style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurface.withAlpha(179),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -81,7 +81,9 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
           ),
           child: Text(
             'キャンセル',
-            style: TextStyle(color: theme.colorScheme.onSurface.withAlpha(179)),
+            style: TextStyle(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
           ),
         ),
         ElevatedButton(
