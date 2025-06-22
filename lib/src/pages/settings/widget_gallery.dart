@@ -5,6 +5,10 @@ import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
 import 'package:tune_chord_sample/src/widgets/custom_text_field.dart';
 import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
+import 'package:tune_chord_sample/src/widgets/tuning_info_card.dart'
+    as new_tuning;
+import 'package:tune_chord_sample/src/widgets/fret_control_widget.dart';
+import 'package:tune_chord_sample/src/widgets/code_form_action_buttons.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 
 class WidgetGallery extends HookConsumerWidget {
@@ -100,15 +104,9 @@ class WidgetGallery extends HookConsumerWidget {
                     hintText: 'ヒントテキスト',
                   ),
                   const SizedBox(height: 16),
-                  const CustomTextField(
-                    hintText: 'シンプルなフィールド',
-                    maxLines: 3,
-                  ),
+                  const CustomTextField(hintText: 'シンプルなフィールド', maxLines: 3),
                   const SizedBox(height: 16),
-                  const SectionHeader(
-                    title: 'セクションヘッダー',
-                    icon: Icons.settings,
-                  ),
+                  const SectionHeader(title: 'セクションヘッダー', icon: Icons.settings),
                 ],
               ),
             ),
@@ -164,10 +162,102 @@ class WidgetGallery extends HookConsumerWidget {
                 startFret: 0,
                 tuningAsync: AsyncValue.data(sampleTuning),
                 onHelpPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('ヘルプが押されました')),
-                  );
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(const SnackBar(content: Text('ヘルプが押されました')));
                 },
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // TuningInfoCard (New)
+            _buildWidgetSection(
+              context,
+              title: 'TuningInfoCard (New)',
+              description: '新しいチューニング情報表示カード',
+              child: new_tuning.TuningInfoCard(
+                tuningName: sampleTuning.name,
+                tuningStrings: sampleTuning.strings,
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // FretControlWidget
+            _buildWidgetSection(
+              context,
+              title: 'FretControlWidget',
+              description: 'フレット位置制御ウィジェット',
+              child: FretControlWidget(
+                selectedFret: 3,
+                canGoToPrevious: true,
+                canGoToNext: true,
+                onPreviousFret: () {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(const SnackBar(content: Text('前のフレット')));
+                },
+                onNextFret: () {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(const SnackBar(content: Text('次のフレット')));
+                },
+                onReset: () {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(const SnackBar(content: Text('リセット')));
+                },
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // CodeFormActionButtons
+            _buildWidgetSection(
+              context,
+              title: 'CodeFormActionButtons',
+              description: 'コードフォーム用アクションボタン',
+              child: Column(
+                children: [
+                  CodeFormActionButtons(
+                    submitButtonText: '登録する',
+                    onSubmit: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('登録ボタンが押されました')),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  CodeFormActionButtons(
+                    submitButtonText: '更新する',
+                    isEnabled: false,
+                    onSubmit: () {},
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // CodeFormWidget
+            _buildWidgetSection(
+              context,
+              title: 'CodeFormWidget',
+              description: 'コードフォーム入力ウィジェット（完全版）',
+              child: Container(
+                height: 300,
+                decoration: BoxDecoration(
+                  border: Border.all(color: theme.colorScheme.outline),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'CodeFormWidget\n（実際の動作には\nプロバイダーが必要）',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ),
               ),
             ),
 
