@@ -62,5 +62,115 @@
   "navSettings": "Settings",
   "@navSettings": {
     "description": "Label for settings tab in navigation bar"
+  },
+  "codeFormRegistration": "Code Form Registration",
+  "@codeFormRegistration": {
+    "description": "Title for code form registration screen"
+  },
+  "codeFormEdit": "Edit Code Form",
+  "@codeFormEdit": {
+    "description": "Title for code form edit screen"
+  },
+  "codeFormDetail": "Code Form Details",
+  "@codeFormDetail": {
+    "description": "Title for code form detail screen"
+  },
+  "codeFormList": "Code Form List",
+  "@codeFormList": {
+    "description": "Title for code form list screen"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Text for register button"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Text for edit button"
+  },
+  "memo": "Memo",
+  "@memo": {
+    "description": "Label for memo field"
+  },
+  "memoOptional": "Memo (Optional)",
+  "@memoOptional": {
+    "description": "Label for optional memo field"
+  },
+  "memoPlaceholder": "Enter notes about this chord...",
+  "@memoPlaceholder": {
+    "description": "Placeholder text for memo field"
+  },
+  "chordName": "Chord Name",
+  "@chordName": {
+    "description": "Label for chord name field"
+  },
+  "chordNameExample": "e.g., Em, C, G7",
+  "@chordNameExample": {
+    "description": "Hint text for chord name field"
+  },
+  "fretPosition": "Fret Position",
+  "@fretPosition": {
+    "description": "Title for fret position section"
+  },
+  "fretNumber": "Fret {number}",
+  "@fretNumber": {
+    "description": "Display text for fret number",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "previousFret": "Previous Fret",
+  "@previousFret": {
+    "description": "Tooltip for previous fret button"
+  },
+  "nextFret": "Next Fret",
+  "@nextFret": {
+    "description": "Tooltip for next fret button"
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Text for reset button"
+  },
+  "tuningInfo": "Tuning Information",
+  "@tuningInfo": {
+    "description": "Title for tuning info section"
+  },
+  "chordInfo": "Chord Information",
+  "@chordInfo": {
+    "description": "Title for chord info section"
+  },
+  "fretboardHelp": "How to Use Fretboard",
+  "@fretboardHelp": {
+    "description": "Title for fretboard help dialog"
+  },
+  "fretboardHelpTapString": "Tap strings to specify fret positions",
+  "@fretboardHelpTapString": {
+    "description": "Fretboard help instruction 1"
+  },
+  "fretboardHelpOpenString": "Fret 0 represents open strings",
+  "@fretboardHelpOpenString": {
+    "description": "Fretboard help instruction 2"
+  },
+  "fretboardHelpMuteString": "Long press at fret 0 to mute string (X)",
+  "@fretboardHelpMuteString": {
+    "description": "Fretboard help instruction 3"
+  },
+  "fretboardHelpTapAgain": "Tap the same position again to clear",
+  "@fretboardHelpTapAgain": {
+    "description": "Fretboard help instruction 4"
+  },
+  "fretboardHelpArrowKeys": "Use left/right arrows to move fret positions",
+  "@fretboardHelpArrowKeys": {
+    "description": "Fretboard help instruction 5"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Text for close button"
+  },
+  "codeFormNotFound": "Code form not found",
+  "@codeFormNotFound": {
+    "description": "Error message when code form is not found"
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
@@ -12,14 +13,15 @@ class CodeFormDetail extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     // codeFormNotifierProviderを使用してコードフォームデータを取得
     final codeFormsAsync = ref.watch(codeFormNotifierProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('コードフォーム詳細')),
+      appBar: AppBar(title: Text(l10n.codeFormDetail)),
       body: codeFormsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('エラー: $e')),
+        error: (e, _) => Center(child: Text(l10n.errorMessage(e.toString()))),
         data: (codeForms) {
           // 指定されたcodeFormIdに一致するコードフォームを取得
           final codeForm = codeForms.firstWhere(
@@ -61,17 +63,17 @@ class CodeFormDetail extends HookConsumerWidget {
                             extra: codeForm.id,
                           );
                         },
-                        child: const Text('編集'),
+                        child: Text(l10n.edit),
                       ),
                       TextButton(
                         onPressed: () {
                           // 削除確認ダイアログを表示
                           _showDeleteConfirmDialog(context, ref, codeForm.id);
                         },
-                        child: const Text('削除'),
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.red,
                         ),
+                        child: Text(l10n.delete),
                       ),
                     ],
                   ),

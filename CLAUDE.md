@@ -265,6 +265,28 @@ class CodeFormActionButtons extends StatelessWidget {
 - ローカライゼーションファイルは `lib/l10n/` にあり
 - 文字列変更後は `flutter gen-l10n` で生成
 
+**重要: ローカライゼーションインポートパス**
+```dart
+// 正しいインポートパス
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
+
+// 間違ったインポートパス（使用不可）
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+```
+
+**ローカライゼーション使用パターン**:
+```dart
+// 基本的な文字列
+Text(l10n.chordName)
+
+// プレースホルダー付き文字列（引数が必要）
+Text(l10n.errorMessage(error.toString()))  // ✓ 正しい
+Text(l10n.errorMessage)                    // ✗ エラー（引数が必要）
+
+// 数値プレースホルダー付き文字列
+Text(l10n.fretNumber(3))  // "フレット 3" または "Fret 3"
+```
+
 ### ウィジェット整理原則
 - **グローバルコンポーネント** (`/lib/src/widgets/`): 複数の機能で再利用されるウィジェットを配置
 - **機能専用コンポーネント**: その機能に真に特化している場合のみ機能ディレクトリに保持

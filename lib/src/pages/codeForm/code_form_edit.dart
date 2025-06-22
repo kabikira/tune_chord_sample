@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:drift/drift.dart' as drift;
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/code_form_widget.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
@@ -18,12 +19,13 @@ class CodeFormEdit extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final database = ref.read(appDatabaseProvider);
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
-        title: const Text('コードフォーム編集'),
+        title: Text(l10n.codeFormEdit),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -39,12 +41,12 @@ class CodeFormEdit extends ConsumerWidget {
             }
             
             if (snapshot.hasError) {
-              return Center(child: Text('エラー: ${snapshot.error}'));
+              return Center(child: Text(l10n.errorMessage(snapshot.error.toString())));
             }
             
             final codeForm = snapshot.data;
             if (codeForm == null) {
-              return const Center(child: Text('コードフォームが見つかりません'));
+              return Center(child: Text(l10n.codeFormNotFound));
             }
 
             // fretPositionsを文字列からList<int>に変換
@@ -55,7 +57,7 @@ class CodeFormEdit extends ConsumerWidget {
 
             return CodeFormWidget(
               tuningId: tuningId,
-              submitButtonText: '更新する',
+              submitButtonText: l10n.update,
               initialLabel: codeForm.label,
               initialMemo: codeForm.memo,
               initialFretPositions: fretPositions,

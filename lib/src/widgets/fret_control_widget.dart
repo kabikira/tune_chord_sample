@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
 class FretControlWidget extends StatelessWidget {
   final int selectedFret;
@@ -21,6 +22,7 @@ class FretControlWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +46,7 @@ class FretControlWidget extends StatelessWidget {
                   onPressed: canGoToPrevious ? onPreviousFret : null,
                   icon: const Icon(Icons.chevron_left),
                   color: theme.colorScheme.primary,
-                  tooltip: '前のフレット',
+                  tooltip: l10n.previousFret,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -58,7 +60,7 @@ class FretControlWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    'フレット $selectedFret',
+                    l10n.fretNumber(selectedFret),
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.primary,
@@ -69,7 +71,7 @@ class FretControlWidget extends StatelessWidget {
                   onPressed: canGoToNext ? onNextFret : null,
                   icon: const Icon(Icons.chevron_right),
                   color: theme.colorScheme.primary,
-                  tooltip: '次のフレット',
+                  tooltip: l10n.nextFret,
                 ),
               ],
             ),
@@ -81,7 +83,7 @@ class FretControlWidget extends StatelessWidget {
           onPressed: onReset,
           icon: Icon(Icons.refresh, color: theme.colorScheme.primary),
           label: Text(
-            'リセット',
+            l10n.reset,
             style: TextStyle(color: theme.colorScheme.primary),
           ),
           style: TextButton.styleFrom(

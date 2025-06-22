@@ -91,4 +91,84 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get navSettings => '設定';
+
+  @override
+  String get codeFormRegistration => 'コードフォーム登録';
+
+  @override
+  String get codeFormEdit => 'コードフォーム編集';
+
+  @override
+  String get codeFormDetail => 'コードフォーム詳細';
+
+  @override
+  String get codeFormList => 'コードフォーム一覧';
+
+  @override
+  String get register => '登録する';
+
+  @override
+  String get edit => '編集';
+
+  @override
+  String get memo => 'メモ';
+
+  @override
+  String get memoOptional => 'メモ（任意）';
+
+  @override
+  String get memoPlaceholder => 'コードに関するメモを入力...';
+
+  @override
+  String get chordName => 'コード名';
+
+  @override
+  String get chordNameExample => 'Em, C, G7など';
+
+  @override
+  String get fretPosition => 'フレットポジション';
+
+  @override
+  String fretNumber(int number) {
+    return 'フレット $number';
+  }
+
+  @override
+  String get previousFret => '前のフレット';
+
+  @override
+  String get nextFret => '次のフレット';
+
+  @override
+  String get reset => 'リセット';
+
+  @override
+  String get tuningInfo => 'チューニング情報';
+
+  @override
+  String get chordInfo => 'コード情報';
+
+  @override
+  String get fretboardHelp => 'フレットボードの使い方';
+
+  @override
+  String get fretboardHelpTapString => '弦をタップして押さえる位置を指定';
+
+  @override
+  String get fretboardHelpOpenString => 'フレット 0 はオープン弦を表します';
+
+  @override
+  String get fretboardHelpMuteString => 'フレット 0 での長押しで弦をミュート（X）します';
+
+  @override
+  String get fretboardHelpTapAgain => '同じ位置を再度タップすると解除されます';
+
+  @override
+  String get fretboardHelpArrowKeys => '左右の矢印でフレット位置を移動できます';
+
+  @override
+  String get close => '閉じる';
+
+  @override
+  String get codeFormNotFound => 'コードフォームが見つかりません';
 }
