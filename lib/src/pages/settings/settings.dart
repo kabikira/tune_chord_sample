@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:tune_chord_sample/src/pages/settings/widget_gallery.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -8,7 +10,7 @@ class Settings extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
         title: const Text('設定'),
         elevation: 0,
@@ -45,7 +47,7 @@ class Settings extends StatelessWidget {
                   trailing: Text(
                     '1.0.0',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.6),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                 ),
@@ -75,6 +77,30 @@ class Settings extends StatelessWidget {
             ),
 
             const SizedBox(height: 24),
+
+            // 開発者セクション（デバッグ時のみ表示）
+            if (kDebugMode) ...[
+              _buildSectionHeader(context, '開発者向け'),
+              const SizedBox(height: 8),
+              _buildSettingsCard(
+                context,
+                children: [
+                  _buildSettingsItem(
+                    context,
+                    icon: Icons.widgets,
+                    title: 'ウィジェット一覧',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const WidgetGallery(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+            ],
 
             // データ管理セクション
             _buildSectionHeader(context, 'データ管理'),
@@ -225,7 +251,7 @@ class Settings extends StatelessWidget {
                 Text(
                   'バージョン: 1.0.0',
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.6),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ],
@@ -262,10 +288,10 @@ class Settings extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.error.withOpacity(0.05),
+                    color: theme.colorScheme.error.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: theme.colorScheme.error.withOpacity(0.2),
+                      color: theme.colorScheme.error.withValues(alpha: 0.2),
                       width: 1,
                     ),
                   ),
@@ -292,7 +318,7 @@ class Settings extends StatelessWidget {
                 Text(
                   'この操作は取り消せません。すべてのデータが完全に削除されます。',
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                 ),
               ],
