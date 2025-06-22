@@ -1,7 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/tuning_providers.dart';
 
 // TODO: AsyncNotifierに書き換え
 
@@ -16,7 +15,6 @@ final tagsProvider = StreamProvider<List<Tag>>((ref) {
   final db = ref.watch(appDatabaseProvider);
   return db.watchTags();
 });
-
 
 class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
   final AppDatabase db;
