@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/tuning_providers.dart';
 
 class CodeFormRegister extends HookConsumerWidget {
   final int tuningId;
@@ -825,15 +826,3 @@ class CodeFormRegister extends HookConsumerWidget {
   }
 }
 
-// 単一のチューニングを取得するためのプロバイダー
-final singleTuningProvider = FutureProvider.family<Tuning, int>((
-  ref,
-  tuningId,
-) async {
-  final db = ref.watch(appDatabaseProvider);
-  final tunings = await db.getAllTunings();
-  return tunings.firstWhere(
-    (tuning) => tuning.id == tuningId,
-    orElse: () => throw Exception('チューニングが見つかりません'),
-  );
-});
