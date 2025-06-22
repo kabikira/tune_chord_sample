@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
 
 class CodeFormDeleteDialog extends HookConsumerWidget {
   final CodeForm codeForm;
@@ -71,23 +72,10 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
       ),
       actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          style: TextButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          ),
-          child: Text(
-            'キャンセル',
-            style: TextStyle(
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-            ),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () async {
+        DialogActionButtons(
+          confirmText: '削除',
+          isDestructive: true,
+          onConfirm: () async {
             await ref
                 .read(codeFormNotifierProvider.notifier)
                 .deleteCodeForm(codeForm.id);
@@ -95,16 +83,6 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
               Navigator.of(context).pop();
             }
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: theme.colorScheme.error,
-            foregroundColor: theme.colorScheme.onError,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            elevation: 0,
-          ),
-          child: const Text('削除'),
         ),
       ],
     );

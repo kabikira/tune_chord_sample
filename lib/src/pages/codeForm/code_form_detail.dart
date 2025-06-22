@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
 
 class CodeFormDetail extends HookConsumerWidget {
   final int codeFormId;
@@ -47,7 +48,7 @@ class CodeFormDetail extends HookConsumerWidget {
                     ),
 
                   const SizedBox(height: 16),
-                  _buildChordDiagram(codeForm),
+                  ChordDiagramWidget(codeForm: codeForm),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -82,42 +83,6 @@ class CodeFormDetail extends HookConsumerWidget {
     );
   }
 
-  Widget _buildChordDiagram(CodeForm codeForm) {
-    // フレットポジションからコードダイアグラムを構築
-    // 例: "X02220" のような文字列を視覚的に表現
-    final positions = codeForm.fretPositions.split('');
-
-    return Container(
-      height: 120,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-        children:
-            positions.map((pos) {
-              return Column(
-                children: [
-                  Text(
-                    pos == 'X' ? 'X' : pos,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: pos == 'X' ? Colors.red : Colors.black,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(width: 2, color: Colors.grey.shade400),
-                  ),
-                ],
-              );
-            }).toList(),
-      ),
-    );
-  }
 
   void _showDeleteConfirmDialog(
     BuildContext context,

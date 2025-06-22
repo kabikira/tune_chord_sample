@@ -7,6 +7,8 @@ import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_update_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
+import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
 
 // TODO:あとで分ける
 // 表示モードを管理するプロバイダー
@@ -204,7 +206,20 @@ class CodeFormList extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      _buildInteractionButtons(context, codeForm),
+                      InteractionButtons(
+                        onEdit: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => CodeFormUpdateDialog(codeForm: codeForm),
+                          );
+                        },
+                        onDelete: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -302,7 +317,20 @@ class CodeFormList extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      _buildInteractionButtons(context, codeForm),
+                      InteractionButtons(
+                        onEdit: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => CodeFormUpdateDialog(codeForm: codeForm),
+                          );
+                        },
+                        onDelete: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -343,7 +371,10 @@ class CodeFormList extends HookConsumerWidget {
                 ),
 
                 const SizedBox(height: 16),
-                _buildEnhancedChordDiagram(context, codeForm),
+                ChordDiagramWidget(
+                  codeForm: codeForm,
+                  isEnhanced: true,
+                ),
                 const SizedBox(height: 16),
                 if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
                   Container(
@@ -379,125 +410,7 @@ class CodeFormList extends HookConsumerWidget {
     );
   }
 
-  Widget _buildInteractionButtons(BuildContext context, CodeForm codeForm) {
-    final theme = Theme.of(context);
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24),
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (_) => CodeFormUpdateDialog(codeForm: codeForm),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.edit_outlined,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24),
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (_) => CodeFormDeleteDialog(codeForm: codeForm),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.delete_outline, color: theme.colorScheme.error),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // 高品質なコードダイアグラムを表示するウィジェット
-  Widget _buildEnhancedChordDiagram(BuildContext context, CodeForm codeForm) {
-    final theme = Theme.of(context);
-    final positions = codeForm.fretPositions.split('');
-
-    return Container(
-      height: 160,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          Text(
-            'コードダイアグラム',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.primary,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:
-                  positions.map((pos) {
-                    final isX = pos == 'X';
-                    return Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color:
-                                isX
-                                    ? Colors.red.withValues(alpha: 0.1)
-                                    : theme.colorScheme.primary.withValues(
-                                      alpha: 0.1,
-                                    ),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Text(
-                            isX ? 'X' : pos,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color:
-                                  isX ? Colors.red : theme.colorScheme.primary,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: 2,
-                            color: Colors.grey.shade400,
-                          ),
-                        ),
-                      ],
-                    );
-                  }).toList(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   // 日付をフォーマットするヘルパーメソッド
   String _formatDate(DateTime date) {
