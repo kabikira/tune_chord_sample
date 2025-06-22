@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/tuning_providers.dart';
+import 'package:tune_chord_sample/src/pages/codeForm/code_form_providers.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 import 'package:tune_chord_sample/src/widgets/custom_text_field.dart';
 import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
