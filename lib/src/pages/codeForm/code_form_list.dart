@@ -203,6 +203,20 @@ class CodeFormList extends HookConsumerWidget {
                                 ),
                               ),
                             ),
+                            if (codeForm.memo != null &&
+                                codeForm.memo!.isNotEmpty) ...[
+                              const SizedBox(height: 4),
+                              Text(
+                                'メモ: ${codeForm.memo!}',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurface.withValues(
+                                    alpha: 0.6,
+                                  ),
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
                           ],
                         ),
                       ),
@@ -210,13 +224,15 @@ class CodeFormList extends HookConsumerWidget {
                         onEdit: () {
                           showDialog(
                             context: context,
-                            builder: (_) => CodeFormUpdateDialog(codeForm: codeForm),
+                            builder:
+                                (_) => CodeFormUpdateDialog(codeForm: codeForm),
                           );
                         },
                         onDelete: () {
                           showDialog(
                             context: context,
-                            builder: (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                            builder:
+                                (_) => CodeFormDeleteDialog(codeForm: codeForm),
                           );
                         },
                       ),
@@ -321,13 +337,15 @@ class CodeFormList extends HookConsumerWidget {
                         onEdit: () {
                           showDialog(
                             context: context,
-                            builder: (_) => CodeFormUpdateDialog(codeForm: codeForm),
+                            builder:
+                                (_) => CodeFormUpdateDialog(codeForm: codeForm),
                           );
                         },
                         onDelete: () {
                           showDialog(
                             context: context,
-                            builder: (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                            builder:
+                                (_) => CodeFormDeleteDialog(codeForm: codeForm),
                           );
                         },
                       ),
@@ -371,10 +389,7 @@ class CodeFormList extends HookConsumerWidget {
                 ),
 
                 const SizedBox(height: 16),
-                ChordDiagramWidget(
-                  codeForm: codeForm,
-                  isEnhanced: true,
-                ),
+                ChordDiagramWidget(codeForm: codeForm, isEnhanced: true),
                 const SizedBox(height: 16),
                 if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
                   Container(
@@ -409,8 +424,6 @@ class CodeFormList extends HookConsumerWidget {
       },
     );
   }
-
-
 
   // 日付をフォーマットするヘルパーメソッド
   String _formatDate(DateTime date) {
