@@ -56,8 +56,9 @@ class CodeFormDetail extends HookConsumerWidget {
                       TextButton(
                         onPressed: () {
                           // 編集画面へ遷移
-                          context.push(
-                            '/tuningList/codeFormList/${codeForm.tuningId}/codeFormEdit/${codeForm.id}',
+                          context.go(
+                            '/tuningList/codeFormList/${codeForm.tuningId}/codeFormDetail/codeFormEdit',
+                            extra: codeForm.id,
                           );
                         },
                         child: const Text('編集'),
