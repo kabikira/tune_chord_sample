@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_update_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
@@ -222,10 +221,9 @@ class CodeFormList extends HookConsumerWidget {
                       ),
                       InteractionButtons(
                         onEdit: () {
-                          showDialog(
-                            context: context,
-                            builder:
-                                (_) => CodeFormUpdateDialog(codeForm: codeForm),
+                          context.push(
+                            '/tuningList/codeFormList/$tuningId/codeFormEdit',
+                            extra: codeForm.id,
                           );
                         },
                         onDelete: () {
@@ -335,10 +333,9 @@ class CodeFormList extends HookConsumerWidget {
                       ),
                       InteractionButtons(
                         onEdit: () {
-                          showDialog(
-                            context: context,
-                            builder:
-                                (_) => CodeFormUpdateDialog(codeForm: codeForm),
+                          context.push(
+                            '/tuningList/codeFormList/$tuningId/codeFormEdit',
+                            extra: codeForm.id,
                           );
                         },
                         onDelete: () {
