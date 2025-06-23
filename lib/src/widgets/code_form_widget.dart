@@ -58,7 +58,9 @@ class CodeFormWidget extends HookConsumerWidget {
                   tuningStrings: tuning.strings,
                 ),
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Center(child: Text(l10n.errorMessage(error.toString()))),
+            error:
+                (error, _) =>
+                    Center(child: Text(l10n.errorMessage(error.toString()))),
           ),
 
           const SizedBox(height: 24),
