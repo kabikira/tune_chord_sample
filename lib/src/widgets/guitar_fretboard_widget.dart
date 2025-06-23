@@ -19,7 +19,9 @@ class TuningDisplayWidget extends StatelessWidget {
 
     return tuningAsync.when(
       data: (tuning) {
-        final stringNames = tuning.strings.split(',');
+        final stringNames = tuning.strings.contains(',')
+            ? tuning.strings.split(',')
+            : tuning.strings.split('');
         return Row(
           children: List.generate(stringCount, (stringIndex) {
             final reversedIndex = stringCount - 1 - stringIndex;
@@ -42,8 +44,7 @@ class TuningDisplayWidget extends StatelessWidget {
                     child: Text(
                       isStringMuted
                           ? 'X'
-                          : (reversedIndex < stringNames.length &&
-                                  reversedIndex > 0
+                          : (reversedIndex < stringNames.length
                               ? stringNames[reversedIndex]
                               : ''),
                       style: theme.textTheme.bodyMedium?.copyWith(
