@@ -30,59 +30,60 @@ class GuitarFretboardWidget extends HookConsumerWidget {
         child: Column(
           children: [
             // チューニング表示
-            tuningAsync.whenData((tuning) {
-                  final stringNames = tuning.strings.split(',');
-                  if (stringNames.length != stringCount) {
-                    return const Text('チューニング情報が不正です');
-                  }
+            tuningAsync.when(
+              data: (tuning) {
+                final stringNames = tuning.strings.split(',');
+                return Row(
+                  children: List.generate(stringCount, (stringIndex) {
+                    // 逆順（低音が下、高音が上）にするために反転
+                    final reversedIndex = stringCount - 1 - stringIndex;
+                    final position = fretPositions.value[reversedIndex];
 
-                  return Row(
-                    children: List.generate(stringCount, (stringIndex) {
-                      // 逆順（低音が下、高音が上）にするために反転
-                      final reversedIndex = stringCount - 1 - stringIndex;
-                      final position = fretPositions.value[reversedIndex];
+                    // ミュートされている弦はXで表示
+                    final isStringMuted = position == -1;
 
-                      // ミュートされている弦はXで表示
-                      final isStringMuted = position == -1;
-
-                      // チューニング表示
-                      return Expanded(
-                        child: Center(
-                          child: Container(
-                            width: 32,
-                            height: 32,
-                            decoration: BoxDecoration(
-                              color:
-                                  isStringMuted
-                                      ? theme.colorScheme.error.withValues(
-                                        alpha: 0.1,
-                                      )
-                                      : theme.colorScheme.primary.withValues(
-                                        alpha: 0.1,
-                                      ),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: Text(
+                    // チューニング表示
+                    return Expanded(
+                      child: Center(
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color:
                                 isStringMuted
-                                    ? 'X'
-                                    : stringNames[reversedIndex],
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color:
-                                      isStringMuted
-                                          ? theme.colorScheme.error
-                                          : theme.colorScheme.primary,
-                                ),
+                                    ? theme.colorScheme.error.withValues(
+                                      alpha: 0.1,
+                                    )
+                                    : theme.colorScheme.primary.withValues(
+                                      alpha: 0.1,
+                                    ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              isStringMuted
+                                  ? 'X'
+                                  : (reversedIndex < stringNames.length 
+                                      ? stringNames[reversedIndex] 
+                                      : '?'),
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    isStringMuted
+                                        ? theme.colorScheme.error
+                                        : theme.colorScheme.primary,
                               ),
                             ),
                           ),
                         ),
-                      );
-                    }),
-                  );
-                }).value ??
-                const SizedBox.shrink(),
+                      ),
+                    );
+                  }),
+                );
+              },
+              loading: () => const SizedBox.shrink(),
+              error: (error, stack) => const SizedBox.shrink(),
+            ),
 
             const SizedBox(height: 16),
 
