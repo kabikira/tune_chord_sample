@@ -172,5 +172,17 @@
   "codeFormNotFound": "Code form not found",
   "@codeFormNotFound": {
     "description": "Error message when code form is not found"
+  },
+  "muteStringLongPress": "Mute string (long press)",
+  "@muteStringLongPress": {
+    "description": "Text for mute control widget"
+  },
+  "currentComposition": "Current composition:",
+  "@currentComposition": {
+    "description": "Label for current chord composition display"
+  },
+  "help": "Help",
+  "@help": {
+    "description": "Text for help button"
   }
 }

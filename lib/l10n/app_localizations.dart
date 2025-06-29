@@ -406,6 +406,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Code form not found'**
   String get codeFormNotFound;
+
+  /// Text for mute control widget
+  ///
+  /// In en, this message translates to:
+  /// **'Mute string (long press)'**
+  String get muteStringLongPress;
+
+  /// Label for current chord composition display
+  ///
+  /// In en, this message translates to:
+  /// **'Current composition:'**
+  String get currentComposition;
+
+  /// Text for help button
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

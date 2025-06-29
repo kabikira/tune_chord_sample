@@ -158,5 +158,17 @@
   "codeFormNotFound": "コードフォームが見つかりません",
   "@codeFormNotFound": {
     "description": "コードフォームが見つからない場合のエラーメッセージ"
+  },
+  "muteStringLongPress": "弦をミュート (長押し)",
+  "@muteStringLongPress": {
+    "description": "ミュートコントロールウィジェットのテキスト"
+  },
+  "currentComposition": "現在の構成:",
+  "@currentComposition": {
+    "description": "現在のコード構成表示のラベル"
+  },
+  "help": "ヘルプ",
+  "@help": {
+    "description": "ヘルプボタンのテキスト"
   }
 }

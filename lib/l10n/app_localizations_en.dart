@@ -171,4 +171,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get codeFormNotFound => 'Code form not found';
+
+  @override
+  String get muteStringLongPress => 'Mute string (long press)';
+
+  @override
+  String get currentComposition => 'Current composition:';
+
+  @override
+  String get help => 'Help';
 }

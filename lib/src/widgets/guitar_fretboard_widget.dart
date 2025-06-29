@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
 class TuningDisplayWidget extends StatelessWidget {
   final AsyncValue<Tuning> tuningAsync;
@@ -93,7 +94,7 @@ class MuteControlWidget extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              '弦をミュート (長押し)',
+              AppLocalizations.of(context)!.muteStringLongPress,
               style: theme.textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w500,
                 color: theme.colorScheme.error,
@@ -414,7 +415,7 @@ class ChordCompositionWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '現在の構成:',
+                AppLocalizations.of(context)!.currentComposition,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
@@ -435,7 +436,7 @@ class ChordCompositionWidget extends StatelessWidget {
             IconButton(
               onPressed: onHelpPressed,
               icon: Icon(Icons.help_outline, color: theme.colorScheme.primary),
-              tooltip: 'ヘルプ',
+              tooltip: AppLocalizations.of(context)!.help,
             ),
         ],
       ),

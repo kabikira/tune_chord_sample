@@ -171,4 +171,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get codeFormNotFound => 'コードフォームが見つかりません';
+
+  @override
+  String get muteStringLongPress => '弦をミュート (長押し)';
+
+  @override
+  String get currentComposition => '現在の構成:';
+
+  @override
+  String get help => 'ヘルプ';
 }
