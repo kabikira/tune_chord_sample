@@ -19,9 +19,10 @@ class TuningDisplayWidget extends StatelessWidget {
 
     return tuningAsync.when(
       data: (tuning) {
-        final stringNames = tuning.strings.contains(',')
-            ? tuning.strings.split(',')
-            : tuning.strings.split('');
+        final stringNames =
+            tuning.strings.contains(',')
+                ? tuning.strings.split(',')
+                : tuning.strings.split('');
         return Row(
           children: List.generate(stringCount, (stringIndex) {
             final reversedIndex = stringCount - 1 - stringIndex;
@@ -173,21 +174,8 @@ class FretWidget extends StatelessWidget {
 
     return Column(
       children: [
-        if (showFretMarker && !isFirstFret)
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.8),
-              shape: BoxShape.circle,
-            ),
-          ),
-        Container(
-          width: double.infinity,
-          color: isFirstFret ? Colors.black : const Color(0xFFAAAAAA),
-          height: isFirstFret ? 4 : 2,
-        ),
+        if (showFretMarker && !isFirstFret) Container(),
+        Container(),
         Row(
           children: List.generate(stringCount, (stringIndex) {
             final reversedIndex = stringCount - 1 - stringIndex;
