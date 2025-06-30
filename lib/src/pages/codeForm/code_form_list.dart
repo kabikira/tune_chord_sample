@@ -195,7 +195,7 @@ class CodeFormList extends HookConsumerWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X')}',
+                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,
@@ -321,7 +321,7 @@ class CodeFormList extends HookConsumerWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X')}',
+                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,
