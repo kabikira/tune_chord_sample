@@ -188,7 +188,7 @@ class CodeFormList extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              codeForm.label ?? 'コード名なし',
+                              codeForm.label ?? '',
                               style: theme.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -314,7 +314,7 @@ class CodeFormList extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              codeForm.label ?? 'コード名なし',
+                              codeForm.label ?? '',
                               style: theme.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
