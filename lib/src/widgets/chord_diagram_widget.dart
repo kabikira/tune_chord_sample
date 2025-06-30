@@ -35,14 +35,16 @@ class ChordDiagramWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: positions.map((pos) {
+          final displayText = (pos == 'X' || pos == '-1') ? 'X' : pos;
+          final isX = (pos == 'X' || pos == '-1');
           return Column(
             children: [
               Text(
-                pos == 'X' ? 'X' : pos,
+                displayText,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: pos == 'X' ? Colors.red : Colors.black,
+                  color: isX ? Colors.red : Colors.black,
                 ),
               ),
               Expanded(
@@ -87,7 +89,8 @@ class ChordDiagramWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: positions.map((pos) {
-                final isX = pos == 'X';
+                final displayText = (pos == 'X' || pos == '-1') ? 'X' : pos;
+                final isX = (pos == 'X' || pos == '-1');
                 return Column(
                   children: [
                     Container(
@@ -99,7 +102,7 @@ class ChordDiagramWidget extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: Text(
-                        isX ? 'X' : pos,
+                        displayText,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
