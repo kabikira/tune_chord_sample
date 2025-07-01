@@ -383,11 +383,15 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
         .clamp(0, widget.maxFrets - visibleFrets);
     
     if (newStartFret != _currentStartFret) {
-      _currentStartFret = newStartFret;
+      // 即座に内部状態を更新（リアルタイム表示用）
+      setState(() => _currentStartFret = newStartFret);
       
-      _debounceTimer = Timer(const Duration(milliseconds: 100), () {
+      // 外部コールバックは即座に呼び出し（FretControlWidget更新用）
+      widget.onStartFretChanged?.call(_currentStartFret);
+      
+      // ユーザースクロール状態は短いデバウンスで管理
+      _debounceTimer = Timer(const Duration(milliseconds: 50), () {
         _isUserScrolling = false;
-        widget.onStartFretChanged?.call(_currentStartFret);
       });
     }
   }
@@ -414,8 +418,9 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
           if (scrollNotification is ScrollStartNotification) {
             _isUserScrolling = true;
           } else if (scrollNotification is ScrollEndNotification) {
+            // スクロール終了時により短い遅延でユーザースクロール状態をリセット
             _debounceTimer?.cancel();
-            _debounceTimer = Timer(const Duration(milliseconds: 50), () {
+            _debounceTimer = Timer(const Duration(milliseconds: 100), () {
               _isUserScrolling = false;
             });
           }
