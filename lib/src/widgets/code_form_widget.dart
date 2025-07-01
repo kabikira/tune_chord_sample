@@ -102,8 +102,11 @@ class CodeFormWidget extends HookConsumerWidget {
           // ギターフレットボード
           GuitarFretboardWidget(
             fretPositions: fretPositions,
-            startFret: selectedFret.value,
             tuningAsync: tuningAsync,
+            startFretNotifier: selectedFret,
+            onStartFretChanged: (newStartFret) {
+              selectedFret.value = newStartFret;
+            },
             onHelpPressed: () => _showHelpDialog(context, l10n),
           ),
 

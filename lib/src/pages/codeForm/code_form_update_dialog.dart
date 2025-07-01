@@ -176,7 +176,6 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
               // ギターフレットボード
               GuitarFretboardWidget(
                 fretPositions: fretPositions,
-                startFret: selectedFret.value,
                 tuningAsync: tuningAsync,
                 onHelpPressed: () => _showHelpDialog(context),
               ),

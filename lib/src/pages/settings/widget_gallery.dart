@@ -159,7 +159,6 @@ class WidgetGallery extends HookConsumerWidget {
               description: 'ギターフレットボードウィジェット',
               child: GuitarFretboardWidget(
                 fretPositions: ValueNotifier(fretPositions.value),
-                startFret: 0,
                 tuningAsync: AsyncValue.data(sampleTuning),
                 onHelpPressed: () {
                   ScaffoldMessenger.of(

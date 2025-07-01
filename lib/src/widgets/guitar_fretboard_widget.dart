@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
@@ -107,53 +109,6 @@ class MuteControlWidget extends StatelessWidget {
   }
 }
 
-class FretNumbersWidget extends StatelessWidget {
-  final int startFret;
-  final int visibleFrets;
-
-  const FretNumbersWidget({
-    super.key,
-    required this.startFret,
-    required this.visibleFrets,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Container(
-      width: 30,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(8),
-          bottomLeft: Radius.circular(8),
-        ),
-        border: Border.all(
-          color: theme.colorScheme.surface.withValues(alpha: 0.9),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(visibleFrets, (fretIndex) {
-          final currentFret = startFret + fretIndex;
-          return Container(
-            height: 48,
-            alignment: Alignment.center,
-            child: Text(
-              '$currentFret',
-              style: theme.textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-          );
-        }),
-      ),
-    );
-  }
-}
 
 class FretWidget extends StatelessWidget {
   final int currentFret;
@@ -170,33 +125,53 @@ class FretWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const stringCount = 6;
-    final isFirstFret = currentFret == 0;
-    final showFretMarker = _shouldShowFretMarker(currentFret);
+    final theme = Theme.of(context);
 
-    return Column(
-      children: [
-        if (showFretMarker && !isFirstFret) Container(),
-        Container(),
-        Row(
-          children: List.generate(stringCount, (stringIndex) {
-            final reversedIndex = stringCount - 1 - stringIndex;
-            return StringWidget(
-              stringIndex: reversedIndex,
-              currentFret: currentFret,
-              fretPositions: fretPositions,
-              stringThickness:
-                  1.0 +
-                  (0.5 * (stringCount - 1 - stringIndex) / (stringCount - 1)),
-            );
-          }),
-        ),
-      ],
+    return SizedBox(
+      height: 48,
+      child: Row(
+        children: [
+          // フレット番号表示部分
+          Container(
+            width: 30,
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surface,
+              border: Border.all(
+                color: theme.colorScheme.surface.withValues(alpha: 0.9),
+                width: 1,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                '$currentFret',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+            ),
+          ),
+          // フレットボード部分
+          Expanded(
+            child: Row(
+              children: List.generate(stringCount, (stringIndex) {
+                final reversedIndex = stringCount - 1 - stringIndex;
+                return StringWidget(
+                  stringIndex: reversedIndex,
+                  currentFret: currentFret,
+                  fretPositions: fretPositions,
+                  stringThickness:
+                      1.0 +
+                      (0.5 * (stringCount - 1 - stringIndex) / (stringCount - 1)),
+                );
+              }),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  bool _shouldShowFretMarker(int fret) {
-    return [3, 5, 7, 9, 12, 15, 17, 19, 21, 24].contains(fret);
-  }
 }
 
 class StringWidget extends StatelessWidget {
@@ -336,17 +311,86 @@ class StringWidget extends StatelessWidget {
   }
 }
 
-class FretboardGridWidget extends StatelessWidget {
-  final int startFret;
+class FretboardGridWidget extends StatefulWidget {
   final ValueNotifier<List<int>> fretPositions;
-  final int visibleFrets;
+  final int maxFrets;
+  final int startFret;
+  final ValueChanged<int>? onStartFretChanged;
 
   const FretboardGridWidget({
     super.key,
-    required this.startFret,
     required this.fretPositions,
-    required this.visibleFrets,
+    this.maxFrets = 24,
+    this.startFret = 0,
+    this.onStartFretChanged,
   });
+
+  @override
+  State<FretboardGridWidget> createState() => _FretboardGridWidgetState();
+}
+
+class _FretboardGridWidgetState extends State<FretboardGridWidget> {
+  late ScrollController _scrollController;
+  int _currentStartFret = 0;
+  static const double fretHeight = 48.0;
+  static const int visibleFrets = 5;
+  
+  bool _isUpdatingFromExternal = false;
+  bool _isUserScrolling = false;
+  Timer? _debounceTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentStartFret = widget.startFret;
+    _scrollController = ScrollController(
+      initialScrollOffset: widget.startFret * fretHeight,
+    );
+    _scrollController.addListener(_handleScroll);
+  }
+
+  @override
+  void didUpdateWidget(FretboardGridWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.startFret != widget.startFret && !_isUserScrolling) {
+      _isUpdatingFromExternal = true;
+      _currentStartFret = widget.startFret;
+      _scrollController.animateTo(
+        widget.startFret * fretHeight,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+      ).then((_) {
+        _isUpdatingFromExternal = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_handleScroll);
+    _scrollController.dispose();
+    _debounceTimer?.cancel();
+    super.dispose();
+  }
+
+  void _handleScroll() {
+    if (_isUpdatingFromExternal) return;
+    
+    _isUserScrolling = true;
+    _debounceTimer?.cancel();
+    
+    final newStartFret = (_scrollController.offset / fretHeight).floor()
+        .clamp(0, widget.maxFrets - visibleFrets);
+    
+    if (newStartFret != _currentStartFret) {
+      _currentStartFret = newStartFret;
+      
+      _debounceTimer = Timer(const Duration(milliseconds: 100), () {
+        _isUserScrolling = false;
+        widget.onStartFretChanged?.call(_currentStartFret);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -364,26 +408,36 @@ class FretboardGridWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        children: [
-          FretNumbersWidget(startFret: startFret, visibleFrets: visibleFrets),
-          Expanded(
-            child: Column(
-              children: List.generate(visibleFrets, (fretIndex) {
-                final currentFret = startFret + fretIndex;
-                return FretWidget(
-                  currentFret: currentFret,
-                  startFret: startFret,
-                  fretPositions: fretPositions,
-                );
-              }),
-            ),
-          ),
-        ],
+      height: visibleFrets * fretHeight,
+      child: NotificationListener<ScrollNotification>(
+        onNotification: (scrollNotification) {
+          if (scrollNotification is ScrollStartNotification) {
+            _isUserScrolling = true;
+          } else if (scrollNotification is ScrollEndNotification) {
+            _debounceTimer?.cancel();
+            _debounceTimer = Timer(const Duration(milliseconds: 50), () {
+              _isUserScrolling = false;
+            });
+          }
+          return false;
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          physics: const BouncingScrollPhysics(),
+          itemCount: widget.maxFrets,
+          itemBuilder: (context, index) {
+            return FretWidget(
+              currentFret: index,
+              startFret: _currentStartFret,
+              fretPositions: widget.fretPositions,
+            );
+          },
+        ),
       ),
     );
   }
 }
+
 
 class ChordCompositionWidget extends StatelessWidget {
   final ValueNotifier<List<int>> fretPositions;
@@ -446,21 +500,24 @@ class ChordCompositionWidget extends StatelessWidget {
 
 class GuitarFretboardWidget extends HookConsumerWidget {
   final ValueNotifier<List<int>> fretPositions;
-  final int startFret;
   final AsyncValue<Tuning> tuningAsync;
   final VoidCallback? onHelpPressed;
+  final ValueNotifier<int>? startFretNotifier;
+  final ValueChanged<int>? onStartFretChanged;
 
   const GuitarFretboardWidget({
     super.key,
     required this.fretPositions,
-    required this.startFret,
     required this.tuningAsync,
     this.onHelpPressed,
+    this.startFretNotifier,
+    this.onStartFretChanged,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const visibleFrets = 5;
+    final internalStartFretNotifier = useState(0);
+    final effectiveStartFretNotifier = startFretNotifier ?? internalStartFretNotifier;
 
     return Card(
       elevation: 2,
@@ -474,11 +531,14 @@ class GuitarFretboardWidget extends HookConsumerWidget {
               fretPositions: fretPositions,
             ),
             const SizedBox(height: 16),
-            MuteControlWidget(startFret: startFret),
+            MuteControlWidget(startFret: effectiveStartFretNotifier.value),
             FretboardGridWidget(
-              startFret: startFret,
               fretPositions: fretPositions,
-              visibleFrets: visibleFrets,
+              startFret: effectiveStartFretNotifier.value,
+              onStartFretChanged: (newStartFret) {
+                effectiveStartFretNotifier.value = newStartFret;
+                onStartFretChanged?.call(newStartFret);
+              },
             ),
             const SizedBox(height: 16),
             ChordCompositionWidget(
