@@ -3,7 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
-import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
+import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 
 class CodeFormDetail extends HookConsumerWidget {
   final int codeFormId;
@@ -49,7 +50,41 @@ class CodeFormDetail extends HookConsumerWidget {
                     ),
 
                   const SizedBox(height: 16),
-                  ChordDiagramWidget(codeForm: codeForm),
+                  // ギターフレットボード表示の追加
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final tuningAsync = ref.watch(tuningNotifierProvider);
+                      return tuningAsync.when(
+                        data: (tunings) {
+                          final tuning = tunings.firstWhere(
+                            (t) => t.id == codeForm.tuningId,
+                            orElse: () => throw Exception('チューニングが見つかりません'),
+                          );
+
+                          final fretPositions = ValueNotifier<List<int>>(
+                            codeForm.fretPositions.contains(',')
+                                ? codeForm.fretPositions
+                                    .split(',')
+                                    .map(int.parse)
+                                    .toList()
+                                : [0, 0, 0, 0, 0, 0],
+                          );
+
+                          return GuitarFretboardWidget(
+                            fretPositions: fretPositions,
+                            tuningAsync: AsyncValue.data(tuning),
+                          );
+                        },
+                        loading:
+                            () => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                        error:
+                            (error, stack) =>
+                                Center(child: Text('エラー: $error')),
+                      );
+                    },
+                  ),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -58,7 +93,7 @@ class CodeFormDetail extends HookConsumerWidget {
                         onPressed: () {
                           // 編集画面へ遷移
                           context.go(
-                            '/tuningList/codeFormList/${codeForm.tuningId}/codeFormDetail/codeFormEdit',
+                            '/tuningList/codeFormList/${codeForm.tuningId}/codeFormEdit',
                             extra: codeForm.id,
                           );
                         },
