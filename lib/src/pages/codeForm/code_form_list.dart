@@ -6,8 +6,10 @@ import 'package:tune_chord_sample/src/pages/codeForm/code_form_delete_dialog.dar
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
 import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
+import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 
 // TODO:あとで分ける
 // 表示モードを管理するプロバイダー
@@ -386,34 +388,41 @@ class CodeFormList extends HookConsumerWidget {
                 ),
 
                 const SizedBox(height: 16),
-                ChordDiagramWidget(codeForm: codeForm, isEnhanced: true),
-                const SizedBox(height: 16),
-                if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surface,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: theme.colorScheme.outline.withValues(alpha: 0.2),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'メモ',
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: theme.colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(codeForm.memo!, style: theme.textTheme.bodyMedium),
-                      ],
-                    ),
-                  ),
+                Consumer(
+                  builder: (context, ref, child) {
+                    final tuningAsync = ref.watch(tuningNotifierProvider);
+                    return tuningAsync.when(
+                      data: (tunings) {
+                        final tuning = tunings.firstWhere(
+                          (t) => t.id == codeForm.tuningId,
+                          orElse: () => throw Exception('チューニングが見つかりません'),
+                        );
+
+                        final fretPositions = ValueNotifier<List<int>>(
+                          codeForm.fretPositions.contains(',')
+                              ? codeForm.fretPositions
+                                  .split(',')
+                                  .map(int.parse)
+                                  .toList()
+                              : [0, 0, 0, 0, 0, 0],
+                        );
+
+                        return GuitarFretboardWidget(
+                          fretPositions: fretPositions,
+                          tuningAsync: AsyncValue.data(tuning),
+                          showMuteControl: false,
+                          showTuningDisplay: false,
+                          showChordComposition: false,
+                        );
+                      },
+                      loading:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      error:
+                          (error, stack) => Center(child: Text('エラー: $error')),
+                    );
+                  },
+                ),
               ],
             ),
           ),

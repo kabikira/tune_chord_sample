@@ -509,6 +509,9 @@ class GuitarFretboardWidget extends HookConsumerWidget {
   final VoidCallback? onHelpPressed;
   final ValueNotifier<int>? startFretNotifier;
   final ValueChanged<int>? onStartFretChanged;
+  final bool showTuningDisplay;
+  final bool showChordComposition;
+  final bool showMuteControl;
 
   const GuitarFretboardWidget({
     super.key,
@@ -517,6 +520,9 @@ class GuitarFretboardWidget extends HookConsumerWidget {
     this.onHelpPressed,
     this.startFretNotifier,
     this.onStartFretChanged,
+    this.showTuningDisplay = true,
+    this.showChordComposition = true,
+    this.showMuteControl = true,
   });
 
   @override
@@ -531,12 +537,15 @@ class GuitarFretboardWidget extends HookConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TuningDisplayWidget(
-              tuningAsync: tuningAsync,
-              fretPositions: fretPositions,
-            ),
-            const SizedBox(height: 16),
-            MuteControlWidget(startFret: effectiveStartFretNotifier.value),
+            if (showTuningDisplay) ...[
+              TuningDisplayWidget(
+                tuningAsync: tuningAsync,
+                fretPositions: fretPositions,
+              ),
+              const SizedBox(height: 16),
+            ],
+            if (showMuteControl)
+              MuteControlWidget(startFret: effectiveStartFretNotifier.value),
             FretboardGridWidget(
               fretPositions: fretPositions,
               startFret: effectiveStartFretNotifier.value,
@@ -545,11 +554,13 @@ class GuitarFretboardWidget extends HookConsumerWidget {
                 onStartFretChanged?.call(newStartFret);
               },
             ),
-            const SizedBox(height: 16),
-            ChordCompositionWidget(
-              fretPositions: fretPositions,
-              onHelpPressed: onHelpPressed,
-            ),
+            if (showChordComposition) ...[
+              const SizedBox(height: 16),
+              ChordCompositionWidget(
+                fretPositions: fretPositions,
+                onHelpPressed: onHelpPressed,
+              ),
+            ],
           ],
         ),
       ),

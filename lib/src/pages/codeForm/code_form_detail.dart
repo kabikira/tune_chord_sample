@@ -73,6 +73,7 @@ class CodeFormDetail extends HookConsumerWidget {
                           return GuitarFretboardWidget(
                             fretPositions: fretPositions,
                             tuningAsync: AsyncValue.data(tuning),
+                            showMuteControl: false,
                           );
                         },
                         loading:
