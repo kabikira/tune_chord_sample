@@ -424,6 +424,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Help'**
   String get help;
+
+  /// Title for code form deletion dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Code Form'**
+  String get deleteCodeForm;
+
+  /// Confirmation message for code form deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this code form?'**
+  String get deleteCodeFormConfirmation;
+
+  /// Warning message for irreversible actions
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get cannotBeUndone;
+
+  /// Text for confirm button
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// Generic error message
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String errorOccurred(String error);
+
+  /// Error message when tuning is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning not found'**
+  String get tuningNotFound;
+
+  /// Label for display mode selection
+  ///
+  /// In en, this message translates to:
+  /// **'Display Mode'**
+  String get displayMode;
+
+  /// Card display mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Card'**
+  String get cardMode;
+
+  /// List display mode option
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get listMode;
+
+  /// Tooltip for favorite toggle button
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle Favorite'**
+  String get toggleFavorite;
+
+  /// Message when no code forms are found
+  ///
+  /// In en, this message translates to:
+  /// **'No code forms found'**
+  String get noCodeFormsFound;
+
+  /// Suggestion to register first when list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Register first'**
+  String get registerFirst;
+
+  /// Title or button text for code form registration
+  ///
+  /// In en, this message translates to:
+  /// **'Register Code Form'**
+  String get registerCodeForm;
+
+  /// Label for open string in chord diagrams
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get openString;
+
+  /// Label for muted string in chord diagrams
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get muteString;
+
+  /// Display text for chord fret position
+  ///
+  /// In en, this message translates to:
+  /// **'Fret Position: {position}'**
+  String chordFretPosition(String position);
+
+  /// Display text for chord memo
+  ///
+  /// In en, this message translates to:
+  /// **'Memo: {memo}'**
+  String chordMemo(String memo);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

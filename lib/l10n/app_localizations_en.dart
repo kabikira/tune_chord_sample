@@ -180,4 +180,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get help => 'Help';
+
+  @override
+  String get deleteCodeForm => 'Delete Code Form';
+
+  @override
+  String get deleteCodeFormConfirmation => 'Are you sure you want to delete this code form?';
+
+  @override
+  String get cannotBeUndone => 'This action cannot be undone.';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String errorOccurred(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get tuningNotFound => 'Tuning not found';
+
+  @override
+  String get displayMode => 'Display Mode';
+
+  @override
+  String get cardMode => 'Card';
+
+  @override
+  String get listMode => 'List';
+
+  @override
+  String get toggleFavorite => 'Toggle Favorite';
+
+  @override
+  String get noCodeFormsFound => 'No code forms found';
+
+  @override
+  String get registerFirst => 'Register first';
+
+  @override
+  String get registerCodeForm => 'Register Code Form';
+
+  @override
+  String get openString => 'Open';
+
+  @override
+  String get muteString => 'Mute';
+
+  @override
+  String chordFretPosition(String position) {
+    return 'Fret Position: $position';
+  }
+
+  @override
+  String chordMemo(String memo) {
+    return 'Memo: $memo';
+  }
 }

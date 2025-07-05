@@ -170,5 +170,88 @@
   "help": "ヘルプ",
   "@help": {
     "description": "ヘルプボタンのテキスト"
+  },
+  "deleteCodeForm": "コードフォームの削除",
+  "@deleteCodeForm": {
+    "description": "コードフォーム削除ダイアログのタイトル"
+  },
+  "deleteCodeFormConfirmation": "このコードフォームを削除してもよろしいですか？",
+  "@deleteCodeFormConfirmation": {
+    "description": "コードフォーム削除の確認メッセージ"
+  },
+  "cannotBeUndone": "この操作は取り消せません。",
+  "@cannotBeUndone": {
+    "description": "取り消し不可能なアクションの警告メッセージ"
+  },
+  "confirm": "確認",
+  "@confirm": {
+    "description": "確認ボタンのテキスト"
+  },
+  "errorOccurred": "エラー: {error}",
+  "@errorOccurred": {
+    "description": "一般的なエラーメッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "tuningNotFound": "チューニングが見つかりません",
+  "@tuningNotFound": {
+    "description": "チューニングが見つからない場合のエラーメッセージ"
+  },
+  "displayMode": "表示モード",
+  "@displayMode": {
+    "description": "表示モード選択のラベル"
+  },
+  "cardMode": "カード",
+  "@cardMode": {
+    "description": "カード表示モードのオプション"
+  },
+  "listMode": "リスト",
+  "@listMode": {
+    "description": "リスト表示モードのオプション"
+  },
+  "toggleFavorite": "お気に入り切り替え",
+  "@toggleFavorite": {
+    "description": "お気に入り切り替えボタンのツールチップ"
+  },
+  "noCodeFormsFound": "コードフォームが見つかりません",
+  "@noCodeFormsFound": {
+    "description": "コードフォームが見つからない場合のメッセージ"
+  },
+  "registerFirst": "まず登録してください",
+  "@registerFirst": {
+    "description": "リストが空の場合の登録提案"
+  },
+  "registerCodeForm": "コードフォーム登録",
+  "@registerCodeForm": {
+    "description": "コードフォーム登録のタイトルまたはボタンテキスト"
+  },
+  "openString": "開放",
+  "@openString": {
+    "description": "コードダイアグラムでの開放弦のラベル"
+  },
+  "muteString": "ミュート",
+  "@muteString": {
+    "description": "コードダイアグラムでのミュート弦のラベル"
+  },
+  "chordFretPosition": "フレットポジション: {position}",
+  "@chordFretPosition": {
+    "description": "コードフレットポジションの表示テキスト",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "chordMemo": "メモ: {memo}",
+  "@chordMemo": {
+    "description": "コードメモの表示テキスト",
+    "placeholders": {
+      "memo": {
+        "type": "String"
+      }
+    }
   }
 }

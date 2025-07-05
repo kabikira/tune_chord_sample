@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
@@ -32,6 +33,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
     final memoController = useTextEditingController(text: codeForm.memo ?? '');
     final isSaving = useState(false);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     // チューニング情報を取得
     final tuningAsync = ref.watch(singleTuningProvider(codeForm.tuningId));
@@ -43,7 +45,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
           Icon(Icons.edit, color: theme.colorScheme.primary),
           const SizedBox(width: 8),
           Text(
-            'コードフォームを編集',
+            l10n.codeFormEdit,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -66,22 +68,22 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                       tuningStrings: tuning.strings,
                     ),
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, _) => Center(child: Text('エラー: $error')),
+                error: (error, _) => Center(child: Text(l10n.errorOccurred(error.toString()))),
               ),
 
               const SizedBox(height: 16),
 
               CustomTextField(
                 controller: labelController,
-                labelText: 'コード名',
-                hintText: 'C, Am7, Em/G など',
+                labelText: l10n.chordName,
+                hintText: l10n.chordNameExample,
               ),
 
               const SizedBox(height: 24),
 
               // フレットボード表示
               Text(
-                'フレットポジション',
+                l10n.fretPosition,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.primary,
                   fontWeight: FontWeight.w500,
@@ -115,7 +117,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                                     : null,
                             icon: const Icon(Icons.chevron_left),
                             color: theme.colorScheme.primary,
-                            tooltip: '前のフレット',
+                            tooltip: l10n.previousFret,
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -129,7 +131,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              'フレット ${selectedFret.value}',
+                              l10n.fretNumber(selectedFret.value),
                               style: theme.textTheme.titleSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: theme.colorScheme.primary,
@@ -143,7 +145,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                                     : null,
                             icon: const Icon(Icons.chevron_right),
                             color: theme.colorScheme.primary,
-                            tooltip: '次のフレット',
+                            tooltip: l10n.nextFret,
                           ),
                         ],
                       ),
@@ -158,7 +160,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                     },
                     icon: Icon(Icons.refresh, color: theme.colorScheme.primary),
                     label: Text(
-                      'リセット',
+                      l10n.reset,
                       style: TextStyle(color: theme.colorScheme.primary),
                     ),
                     style: TextButton.styleFrom(
@@ -184,8 +186,8 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
 
               CustomTextField(
                 controller: memoController,
-                labelText: 'メモ',
-                hintText: '任意のメモを入力できます',
+                labelText: l10n.memo,
+                hintText: l10n.memoPlaceholder,
                 maxLines: 3,
               ),
             ],
@@ -195,7 +197,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
       actionsPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
       actions: [
         DialogActionButtons(
-          confirmText: '更新',
+          confirmText: l10n.update,
           isLoading: isSaving.value,
           onConfirm:
               isSaving.value
@@ -236,6 +238,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
   // ヘルプダイアログを表示
   void _showHelpDialog(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     showDialog(
       context: context,
@@ -248,16 +251,16 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
               children: [
                 Icon(Icons.help_outline, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
-                const Text('フレットボードの使い方'),
+                Text(l10n.fretboardHelp),
               ],
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('• 弦をタップして押さえる位置を指定', style: theme.textTheme.bodyMedium),
+                Text('• ${l10n.fretboardHelpTapString}', style: theme.textTheme.bodyMedium),
                 const SizedBox(height: 8),
-                Text('• フレット 0 はオープン弦を表します', style: theme.textTheme.bodyMedium),
+                Text('• ${l10n.fretboardHelpOpenString}', style: theme.textTheme.bodyMedium),
                 const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,7 +268,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                     Text('• ', style: theme.textTheme.bodyMedium),
                     Expanded(
                       child: Text(
-                        'フレット 0 での長押しで弦をミュート（X）します',
+                        l10n.fretboardHelpMuteString,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: theme.colorScheme.error,
                         ),
@@ -275,12 +278,12 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '• 同じ位置を再度タップすると解除されます',
+                  '• ${l10n.fretboardHelpTapAgain}',
                   style: theme.textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '• 左右の矢印でフレット位置を移動できます',
+                  '• ${l10n.fretboardHelpArrowKeys}',
                   style: theme.textTheme.bodyMedium,
                 ),
               ],
@@ -289,7 +292,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text(
-                  '閉じる',
+                  l10n.close,
                   style: TextStyle(color: theme.colorScheme.primary),
                 ),
               ),
@@ -308,6 +311,6 @@ final singleTuningProvider = FutureProvider.family<Tuning, int>((
   final tunings = await db.getAllTunings();
   return tunings.firstWhere(
     (tuning) => tuning.id == tuningId,
-    orElse: () => throw Exception('チューニングが見つかりません'),
+    orElse: () => throw Exception('Tuning not found'),
   );
 });

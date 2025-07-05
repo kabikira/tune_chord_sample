@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
-import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 
 // TODO:あとで分ける
@@ -74,7 +73,7 @@ class CodeFormList extends HookConsumerWidget {
           Expanded(
             child: codeFormAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Center(child: Text('エラー: $error')),
+              error: (error, _) => Center(child: Text(l10n.errorOccurred(error.toString()))),
               data: (codeForms) {
                 // チューニングIDに基づいてコードフォームをフィルタリング
                 final filteredCodeForms =
@@ -96,7 +95,7 @@ class CodeFormList extends HookConsumerWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          '登録されたコードフォームがありません',
+                          l10n.noCodeFormsFound,
                           style: theme.textTheme.bodyLarge?.copyWith(
                             color: theme.colorScheme.onSurface.withValues(
                               alpha: 0.7,
@@ -139,7 +138,7 @@ class CodeFormList extends HookConsumerWidget {
                 children: [
                   Icon(Icons.add, color: theme.colorScheme.onPrimary),
                   const SizedBox(width: 8),
-                  const Text('新しいコードフォームを追加'),
+                  Text(l10n.registerCodeForm),
                 ],
               ),
             ),

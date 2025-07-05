@@ -184,5 +184,88 @@
   "help": "Help",
   "@help": {
     "description": "Text for help button"
+  },
+  "deleteCodeForm": "Delete Code Form",
+  "@deleteCodeForm": {
+    "description": "Title for code form deletion dialog"
+  },
+  "deleteCodeFormConfirmation": "Are you sure you want to delete this code form?",
+  "@deleteCodeFormConfirmation": {
+    "description": "Confirmation message for code form deletion"
+  },
+  "cannotBeUndone": "This action cannot be undone.",
+  "@cannotBeUndone": {
+    "description": "Warning message for irreversible actions"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Text for confirm button"
+  },
+  "errorOccurred": "Error: {error}",
+  "@errorOccurred": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "tuningNotFound": "Tuning not found",
+  "@tuningNotFound": {
+    "description": "Error message when tuning is not found"
+  },
+  "displayMode": "Display Mode",
+  "@displayMode": {
+    "description": "Label for display mode selection"
+  },
+  "cardMode": "Card",
+  "@cardMode": {
+    "description": "Card display mode option"
+  },
+  "listMode": "List",
+  "@listMode": {
+    "description": "List display mode option"
+  },
+  "toggleFavorite": "Toggle Favorite",
+  "@toggleFavorite": {
+    "description": "Tooltip for favorite toggle button"
+  },
+  "noCodeFormsFound": "No code forms found",
+  "@noCodeFormsFound": {
+    "description": "Message when no code forms are found"
+  },
+  "registerFirst": "Register first",
+  "@registerFirst": {
+    "description": "Suggestion to register first when list is empty"
+  },
+  "registerCodeForm": "Register Code Form",
+  "@registerCodeForm": {
+    "description": "Title or button text for code form registration"
+  },
+  "openString": "Open",
+  "@openString": {
+    "description": "Label for open string in chord diagrams"
+  },
+  "muteString": "Mute",
+  "@muteString": {
+    "description": "Label for muted string in chord diagrams"
+  },
+  "chordFretPosition": "Fret Position: {position}",
+  "@chordFretPosition": {
+    "description": "Display text for chord fret position",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "chordMemo": "Memo: {memo}",
+  "@chordMemo": {
+    "description": "Display text for chord memo",
+    "placeholders": {
+      "memo": {
+        "type": "String"
+      }
+    }
   }
 }

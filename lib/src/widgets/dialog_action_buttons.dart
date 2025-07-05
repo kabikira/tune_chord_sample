@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
 class DialogActionButtons extends StatelessWidget {
   final String? cancelText;
@@ -25,6 +26,7 @@ class DialogActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -38,7 +40,7 @@ class DialogActionButtons extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
           child: Text(
-            cancelText ?? 'キャンセル',
+            cancelText ?? l10n.cancel,
             style: TextStyle(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
@@ -68,7 +70,7 @@ class DialogActionButtons extends StatelessWidget {
                         (isDestructive ? theme.colorScheme.onError : theme.colorScheme.onPrimary),
                   ),
                 )
-              : Text(confirmText ?? '確認'),
+              : Text(confirmText ?? l10n.confirm),
         ),
       ],
     );

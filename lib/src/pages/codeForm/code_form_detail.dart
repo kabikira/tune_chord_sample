@@ -42,11 +42,11 @@ class CodeFormDetail extends HookConsumerWidget {
                   ),
 
                   const SizedBox(height: 8),
-                  Text('フレットポジション: ${codeForm.fretPositions}'),
+                  Text(l10n.chordFretPosition(codeForm.fretPositions)),
                   if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text('メモ: ${codeForm.memo}'),
+                      child: Text(l10n.chordMemo(codeForm.memo!)),
                     ),
 
                   const SizedBox(height: 16),
@@ -58,7 +58,7 @@ class CodeFormDetail extends HookConsumerWidget {
                         data: (tunings) {
                           final tuning = tunings.firstWhere(
                             (t) => t.id == codeForm.tuningId,
-                            orElse: () => throw Exception('チューニングが見つかりません'),
+                            orElse: () => throw Exception(l10n.tuningNotFound),
                           );
 
                           final fretPositions = ValueNotifier<List<int>>(
@@ -82,7 +82,7 @@ class CodeFormDetail extends HookConsumerWidget {
                             ),
                         error:
                             (error, stack) =>
-                                Center(child: Text('エラー: $error')),
+                                Center(child: Text(l10n.errorOccurred(error.toString()))),
                       );
                     },
                   ),

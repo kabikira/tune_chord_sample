@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
@@ -12,6 +13,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -20,7 +22,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
           Icon(Icons.delete_outline, color: theme.colorScheme.error),
           const SizedBox(width: 8),
           Text(
-            '削除確認',
+            l10n.deleteCodeForm,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -52,7 +54,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    '「${codeForm.label ?? "名称なし"}」を削除しますか？',
+                    l10n.deleteCodeFormConfirmation,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -63,7 +65,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'この操作は取り消せません。削除したコードフォームは復元できません。',
+            l10n.cannotBeUndone,
             style: theme.textTheme.bodySmall?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
@@ -73,7 +75,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
       actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       actions: [
         DialogActionButtons(
-          confirmText: '削除',
+          confirmText: l10n.delete,
           isDestructive: true,
           onConfirm: () async {
             await ref

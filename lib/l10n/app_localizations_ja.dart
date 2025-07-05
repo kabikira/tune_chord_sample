@@ -180,4 +180,61 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get help => 'ヘルプ';
+
+  @override
+  String get deleteCodeForm => 'コードフォームの削除';
+
+  @override
+  String get deleteCodeFormConfirmation => 'このコードフォームを削除してもよろしいですか？';
+
+  @override
+  String get cannotBeUndone => 'この操作は取り消せません。';
+
+  @override
+  String get confirm => '確認';
+
+  @override
+  String errorOccurred(String error) {
+    return 'エラー: $error';
+  }
+
+  @override
+  String get tuningNotFound => 'チューニングが見つかりません';
+
+  @override
+  String get displayMode => '表示モード';
+
+  @override
+  String get cardMode => 'カード';
+
+  @override
+  String get listMode => 'リスト';
+
+  @override
+  String get toggleFavorite => 'お気に入り切り替え';
+
+  @override
+  String get noCodeFormsFound => 'コードフォームが見つかりません';
+
+  @override
+  String get registerFirst => 'まず登録してください';
+
+  @override
+  String get registerCodeForm => 'コードフォーム登録';
+
+  @override
+  String get openString => '開放';
+
+  @override
+  String get muteString => 'ミュート';
+
+  @override
+  String chordFretPosition(String position) {
+    return 'フレットポジション: $position';
+  }
+
+  @override
+  String chordMemo(String memo) {
+    return 'メモ: $memo';
+  }
 }
