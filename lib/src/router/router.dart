@@ -57,14 +57,19 @@ final GoRouter router = GoRouter(
                         final codeFormId = state.extra as int;
                         return CodeFormDetail(codeFormId: codeFormId);
                       },
-                      routes: [
-                        GoRoute(
-                          path: 'codeFormEdit',
-                          builder: (context, state) {
-                            return CodeFormEdit();
-                          },
-                        ),
-                      ],
+                    ),
+                    GoRoute(
+                      path: 'codeFormEdit',
+                      builder: (context, state) {
+                        final tuningId = int.parse(
+                          state.pathParameters['tuningId']!,
+                        );
+                        final codeFormId = state.extra as int;
+                        return CodeFormEdit(
+                          codeFormId: codeFormId,
+                          tuningId: tuningId,
+                        );
+                      },
                     ),
                   ],
                 ),

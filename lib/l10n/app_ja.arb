@@ -48,5 +48,210 @@
   "navSettings": "設定",
   "@navSettings": {
     "description": "ナビゲーションバーの設定タブのラベル"
+  },
+  "codeFormRegistration": "コードフォーム登録",
+  "@codeFormRegistration": {
+    "description": "コードフォーム登録画面のタイトル"
+  },
+  "codeFormEdit": "コードフォーム編集",
+  "@codeFormEdit": {
+    "description": "コードフォーム編集画面のタイトル"
+  },
+  "codeFormDetail": "コードフォーム詳細",
+  "@codeFormDetail": {
+    "description": "コードフォーム詳細画面のタイトル"
+  },
+  "codeFormList": "コードフォーム一覧",
+  "@codeFormList": {
+    "description": "コードフォーム一覧画面のタイトル"
+  },
+  "register": "登録する",
+  "@register": {
+    "description": "登録ボタンのテキスト"
+  },
+  "edit": "編集",
+  "@edit": {
+    "description": "編集ボタンのテキスト"
+  },
+  "memo": "メモ",
+  "@memo": {
+    "description": "メモフィールドのラベル"
+  },
+  "memoOptional": "メモ（任意）",
+  "@memoOptional": {
+    "description": "任意のメモフィールドのラベル"
+  },
+  "memoPlaceholder": "コードに関するメモを入力...",
+  "@memoPlaceholder": {
+    "description": "メモフィールドのプレースホルダー"
+  },
+  "chordName": "コード名",
+  "@chordName": {
+    "description": "コード名フィールドのラベル"
+  },
+  "chordNameExample": "Em, C, G7など",
+  "@chordNameExample": {
+    "description": "コード名フィールドのヒント"
+  },
+  "fretPosition": "フレットポジション",
+  "@fretPosition": {
+    "description": "フレットポジションセクションのタイトル"
+  },
+  "fretNumber": "フレット {number}",
+  "@fretNumber": {
+    "description": "フレット番号の表示",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "previousFret": "前のフレット",
+  "@previousFret": {
+    "description": "前のフレットボタンのツールチップ"
+  },
+  "nextFret": "次のフレット",
+  "@nextFret": {
+    "description": "次のフレットボタンのツールチップ"
+  },
+  "reset": "リセット",
+  "@reset": {
+    "description": "リセットボタンのテキスト"
+  },
+  "tuningInfo": "チューニング情報",
+  "@tuningInfo": {
+    "description": "チューニング情報セクションのタイトル"
+  },
+  "chordInfo": "コード情報",
+  "@chordInfo": {
+    "description": "コード情報セクションのタイトル"
+  },
+  "fretboardHelp": "フレットボードの使い方",
+  "@fretboardHelp": {
+    "description": "フレットボードヘルプダイアログのタイトル"
+  },
+  "fretboardHelpTapString": "弦をタップして押さえる位置を指定",
+  "@fretboardHelpTapString": {
+    "description": "フレットボードヘルプの説明1"
+  },
+  "fretboardHelpOpenString": "フレット 0 はオープン弦を表します",
+  "@fretboardHelpOpenString": {
+    "description": "フレットボードヘルプの説明2"
+  },
+  "fretboardHelpMuteString": "フレット 0 での長押しで弦をミュート（X）します",
+  "@fretboardHelpMuteString": {
+    "description": "フレットボードヘルプの説明3"
+  },
+  "fretboardHelpTapAgain": "同じ位置を再度タップすると解除されます",
+  "@fretboardHelpTapAgain": {
+    "description": "フレットボードヘルプの説明4"
+  },
+  "fretboardHelpArrowKeys": "左右の矢印でフレット位置を移動できます",
+  "@fretboardHelpArrowKeys": {
+    "description": "フレットボードヘルプの説明5"
+  },
+  "close": "閉じる",
+  "@close": {
+    "description": "閉じるボタンのテキスト"
+  },
+  "codeFormNotFound": "コードフォームが見つかりません",
+  "@codeFormNotFound": {
+    "description": "コードフォームが見つからない場合のエラーメッセージ"
+  },
+  "muteStringLongPress": "弦をミュート (長押し)",
+  "@muteStringLongPress": {
+    "description": "ミュートコントロールウィジェットのテキスト"
+  },
+  "currentComposition": "現在の構成:",
+  "@currentComposition": {
+    "description": "現在のコード構成表示のラベル"
+  },
+  "help": "ヘルプ",
+  "@help": {
+    "description": "ヘルプボタンのテキスト"
+  },
+  "deleteCodeForm": "コードフォームの削除",
+  "@deleteCodeForm": {
+    "description": "コードフォーム削除ダイアログのタイトル"
+  },
+  "deleteCodeFormConfirmation": "このコードフォームを削除してもよろしいですか？",
+  "@deleteCodeFormConfirmation": {
+    "description": "コードフォーム削除の確認メッセージ"
+  },
+  "cannotBeUndone": "この操作は取り消せません。",
+  "@cannotBeUndone": {
+    "description": "取り消し不可能なアクションの警告メッセージ"
+  },
+  "confirm": "確認",
+  "@confirm": {
+    "description": "確認ボタンのテキスト"
+  },
+  "errorOccurred": "エラー: {error}",
+  "@errorOccurred": {
+    "description": "一般的なエラーメッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "tuningNotFound": "チューニングが見つかりません",
+  "@tuningNotFound": {
+    "description": "チューニングが見つからない場合のエラーメッセージ"
+  },
+  "displayMode": "表示モード",
+  "@displayMode": {
+    "description": "表示モード選択のラベル"
+  },
+  "cardMode": "カード",
+  "@cardMode": {
+    "description": "カード表示モードのオプション"
+  },
+  "listMode": "リスト",
+  "@listMode": {
+    "description": "リスト表示モードのオプション"
+  },
+  "toggleFavorite": "お気に入り切り替え",
+  "@toggleFavorite": {
+    "description": "お気に入り切り替えボタンのツールチップ"
+  },
+  "noCodeFormsFound": "コードフォームが見つかりません",
+  "@noCodeFormsFound": {
+    "description": "コードフォームが見つからない場合のメッセージ"
+  },
+  "registerFirst": "まず登録してください",
+  "@registerFirst": {
+    "description": "リストが空の場合の登録提案"
+  },
+  "registerCodeForm": "コードフォーム登録",
+  "@registerCodeForm": {
+    "description": "コードフォーム登録のタイトルまたはボタンテキスト"
+  },
+  "openString": "開放",
+  "@openString": {
+    "description": "コードダイアグラムでの開放弦のラベル"
+  },
+  "muteString": "ミュート",
+  "@muteString": {
+    "description": "コードダイアグラムでのミュート弦のラベル"
+  },
+  "chordFretPosition": "フレットポジション: {position}",
+  "@chordFretPosition": {
+    "description": "コードフレットポジションの表示テキスト",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "chordMemo": "メモ: {memo}",
+  "@chordMemo": {
+    "description": "コードメモの表示テキスト",
+    "placeholders": {
+      "memo": {
+        "type": "String"
+      }
+    }
   }
 }

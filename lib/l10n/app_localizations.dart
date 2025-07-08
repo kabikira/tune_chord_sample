@@ -250,6 +250,282 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get navSettings;
+
+  /// Title for code form registration screen
+  ///
+  /// In en, this message translates to:
+  /// **'Code Form Registration'**
+  String get codeFormRegistration;
+
+  /// Title for code form edit screen
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Code Form'**
+  String get codeFormEdit;
+
+  /// Title for code form detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Code Form Details'**
+  String get codeFormDetail;
+
+  /// Title for code form list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Code Form List'**
+  String get codeFormList;
+
+  /// Text for register button
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// Text for edit button
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// Label for memo field
+  ///
+  /// In en, this message translates to:
+  /// **'Memo'**
+  String get memo;
+
+  /// Label for optional memo field
+  ///
+  /// In en, this message translates to:
+  /// **'Memo (Optional)'**
+  String get memoOptional;
+
+  /// Placeholder text for memo field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter notes about this chord...'**
+  String get memoPlaceholder;
+
+  /// Label for chord name field
+  ///
+  /// In en, this message translates to:
+  /// **'Chord Name'**
+  String get chordName;
+
+  /// Hint text for chord name field
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Em, C, G7'**
+  String get chordNameExample;
+
+  /// Title for fret position section
+  ///
+  /// In en, this message translates to:
+  /// **'Fret Position'**
+  String get fretPosition;
+
+  /// Display text for fret number
+  ///
+  /// In en, this message translates to:
+  /// **'Fret {number}'**
+  String fretNumber(int number);
+
+  /// Tooltip for previous fret button
+  ///
+  /// In en, this message translates to:
+  /// **'Previous Fret'**
+  String get previousFret;
+
+  /// Tooltip for next fret button
+  ///
+  /// In en, this message translates to:
+  /// **'Next Fret'**
+  String get nextFret;
+
+  /// Text for reset button
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// Title for tuning info section
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning Information'**
+  String get tuningInfo;
+
+  /// Title for chord info section
+  ///
+  /// In en, this message translates to:
+  /// **'Chord Information'**
+  String get chordInfo;
+
+  /// Title for fretboard help dialog
+  ///
+  /// In en, this message translates to:
+  /// **'How to Use Fretboard'**
+  String get fretboardHelp;
+
+  /// Fretboard help instruction 1
+  ///
+  /// In en, this message translates to:
+  /// **'Tap strings to specify fret positions'**
+  String get fretboardHelpTapString;
+
+  /// Fretboard help instruction 2
+  ///
+  /// In en, this message translates to:
+  /// **'Fret 0 represents open strings'**
+  String get fretboardHelpOpenString;
+
+  /// Fretboard help instruction 3
+  ///
+  /// In en, this message translates to:
+  /// **'Long press at fret 0 to mute string (X)'**
+  String get fretboardHelpMuteString;
+
+  /// Fretboard help instruction 4
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the same position again to clear'**
+  String get fretboardHelpTapAgain;
+
+  /// Fretboard help instruction 5
+  ///
+  /// In en, this message translates to:
+  /// **'Use left/right arrows to move fret positions'**
+  String get fretboardHelpArrowKeys;
+
+  /// Text for close button
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// Error message when code form is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Code form not found'**
+  String get codeFormNotFound;
+
+  /// Text for mute control widget
+  ///
+  /// In en, this message translates to:
+  /// **'Mute string (long press)'**
+  String get muteStringLongPress;
+
+  /// Label for current chord composition display
+  ///
+  /// In en, this message translates to:
+  /// **'Current composition:'**
+  String get currentComposition;
+
+  /// Text for help button
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
+  /// Title for code form deletion dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Code Form'**
+  String get deleteCodeForm;
+
+  /// Confirmation message for code form deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this code form?'**
+  String get deleteCodeFormConfirmation;
+
+  /// Warning message for irreversible actions
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get cannotBeUndone;
+
+  /// Text for confirm button
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// Generic error message
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String errorOccurred(String error);
+
+  /// Error message when tuning is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning not found'**
+  String get tuningNotFound;
+
+  /// Label for display mode selection
+  ///
+  /// In en, this message translates to:
+  /// **'Display Mode'**
+  String get displayMode;
+
+  /// Card display mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Card'**
+  String get cardMode;
+
+  /// List display mode option
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get listMode;
+
+  /// Tooltip for favorite toggle button
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle Favorite'**
+  String get toggleFavorite;
+
+  /// Message when no code forms are found
+  ///
+  /// In en, this message translates to:
+  /// **'No code forms found'**
+  String get noCodeFormsFound;
+
+  /// Suggestion to register first when list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Register first'**
+  String get registerFirst;
+
+  /// Title or button text for code form registration
+  ///
+  /// In en, this message translates to:
+  /// **'Register Code Form'**
+  String get registerCodeForm;
+
+  /// Label for open string in chord diagrams
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get openString;
+
+  /// Label for muted string in chord diagrams
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get muteString;
+
+  /// Display text for chord fret position
+  ///
+  /// In en, this message translates to:
+  /// **'Fret Position: {position}'**
+  String chordFretPosition(String position);
+
+  /// Display text for chord memo
+  ///
+  /// In en, this message translates to:
+  /// **'Memo: {memo}'**
+  String chordMemo(String memo);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -91,4 +91,150 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get navSettings => '設定';
+
+  @override
+  String get codeFormRegistration => 'コードフォーム登録';
+
+  @override
+  String get codeFormEdit => 'コードフォーム編集';
+
+  @override
+  String get codeFormDetail => 'コードフォーム詳細';
+
+  @override
+  String get codeFormList => 'コードフォーム一覧';
+
+  @override
+  String get register => '登録する';
+
+  @override
+  String get edit => '編集';
+
+  @override
+  String get memo => 'メモ';
+
+  @override
+  String get memoOptional => 'メモ（任意）';
+
+  @override
+  String get memoPlaceholder => 'コードに関するメモを入力...';
+
+  @override
+  String get chordName => 'コード名';
+
+  @override
+  String get chordNameExample => 'Em, C, G7など';
+
+  @override
+  String get fretPosition => 'フレットポジション';
+
+  @override
+  String fretNumber(int number) {
+    return 'フレット $number';
+  }
+
+  @override
+  String get previousFret => '前のフレット';
+
+  @override
+  String get nextFret => '次のフレット';
+
+  @override
+  String get reset => 'リセット';
+
+  @override
+  String get tuningInfo => 'チューニング情報';
+
+  @override
+  String get chordInfo => 'コード情報';
+
+  @override
+  String get fretboardHelp => 'フレットボードの使い方';
+
+  @override
+  String get fretboardHelpTapString => '弦をタップして押さえる位置を指定';
+
+  @override
+  String get fretboardHelpOpenString => 'フレット 0 はオープン弦を表します';
+
+  @override
+  String get fretboardHelpMuteString => 'フレット 0 での長押しで弦をミュート（X）します';
+
+  @override
+  String get fretboardHelpTapAgain => '同じ位置を再度タップすると解除されます';
+
+  @override
+  String get fretboardHelpArrowKeys => '左右の矢印でフレット位置を移動できます';
+
+  @override
+  String get close => '閉じる';
+
+  @override
+  String get codeFormNotFound => 'コードフォームが見つかりません';
+
+  @override
+  String get muteStringLongPress => '弦をミュート (長押し)';
+
+  @override
+  String get currentComposition => '現在の構成:';
+
+  @override
+  String get help => 'ヘルプ';
+
+  @override
+  String get deleteCodeForm => 'コードフォームの削除';
+
+  @override
+  String get deleteCodeFormConfirmation => 'このコードフォームを削除してもよろしいですか？';
+
+  @override
+  String get cannotBeUndone => 'この操作は取り消せません。';
+
+  @override
+  String get confirm => '確認';
+
+  @override
+  String errorOccurred(String error) {
+    return 'エラー: $error';
+  }
+
+  @override
+  String get tuningNotFound => 'チューニングが見つかりません';
+
+  @override
+  String get displayMode => '表示モード';
+
+  @override
+  String get cardMode => 'カード';
+
+  @override
+  String get listMode => 'リスト';
+
+  @override
+  String get toggleFavorite => 'お気に入り切り替え';
+
+  @override
+  String get noCodeFormsFound => 'コードフォームが見つかりません';
+
+  @override
+  String get registerFirst => 'まず登録してください';
+
+  @override
+  String get registerCodeForm => 'コードフォーム登録';
+
+  @override
+  String get openString => '開放';
+
+  @override
+  String get muteString => 'ミュート';
+
+  @override
+  String chordFretPosition(String position) {
+    return 'フレットポジション: $position';
+  }
+
+  @override
+  String chordMemo(String memo) {
+    return 'メモ: $memo';
+  }
 }

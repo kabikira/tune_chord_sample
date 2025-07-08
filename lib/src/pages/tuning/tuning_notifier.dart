@@ -16,15 +16,6 @@ final tagsProvider = StreamProvider<List<Tag>>((ref) {
   return db.watchTags();
 });
 
-// 単一のチューニングを取得するためのプロバイダー
-final singleTuningProvider = FutureProvider.family<Tuning, int>((
-  ref,
-  tuningId,
-) async {
-  final db = ref.watch(appDatabaseProvider);
-  return db.getTuningById(tuningId);
-});
-
 class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
   final AppDatabase db;
 

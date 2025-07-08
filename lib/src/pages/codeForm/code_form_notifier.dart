@@ -28,7 +28,7 @@ class CodeFormNotifier extends StateNotifier<AsyncValue<List<CodeForm>>> {
   Future<void> addCodeForm({
     required int tuningId,
     required String fretPositions,
-    required String label,
+    String? label,
     String? memo,
   }) async {
     try {
@@ -36,7 +36,8 @@ class CodeFormNotifier extends StateNotifier<AsyncValue<List<CodeForm>>> {
         CodeFormsCompanion(
           tuningId: drift.Value(tuningId),
           fretPositions: drift.Value(fretPositions),
-          label: drift.Value(label),
+          label:
+              label != null ? drift.Value(label) : const drift.Value.absent(),
           memo: memo != null ? drift.Value(memo) : const drift.Value.absent(),
         ),
       );

@@ -4,7 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_update_dialog.dart';
+import 'package:intl/intl.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
+import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
+import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 
 // TODO:あとで分ける
 // 表示モードを管理するプロバイダー
@@ -23,9 +27,10 @@ class CodeFormList extends HookConsumerWidget {
     final codeFormAsync = ref.watch(codeFormNotifierProvider);
     final viewMode = ref.watch(viewModeProvider);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
         title: const Text('コードフォーム一覧'),
         elevation: 0,
@@ -55,7 +60,7 @@ class CodeFormList extends HookConsumerWidget {
                     viewMode == ViewMode.list
                         ? Icons.view_module
                         : Icons.view_list,
-                    color: theme.colorScheme.primary,
+                    color: theme.colorScheme.primary.withValues(alpha: 0.5),
                   ),
                 ),
               ),
@@ -68,7 +73,7 @@ class CodeFormList extends HookConsumerWidget {
           Expanded(
             child: codeFormAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Center(child: Text('エラー: $error')),
+              error: (error, _) => Center(child: Text(l10n.errorOccurred(error.toString()))),
               data: (codeForms) {
                 // チューニングIDに基づいてコードフォームをフィルタリング
                 final filteredCodeForms =
@@ -84,13 +89,17 @@ class CodeFormList extends HookConsumerWidget {
                         Icon(
                           Icons.music_note,
                           size: 64,
-                          color: theme.colorScheme.primary.withOpacity(0.5),
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.6,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          '登録されたコードフォームがありません',
+                          l10n.noCodeFormsFound,
                           style: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.7),
+                            color: theme.colorScheme.onSurface.withValues(
+                              alpha: 0.7,
+                            ),
                           ),
                         ),
                       ],
@@ -100,8 +109,8 @@ class CodeFormList extends HookConsumerWidget {
 
                 // 表示モードに応じてビューを切り替え
                 return viewMode == ViewMode.list
-                    ? _buildListView(context, ref, filteredCodeForms)
-                    : _buildDetailView(context, ref, filteredCodeForms);
+                    ? _buildListView(context, ref, filteredCodeForms, l10n)
+                    : _buildDetailView(context, ref, filteredCodeForms, l10n);
               },
             ),
           ),
@@ -129,7 +138,7 @@ class CodeFormList extends HookConsumerWidget {
                 children: [
                   Icon(Icons.add, color: theme.colorScheme.onPrimary),
                   const SizedBox(width: 8),
-                  const Text('新しいコードフォームを追加'),
+                  Text(l10n.registerCodeForm),
                 ],
               ),
             ),
@@ -144,6 +153,7 @@ class CodeFormList extends HookConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     List<CodeForm> codeForms,
+    AppLocalizations l10n,
   ) {
     final theme = Theme.of(context);
 
@@ -167,46 +177,102 @@ class CodeFormList extends HookConsumerWidget {
                 extra: codeForm.id,
               );
             },
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          codeForm.label ?? 'コード名なし',
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'フレットポジション: ${codeForm.fretPositions}',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.7),
-                          ),
-                        ),
-                        if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              'メモ: ${codeForm.memo}',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurface.withOpacity(
-                                  0.5,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              codeForm.label ?? '',
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onSurface.withValues(
+                                  alpha: 0.7,
                                 ),
                               ),
                             ),
-                          ),
-                      ],
-                    ),
+                            if (codeForm.memo != null &&
+                                codeForm.memo!.isNotEmpty) ...[
+                              const SizedBox(height: 4),
+                              Text(
+                                'メモ: ${codeForm.memo!}',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurface.withValues(
+                                    alpha: 0.6,
+                                  ),
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      InteractionButtons(
+                        onEdit: () {
+                          context.push(
+                            '/tuningList/codeFormList/$tuningId/codeFormEdit',
+                            extra: codeForm.id,
+                          );
+                        },
+                        onDelete: () {
+                          showDialog(
+                            context: context,
+                            builder:
+                                (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                  _buildInteractionButtons(context, codeForm),
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      size: 14,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${l10n.registrationDate}: ${_formatDate(codeForm.createdAt)}',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.5,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Icon(
+                      Icons.update,
+                      size: 14,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${l10n.updateDate}: ${_formatDate(codeForm.updatedAt)}',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
@@ -219,6 +285,7 @@ class CodeFormList extends HookConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     List<CodeForm> codeForms,
+    AppLocalizations l10n,
   ) {
     final theme = Theme.of(context);
 
@@ -238,62 +305,123 @@ class CodeFormList extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            codeForm.label ?? 'コード名なし',
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'フレットポジション: ${codeForm.fretPositions}',
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.onSurface.withOpacity(
-                                0.7,
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              codeForm.label ?? '',
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 4),
+                            Text(
+                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onSurface.withValues(
+                                  alpha: 0.7,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      InteractionButtons(
+                        onEdit: () {
+                          context.push(
+                            '/tuningList/codeFormList/$tuningId/codeFormEdit',
+                            extra: codeForm.id,
+                          );
+                        },
+                        onDelete: () {
+                          showDialog(
+                            context: context,
+                            builder:
+                                (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      size: 14,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${l10n.registrationDate}: ${_formatDate(codeForm.createdAt)}',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.5,
+                        ),
                       ),
                     ),
-                    _buildInteractionButtons(context, codeForm),
+                    const SizedBox(width: 12),
+                    Icon(
+                      Icons.update,
+                      size: 14,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${l10n.updateDate}: ${_formatDate(codeForm.updatedAt)}',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.5,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
+
                 const SizedBox(height: 16),
-                _buildEnhancedChordDiagram(context, codeForm),
-                const SizedBox(height: 16),
-                if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surface,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: theme.colorScheme.outline.withOpacity(0.2),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'メモ',
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: theme.colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(codeForm.memo!, style: theme.textTheme.bodyMedium),
-                      ],
-                    ),
-                  ),
+                Consumer(
+                  builder: (context, ref, child) {
+                    final tuningAsync = ref.watch(tuningNotifierProvider);
+                    return tuningAsync.when(
+                      data: (tunings) {
+                        final tuning = tunings.firstWhere(
+                          (t) => t.id == codeForm.tuningId,
+                          orElse: () => throw Exception('チューニングが見つかりません'),
+                        );
+
+                        final fretPositions = ValueNotifier<List<int>>(
+                          codeForm.fretPositions.contains(',')
+                              ? codeForm.fretPositions
+                                  .split(',')
+                                  .map(int.parse)
+                                  .toList()
+                              : [0, 0, 0, 0, 0, 0],
+                        );
+
+                        return GuitarFretboardWidget(
+                          fretPositions: fretPositions,
+                          tuningAsync: AsyncValue.data(tuning),
+                          showMuteControl: false,
+                          showTuningDisplay: false,
+                          showChordComposition: false,
+                        );
+                      },
+                      loading:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      error:
+                          (error, stack) => Center(child: Text('エラー: $error')),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -302,123 +430,9 @@ class CodeFormList extends HookConsumerWidget {
     );
   }
 
-  Widget _buildInteractionButtons(BuildContext context, CodeForm codeForm) {
-    final theme = Theme.of(context);
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24),
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (_) => CodeFormUpdateDialog(codeForm: codeForm),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.edit_outlined,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24),
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (_) => CodeFormDeleteDialog(codeForm: codeForm),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.delete_outline, color: theme.colorScheme.error),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // 高品質なコードダイアグラムを表示するウィジェット
-  Widget _buildEnhancedChordDiagram(BuildContext context, CodeForm codeForm) {
-    final theme = Theme.of(context);
-    final positions = codeForm.fretPositions.split('');
-
-    return Container(
-      height: 160,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          Text(
-            'コードダイアグラム',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.primary,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:
-                  positions.map((pos) {
-                    final isX = pos == 'X';
-                    return Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color:
-                                isX
-                                    ? Colors.red.withOpacity(0.1)
-                                    : theme.colorScheme.primary.withOpacity(
-                                      0.1,
-                                    ),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Text(
-                            isX ? 'X' : pos,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color:
-                                  isX ? Colors.red : theme.colorScheme.primary,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: 2,
-                            color: Colors.grey.shade400,
-                          ),
-                        ),
-                      ],
-                    );
-                  }).toList(),
-            ),
-          ),
-        ],
-      ),
-    );
+  // 日付をフォーマットするヘルパーメソッド
+  String _formatDate(DateTime date) {
+    final formatter = DateFormat('yyyy/MM/dd');
+    return formatter.format(date);
   }
 }

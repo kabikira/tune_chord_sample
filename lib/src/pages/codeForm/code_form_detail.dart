@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
+import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 
 class CodeFormDetail extends HookConsumerWidget {
   final int codeFormId;
@@ -11,14 +13,15 @@ class CodeFormDetail extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     // codeFormNotifierProviderを使用してコードフォームデータを取得
     final codeFormsAsync = ref.watch(codeFormNotifierProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('コードフォーム詳細')),
+      appBar: AppBar(title: Text(l10n.codeFormDetail)),
       body: codeFormsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('エラー: $e')),
+        error: (e, _) => Center(child: Text(l10n.errorMessage(e.toString()))),
         data: (codeForms) {
           // 指定されたcodeFormIdに一致するコードフォームを取得
           final codeForm = codeForms.firstWhere(
@@ -39,15 +42,50 @@ class CodeFormDetail extends HookConsumerWidget {
                   ),
 
                   const SizedBox(height: 8),
-                  Text('フレットポジション: ${codeForm.fretPositions}'),
+                  Text(l10n.chordFretPosition(codeForm.fretPositions)),
                   if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text('メモ: ${codeForm.memo}'),
+                      child: Text(l10n.chordMemo(codeForm.memo!)),
                     ),
 
                   const SizedBox(height: 16),
-                  _buildChordDiagram(codeForm),
+                  // ギターフレットボード表示の追加
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final tuningAsync = ref.watch(tuningNotifierProvider);
+                      return tuningAsync.when(
+                        data: (tunings) {
+                          final tuning = tunings.firstWhere(
+                            (t) => t.id == codeForm.tuningId,
+                            orElse: () => throw Exception(l10n.tuningNotFound),
+                          );
+
+                          final fretPositions = ValueNotifier<List<int>>(
+                            codeForm.fretPositions.contains(',')
+                                ? codeForm.fretPositions
+                                    .split(',')
+                                    .map(int.parse)
+                                    .toList()
+                                : [0, 0, 0, 0, 0, 0],
+                          );
+
+                          return GuitarFretboardWidget(
+                            fretPositions: fretPositions,
+                            tuningAsync: AsyncValue.data(tuning),
+                            showMuteControl: false,
+                          );
+                        },
+                        loading:
+                            () => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                        error:
+                            (error, stack) =>
+                                Center(child: Text(l10n.errorOccurred(error.toString()))),
+                      );
+                    },
+                  ),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -55,21 +93,22 @@ class CodeFormDetail extends HookConsumerWidget {
                       TextButton(
                         onPressed: () {
                           // 編集画面へ遷移
-                          context.push(
-                            '/tuningList/codeFormList/${codeForm.tuningId}/codeFormEdit/${codeForm.id}',
+                          context.go(
+                            '/tuningList/codeFormList/${codeForm.tuningId}/codeFormEdit',
+                            extra: codeForm.id,
                           );
                         },
-                        child: const Text('編集'),
+                        child: Text(l10n.edit),
                       ),
                       TextButton(
                         onPressed: () {
                           // 削除確認ダイアログを表示
                           _showDeleteConfirmDialog(context, ref, codeForm.id);
                         },
-                        child: const Text('削除'),
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.red,
                         ),
+                        child: Text(l10n.delete),
                       ),
                     ],
                   ),
@@ -78,43 +117,6 @@ class CodeFormDetail extends HookConsumerWidget {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildChordDiagram(CodeForm codeForm) {
-    // フレットポジションからコードダイアグラムを構築
-    // 例: "X02220" のような文字列を視覚的に表現
-    final positions = codeForm.fretPositions.split('');
-
-    return Container(
-      height: 120,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-        children:
-            positions.map((pos) {
-              return Column(
-                children: [
-                  Text(
-                    pos == 'X' ? 'X' : pos,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: pos == 'X' ? Colors.red : Colors.black,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(width: 2, color: Colors.grey.shade400),
-                  ),
-                ],
-              );
-            }).toList(),
       ),
     );
   }
