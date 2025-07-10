@@ -33,7 +33,7 @@ class SearchPage extends HookConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
         title: Text(l10n.search),
         elevation: 0,
@@ -53,7 +53,7 @@ class SearchPage extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 10,
                     spreadRadius: 0,
                     offset: const Offset(0, 2),
@@ -64,7 +64,7 @@ class SearchPage extends HookConsumerWidget {
                 decoration: InputDecoration(
                   hintText: l10n.searchKeywordPlaceholder,
                   hintStyle: TextStyle(
-                    color: theme.colorScheme.onSurface.withOpacity(0.5),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                   prefixIcon: Icon(
                     Icons.search,
@@ -75,7 +75,7 @@ class SearchPage extends HookConsumerWidget {
                           ? IconButton(
                             icon: Icon(
                               Icons.clear,
-                              color: theme.colorScheme.primary.withOpacity(0.7),
+                              color: theme.colorScheme.primary.withValues(alpha: 0.7),
                             ),
                             onPressed: () {
                               ref.read(searchQueryProvider.notifier).state = '';
@@ -109,7 +109,7 @@ class SearchPage extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 10,
                     spreadRadius: 0,
                     offset: const Offset(0, 2),
@@ -138,17 +138,15 @@ class SearchPage extends HookConsumerWidget {
                             Text(
                               l10n.searchTarget,
                               style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.primary.withOpacity(
-                                  0.8,
-                                ),
+                                color: theme.colorScheme.primary.withValues(alpha: 0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Container(
                               decoration: BoxDecoration(
-                                color: theme.colorScheme.surfaceVariant
-                                    .withOpacity(0.3),
+                                color: theme.colorScheme.surfaceContainerHighest
+                                    .withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: const EdgeInsets.symmetric(
@@ -208,17 +206,15 @@ class SearchPage extends HookConsumerWidget {
                             Text(
                               l10n.sortOrder,
                               style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.primary.withOpacity(
-                                  0.8,
-                                ),
+                                color: theme.colorScheme.primary.withValues(alpha: 0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Container(
                               decoration: BoxDecoration(
-                                color: theme.colorScheme.surfaceVariant
-                                    .withOpacity(0.3),
+                                color: theme.colorScheme.surfaceContainerHighest
+                                    .withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: const EdgeInsets.symmetric(
@@ -300,7 +296,7 @@ class SearchPage extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(16),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
+                                  color: Colors.black.withValues(alpha: 0.05),
                                   blurRadius: 10,
                                   spreadRadius: 0,
                                   offset: const Offset(0, 2),
@@ -316,7 +312,7 @@ class SearchPage extends HookConsumerWidget {
                                       height: 1,
                                       indent: 72,
                                       color: theme.colorScheme.outline
-                                          .withOpacity(0.1),
+                                          .withValues(alpha: 0.1),
                                     ),
                                 itemBuilder: (context, index) {
                                   final result = results[index];
@@ -373,13 +369,13 @@ class SearchPage extends HookConsumerWidget {
           Icon(
             icon,
             size: 64,
-            color: theme.colorScheme.primary.withOpacity(0.5),
+            color: theme.colorScheme.primary.withValues(alpha: 0.5),
           ),
           const SizedBox(height: 16),
           Text(
             message,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -404,7 +400,7 @@ class SearchPage extends HookConsumerWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: theme.colorScheme.primary.withOpacity(0.1),
+              backgroundColor: theme.colorScheme.primary.withValues(alpha: 0.1),
               child: Icon(
                 Icons.music_note,
                 color: theme.colorScheme.primary,
@@ -425,7 +421,7 @@ class SearchPage extends HookConsumerWidget {
                   Text(
                     l10n.tuningLabel(tuning.strings),
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -446,7 +442,7 @@ class SearchPage extends HookConsumerWidget {
             ),
             Icon(
               Icons.chevron_right,
-              color: theme.colorScheme.onSurface.withOpacity(0.5),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ],
         ),
@@ -473,7 +469,7 @@ class SearchPage extends HookConsumerWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: theme.colorScheme.secondary.withOpacity(0.1),
+              backgroundColor: theme.colorScheme.secondary.withValues(alpha: 0.1),
               child: Icon(
                 Icons.queue_music,
                 color: theme.colorScheme.secondary,
@@ -494,7 +490,7 @@ class SearchPage extends HookConsumerWidget {
                   Text(
                     l10n.fretPositionLabel(codeForm.fretPositions),
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -515,7 +511,7 @@ class SearchPage extends HookConsumerWidget {
             ),
             Icon(
               Icons.chevron_right,
-              color: theme.colorScheme.onSurface.withOpacity(0.5),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ],
         ),
@@ -531,7 +527,7 @@ class SearchPage extends HookConsumerWidget {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
           decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+            color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
