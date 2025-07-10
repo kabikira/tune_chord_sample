@@ -68,6 +68,25 @@ class AppDatabase extends _$AppDatabase {
       into(codeFormTags).insert(tag);
   Future<void> deleteCodeFormTag(int id) =>
       (delete(codeFormTags)..where((t) => t.id.equals(id))).go();
+
+  // ---------- Helper Methods for Tags ----------
+  Future<List<Tag>> getTagsForTuning(int tuningId) async {
+    final query = select(tags).join([
+      innerJoin(tuningTags, tuningTags.tagId.equalsExp(tags.id)),
+    ])..where(tuningTags.tuningId.equals(tuningId));
+    
+    final result = await query.get();
+    return result.map((row) => row.readTable(tags)).toList();
+  }
+
+  Future<List<Tag>> getTagsForCodeForm(int codeFormId) async {
+    final query = select(tags).join([
+      innerJoin(codeFormTags, codeFormTags.tagId.equalsExp(tags.id)),
+    ])..where(codeFormTags.codeFormId.equals(codeFormId));
+    
+    final result = await query.get();
+    return result.map((row) => row.readTable(tags)).toList();
+  }
 }
 
 LazyDatabase _openConnection() {

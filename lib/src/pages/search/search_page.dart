@@ -5,7 +5,7 @@ import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/search/search_notifier.dart';
 
 // 検索対象の種類
-enum SearchType { tuning, codeForm, both }
+enum SearchType { tuning, codeForm, tag, both }
 
 // ソート順
 enum SortOrder { dateAsc, dateDesc, idAsc, idDesc }
@@ -184,6 +184,10 @@ class SearchPage extends HookConsumerWidget {
                                       value: SearchType.codeForm,
                                       child: Text('コードフォームのみ'),
                                     ),
+                                    DropdownMenuItem(
+                                      value: SearchType.tag,
+                                      child: Text('タグのみ'),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -317,53 +321,19 @@ class SearchPage extends HookConsumerWidget {
 
                                   if (result is Tuning) {
                                     // チューニングの表示
-                                    return _buildResultTile(
+                                    return _buildTuningResultTile(
                                       context,
                                       theme,
-                                      leading: CircleAvatar(
-                                        backgroundColor: theme
-                                            .colorScheme
-                                            .primary
-                                            .withOpacity(0.1),
-                                        child: Icon(
-                                          Icons.music_note,
-                                          color: theme.colorScheme.primary,
-                                        ),
-                                      ),
-                                      title: result.name,
-                                      subtitle: 'チューニング: ${result.strings}',
-                                      onTap: () {
-                                        // チューニングの詳細ページに遷移
-                                        context.push(
-                                          '/tuningList/codeFormList/${result.id}',
-                                        );
-                                      },
+                                      ref,
+                                      result,
                                     );
                                   } else if (result is CodeForm) {
                                     // コードフォームの表示
-                                    return _buildResultTile(
+                                    return _buildCodeFormResultTile(
                                       context,
                                       theme,
-                                      leading: CircleAvatar(
-                                        backgroundColor: theme
-                                            .colorScheme
-                                            .secondary
-                                            .withOpacity(0.1),
-                                        child: Icon(
-                                          Icons.queue_music,
-                                          color: theme.colorScheme.secondary,
-                                        ),
-                                      ),
-                                      title: result.label ?? '名称なし',
-                                      subtitle:
-                                          'フレットポジション: ${result.fretPositions}',
-                                      onTap: () {
-                                        // コードフォームの詳細ページに遷移
-                                        context.push(
-                                          '/tuningList/codeFormList/${result.tuningId}/codeFormDetail',
-                                          extra: result.id,
-                                        );
-                                      },
+                                      ref,
+                                      result,
                                     );
                                   }
 
@@ -416,38 +386,57 @@ class SearchPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildResultTile(
+  Widget _buildTuningResultTile(
     BuildContext context,
-    ThemeData theme, {
-    required Widget leading,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
+    ThemeData theme,
+    WidgetRef ref,
+    Tuning tuning,
+  ) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        context.push('/tuningList/codeFormList/${tuning.id}');
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           children: [
-            leading,
+            CircleAvatar(
+              backgroundColor: theme.colorScheme.primary.withOpacity(0.1),
+              child: Icon(
+                Icons.music_note,
+                color: theme.colorScheme.primary,
+              ),
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    tuning.name,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    subtitle,
+                    'チューニング: ${tuning.strings}',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurface.withOpacity(0.7),
                     ),
+                  ),
+                  const SizedBox(height: 4),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final tagsAsync = ref.watch(tuningTagsProvider(tuning.id));
+                      return tagsAsync.when(
+                        data: (tags) => tags.isNotEmpty
+                            ? _buildTagsRow(theme, tags)
+                            : const SizedBox.shrink(),
+                        loading: () => const SizedBox.shrink(),
+                        error: (_, __) => const SizedBox.shrink(),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -459,6 +448,97 @@ class SearchPage extends HookConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCodeFormResultTile(
+    BuildContext context,
+    ThemeData theme,
+    WidgetRef ref,
+    CodeForm codeForm,
+  ) {
+    return InkWell(
+      onTap: () {
+        context.push(
+          '/tuningList/codeFormList/${codeForm.tuningId}/codeFormDetail',
+          extra: codeForm.id,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: theme.colorScheme.secondary.withOpacity(0.1),
+              child: Icon(
+                Icons.queue_music,
+                color: theme.colorScheme.secondary,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    codeForm.label ?? '名称なし',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'フレットポジション: ${codeForm.fretPositions}',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final tagsAsync = ref.watch(codeFormTagsProvider(codeForm.id));
+                      return tagsAsync.when(
+                        data: (tags) => tags.isNotEmpty
+                            ? _buildTagsRow(theme, tags)
+                            : const SizedBox.shrink(),
+                        loading: () => const SizedBox.shrink(),
+                        error: (_, __) => const SizedBox.shrink(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right,
+              color: theme.colorScheme.onSurface.withOpacity(0.5),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTagsRow(ThemeData theme, List<Tag> tags) {
+    return Wrap(
+      spacing: 4,
+      runSpacing: 4,
+      children: tags.map((tag) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            tag.name,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.primary,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }
