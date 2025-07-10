@@ -526,6 +526,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Memo: {memo}'**
   String chordMemo(String memo);
+
+  /// Title for search screen
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// Placeholder text for search input field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter search keyword'**
+  String get searchKeywordPlaceholder;
+
+  /// Title for search options section
+  ///
+  /// In en, this message translates to:
+  /// **'Search Options'**
+  String get searchOptions;
+
+  /// Label for search target selection
+  ///
+  /// In en, this message translates to:
+  /// **'Search Target'**
+  String get searchTarget;
+
+  /// Label for sort order selection
+  ///
+  /// In en, this message translates to:
+  /// **'Sort Order'**
+  String get sortOrder;
+
+  /// Search target option for all items
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get searchTargetAll;
+
+  /// Search target option for tuning only
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning Only'**
+  String get searchTargetTuning;
+
+  /// Search target option for code form only
+  ///
+  /// In en, this message translates to:
+  /// **'Code Form Only'**
+  String get searchTargetCodeForm;
+
+  /// Search target option for tag only
+  ///
+  /// In en, this message translates to:
+  /// **'Tag Only'**
+  String get searchTargetTag;
+
+  /// Sort order option for newest first
+  ///
+  /// In en, this message translates to:
+  /// **'Newest First'**
+  String get sortOrderNewest;
+
+  /// Sort order option for oldest first
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest First'**
+  String get sortOrderOldest;
+
+  /// Sort order option for ID ascending
+  ///
+  /// In en, this message translates to:
+  /// **'ID Ascending'**
+  String get sortOrderIdAsc;
+
+  /// Sort order option for ID descending
+  ///
+  /// In en, this message translates to:
+  /// **'ID Descending'**
+  String get sortOrderIdDesc;
+
+  /// Empty state message when no search keyword is entered
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a search keyword'**
+  String get searchEnterKeyword;
+
+  /// Empty state message when no search results are found
+  ///
+  /// In en, this message translates to:
+  /// **'No search results found'**
+  String get searchNoResults;
+
+  /// Label for tuning display in search results
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning: {tuning}'**
+  String tuningLabel(String tuning);
+
+  /// Label for fret position display in search results
+  ///
+  /// In en, this message translates to:
+  /// **'Fret Position: {position}'**
+  String fretPositionLabel(String position);
+
+  /// Placeholder text when item has no name
+  ///
+  /// In en, this message translates to:
+  /// **'No Name'**
+  String get noName;
+
+  /// Error message during search operation
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred during search: {error}'**
+  String searchError(String error);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

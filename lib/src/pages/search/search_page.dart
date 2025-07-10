@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/search/search_notifier.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
 // 検索対象の種類
 enum SearchType { tuning, codeForm, tag, both }
@@ -29,11 +30,12 @@ class SearchPage extends HookConsumerWidget {
     final searchQuery = ref.watch(searchQueryProvider);
     final searchResults = ref.watch(searchResultsProvider);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
       appBar: AppBar(
-        title: const Text('検索'),
+        title: Text(l10n.search),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -60,7 +62,7 @@ class SearchPage extends HookConsumerWidget {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: '検索キーワードを入力',
+                  hintText: l10n.searchKeywordPlaceholder,
                   hintStyle: TextStyle(
                     color: theme.colorScheme.onSurface.withOpacity(0.5),
                   ),
@@ -119,7 +121,7 @@ class SearchPage extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '検索オプション',
+                    l10n.searchOptions,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.primary,
@@ -134,7 +136,7 @@ class SearchPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '検索対象',
+                              l10n.searchTarget,
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: theme.colorScheme.primary.withOpacity(
                                   0.8,
@@ -171,22 +173,22 @@ class SearchPage extends HookConsumerWidget {
                                           .state = value;
                                     }
                                   },
-                                  items: const [
+                                  items: [
                                     DropdownMenuItem(
                                       value: SearchType.both,
-                                      child: Text('すべて'),
+                                      child: Text(l10n.searchTargetAll),
                                     ),
                                     DropdownMenuItem(
                                       value: SearchType.tuning,
-                                      child: Text('チューニングのみ'),
+                                      child: Text(l10n.searchTargetTuning),
                                     ),
                                     DropdownMenuItem(
                                       value: SearchType.codeForm,
-                                      child: Text('コードフォームのみ'),
+                                      child: Text(l10n.searchTargetCodeForm),
                                     ),
                                     DropdownMenuItem(
                                       value: SearchType.tag,
-                                      child: Text('タグのみ'),
+                                      child: Text(l10n.searchTargetTag),
                                     ),
                                   ],
                                 ),
@@ -204,7 +206,7 @@ class SearchPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '並び順',
+                              l10n.sortOrder,
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: theme.colorScheme.primary.withOpacity(
                                   0.8,
@@ -241,22 +243,22 @@ class SearchPage extends HookConsumerWidget {
                                           .state = value;
                                     }
                                   },
-                                  items: const [
+                                  items: [
                                     DropdownMenuItem(
                                       value: SortOrder.dateDesc,
-                                      child: Text('新しい順'),
+                                      child: Text(l10n.sortOrderNewest),
                                     ),
                                     DropdownMenuItem(
                                       value: SortOrder.dateAsc,
-                                      child: Text('古い順'),
+                                      child: Text(l10n.sortOrderOldest),
                                     ),
                                     DropdownMenuItem(
                                       value: SortOrder.idAsc,
-                                      child: Text('ID昇順'),
+                                      child: Text(l10n.sortOrderIdAsc),
                                     ),
                                     DropdownMenuItem(
                                       value: SortOrder.idDesc,
-                                      child: Text('ID降順'),
+                                      child: Text(l10n.sortOrderIdDesc),
                                     ),
                                   ],
                                 ),
@@ -280,7 +282,7 @@ class SearchPage extends HookConsumerWidget {
                       ? _buildEmptyState(
                         theme,
                         Icons.search,
-                        '検索キーワードを入力してください',
+                        l10n.searchEnterKeyword,
                       )
                       : searchResults.when(
                         data: (results) {
@@ -288,7 +290,7 @@ class SearchPage extends HookConsumerWidget {
                             return _buildEmptyState(
                               theme,
                               Icons.search_off,
-                              '検索結果がありません',
+                              l10n.searchNoResults,
                             );
                           }
 
@@ -353,7 +355,7 @@ class SearchPage extends HookConsumerWidget {
                             (error, stack) => _buildEmptyState(
                               theme,
                               Icons.error_outline,
-                              'エラー: $error',
+                              l10n.searchError(error.toString()),
                             ),
                       ),
             ),
@@ -392,6 +394,7 @@ class SearchPage extends HookConsumerWidget {
     WidgetRef ref,
     Tuning tuning,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
         context.push('/tuningList/codeFormList/${tuning.id}');
@@ -420,7 +423,7 @@ class SearchPage extends HookConsumerWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'チューニング: ${tuning.strings}',
+                    l10n.tuningLabel(tuning.strings),
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurface.withOpacity(0.7),
                     ),
@@ -457,6 +460,7 @@ class SearchPage extends HookConsumerWidget {
     WidgetRef ref,
     CodeForm codeForm,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
         context.push(
@@ -481,14 +485,14 @@ class SearchPage extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    codeForm.label ?? '名称なし',
+                    codeForm.label ?? l10n.noName,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'フレットポジション: ${codeForm.fretPositions}',
+                    l10n.fretPositionLabel(codeForm.fretPositions),
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurface.withOpacity(0.7),
                     ),

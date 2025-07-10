@@ -237,4 +237,67 @@ class AppLocalizationsEn extends AppLocalizations {
   String chordMemo(String memo) {
     return 'Memo: $memo';
   }
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get searchKeywordPlaceholder => 'Enter search keyword';
+
+  @override
+  String get searchOptions => 'Search Options';
+
+  @override
+  String get searchTarget => 'Search Target';
+
+  @override
+  String get sortOrder => 'Sort Order';
+
+  @override
+  String get searchTargetAll => 'All';
+
+  @override
+  String get searchTargetTuning => 'Tuning Only';
+
+  @override
+  String get searchTargetCodeForm => 'Code Form Only';
+
+  @override
+  String get searchTargetTag => 'Tag Only';
+
+  @override
+  String get sortOrderNewest => 'Newest First';
+
+  @override
+  String get sortOrderOldest => 'Oldest First';
+
+  @override
+  String get sortOrderIdAsc => 'ID Ascending';
+
+  @override
+  String get sortOrderIdDesc => 'ID Descending';
+
+  @override
+  String get searchEnterKeyword => 'Please enter a search keyword';
+
+  @override
+  String get searchNoResults => 'No search results found';
+
+  @override
+  String tuningLabel(String tuning) {
+    return 'Tuning: $tuning';
+  }
+
+  @override
+  String fretPositionLabel(String position) {
+    return 'Fret Position: $position';
+  }
+
+  @override
+  String get noName => 'No Name';
+
+  @override
+  String searchError(String error) {
+    return 'An error occurred during search: $error';
+  }
 }

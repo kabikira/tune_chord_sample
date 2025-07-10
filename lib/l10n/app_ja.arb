@@ -253,5 +253,96 @@
         "type": "String"
       }
     }
+  },
+  "search": "検索",
+  "@search": {
+    "description": "検索画面のタイトル"
+  },
+  "searchKeywordPlaceholder": "検索キーワードを入力",
+  "@searchKeywordPlaceholder": {
+    "description": "検索入力フィールドのプレースホルダー"
+  },
+  "searchOptions": "検索オプション",
+  "@searchOptions": {
+    "description": "検索オプションセクションのタイトル"
+  },
+  "searchTarget": "検索対象",
+  "@searchTarget": {
+    "description": "検索対象選択のラベル"
+  },
+  "sortOrder": "並び順",
+  "@sortOrder": {
+    "description": "並び順選択のラベル"
+  },
+  "searchTargetAll": "すべて",
+  "@searchTargetAll": {
+    "description": "すべての項目を検索対象とするオプション"
+  },
+  "searchTargetTuning": "チューニングのみ",
+  "@searchTargetTuning": {
+    "description": "チューニングのみを検索対象とするオプション"
+  },
+  "searchTargetCodeForm": "コードフォームのみ",
+  "@searchTargetCodeForm": {
+    "description": "コードフォームのみを検索対象とするオプション"
+  },
+  "searchTargetTag": "タグのみ",
+  "@searchTargetTag": {
+    "description": "タグのみを検索対象とするオプション"
+  },
+  "sortOrderNewest": "新しい順",
+  "@sortOrderNewest": {
+    "description": "新しい順の並び順オプション"
+  },
+  "sortOrderOldest": "古い順",
+  "@sortOrderOldest": {
+    "description": "古い順の並び順オプション"
+  },
+  "sortOrderIdAsc": "ID昇順",
+  "@sortOrderIdAsc": {
+    "description": "ID昇順の並び順オプション"
+  },
+  "sortOrderIdDesc": "ID降順",
+  "@sortOrderIdDesc": {
+    "description": "ID降順の並び順オプション"
+  },
+  "searchEnterKeyword": "検索キーワードを入力してください",
+  "@searchEnterKeyword": {
+    "description": "検索キーワードが入力されていない場合の空状態メッセージ"
+  },
+  "searchNoResults": "検索結果がありません",
+  "@searchNoResults": {
+    "description": "検索結果が見つからない場合の空状態メッセージ"
+  },
+  "tuningLabel": "チューニング: {tuning}",
+  "@tuningLabel": {
+    "description": "検索結果でのチューニング表示ラベル",
+    "placeholders": {
+      "tuning": {
+        "type": "String"
+      }
+    }
+  },
+  "fretPositionLabel": "フレットポジション: {position}",
+  "@fretPositionLabel": {
+    "description": "検索結果でのフレットポジション表示ラベル",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "noName": "名称なし",
+  "@noName": {
+    "description": "項目に名前がない場合のプレースホルダー"
+  },
+  "searchError": "検索中にエラーが発生しました: {error}",
+  "@searchError": {
+    "description": "検索操作中のエラーメッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }

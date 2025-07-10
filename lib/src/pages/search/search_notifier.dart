@@ -210,6 +210,7 @@ final searchResultsProvider = FutureProvider<List<dynamic>>((ref) async {
 
     return results;
   } catch (e) {
+    // TODO: 多言語対応 - エラーメッセージをローカライゼーションで対応する予定
     throw Exception('検索中にエラーが発生しました: $e');
   }
 });
