@@ -267,5 +267,96 @@
         "type": "String"
       }
     }
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Title for search screen"
+  },
+  "searchKeywordPlaceholder": "Enter search keyword",
+  "@searchKeywordPlaceholder": {
+    "description": "Placeholder text for search input field"
+  },
+  "searchOptions": "Search Options",
+  "@searchOptions": {
+    "description": "Title for search options section"
+  },
+  "searchTarget": "Search Target",
+  "@searchTarget": {
+    "description": "Label for search target selection"
+  },
+  "sortOrder": "Sort Order",
+  "@sortOrder": {
+    "description": "Label for sort order selection"
+  },
+  "searchTargetAll": "All",
+  "@searchTargetAll": {
+    "description": "Search target option for all items"
+  },
+  "searchTargetTuning": "Tuning Only",
+  "@searchTargetTuning": {
+    "description": "Search target option for tuning only"
+  },
+  "searchTargetCodeForm": "Code Form Only",
+  "@searchTargetCodeForm": {
+    "description": "Search target option for code form only"
+  },
+  "searchTargetTag": "Tag Only",
+  "@searchTargetTag": {
+    "description": "Search target option for tag only"
+  },
+  "sortOrderNewest": "Newest First",
+  "@sortOrderNewest": {
+    "description": "Sort order option for newest first"
+  },
+  "sortOrderOldest": "Oldest First",
+  "@sortOrderOldest": {
+    "description": "Sort order option for oldest first"
+  },
+  "sortOrderIdAsc": "ID Ascending",
+  "@sortOrderIdAsc": {
+    "description": "Sort order option for ID ascending"
+  },
+  "sortOrderIdDesc": "ID Descending",
+  "@sortOrderIdDesc": {
+    "description": "Sort order option for ID descending"
+  },
+  "searchEnterKeyword": "Please enter a search keyword",
+  "@searchEnterKeyword": {
+    "description": "Empty state message when no search keyword is entered"
+  },
+  "searchNoResults": "No search results found",
+  "@searchNoResults": {
+    "description": "Empty state message when no search results are found"
+  },
+  "tuningLabel": "Tuning: {tuning}",
+  "@tuningLabel": {
+    "description": "Label for tuning display in search results",
+    "placeholders": {
+      "tuning": {
+        "type": "String"
+      }
+    }
+  },
+  "fretPositionLabel": "Fret Position: {position}",
+  "@fretPositionLabel": {
+    "description": "Label for fret position display in search results",
+    "placeholders": {
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "noName": "No Name",
+  "@noName": {
+    "description": "Placeholder text when item has no name"
+  },
+  "searchError": "An error occurred during search: {error}",
+  "@searchError": {
+    "description": "Error message during search operation",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   }
 }

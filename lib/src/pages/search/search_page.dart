@@ -3,9 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/search/search_notifier.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
 // 検索対象の種類
-enum SearchType { tuning, codeForm, both }
+enum SearchType { tuning, codeForm, tag, both }
 
 // ソート順
 enum SortOrder { dateAsc, dateDesc, idAsc, idDesc }
@@ -29,11 +30,12 @@ class SearchPage extends HookConsumerWidget {
     final searchQuery = ref.watch(searchQueryProvider);
     final searchResults = ref.watch(searchResultsProvider);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.95),
+      backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
-        title: const Text('検索'),
+        title: Text(l10n.search),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -51,7 +53,7 @@ class SearchPage extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 10,
                     spreadRadius: 0,
                     offset: const Offset(0, 2),
@@ -60,9 +62,9 @@ class SearchPage extends HookConsumerWidget {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: '検索キーワードを入力',
+                  hintText: l10n.searchKeywordPlaceholder,
                   hintStyle: TextStyle(
-                    color: theme.colorScheme.onSurface.withOpacity(0.5),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                   prefixIcon: Icon(
                     Icons.search,
@@ -73,7 +75,7 @@ class SearchPage extends HookConsumerWidget {
                           ? IconButton(
                             icon: Icon(
                               Icons.clear,
-                              color: theme.colorScheme.primary.withOpacity(0.7),
+                              color: theme.colorScheme.primary.withValues(alpha: 0.7),
                             ),
                             onPressed: () {
                               ref.read(searchQueryProvider.notifier).state = '';
@@ -107,7 +109,7 @@ class SearchPage extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 10,
                     spreadRadius: 0,
                     offset: const Offset(0, 2),
@@ -119,7 +121,7 @@ class SearchPage extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '検索オプション',
+                    l10n.searchOptions,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.primary,
@@ -134,19 +136,17 @@ class SearchPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '検索対象',
+                              l10n.searchTarget,
                               style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.primary.withOpacity(
-                                  0.8,
-                                ),
+                                color: theme.colorScheme.primary.withValues(alpha: 0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Container(
                               decoration: BoxDecoration(
-                                color: theme.colorScheme.surfaceVariant
-                                    .withOpacity(0.3),
+                                color: theme.colorScheme.surfaceContainerHighest
+                                    .withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: const EdgeInsets.symmetric(
@@ -171,18 +171,22 @@ class SearchPage extends HookConsumerWidget {
                                           .state = value;
                                     }
                                   },
-                                  items: const [
+                                  items: [
                                     DropdownMenuItem(
                                       value: SearchType.both,
-                                      child: Text('すべて'),
+                                      child: Text(l10n.searchTargetAll),
                                     ),
                                     DropdownMenuItem(
                                       value: SearchType.tuning,
-                                      child: Text('チューニングのみ'),
+                                      child: Text(l10n.searchTargetTuning),
                                     ),
                                     DropdownMenuItem(
                                       value: SearchType.codeForm,
-                                      child: Text('コードフォームのみ'),
+                                      child: Text(l10n.searchTargetCodeForm),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: SearchType.tag,
+                                      child: Text(l10n.searchTargetTag),
                                     ),
                                   ],
                                 ),
@@ -200,19 +204,17 @@ class SearchPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '並び順',
+                              l10n.sortOrder,
                               style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.primary.withOpacity(
-                                  0.8,
-                                ),
+                                color: theme.colorScheme.primary.withValues(alpha: 0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Container(
                               decoration: BoxDecoration(
-                                color: theme.colorScheme.surfaceVariant
-                                    .withOpacity(0.3),
+                                color: theme.colorScheme.surfaceContainerHighest
+                                    .withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               padding: const EdgeInsets.symmetric(
@@ -237,22 +239,22 @@ class SearchPage extends HookConsumerWidget {
                                           .state = value;
                                     }
                                   },
-                                  items: const [
+                                  items: [
                                     DropdownMenuItem(
                                       value: SortOrder.dateDesc,
-                                      child: Text('新しい順'),
+                                      child: Text(l10n.sortOrderNewest),
                                     ),
                                     DropdownMenuItem(
                                       value: SortOrder.dateAsc,
-                                      child: Text('古い順'),
+                                      child: Text(l10n.sortOrderOldest),
                                     ),
                                     DropdownMenuItem(
                                       value: SortOrder.idAsc,
-                                      child: Text('ID昇順'),
+                                      child: Text(l10n.sortOrderIdAsc),
                                     ),
                                     DropdownMenuItem(
                                       value: SortOrder.idDesc,
-                                      child: Text('ID降順'),
+                                      child: Text(l10n.sortOrderIdDesc),
                                     ),
                                   ],
                                 ),
@@ -276,7 +278,7 @@ class SearchPage extends HookConsumerWidget {
                       ? _buildEmptyState(
                         theme,
                         Icons.search,
-                        '検索キーワードを入力してください',
+                        l10n.searchEnterKeyword,
                       )
                       : searchResults.when(
                         data: (results) {
@@ -284,7 +286,7 @@ class SearchPage extends HookConsumerWidget {
                             return _buildEmptyState(
                               theme,
                               Icons.search_off,
-                              '検索結果がありません',
+                              l10n.searchNoResults,
                             );
                           }
 
@@ -294,7 +296,7 @@ class SearchPage extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(16),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
+                                  color: Colors.black.withValues(alpha: 0.05),
                                   blurRadius: 10,
                                   spreadRadius: 0,
                                   offset: const Offset(0, 2),
@@ -310,60 +312,26 @@ class SearchPage extends HookConsumerWidget {
                                       height: 1,
                                       indent: 72,
                                       color: theme.colorScheme.outline
-                                          .withOpacity(0.1),
+                                          .withValues(alpha: 0.1),
                                     ),
                                 itemBuilder: (context, index) {
                                   final result = results[index];
 
                                   if (result is Tuning) {
                                     // チューニングの表示
-                                    return _buildResultTile(
+                                    return _buildTuningResultTile(
                                       context,
                                       theme,
-                                      leading: CircleAvatar(
-                                        backgroundColor: theme
-                                            .colorScheme
-                                            .primary
-                                            .withOpacity(0.1),
-                                        child: Icon(
-                                          Icons.music_note,
-                                          color: theme.colorScheme.primary,
-                                        ),
-                                      ),
-                                      title: result.name,
-                                      subtitle: 'チューニング: ${result.strings}',
-                                      onTap: () {
-                                        // チューニングの詳細ページに遷移
-                                        context.push(
-                                          '/tuningList/codeFormList/${result.id}',
-                                        );
-                                      },
+                                      ref,
+                                      result,
                                     );
                                   } else if (result is CodeForm) {
                                     // コードフォームの表示
-                                    return _buildResultTile(
+                                    return _buildCodeFormResultTile(
                                       context,
                                       theme,
-                                      leading: CircleAvatar(
-                                        backgroundColor: theme
-                                            .colorScheme
-                                            .secondary
-                                            .withOpacity(0.1),
-                                        child: Icon(
-                                          Icons.queue_music,
-                                          color: theme.colorScheme.secondary,
-                                        ),
-                                      ),
-                                      title: result.label ?? '名称なし',
-                                      subtitle:
-                                          'フレットポジション: ${result.fretPositions}',
-                                      onTap: () {
-                                        // コードフォームの詳細ページに遷移
-                                        context.push(
-                                          '/tuningList/codeFormList/${result.tuningId}/codeFormDetail',
-                                          extra: result.id,
-                                        );
-                                      },
+                                      ref,
+                                      result,
                                     );
                                   }
 
@@ -383,7 +351,7 @@ class SearchPage extends HookConsumerWidget {
                             (error, stack) => _buildEmptyState(
                               theme,
                               Icons.error_outline,
-                              'エラー: $error',
+                              l10n.searchError(error.toString()),
                             ),
                       ),
             ),
@@ -401,13 +369,13 @@ class SearchPage extends HookConsumerWidget {
           Icon(
             icon,
             size: 64,
-            color: theme.colorScheme.primary.withOpacity(0.5),
+            color: theme.colorScheme.primary.withValues(alpha: 0.5),
           ),
           const SizedBox(height: 16),
           Text(
             message,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -416,49 +384,161 @@ class SearchPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildResultTile(
+  Widget _buildTuningResultTile(
     BuildContext context,
-    ThemeData theme, {
-    required Widget leading,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
+    ThemeData theme,
+    WidgetRef ref,
+    Tuning tuning,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        context.push('/tuningList/codeFormList/${tuning.id}');
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           children: [
-            leading,
+            CircleAvatar(
+              backgroundColor: theme.colorScheme.primary.withValues(alpha: 0.1),
+              child: Icon(
+                Icons.music_note,
+                color: theme.colorScheme.primary,
+              ),
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    tuning.name,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    subtitle,
+                    l10n.tuningLabel(tuning.strings),
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                     ),
+                  ),
+                  const SizedBox(height: 4),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final tagsAsync = ref.watch(tuningTagsProvider(tuning.id));
+                      return tagsAsync.when(
+                        data: (tags) => tags.isNotEmpty
+                            ? _buildTagsRow(theme, tags)
+                            : const SizedBox.shrink(),
+                        loading: () => const SizedBox.shrink(),
+                        error: (_, __) => const SizedBox.shrink(),
+                      );
+                    },
                   ),
                 ],
               ),
             ),
             Icon(
               Icons.chevron_right,
-              color: theme.colorScheme.onSurface.withOpacity(0.5),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCodeFormResultTile(
+    BuildContext context,
+    ThemeData theme,
+    WidgetRef ref,
+    CodeForm codeForm,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    return InkWell(
+      onTap: () {
+        context.push(
+          '/tuningList/codeFormList/${codeForm.tuningId}/codeFormDetail',
+          extra: codeForm.id,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: theme.colorScheme.secondary.withValues(alpha: 0.1),
+              child: Icon(
+                Icons.queue_music,
+                color: theme.colorScheme.secondary,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    codeForm.label ?? l10n.noName,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    l10n.fretPositionLabel(codeForm.fretPositions),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final tagsAsync = ref.watch(codeFormTagsProvider(codeForm.id));
+                      return tagsAsync.when(
+                        data: (tags) => tags.isNotEmpty
+                            ? _buildTagsRow(theme, tags)
+                            : const SizedBox.shrink(),
+                        loading: () => const SizedBox.shrink(),
+                        error: (_, __) => const SizedBox.shrink(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTagsRow(ThemeData theme, List<Tag> tags) {
+    return Wrap(
+      spacing: 4,
+      runSpacing: 4,
+      children: tags.map((tag) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            tag.name,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.primary,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }

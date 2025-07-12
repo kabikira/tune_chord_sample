@@ -237,4 +237,67 @@ class AppLocalizationsJa extends AppLocalizations {
   String chordMemo(String memo) {
     return 'メモ: $memo';
   }
+
+  @override
+  String get search => '検索';
+
+  @override
+  String get searchKeywordPlaceholder => '検索キーワードを入力';
+
+  @override
+  String get searchOptions => '検索オプション';
+
+  @override
+  String get searchTarget => '検索対象';
+
+  @override
+  String get sortOrder => '並び順';
+
+  @override
+  String get searchTargetAll => 'すべて';
+
+  @override
+  String get searchTargetTuning => 'チューニングのみ';
+
+  @override
+  String get searchTargetCodeForm => 'コードフォームのみ';
+
+  @override
+  String get searchTargetTag => 'タグのみ';
+
+  @override
+  String get sortOrderNewest => '新しい順';
+
+  @override
+  String get sortOrderOldest => '古い順';
+
+  @override
+  String get sortOrderIdAsc => 'ID昇順';
+
+  @override
+  String get sortOrderIdDesc => 'ID降順';
+
+  @override
+  String get searchEnterKeyword => '検索キーワードを入力してください';
+
+  @override
+  String get searchNoResults => '検索結果がありません';
+
+  @override
+  String tuningLabel(String tuning) {
+    return 'チューニング: $tuning';
+  }
+
+  @override
+  String fretPositionLabel(String position) {
+    return 'フレットポジション: $position';
+  }
+
+  @override
+  String get noName => '名称なし';
+
+  @override
+  String searchError(String error) {
+    return '検索中にエラーが発生しました: $error';
+  }
 }
