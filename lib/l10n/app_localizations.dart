@@ -640,6 +640,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An error occurred during search: {error}'**
   String searchError(String error);
+
+  /// Settings screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// App information section title
+  ///
+  /// In en, this message translates to:
+  /// **'App Information'**
+  String get appInfo;
+
+  /// About app item label
+  ///
+  /// In en, this message translates to:
+  /// **'About App'**
+  String get aboutApp;
+
+  /// Version item label
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
+
+  /// Appearance settings section title
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance Settings'**
+  String get appearanceSettings;
+
+  /// Dark mode setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// Developer options section title
+  ///
+  /// In en, this message translates to:
+  /// **'Developer Options'**
+  String get developerOptions;
+
+  /// Widget gallery item label
+  ///
+  /// In en, this message translates to:
+  /// **'Widget Gallery'**
+  String get widgetGallery;
+
+  /// Data management section title
+  ///
+  /// In en, this message translates to:
+  /// **'Data Management'**
+  String get dataManagement;
+
+  /// Data backup item label
+  ///
+  /// In en, this message translates to:
+  /// **'Backup Data'**
+  String get backupData;
+
+  /// Data restore item label
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Data'**
+  String get restoreData;
+
+  /// Delete all data item label
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All Data'**
+  String get deleteAllData;
+
+  /// About app dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'About App'**
+  String get aboutAppTitle;
+
+  /// Application name
+  ///
+  /// In en, this message translates to:
+  /// **'Chord Form Manager'**
+  String get appName;
+
+  /// Application description
+  ///
+  /// In en, this message translates to:
+  /// **'A guitar chord form management app for alternate tunings. Record and manage chord forms across various tunings.'**
+  String get appDescription;
+
+  /// Version display label
+  ///
+  /// In en, this message translates to:
+  /// **'Version: {version}'**
+  String versionLabel(String version);
+
+  /// Delete data dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Data'**
+  String get deleteData;
+
+  /// Data deletion warning message
+  ///
+  /// In en, this message translates to:
+  /// **'All tuning and chord form data will be deleted'**
+  String get deleteDataWarning;
+
+  /// Data deletion detailed description
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone. All data will be permanently deleted.'**
+  String get deleteDataDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

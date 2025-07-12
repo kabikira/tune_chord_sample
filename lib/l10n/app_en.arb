@@ -358,5 +358,86 @@
         "type": "String"
       }
     }
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "appInfo": "App Information",
+  "@appInfo": {
+    "description": "App information section title"
+  },
+  "aboutApp": "About App",
+  "@aboutApp": {
+    "description": "About app item label"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version item label"
+  },
+  "appearanceSettings": "Appearance Settings",
+  "@appearanceSettings": {
+    "description": "Appearance settings section title"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode setting label"
+  },
+  "developerOptions": "Developer Options",
+  "@developerOptions": {
+    "description": "Developer options section title"
+  },
+  "widgetGallery": "Widget Gallery",
+  "@widgetGallery": {
+    "description": "Widget gallery item label"
+  },
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management section title"
+  },
+  "backupData": "Backup Data",
+  "@backupData": {
+    "description": "Data backup item label"
+  },
+  "restoreData": "Restore Data",
+  "@restoreData": {
+    "description": "Data restore item label"
+  },
+  "deleteAllData": "Delete All Data",
+  "@deleteAllData": {
+    "description": "Delete all data item label"
+  },
+  "aboutAppTitle": "About App",
+  "@aboutAppTitle": {
+    "description": "About app dialog title"
+  },
+  "appName": "Chord Form Manager",
+  "@appName": {
+    "description": "Application name"
+  },
+  "appDescription": "A guitar chord form management app for alternate tunings. Record and manage chord forms across various tunings.",
+  "@appDescription": {
+    "description": "Application description"
+  },
+  "versionLabel": "Version: {version}",
+  "@versionLabel": {
+    "description": "Version display label",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteData": "Delete Data",
+  "@deleteData": {
+    "description": "Delete data dialog title"
+  },
+  "deleteDataWarning": "All tuning and chord form data will be deleted",
+  "@deleteDataWarning": {
+    "description": "Data deletion warning message"
+  },
+  "deleteDataDescription": "This action cannot be undone. All data will be permanently deleted.",
+  "@deleteDataDescription": {
+    "description": "Data deletion detailed description"
   }
 }

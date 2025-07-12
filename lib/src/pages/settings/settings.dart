@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/settings/widget_gallery.dart';
 
 class Settings extends StatelessWidget {
@@ -8,11 +9,12 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
-        title: const Text('設定'),
+        title: Text(l10n.settings),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -25,7 +27,7 @@ class Settings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // アプリ情報セクション
-            _buildSectionHeader(context, 'アプリ情報'),
+            _buildSectionHeader(context, l10n.appInfo),
             const SizedBox(height: 8),
             _buildSettingsCard(
               context,
@@ -33,7 +35,7 @@ class Settings extends StatelessWidget {
                 _buildSettingsItem(
                   context,
                   icon: Icons.info_outline,
-                  title: 'アプリについて',
+                  title: l10n.aboutApp,
                   onTap: () {
                     // アプリ情報ダイアログを表示
                     _showAboutDialog(context);
@@ -43,7 +45,7 @@ class Settings extends StatelessWidget {
                 _buildSettingsItem(
                   context,
                   icon: Icons.update,
-                  title: 'バージョン',
+                  title: l10n.version,
                   trailing: Text(
                     '1.0.0',
                     style: theme.textTheme.bodyMedium?.copyWith(
@@ -57,7 +59,7 @@ class Settings extends StatelessWidget {
             const SizedBox(height: 24),
 
             // 外観設定セクション
-            _buildSectionHeader(context, '外観設定'),
+            _buildSectionHeader(context, l10n.appearanceSettings),
             const SizedBox(height: 8),
             _buildSettingsCard(
               context,
@@ -65,7 +67,7 @@ class Settings extends StatelessWidget {
                 _buildSettingsItem(
                   context,
                   icon: Icons.dark_mode,
-                  title: 'ダークモード',
+                  title: l10n.darkMode,
                   trailing: Switch.adaptive(
                     value: false, // 実際の値は状態管理で制御
                     onChanged: (value) {
@@ -80,7 +82,7 @@ class Settings extends StatelessWidget {
 
             // 開発者セクション（デバッグ時のみ表示）
             if (kDebugMode) ...[
-              _buildSectionHeader(context, '開発者向け'),
+              _buildSectionHeader(context, l10n.developerOptions),
               const SizedBox(height: 8),
               _buildSettingsCard(
                 context,
@@ -88,7 +90,7 @@ class Settings extends StatelessWidget {
                   _buildSettingsItem(
                     context,
                     icon: Icons.widgets,
-                    title: 'ウィジェット一覧',
+                    title: l10n.widgetGallery,
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -103,7 +105,7 @@ class Settings extends StatelessWidget {
             ],
 
             // データ管理セクション
-            _buildSectionHeader(context, 'データ管理'),
+            _buildSectionHeader(context, l10n.dataManagement),
             const SizedBox(height: 8),
             _buildSettingsCard(
               context,
@@ -111,7 +113,7 @@ class Settings extends StatelessWidget {
                 _buildSettingsItem(
                   context,
                   icon: Icons.backup,
-                  title: 'データのバックアップ',
+                  title: l10n.backupData,
                   onTap: () {
                     // バックアップ処理
                   },
@@ -120,7 +122,7 @@ class Settings extends StatelessWidget {
                 _buildSettingsItem(
                   context,
                   icon: Icons.restore,
-                  title: 'データの復元',
+                  title: l10n.restoreData,
                   onTap: () {
                     // 復元処理
                   },
@@ -129,7 +131,7 @@ class Settings extends StatelessWidget {
                 _buildSettingsItem(
                   context,
                   icon: Icons.delete_forever,
-                  title: 'すべてのデータを削除',
+                  title: l10n.deleteAllData,
                   titleColor: theme.colorScheme.error,
                   onTap: () {
                     // 削除確認ダイアログ
@@ -217,6 +219,7 @@ class Settings extends StatelessWidget {
   // アプリ情報ダイアログを表示
   void _showAboutDialog(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     showDialog(
       context: context,
@@ -229,27 +232,27 @@ class Settings extends StatelessWidget {
               children: [
                 Icon(Icons.music_note, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
-                const Text('アプリについて'),
+                Text(l10n.aboutAppTitle),
               ],
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'コードフォーム管理アプリ',
+                  l10n.appName,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '変則チューニングのためのギターコードフォーム管理アプリです。様々なチューニングでのコードフォームを記録・管理できます。',
+                  l10n.appDescription,
                   style: theme.textTheme.bodyMedium,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'バージョン: 1.0.0',
+                  l10n.versionLabel('1.0.0'),
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
@@ -260,7 +263,7 @@ class Settings extends StatelessWidget {
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text(
-                  '閉じる',
+                  l10n.close,
                   style: TextStyle(color: theme.colorScheme.primary),
                 ),
               ),
@@ -272,6 +275,7 @@ class Settings extends StatelessWidget {
   // データ削除確認ダイアログを表示
   void _showDeleteConfirmDialog(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     showDialog(
       context: context,
@@ -280,7 +284,7 @@ class Settings extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: const Text('データを削除'),
+            title: Text(l10n.deleteData),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -305,7 +309,7 @@ class Settings extends StatelessWidget {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'すべてのチューニングとコードフォームデータを削除します',
+                          l10n.deleteDataWarning,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
@@ -316,7 +320,7 @@ class Settings extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'この操作は取り消せません。すべてのデータが完全に削除されます。',
+                  l10n.deleteDataDescription,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
@@ -327,7 +331,7 @@ class Settings extends StatelessWidget {
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text(
-                  'キャンセル',
+                  l10n.cancel,
                   style: TextStyle(color: theme.colorScheme.onSurface),
                 ),
               ),
@@ -343,7 +347,7 @@ class Settings extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text('削除する'),
+                child: Text(l10n.delete),
               ),
             ],
             actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
