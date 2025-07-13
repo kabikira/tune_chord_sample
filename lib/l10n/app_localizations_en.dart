@@ -67,6 +67,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tuningName => 'Tuning Name';
 
   @override
+  String get tuningNameExample => 'e.g., Open C';
+
+  @override
   String get update => 'Update';
 
   @override

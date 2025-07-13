@@ -16,6 +16,22 @@ final tagsProvider = StreamProvider<List<Tag>>((ref) {
   return db.watchTags();
 });
 
+// タグ操作用のプロバイダー
+final tagNotifierProvider = Provider<TagNotifier>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return TagNotifier(db);
+});
+
+class TagNotifier {
+  final AppDatabase db;
+
+  TagNotifier(this.db);
+
+  Future<int> addTag(String name) async {
+    return await db.addTag(TagsCompanion(name: Value(name)));
+  }
+}
+
 class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
   final AppDatabase db;
 
@@ -40,8 +56,10 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
     List<int>? tagIds,
   }) async {
     try {
+      // 空文字列の場合はデフォルト値を設定
+      final finalName = name.isEmpty ? 'No TuningName' : name;
       final tuningId = await db.addTuning(
-        TuningsCompanion(name: Value(name), strings: Value(strings)),
+        TuningsCompanion(name: Value(finalName), strings: Value(strings)),
       );
 
       if (tagIds != null && tagIds.isNotEmpty) {
@@ -69,10 +87,12 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
         orElse: () => throw Exception('チューニングが見つかりません'),
       );
 
+      // 空文字列の場合はデフォルト値を設定
+      final finalName = name.isEmpty ? 'Untitled Tuning' : name;
       await db.updateTuning(
         Tuning(
           id: id,
-          name: name,
+          name: finalName,
           strings: strings,
           memo: existingTuning.memo,
           isFavorite: existingTuning.isFavorite,
