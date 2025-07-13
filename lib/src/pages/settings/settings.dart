@@ -273,85 +273,85 @@ class Settings extends StatelessWidget {
   }
 
   // データ削除確認ダイアログを表示
-  void _showDeleteConfirmDialog(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context)!;
+  // void _showDeleteConfirmDialog(BuildContext context) {
+  //   final theme = Theme.of(context);
+  //   final l10n = AppLocalizations.of(context)!;
 
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            title: Text(l10n.deleteData),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.error.withValues(alpha: 0.05),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: theme.colorScheme.error.withValues(alpha: 0.2),
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.warning_amber_rounded,
-                        color: theme.colorScheme.error,
-                        size: 24,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          l10n.deleteDataWarning,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  l10n.deleteDataDescription,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  l10n.cancel,
-                  style: TextStyle(color: theme.colorScheme.onSurface),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // データ削除処理
-                  Navigator.of(context).pop();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: theme.colorScheme.error,
-                  foregroundColor: theme.colorScheme.onError,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: Text(l10n.delete),
-              ),
-            ],
-            actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          ),
-    );
-  }
+  //   showDialog(
+  //     context: context,
+  //     builder:
+  //         (context) => AlertDialog(
+  //           shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(16),
+  //           ),
+  //           title: Text(l10n.deleteData),
+  //           content: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Container(
+  //                 padding: const EdgeInsets.all(16),
+  //                 decoration: BoxDecoration(
+  //                   color: theme.colorScheme.error.withValues(alpha: 0.05),
+  //                   borderRadius: BorderRadius.circular(16),
+  //                   border: Border.all(
+  //                     color: theme.colorScheme.error.withValues(alpha: 0.2),
+  //                     width: 1,
+  //                   ),
+  //                 ),
+  //                 child: Row(
+  //                   children: [
+  //                     Icon(
+  //                       Icons.warning_amber_rounded,
+  //                       color: theme.colorScheme.error,
+  //                       size: 24,
+  //                     ),
+  //                     const SizedBox(width: 12),
+  //                     Expanded(
+  //                       child: Text(
+  //                         l10n.deleteDataWarning,
+  //                         style: theme.textTheme.bodyMedium?.copyWith(
+  //                           fontWeight: FontWeight.w500,
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 16),
+  //               Text(
+  //                 l10n.deleteDataDescription,
+  //                 style: theme.textTheme.bodySmall?.copyWith(
+  //                   color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           actions: [
+  //             TextButton(
+  //               onPressed: () => Navigator.of(context).pop(),
+  //               child: Text(
+  //                 l10n.cancel,
+  //                 style: TextStyle(color: theme.colorScheme.onSurface),
+  //               ),
+  //             ),
+  //             ElevatedButton(
+  //               onPressed: () {
+  //                 // データ削除処理
+  //                 Navigator.of(context).pop();
+  //               },
+  //               style: ElevatedButton.styleFrom(
+  //                 backgroundColor: theme.colorScheme.error,
+  //                 foregroundColor: theme.colorScheme.onError,
+  //                 shape: RoundedRectangleBorder(
+  //                   borderRadius: BorderRadius.circular(12),
+  //                 ),
+  //               ),
+  //               child: Text(l10n.delete),
+  //             ),
+  //           ],
+  //           actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+  //         ),
+  //   );
+  // }
 }
