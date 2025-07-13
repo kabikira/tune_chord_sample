@@ -105,41 +105,41 @@ class Settings extends StatelessWidget {
             ],
 
             // データ管理セクション
-            _buildSectionHeader(context, l10n.dataManagement),
-            const SizedBox(height: 8),
-            _buildSettingsCard(
-              context,
-              children: [
-                _buildSettingsItem(
-                  context,
-                  icon: Icons.backup,
-                  title: l10n.backupData,
-                  onTap: () {
-                    // バックアップ処理
-                  },
-                ),
-                _buildDivider(),
-                _buildSettingsItem(
-                  context,
-                  icon: Icons.restore,
-                  title: l10n.restoreData,
-                  onTap: () {
-                    // 復元処理
-                  },
-                ),
-                _buildDivider(),
-                _buildSettingsItem(
-                  context,
-                  icon: Icons.delete_forever,
-                  title: l10n.deleteAllData,
-                  titleColor: theme.colorScheme.error,
-                  onTap: () {
-                    // 削除確認ダイアログ
-                    _showDeleteConfirmDialog(context);
-                  },
-                ),
-              ],
-            ),
+            // _buildSectionHeader(context, l10n.dataManagement),
+            // const SizedBox(height: 8),
+            // _buildSettingsCard(
+            //   context,
+            //   children: [
+            //     _buildSettingsItem(
+            //       context,
+            //       icon: Icons.backup,
+            //       title: l10n.backupData,
+            //       onTap: () {
+            //         // バックアップ処理
+            //       },
+            //     ),
+            //     _buildDivider(),
+            //     _buildSettingsItem(
+            //       context,
+            //       icon: Icons.restore,
+            //       title: l10n.restoreData,
+            //       onTap: () {
+            //         // 復元処理
+            //       },
+            //     ),
+            //     _buildDivider(),
+            //     _buildSettingsItem(
+            //       context,
+            //       icon: Icons.delete_forever,
+            //       title: l10n.deleteAllData,
+            //       titleColor: theme.colorScheme.error,
+            //       onTap: () {
+            //         // 削除確認ダイアログ
+            //         _showDeleteConfirmDialog(context);
+            //       },
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
