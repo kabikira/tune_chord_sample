@@ -300,4 +300,63 @@ class AppLocalizationsEn extends AppLocalizations {
   String searchError(String error) {
     return 'An error occurred during search: $error';
   }
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get appInfo => 'App Information';
+
+  @override
+  String get aboutApp => 'About App';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get appearanceSettings => 'Appearance Settings';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get developerOptions => 'Developer Options';
+
+  @override
+  String get widgetGallery => 'Widget Gallery';
+
+  @override
+  String get dataManagement => 'Data Management';
+
+  @override
+  String get backupData => 'Backup Data';
+
+  @override
+  String get restoreData => 'Restore Data';
+
+  @override
+  String get deleteAllData => 'Delete All Data';
+
+  @override
+  String get aboutAppTitle => 'About App';
+
+  @override
+  String get appName => 'Chord Form Manager';
+
+  @override
+  String get appDescription => 'A guitar chord form management app for alternate tunings. Record and manage chord forms across various tunings.';
+
+  @override
+  String versionLabel(String version) {
+    return 'Version: $version';
+  }
+
+  @override
+  String get deleteData => 'Delete Data';
+
+  @override
+  String get deleteDataWarning => 'All tuning and chord form data will be deleted';
+
+  @override
+  String get deleteDataDescription => 'This action cannot be undone. All data will be permanently deleted.';
 }

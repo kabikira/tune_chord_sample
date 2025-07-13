@@ -300,4 +300,63 @@ class AppLocalizationsJa extends AppLocalizations {
   String searchError(String error) {
     return '検索中にエラーが発生しました: $error';
   }
+
+  @override
+  String get settings => '設定';
+
+  @override
+  String get appInfo => 'アプリ情報';
+
+  @override
+  String get aboutApp => 'アプリについて';
+
+  @override
+  String get version => 'バージョン';
+
+  @override
+  String get appearanceSettings => '外観設定';
+
+  @override
+  String get darkMode => 'ダークモード';
+
+  @override
+  String get developerOptions => '開発者向け';
+
+  @override
+  String get widgetGallery => 'ウィジェット一覧';
+
+  @override
+  String get dataManagement => 'データ管理';
+
+  @override
+  String get backupData => 'データのバックアップ';
+
+  @override
+  String get restoreData => 'データの復元';
+
+  @override
+  String get deleteAllData => 'すべてのデータを削除';
+
+  @override
+  String get aboutAppTitle => 'アプリについて';
+
+  @override
+  String get appName => 'コードフォーム管理アプリ';
+
+  @override
+  String get appDescription => '変則チューニングのためのギターコードフォーム管理アプリです。様々なチューニングでのコードフォームを記録・管理できます。';
+
+  @override
+  String versionLabel(String version) {
+    return 'バージョン: $version';
+  }
+
+  @override
+  String get deleteData => 'データを削除';
+
+  @override
+  String get deleteDataWarning => 'すべてのチューニングとコードフォームデータを削除します';
+
+  @override
+  String get deleteDataDescription => 'この操作は取り消せません。すべてのデータが完全に削除されます。';
 }

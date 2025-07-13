@@ -344,5 +344,86 @@
         "type": "String"
       }
     }
+  },
+  "settings": "設定",
+  "@settings": {
+    "description": "設定画面のタイトル"
+  },
+  "appInfo": "アプリ情報",
+  "@appInfo": {
+    "description": "アプリ情報セクションのタイトル"
+  },
+  "aboutApp": "アプリについて",
+  "@aboutApp": {
+    "description": "アプリについての項目ラベル"
+  },
+  "version": "バージョン",
+  "@version": {
+    "description": "バージョン項目のラベル"
+  },
+  "appearanceSettings": "外観設定",
+  "@appearanceSettings": {
+    "description": "外観設定セクションのタイトル"
+  },
+  "darkMode": "ダークモード",
+  "@darkMode": {
+    "description": "ダークモード設定のラベル"
+  },
+  "developerOptions": "開発者向け",
+  "@developerOptions": {
+    "description": "開発者向けセクションのタイトル"
+  },
+  "widgetGallery": "ウィジェット一覧",
+  "@widgetGallery": {
+    "description": "ウィジェット一覧項目のラベル"
+  },
+  "dataManagement": "データ管理",
+  "@dataManagement": {
+    "description": "データ管理セクションのタイトル"
+  },
+  "backupData": "データのバックアップ",
+  "@backupData": {
+    "description": "データバックアップ項目のラベル"
+  },
+  "restoreData": "データの復元",
+  "@restoreData": {
+    "description": "データ復元項目のラベル"
+  },
+  "deleteAllData": "すべてのデータを削除",
+  "@deleteAllData": {
+    "description": "全データ削除項目のラベル"
+  },
+  "aboutAppTitle": "アプリについて",
+  "@aboutAppTitle": {
+    "description": "アプリについてダイアログのタイトル"
+  },
+  "appName": "コードフォーム管理アプリ",
+  "@appName": {
+    "description": "アプリ名"
+  },
+  "appDescription": "変則チューニングのためのギターコードフォーム管理アプリです。様々なチューニングでのコードフォームを記録・管理できます。",
+  "@appDescription": {
+    "description": "アプリの説明文"
+  },
+  "versionLabel": "バージョン: {version}",
+  "@versionLabel": {
+    "description": "バージョン表示ラベル",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteData": "データを削除",
+  "@deleteData": {
+    "description": "データ削除ダイアログのタイトル"
+  },
+  "deleteDataWarning": "すべてのチューニングとコードフォームデータを削除します",
+  "@deleteDataWarning": {
+    "description": "データ削除の警告メッセージ"
+  },
+  "deleteDataDescription": "この操作は取り消せません。すべてのデータが完全に削除されます。",
+  "@deleteDataDescription": {
+    "description": "データ削除の詳細説明"
   }
 }
