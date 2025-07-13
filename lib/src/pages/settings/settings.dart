@@ -59,25 +59,24 @@ class Settings extends StatelessWidget {
             const SizedBox(height: 24),
 
             // 外観設定セクション
-            _buildSectionHeader(context, l10n.appearanceSettings),
-            const SizedBox(height: 8),
-            _buildSettingsCard(
-              context,
-              children: [
-                _buildSettingsItem(
-                  context,
-                  icon: Icons.dark_mode,
-                  title: l10n.darkMode,
-                  trailing: Switch.adaptive(
-                    value: false, // 実際の値は状態管理で制御
-                    onChanged: (value) {
-                      // ダークモード切り替え処理
-                    },
-                  ),
-                ),
-              ],
-            ),
-
+            // _buildSectionHeader(context, l10n.appearanceSettings),
+            // const SizedBox(height: 8),
+            // _buildSettingsCard(
+            //   context,
+            //   children: [
+            //     _buildSettingsItem(
+            //       context,
+            //       icon: Icons.dark_mode,
+            //       title: l10n.darkMode,
+            //       trailing: Switch.adaptive(
+            //         value: false, // 実際の値は状態管理で制御
+            //         onChanged: (value) {
+            //           // ダークモード切り替え処理
+            //         },
+            //       ),
+            //     ),
+            //   ],
+            // ),
             const SizedBox(height: 24),
 
             // 開発者セクション（デバッグ時のみ表示）
