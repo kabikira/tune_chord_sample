@@ -67,6 +67,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tuningName => 'チューニング名';
 
   @override
+  String get tuningNameExample => '例: オープンC';
+
+  @override
   String get update => '更新';
 
   @override

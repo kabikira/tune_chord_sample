@@ -40,8 +40,10 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
     List<int>? tagIds,
   }) async {
     try {
+      // 空文字列の場合はデフォルト値を設定
+      final finalName = name.isEmpty ? 'No TuningName' : name;
       final tuningId = await db.addTuning(
-        TuningsCompanion(name: Value(name), strings: Value(strings)),
+        TuningsCompanion(name: Value(finalName), strings: Value(strings)),
       );
 
       if (tagIds != null && tagIds.isNotEmpty) {
@@ -69,10 +71,12 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
         orElse: () => throw Exception('チューニングが見つかりません'),
       );
 
+      // 空文字列の場合はデフォルト値を設定
+      final finalName = name.isEmpty ? 'Untitled Tuning' : name;
       await db.updateTuning(
         Tuning(
           id: id,
-          name: name,
+          name: finalName,
           strings: strings,
           memo: existingTuning.memo,
           isFavorite: existingTuning.isFavorite,

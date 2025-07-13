@@ -34,6 +34,7 @@
   "delete": "Delete",
   "editTuning": "Edit Tuning",
   "tuningName": "Tuning Name",
+  "tuningNameExample": "e.g., Open C",
   "update": "Update",
   "tags": "Tags",
   "newTag": "New Tag",

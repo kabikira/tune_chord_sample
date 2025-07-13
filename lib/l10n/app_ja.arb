@@ -20,6 +20,7 @@
   "delete": "削除",
   "editTuning": "チューニングを編集",
   "tuningName": "チューニング名",
+  "tuningNameExample": "例: オープンC",
   "update": "更新",
   "tags": "タグ",
   "newTag": "新規タグ",

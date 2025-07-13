@@ -26,7 +26,9 @@ class TuningKeyboard extends HookWidget {
   void insertText(String text) {
     final currentText = controller.text;
     if (currentText.length + text.length >
-        ValidationConstants.maxTuningLength) return;
+        ValidationConstants.maxTuningLength) {
+      return;
+    }
     final newText = currentText + text;
     controller.text = newText;
     controller.selection = TextSelection.fromPosition(
@@ -108,8 +110,29 @@ class TuningRegister extends HookConsumerWidget {
     final stringsFocusNode = useFocusNode();
     final isSaving = useState(false);
     final selectedTagIds = useState<List<int>>([]);
+    final isFormValid = useState(false);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+
+    // フォームバリデーション
+    void validateForm() {
+      final strings = stringsController.text.trim();
+      isFormValid.value = strings.isNotEmpty;
+    }
+
+    // コントローラーのリスナー設定
+    useEffect(() {
+      void nameListener() => validateForm();
+      void stringsListener() => validateForm();
+      
+      nameController.addListener(nameListener);
+      stringsController.addListener(stringsListener);
+      
+      return () {
+        nameController.removeListener(nameListener);
+        stringsController.removeListener(stringsListener);
+      };
+    }, [nameController, stringsController]);
 
     // タグ一覧を取得
     final tagsAsync = ref.watch(tagsProvider);
@@ -135,6 +158,46 @@ class TuningRegister extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              '${l10n.tuningName}（任意）', // チューニング名（任意）
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const Gap(8),
+            TextField(
+              controller: nameController,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(
+                  ValidationConstants.maxTuningLength,
+                ),
+              ],
+              maxLength: ValidationConstants.maxTuningLength,
+              decoration: InputDecoration(
+                hintText: '${l10n.tuningNameExample}（空欄可）', // 例: Open C（空欄可）
+                filled: true,
+                fillColor: theme.colorScheme.surfaceContainer.withValues(
+                  alpha: 0.3,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.primary,
+                    width: 2,
+                  ),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+              ),
+            ),
+            const Gap(16),
             Text(
               l10n.stringTuning, // 弦のチューニング
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -349,20 +412,42 @@ class TuningRegister extends HookConsumerWidget {
         ),
         ElevatedButton(
           onPressed:
-              isSaving.value
+              isSaving.value || !isFormValid.value
                   ? null
                   : () async {
                     final name = nameController.text.trim();
                     final strings = stringsController.text.trim();
-                    if (strings.isEmpty) return;
+                    
+                    // バリデーション強化
+                    if (strings.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('弦のチューニングを入力してください'),
+                          backgroundColor: theme.colorScheme.error,
+                        ),
+                      );
+                      return;
+                    }
 
-                    isSaving.value = true;
-                    await ref
-                        .read(tuningNotifierProvider.notifier)
-                        .addTuning(name, strings, tagIds: selectedTagIds.value);
-                    isSaving.value = false;
-                    if (context.mounted) {
-                      Navigator.of(context).pop();
+                    try {
+                      isSaving.value = true;
+                      await ref
+                          .read(tuningNotifierProvider.notifier)
+                          .addTuning(name, strings, tagIds: selectedTagIds.value);
+                      isSaving.value = false;
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
+                    } catch (e) {
+                      isSaving.value = false;
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('エラーが発生しました: ${e.toString()}'),
+                            backgroundColor: theme.colorScheme.error,
+                          ),
+                        );
+                      }
                     }
                   },
           style: ElevatedButton.styleFrom(

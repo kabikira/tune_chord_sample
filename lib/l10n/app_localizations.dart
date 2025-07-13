@@ -203,6 +203,12 @@ abstract class AppLocalizations {
   /// **'Tuning Name'**
   String get tuningName;
 
+  /// No description provided for @tuningNameExample.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Open C'**
+  String get tuningNameExample;
+
   /// No description provided for @update.
   ///
   /// In en, this message translates to:
