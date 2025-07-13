@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:drift/drift.dart' as drift;
 import 'package:flutter/services.dart';
 import 'package:tune_chord_sample/src/config/validation_constants.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 
 class TuningKeyboard extends HookWidget {
@@ -337,10 +335,8 @@ class TuningRegister extends HookConsumerWidget {
                           ),
                     );
                     if (result != null) {
-                      final db = ref.read(appDatabaseProvider);
-                      final tagId = await db.addTag(
-                        TagsCompanion(name: drift.Value(result)),
-                      );
+                      final tagNotifier = ref.read(tagNotifierProvider);
+                      final tagId = await tagNotifier.addTag(result);
                       selectedTagIds.value = [...selectedTagIds.value, tagId];
                     }
                   },

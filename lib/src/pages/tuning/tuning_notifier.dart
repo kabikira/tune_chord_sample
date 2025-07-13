@@ -16,6 +16,22 @@ final tagsProvider = StreamProvider<List<Tag>>((ref) {
   return db.watchTags();
 });
 
+// タグ操作用のプロバイダー
+final tagNotifierProvider = Provider<TagNotifier>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return TagNotifier(db);
+});
+
+class TagNotifier {
+  final AppDatabase db;
+
+  TagNotifier(this.db);
+
+  Future<int> addTag(String name) async {
+    return await db.addTag(TagsCompanion(name: Value(name)));
+  }
+}
+
 class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
   final AppDatabase db;
 

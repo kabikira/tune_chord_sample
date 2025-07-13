@@ -112,6 +112,61 @@ class TuningUpdateDialog extends HookConsumerWidget {
               ),
             ),
             const Gap(8),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    final controller = TextEditingController();
+                    final result = await showDialog<String>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text(l10n.newTag), // 新規タグ
+                        content: TextField(
+                          controller: controller,
+                          autofocus: true,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(
+                              ValidationConstants.maxTagLength,
+                            ),
+                          ],
+                          maxLength: ValidationConstants.maxTagLength,
+                          decoration: InputDecoration(
+                            hintText: l10n.newTag, // 新規タグ
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(l10n.cancel), // キャンセル
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              final text = controller.text.trim();
+                              if (text.isNotEmpty &&
+                                  text.length <=
+                                      ValidationConstants.maxTagLength) {
+                                Navigator.pop(
+                                  context,
+                                  text,
+                                );
+                              }
+                            },
+                            child: Text(l10n.complete), // 完了
+                          ),
+                        ],
+                      ),
+                    );
+                    if (result != null) {
+                      final tagNotifier = ref.read(tagNotifierProvider);
+                      final tagId = await tagNotifier.addTag(result);
+                      selectedTagIds.value = [...selectedTagIds.value, tagId];
+                    }
+                  },
+                  icon: Icon(Icons.add, color: theme.colorScheme.primary),
+                ),
+              ],
+            ),
+            const Gap(8),
             tagsAsync.when(
               data:
                   (tags) => Wrap(
