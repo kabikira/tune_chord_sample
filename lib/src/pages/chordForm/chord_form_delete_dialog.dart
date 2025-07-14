@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
 
-class CodeFormDeleteDialog extends HookConsumerWidget {
-  final CodeForm codeForm;
+class ChordFormDeleteDialog extends HookConsumerWidget {
+  final ChordForm chordForm;
 
-  const CodeFormDeleteDialog({super.key, required this.codeForm});
+  const ChordFormDeleteDialog({super.key, required this.chordForm});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +22,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
           Icon(Icons.delete_outline, color: theme.colorScheme.error),
           const SizedBox(width: 8),
           Text(
-            l10n.deleteCodeForm,
+            l10n.deleteChordForm,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -54,7 +54,7 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    l10n.deleteCodeFormConfirmation,
+                    l10n.deleteChordFormConfirmation,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -79,8 +79,8 @@ class CodeFormDeleteDialog extends HookConsumerWidget {
           isDestructive: true,
           onConfirm: () async {
             await ref
-                .read(codeFormNotifierProvider.notifier)
-                .deleteCodeForm(codeForm.id);
+                .read(chordFormNotifierProvider.notifier)
+                .deleteChordForm(chordForm.id);
             if (context.mounted) {
               Navigator.of(context).pop();
             }

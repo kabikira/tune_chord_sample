@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_detail.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_edit.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_list.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_register.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_detail.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_edit.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_list.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_register.dart';
 import 'package:tune_chord_sample/src/pages/navBar/nav_bar.dart';
 import 'package:tune_chord_sample/src/pages/search/search_page.dart';
 import 'package:tune_chord_sample/src/pages/settings/settings.dart';
@@ -36,37 +36,37 @@ final GoRouter router = GoRouter(
               builder: (context, state) => const TuningList(),
               routes: [
                 GoRoute(
-                  path: 'codeFormList/:tuningId',
+                  path: 'chordFormList/:tuningId',
                   builder: (context, state) {
                     final tuningId = int.parse(
                       state.pathParameters['tuningId']!,
                     );
-                    return CodeFormList(tuningId: tuningId);
+                    return ChordFormList(tuningId: tuningId);
                   },
                   routes: [
                     GoRoute(
-                      path: 'codeFormRegister',
+                      path: 'chordFormRegister',
                       builder: (context, state) {
                         final tuningId = state.extra as int;
-                        return CodeFormRegister(tuningId: tuningId);
+                        return ChordFormRegister(tuningId: tuningId);
                       },
                     ),
                     GoRoute(
-                      path: 'codeFormDetail',
+                      path: 'chordFormDetail',
                       builder: (context, state) {
-                        final codeFormId = state.extra as int;
-                        return CodeFormDetail(codeFormId: codeFormId);
+                        final chordFormId = state.extra as int;
+                        return ChordFormDetail(chordFormId: chordFormId);
                       },
                     ),
                     GoRoute(
-                      path: 'codeFormEdit',
+                      path: 'chordFormEdit',
                       builder: (context, state) {
                         final tuningId = int.parse(
                           state.pathParameters['tuningId']!,
                         );
-                        final codeFormId = state.extra as int;
-                        return CodeFormEdit(
-                          codeFormId: codeFormId,
+                        final chordFormId = state.extra as int;
+                        return ChordFormEdit(
+                          chordFormId: chordFormId,
                           tuningId: tuningId,
                         );
                       },

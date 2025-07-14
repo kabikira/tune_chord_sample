@@ -96,16 +96,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get navSettings => '設定';
 
   @override
-  String get codeFormRegistration => 'コードフォーム登録';
+  String get chordFormRegistration => 'コードフォーム登録';
 
   @override
-  String get codeFormEdit => 'コードフォーム編集';
+  String get chordFormEdit => 'コードフォーム編集';
 
   @override
-  String get codeFormDetail => 'コードフォーム詳細';
+  String get chordFormDetail => 'コードフォーム詳細';
 
   @override
-  String get codeFormList => 'コードフォーム一覧';
+  String get chordFormList => 'コードフォーム一覧';
 
   @override
   String get register => '登録する';
@@ -173,7 +173,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get close => '閉じる';
 
   @override
-  String get codeFormNotFound => 'コードフォームが見つかりません';
+  String get chordFormNotFound => 'コードフォームが見つかりません';
 
   @override
   String get muteStringLongPress => '弦をミュート (長押し)';
@@ -185,10 +185,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get help => 'ヘルプ';
 
   @override
-  String get deleteCodeForm => 'コードフォームの削除';
+  String get deleteChordForm => 'コードフォームの削除';
 
   @override
-  String get deleteCodeFormConfirmation => 'このコードフォームを削除してもよろしいですか？';
+  String get deleteChordFormConfirmation => 'このコードフォームを削除してもよろしいですか？';
 
   @override
   String get cannotBeUndone => 'この操作は取り消せません。';
@@ -217,13 +217,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get toggleFavorite => 'お気に入り切り替え';
 
   @override
-  String get noCodeFormsFound => 'コードフォームが見つかりません';
+  String get noChordFormsFound => 'コードフォームが見つかりません';
 
   @override
   String get registerFirst => 'まず登録してください';
 
   @override
-  String get registerCodeForm => 'コードフォーム登録';
+  String get registerChordForm => 'コードフォーム登録';
 
   @override
   String get openString => '開放';
@@ -263,7 +263,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get searchTargetTuning => 'チューニングのみ';
 
   @override
-  String get searchTargetCodeForm => 'コードフォームのみ';
+  String get searchTargetChordForm => 'コードフォームのみ';
 
   @override
   String get searchTargetTag => 'タグのみ';

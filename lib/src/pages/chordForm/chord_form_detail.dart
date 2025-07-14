@@ -2,30 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 
-class CodeFormDetail extends HookConsumerWidget {
-  final int codeFormId;
+class ChordFormDetail extends HookConsumerWidget {
+  final int chordFormId;
 
-  const CodeFormDetail({super.key, required this.codeFormId});
+  const ChordFormDetail({super.key, required this.chordFormId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    // codeFormNotifierProviderを使用してコードフォームデータを取得
-    final codeFormsAsync = ref.watch(codeFormNotifierProvider);
+    // chordFormNotifierProviderを使用してコードフォームデータを取得
+    final chordFormsAsync = ref.watch(chordFormNotifierProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.codeFormDetail)),
-      body: codeFormsAsync.when(
+      appBar: AppBar(title: Text(l10n.chordFormDetail)),
+      body: chordFormsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text(l10n.errorMessage(e.toString()))),
-        data: (codeForms) {
-          // 指定されたcodeFormIdに一致するコードフォームを取得
-          final codeForm = codeForms.firstWhere(
-            (form) => form.id == codeFormId,
+        data: (chordForms) {
+          // 指定されたchordFormIdに一致するコードフォームを取得
+          final chordForm = chordForms.firstWhere(
+            (form) => form.id == chordFormId,
             orElse: () => throw Exception('コードフォームが見つかりません'),
           );
 
@@ -37,16 +37,16 @@ class CodeFormDetail extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    codeForm.label ?? '',
+                    chordForm.label ?? '',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
 
                   const SizedBox(height: 8),
-                  Text(l10n.chordFretPosition(codeForm.fretPositions)),
-                  if (codeForm.memo != null && codeForm.memo!.isNotEmpty)
+                  Text(l10n.chordFretPosition(chordForm.fretPositions)),
+                  if (chordForm.memo != null && chordForm.memo!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(l10n.chordMemo(codeForm.memo!)),
+                      child: Text(l10n.chordMemo(chordForm.memo!)),
                     ),
 
                   const SizedBox(height: 16),
@@ -57,13 +57,13 @@ class CodeFormDetail extends HookConsumerWidget {
                       return tuningAsync.when(
                         data: (tunings) {
                           final tuning = tunings.firstWhere(
-                            (t) => t.id == codeForm.tuningId,
+                            (t) => t.id == chordForm.tuningId,
                             orElse: () => throw Exception(l10n.tuningNotFound),
                           );
 
                           final fretPositions = ValueNotifier<List<int>>(
-                            codeForm.fretPositions.contains(',')
-                                ? codeForm.fretPositions
+                            chordForm.fretPositions.contains(',')
+                                ? chordForm.fretPositions
                                     .split(',')
                                     .map(int.parse)
                                     .toList()
@@ -94,8 +94,8 @@ class CodeFormDetail extends HookConsumerWidget {
                         onPressed: () {
                           // 編集画面へ遷移
                           context.go(
-                            '/tuningList/codeFormList/${codeForm.tuningId}/codeFormEdit',
-                            extra: codeForm.id,
+                            '/tuningList/chordFormList/${chordForm.tuningId}/chordFormEdit',
+                            extra: chordForm.id,
                           );
                         },
                         child: Text(l10n.edit),
@@ -103,7 +103,7 @@ class CodeFormDetail extends HookConsumerWidget {
                       TextButton(
                         onPressed: () {
                           // 削除確認ダイアログを表示
-                          _showDeleteConfirmDialog(context, ref, codeForm.id);
+                          _showDeleteConfirmDialog(context, ref, chordForm.id);
                         },
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.red,
@@ -124,7 +124,7 @@ class CodeFormDetail extends HookConsumerWidget {
   void _showDeleteConfirmDialog(
     BuildContext context,
     WidgetRef ref,
-    int codeFormId,
+    int chordFormId,
   ) {
     showDialog(
       context: context,
@@ -142,8 +142,8 @@ class CodeFormDetail extends HookConsumerWidget {
                 onPressed: () {
                   // コードフォームを削除
                   ref
-                      .read(codeFormNotifierProvider.notifier)
-                      .deleteCodeForm(codeFormId);
+                      .read(chordFormNotifierProvider.notifier)
+                      .deleteChordForm(chordFormId);
                   Navigator.of(context).pop();
                   // 削除後に前の画面に戻る
                   context.pop();

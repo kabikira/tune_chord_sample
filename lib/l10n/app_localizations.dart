@@ -257,29 +257,29 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get navSettings;
 
-  /// Title for code form registration screen
+  /// Title for chord form registration screen
   ///
   /// In en, this message translates to:
-  /// **'Code Form Registration'**
-  String get codeFormRegistration;
+  /// **'Chord Form Registration'**
+  String get chordFormRegistration;
 
-  /// Title for code form edit screen
+  /// Title for chord form edit screen
   ///
   /// In en, this message translates to:
-  /// **'Edit Code Form'**
-  String get codeFormEdit;
+  /// **'Edit Chord Form'**
+  String get chordFormEdit;
 
-  /// Title for code form detail screen
+  /// Title for chord form detail screen
   ///
   /// In en, this message translates to:
-  /// **'Code Form Details'**
-  String get codeFormDetail;
+  /// **'Chord Form Details'**
+  String get chordFormDetail;
 
-  /// Title for code form list screen
+  /// Title for chord form list screen
   ///
   /// In en, this message translates to:
-  /// **'Code Form List'**
-  String get codeFormList;
+  /// **'Chord Form List'**
+  String get chordFormList;
 
   /// Text for register button
   ///
@@ -407,11 +407,11 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get close;
 
-  /// Error message when code form is not found
+  /// Error message when chord form is not found
   ///
   /// In en, this message translates to:
-  /// **'Code form not found'**
-  String get codeFormNotFound;
+  /// **'Chord form not found'**
+  String get chordFormNotFound;
 
   /// Text for mute control widget
   ///
@@ -431,17 +431,17 @@ abstract class AppLocalizations {
   /// **'Help'**
   String get help;
 
-  /// Title for code form deletion dialog
+  /// Title for chord form deletion dialog
   ///
   /// In en, this message translates to:
-  /// **'Delete Code Form'**
-  String get deleteCodeForm;
+  /// **'Delete Chord Form'**
+  String get deleteChordForm;
 
-  /// Confirmation message for code form deletion
+  /// Confirmation message for chord form deletion
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to delete this code form?'**
-  String get deleteCodeFormConfirmation;
+  /// **'Are you sure you want to delete this chord form?'**
+  String get deleteChordFormConfirmation;
 
   /// Warning message for irreversible actions
   ///
@@ -491,11 +491,11 @@ abstract class AppLocalizations {
   /// **'Toggle Favorite'**
   String get toggleFavorite;
 
-  /// Message when no code forms are found
+  /// Message when no chord forms are found
   ///
   /// In en, this message translates to:
-  /// **'No code forms found'**
-  String get noCodeFormsFound;
+  /// **'No chord forms found'**
+  String get noChordFormsFound;
 
   /// Suggestion to register first when list is empty
   ///
@@ -503,11 +503,11 @@ abstract class AppLocalizations {
   /// **'Register first'**
   String get registerFirst;
 
-  /// Title or button text for code form registration
+  /// Title or button text for chord form registration
   ///
   /// In en, this message translates to:
-  /// **'Register Code Form'**
-  String get registerCodeForm;
+  /// **'Register Chord Form'**
+  String get registerChordForm;
 
   /// Label for open string in chord diagrams
   ///
@@ -575,11 +575,11 @@ abstract class AppLocalizations {
   /// **'Tuning Only'**
   String get searchTargetTuning;
 
-  /// Search target option for code form only
+  /// Search target option for chord form only
   ///
   /// In en, this message translates to:
-  /// **'Code Form Only'**
-  String get searchTargetCodeForm;
+  /// **'Chord Form Only'**
+  String get searchTargetChordForm;
 
   /// Search target option for tag only
   ///

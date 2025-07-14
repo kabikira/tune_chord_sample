@@ -3,7 +3,7 @@ import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 
 class ChordDiagramWidget extends StatelessWidget {
-  final CodeForm codeForm;
+  final ChordForm codeForm;
   final bool isEnhanced;
   final String? title;
 

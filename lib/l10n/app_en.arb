@@ -64,21 +64,21 @@
   "@navSettings": {
     "description": "Label for settings tab in navigation bar"
   },
-  "codeFormRegistration": "Code Form Registration",
-  "@codeFormRegistration": {
-    "description": "Title for code form registration screen"
+  "chordFormRegistration": "Chord Form Registration",
+  "@chordFormRegistration": {
+    "description": "Title for chord form registration screen"
   },
-  "codeFormEdit": "Edit Code Form",
-  "@codeFormEdit": {
-    "description": "Title for code form edit screen"
+  "chordFormEdit": "Edit Chord Form",
+  "@chordFormEdit": {
+    "description": "Title for chord form edit screen"
   },
-  "codeFormDetail": "Code Form Details",
-  "@codeFormDetail": {
-    "description": "Title for code form detail screen"
+  "chordFormDetail": "Chord Form Details",
+  "@chordFormDetail": {
+    "description": "Title for chord form detail screen"
   },
-  "codeFormList": "Code Form List",
-  "@codeFormList": {
-    "description": "Title for code form list screen"
+  "chordFormList": "Chord Form List",
+  "@chordFormList": {
+    "description": "Title for chord form list screen"
   },
   "register": "Register",
   "@register": {
@@ -170,9 +170,9 @@
   "@close": {
     "description": "Text for close button"
   },
-  "codeFormNotFound": "Code form not found",
-  "@codeFormNotFound": {
-    "description": "Error message when code form is not found"
+  "chordFormNotFound": "Chord form not found",
+  "@chordFormNotFound": {
+    "description": "Error message when chord form is not found"
   },
   "muteStringLongPress": "Mute string (long press)",
   "@muteStringLongPress": {
@@ -186,13 +186,13 @@
   "@help": {
     "description": "Text for help button"
   },
-  "deleteCodeForm": "Delete Code Form",
-  "@deleteCodeForm": {
-    "description": "Title for code form deletion dialog"
+  "deleteChordForm": "Delete Chord Form",
+  "@deleteChordForm": {
+    "description": "Title for chord form deletion dialog"
   },
-  "deleteCodeFormConfirmation": "Are you sure you want to delete this code form?",
-  "@deleteCodeFormConfirmation": {
-    "description": "Confirmation message for code form deletion"
+  "deleteChordFormConfirmation": "Are you sure you want to delete this chord form?",
+  "@deleteChordFormConfirmation": {
+    "description": "Confirmation message for chord form deletion"
   },
   "cannotBeUndone": "This action cannot be undone.",
   "@cannotBeUndone": {
@@ -231,17 +231,17 @@
   "@toggleFavorite": {
     "description": "Tooltip for favorite toggle button"
   },
-  "noCodeFormsFound": "No code forms found",
-  "@noCodeFormsFound": {
-    "description": "Message when no code forms are found"
+  "noChordFormsFound": "No chord forms found",
+  "@noChordFormsFound": {
+    "description": "Message when no chord forms are found"
   },
   "registerFirst": "Register first",
   "@registerFirst": {
     "description": "Suggestion to register first when list is empty"
   },
-  "registerCodeForm": "Register Code Form",
-  "@registerCodeForm": {
-    "description": "Title or button text for code form registration"
+  "registerChordForm": "Register Chord Form",
+  "@registerChordForm": {
+    "description": "Title or button text for chord form registration"
   },
   "openString": "Open",
   "@openString": {
@@ -297,9 +297,9 @@
   "@searchTargetTuning": {
     "description": "Search target option for tuning only"
   },
-  "searchTargetCodeForm": "Code Form Only",
-  "@searchTargetCodeForm": {
-    "description": "Search target option for code form only"
+  "searchTargetChordForm": "Chord Form Only",
+  "@searchTargetChordForm": {
+    "description": "Search target option for chord form only"
   },
   "searchTargetTag": "Tag Only",
   "@searchTargetTag": {

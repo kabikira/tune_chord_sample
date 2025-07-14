@@ -8,7 +8,7 @@ import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 import 'package:tune_chord_sample/src/widgets/tuning_info_card.dart'
     as new_tuning;
 import 'package:tune_chord_sample/src/widgets/fret_control_widget.dart';
-import 'package:tune_chord_sample/src/widgets/code_form_action_buttons.dart';
+import 'package:tune_chord_sample/src/widgets/chord_form_action_buttons.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 
 class WidgetGallery extends HookConsumerWidget {
@@ -21,7 +21,7 @@ class WidgetGallery extends HookConsumerWidget {
     final fretPositions = useState<List<int>>([3, 2, 0, 0, 3, 3]);
 
     // サンプルデータ
-    final sampleCodeForm = CodeForm(
+    final sampleChordForm = ChordForm(
       id: 1,
       tuningId: 1,
       fretPositions: '320033',
@@ -65,12 +65,12 @@ class WidgetGallery extends HookConsumerWidget {
               child: Column(
                 children: [
                   ChordDiagramWidget(
-                    codeForm: sampleCodeForm,
+                    codeForm: sampleChordForm,
                     isEnhanced: false,
                   ),
                   const SizedBox(height: 16),
                   ChordDiagramWidget(
-                    codeForm: sampleCodeForm,
+                    codeForm: sampleChordForm,
                     isEnhanced: true,
                     title: 'Enhanced版',
                   ),
@@ -212,14 +212,14 @@ class WidgetGallery extends HookConsumerWidget {
 
             const SizedBox(height: 32),
 
-            // CodeFormActionButtons
+            // ChordFormActionButtons
             _buildWidgetSection(
               context,
-              title: 'CodeFormActionButtons',
+              title: 'ChordFormActionButtons',
               description: 'コードフォーム用アクションボタン',
               child: Column(
                 children: [
-                  CodeFormActionButtons(
+                  ChordFormActionButtons(
                     submitButtonText: '登録する',
                     onSubmit: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -228,7 +228,7 @@ class WidgetGallery extends HookConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 16),
-                  CodeFormActionButtons(
+                  ChordFormActionButtons(
                     submitButtonText: '更新する',
                     isEnabled: false,
                     onSubmit: () {},
@@ -239,10 +239,10 @@ class WidgetGallery extends HookConsumerWidget {
 
             const SizedBox(height: 32),
 
-            // CodeFormWidget
+            // ChordFormWidget
             _buildWidgetSection(
               context,
-              title: 'CodeFormWidget',
+              title: 'ChordFormWidget',
               description: 'コードフォーム入力ウィジェット（完全版）',
               child: Container(
                 height: 300,
@@ -252,7 +252,7 @@ class WidgetGallery extends HookConsumerWidget {
                 ),
                 child: const Center(
                   child: Text(
-                    'CodeFormWidget\n（実際の動作には\nプロバイダーが必要）',
+                    'ChordFormWidget\n（実際の動作には\nプロバイダーが必要）',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),

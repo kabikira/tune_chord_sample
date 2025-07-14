@@ -8,9 +8,9 @@ final tuningTagsProvider = FutureProvider.family<List<Tag>, int>((ref, tuningId)
   return await db.getTagsForTuning(tuningId);
 });
 
-final codeFormTagsProvider = FutureProvider.family<List<Tag>, int>((ref, codeFormId) async {
+final chordFormTagsProvider = FutureProvider.family<List<Tag>, int>((ref, chordFormId) async {
   final db = ref.watch(appDatabaseProvider);
-  return await db.getTagsForCodeForm(codeFormId);
+  return await db.getTagsForChordForm(chordFormId);
 });
 
 // チューニング検索プロバイダー
@@ -60,15 +60,15 @@ final tuningSearchProvider = FutureProvider.family<List<Tuning>, String>((ref, q
 });
 
 // コードフォーム検索プロバイダー
-final codeFormSearchProvider = FutureProvider.family<List<CodeForm>, String>((ref, query) async {
+final chordFormSearchProvider = FutureProvider.family<List<ChordForm>, String>((ref, query) async {
   final db = ref.watch(appDatabaseProvider);
   if (query.isEmpty) return [];
   
-  final codeForms = await db.getAllCodeForms();
+  final chordForms = await db.getAllChordForms();
   final searchQuery = query.toLowerCase();
   
   // 名前、フレットポジション、メモによる検索
-  final directMatches = codeForms.where((form) {
+  final directMatches = chordForms.where((form) {
     final label = (form.label ?? '').toLowerCase();
     final fretPositions = form.fretPositions.toLowerCase();
     final memo = (form.memo ?? '').toLowerCase();
@@ -84,21 +84,21 @@ final codeFormSearchProvider = FutureProvider.family<List<CodeForm>, String>((re
     tag.name.toLowerCase().contains(searchQuery)
   ).toList();
   
-  final tagMatches = <CodeForm>[];
+  final tagMatches = <ChordForm>[];
   for (final tag in matchingTags) {
-    final codeFormTags = await db.getAllCodeFormTags();
-    final matchingCodeFormTags = codeFormTags.where((cft) => cft.tagId == tag.id).toList();
+    final chordFormTags = await db.getAllChordFormTags();
+    final matchingChordFormTags = chordFormTags.where((cft) => cft.tagId == tag.id).toList();
     
-    for (final codeFormTag in matchingCodeFormTags) {
-      final codeForm = codeForms.firstWhere((cf) => cf.id == codeFormTag.codeFormId);
-      if (!tagMatches.contains(codeForm)) {
-        tagMatches.add(codeForm);
+    for (final chordFormTag in matchingChordFormTags) {
+      final chordForm = chordForms.firstWhere((cf) => cf.id == chordFormTag.chordFormId);
+      if (!tagMatches.contains(chordForm)) {
+        tagMatches.add(chordForm);
       }
     }
   }
   
   // 重複を除去して結果を結合
-  final allMatches = <CodeForm>[];
+  final allMatches = <ChordForm>[];
   allMatches.addAll(directMatches);
   for (final tagMatch in tagMatches) {
     if (!allMatches.any((cf) => cf.id == tagMatch.id)) {
@@ -115,29 +115,29 @@ class SearchResultSorter {
     switch (sortOrder) {
       case SortOrder.dateAsc:
         results.sort((a, b) {
-          final dateA = a is Tuning ? a.createdAt : (a as CodeForm).createdAt;
-          final dateB = b is Tuning ? b.createdAt : (b as CodeForm).createdAt;
+          final dateA = a is Tuning ? a.createdAt : (a as ChordForm).createdAt;
+          final dateB = b is Tuning ? b.createdAt : (b as ChordForm).createdAt;
           return dateA.compareTo(dateB);
         });
         break;
       case SortOrder.dateDesc:
         results.sort((a, b) {
-          final dateA = a is Tuning ? a.createdAt : (a as CodeForm).createdAt;
-          final dateB = b is Tuning ? b.createdAt : (b as CodeForm).createdAt;
+          final dateA = a is Tuning ? a.createdAt : (a as ChordForm).createdAt;
+          final dateB = b is Tuning ? b.createdAt : (b as ChordForm).createdAt;
           return dateB.compareTo(dateA);
         });
         break;
       case SortOrder.idAsc:
         results.sort((a, b) {
-          final idA = a is Tuning ? a.id : (a as CodeForm).id;
-          final idB = b is Tuning ? b.id : (b as CodeForm).id;
+          final idA = a is Tuning ? a.id : (a as ChordForm).id;
+          final idB = b is Tuning ? b.id : (b as ChordForm).id;
           return idA.compareTo(idB);
         });
         break;
       case SortOrder.idDesc:
         results.sort((a, b) {
-          final idA = a is Tuning ? a.id : (a as CodeForm).id;
-          final idB = b is Tuning ? b.id : (b as CodeForm).id;
+          final idA = a is Tuning ? a.id : (a as ChordForm).id;
+          final idB = b is Tuning ? b.id : (b as ChordForm).id;
           return idB.compareTo(idA);
         });
         break;
@@ -169,13 +169,13 @@ final searchResultsProvider = FutureProvider<List<dynamic>>((ref) async {
       // タグにマッチしたチューニングとコードフォームを取得
       for (final tag in matchingTags) {
         final tuningTags = await db.getAllTuningTags();
-        final codeFormTags = await db.getAllCodeFormTags();
+        final chordFormTags = await db.getAllChordFormTags();
         
         final matchingTuningTags = tuningTags.where((tt) => tt.tagId == tag.id).toList();
-        final matchingCodeFormTags = codeFormTags.where((cft) => cft.tagId == tag.id).toList();
+        final matchingChordFormTags = chordFormTags.where((cft) => cft.tagId == tag.id).toList();
         
         final allTunings = await db.getAllTunings();
-        final allCodeForms = await db.getAllCodeForms();
+        final allChordForms = await db.getAllChordForms();
         
         for (final tuningTag in matchingTuningTags) {
           final tuning = allTunings.firstWhere((t) => t.id == tuningTag.tuningId);
@@ -184,10 +184,10 @@ final searchResultsProvider = FutureProvider<List<dynamic>>((ref) async {
           }
         }
         
-        for (final codeFormTag in matchingCodeFormTags) {
-          final codeForm = allCodeForms.firstWhere((cf) => cf.id == codeFormTag.codeFormId);
-          if (!results.any((r) => r is CodeForm && r.id == codeForm.id)) {
-            results.add(codeForm);
+        for (final chordFormTag in matchingChordFormTags) {
+          final chordForm = allChordForms.firstWhere((cf) => cf.id == chordFormTag.chordFormId);
+          if (!results.any((r) => r is ChordForm && r.id == chordForm.id)) {
+            results.add(chordForm);
           }
         }
       }
@@ -199,9 +199,9 @@ final searchResultsProvider = FutureProvider<List<dynamic>>((ref) async {
       }
 
       // コードフォームの検索
-      if (searchType == SearchType.codeForm || searchType == SearchType.both) {
-        final codeForms = await ref.read(codeFormSearchProvider(query).future);
-        results.addAll(codeForms);
+      if (searchType == SearchType.chordForm || searchType == SearchType.both) {
+        final chordForms = await ref.read(chordFormSearchProvider(query).future);
+        results.addAll(chordForms);
       }
     }
 
