@@ -96,16 +96,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navSettings => 'Settings';
 
   @override
-  String get codeFormRegistration => 'Code Form Registration';
+  String get chordFormRegistration => 'Chord Form Registration';
 
   @override
-  String get codeFormEdit => 'Edit Code Form';
+  String get chordFormEdit => 'Edit Chord Form';
 
   @override
-  String get codeFormDetail => 'Code Form Details';
+  String get chordFormDetail => 'Chord Form Details';
 
   @override
-  String get codeFormList => 'Code Form List';
+  String get chordFormList => 'Chord Form List';
 
   @override
   String get register => 'Register';
@@ -173,7 +173,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get close => 'Close';
 
   @override
-  String get codeFormNotFound => 'Code form not found';
+  String get chordFormNotFound => 'Chord form not found';
 
   @override
   String get muteStringLongPress => 'Mute string (long press)';
@@ -185,10 +185,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get help => 'Help';
 
   @override
-  String get deleteCodeForm => 'Delete Code Form';
+  String get deleteChordForm => 'Delete Chord Form';
 
   @override
-  String get deleteCodeFormConfirmation => 'Are you sure you want to delete this code form?';
+  String get deleteChordFormConfirmation => 'Are you sure you want to delete this chord form?';
 
   @override
   String get cannotBeUndone => 'This action cannot be undone.';
@@ -217,13 +217,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get toggleFavorite => 'Toggle Favorite';
 
   @override
-  String get noCodeFormsFound => 'No code forms found';
+  String get noChordFormsFound => 'No chord forms found';
 
   @override
   String get registerFirst => 'Register first';
 
   @override
-  String get registerCodeForm => 'Register Code Form';
+  String get registerChordForm => 'Register Chord Form';
 
   @override
   String get openString => 'Open';
@@ -263,7 +263,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchTargetTuning => 'Tuning Only';
 
   @override
-  String get searchTargetCodeForm => 'Code Form Only';
+  String get searchTargetChordForm => 'Chord Form Only';
 
   @override
   String get searchTargetTag => 'Tag Only';

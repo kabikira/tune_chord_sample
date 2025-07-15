@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
-import 'package:tune_chord_sample/src/widgets/code_form_widget.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:tune_chord_sample/src/widgets/chord_form_widget.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 
-class CodeFormEdit extends ConsumerWidget {
-  final int codeFormId;
+class ChordFormEdit extends ConsumerWidget {
+  final int chordFormId;
   final int tuningId;
   
-  const CodeFormEdit({
+  const ChordFormEdit({
     super.key, 
-    required this.codeFormId,
+    required this.chordFormId,
     required this.tuningId,
   });
 
@@ -25,7 +25,7 @@ class CodeFormEdit extends ConsumerWidget {
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
-        title: Text(l10n.codeFormEdit),
+        title: Text(l10n.chordFormEdit),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -33,8 +33,8 @@ class CodeFormEdit extends ConsumerWidget {
         ),
       ),
       body: SafeArea(
-        child: FutureBuilder<CodeForm?>(
-          future: _getCodeForm(database, codeFormId),
+        child: FutureBuilder<ChordForm?>(
+          future: _getChordForm(database, chordFormId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -44,30 +44,30 @@ class CodeFormEdit extends ConsumerWidget {
               return Center(child: Text(l10n.errorMessage(snapshot.error.toString())));
             }
             
-            final codeForm = snapshot.data;
-            if (codeForm == null) {
-              return Center(child: Text(l10n.codeFormNotFound));
+            final chordForm = snapshot.data;
+            if (chordForm == null) {
+              return Center(child: Text(l10n.chordFormNotFound));
             }
 
             // fretPositionsを文字列からList<int>に変換
-            final fretPositions = codeForm.fretPositions
+            final fretPositions = chordForm.fretPositions
                 .split(',')
                 .map((s) => int.tryParse(s) ?? 0)
                 .toList();
 
-            return CodeFormWidget(
+            return ChordFormWidget(
               tuningId: tuningId,
               submitButtonText: l10n.update,
-              initialLabel: codeForm.label,
-              initialMemo: codeForm.memo,
+              initialLabel: chordForm.label,
+              initialMemo: chordForm.memo,
               initialFretPositions: fretPositions,
               onSubmit: ({required String fretPositions, String? label, String? memo}) async {
-                final updatedCodeForm = codeForm.copyWith(
+                final updatedChordForm = chordForm.copyWith(
                   fretPositions: fretPositions,
                   label: label != null ? drift.Value(label) : const drift.Value.absent(),
                   memo: memo != null ? drift.Value(memo) : const drift.Value.absent(),
                 );
-                await ref.read(codeFormNotifierProvider.notifier).updateCodeForm(updatedCodeForm);
+                await ref.read(chordFormNotifierProvider.notifier).updateChordForm(updatedChordForm);
               },
             );
           },
@@ -76,10 +76,10 @@ class CodeFormEdit extends ConsumerWidget {
     );
   }
 
-  Future<CodeForm?> _getCodeForm(AppDatabase database, int id) async {
+  Future<ChordForm?> _getChordForm(AppDatabase database, int id) async {
     try {
-      final allCodeForms = await database.getAllCodeForms();
-      return allCodeForms.where((form) => form.id == id).firstOrNull;
+      final allChordForms = await database.getAllChordForms();
+      return allChordForms.where((form) => form.id == id).firstOrNull;
     } catch (e) {
       return null;
     }

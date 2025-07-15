@@ -6,7 +6,7 @@ import 'package:tune_chord_sample/src/pages/search/search_notifier.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
 // 検索対象の種類
-enum SearchType { tuning, codeForm, tag, both }
+enum SearchType { tuning, chordForm, tag, both }
 
 // ソート順
 enum SortOrder { dateAsc, dateDesc, idAsc, idDesc }
@@ -181,8 +181,8 @@ class SearchPage extends HookConsumerWidget {
                                       child: Text(l10n.searchTargetTuning),
                                     ),
                                     DropdownMenuItem(
-                                      value: SearchType.codeForm,
-                                      child: Text(l10n.searchTargetCodeForm),
+                                      value: SearchType.chordForm,
+                                      child: Text(l10n.searchTargetChordForm),
                                     ),
                                     DropdownMenuItem(
                                       value: SearchType.tag,
@@ -325,9 +325,9 @@ class SearchPage extends HookConsumerWidget {
                                       ref,
                                       result,
                                     );
-                                  } else if (result is CodeForm) {
+                                  } else if (result is ChordForm) {
                                     // コードフォームの表示
-                                    return _buildCodeFormResultTile(
+                                    return _buildChordFormResultTile(
                                       context,
                                       theme,
                                       ref,
@@ -393,7 +393,7 @@ class SearchPage extends HookConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
-        context.push('/tuningList/codeFormList/${tuning.id}');
+        context.push('/tuningList/chordFormList/${tuning.id}');
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -450,18 +450,18 @@ class SearchPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildCodeFormResultTile(
+  Widget _buildChordFormResultTile(
     BuildContext context,
     ThemeData theme,
     WidgetRef ref,
-    CodeForm codeForm,
+    ChordForm chordForm,
   ) {
     final l10n = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
         context.push(
-          '/tuningList/codeFormList/${codeForm.tuningId}/codeFormDetail',
-          extra: codeForm.id,
+          '/tuningList/chordFormList/${chordForm.tuningId}/chordFormDetail',
+          extra: chordForm.id,
         );
       },
       child: Padding(
@@ -481,14 +481,14 @@ class SearchPage extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    codeForm.label ?? l10n.noName,
+                    chordForm.label ?? l10n.noName,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    l10n.fretPositionLabel(codeForm.fretPositions),
+                    l10n.fretPositionLabel(chordForm.fretPositions),
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                     ),
@@ -496,7 +496,7 @@ class SearchPage extends HookConsumerWidget {
                   const SizedBox(height: 4),
                   Consumer(
                     builder: (context, ref, child) {
-                      final tagsAsync = ref.watch(codeFormTagsProvider(codeForm.id));
+                      final tagsAsync = ref.watch(chordFormTagsProvider(chordForm.id));
                       return tagsAsync.when(
                         data: (tags) => tags.isNotEmpty
                             ? _buildTagsRow(theme, tags)

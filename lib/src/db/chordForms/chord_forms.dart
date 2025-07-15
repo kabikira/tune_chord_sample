@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:tune_chord_sample/src/db/tunings/tunings.dart';
 
-class CodeForms extends Table {
+class ChordForms extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get tuningId =>
       integer().references(Tunings, #id, onDelete: KeyAction.cascade)();

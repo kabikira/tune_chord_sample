@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_delete_dialog.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_delete_dialog.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
@@ -18,13 +18,13 @@ final viewModeProvider = StateProvider<ViewMode>((ref) => ViewMode.list);
 // 表示モードの列挙型
 enum ViewMode { list, detail }
 
-class CodeFormList extends HookConsumerWidget {
+class ChordFormList extends HookConsumerWidget {
   final int tuningId;
-  const CodeFormList({super.key, required this.tuningId});
+  const ChordFormList({super.key, required this.tuningId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final codeFormAsync = ref.watch(codeFormNotifierProvider);
+    final chordFormAsync = ref.watch(chordFormNotifierProvider);
     final viewMode = ref.watch(viewModeProvider);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
@@ -71,17 +71,17 @@ class CodeFormList extends HookConsumerWidget {
       body: Column(
         children: [
           Expanded(
-            child: codeFormAsync.when(
+            child: chordFormAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, _) => Center(child: Text(l10n.errorOccurred(error.toString()))),
-              data: (codeForms) {
+              data: (chordForms) {
                 // チューニングIDに基づいてコードフォームをフィルタリング
-                final filteredCodeForms =
-                    codeForms
+                final filteredChordForms =
+                    chordForms
                         .where((form) => form.tuningId == tuningId)
                         .toList();
 
-                if (filteredCodeForms.isEmpty) {
+                if (filteredChordForms.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +95,7 @@ class CodeFormList extends HookConsumerWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          l10n.noCodeFormsFound,
+                          l10n.noChordFormsFound,
                           style: theme.textTheme.bodyLarge?.copyWith(
                             color: theme.colorScheme.onSurface.withValues(
                               alpha: 0.7,
@@ -109,8 +109,8 @@ class CodeFormList extends HookConsumerWidget {
 
                 // 表示モードに応じてビューを切り替え
                 return viewMode == ViewMode.list
-                    ? _buildListView(context, ref, filteredCodeForms, l10n)
-                    : _buildDetailView(context, ref, filteredCodeForms, l10n);
+                    ? _buildListView(context, ref, filteredChordForms, l10n)
+                    : _buildDetailView(context, ref, filteredChordForms, l10n);
               },
             ),
           ),
@@ -119,7 +119,7 @@ class CodeFormList extends HookConsumerWidget {
             child: ElevatedButton(
               onPressed: () {
                 context.push(
-                  '/tuningList/codeFormList/$tuningId/codeFormRegister',
+                  '/tuningList/chordFormList/$tuningId/chordFormRegister',
                   extra: tuningId,
                 );
               },
@@ -138,7 +138,7 @@ class CodeFormList extends HookConsumerWidget {
                 children: [
                   Icon(Icons.add, color: theme.colorScheme.onPrimary),
                   const SizedBox(width: 8),
-                  Text(l10n.registerCodeForm),
+                  Text(l10n.registerChordForm),
                 ],
               ),
             ),
@@ -152,16 +152,16 @@ class CodeFormList extends HookConsumerWidget {
   Widget _buildListView(
     BuildContext context,
     WidgetRef ref,
-    List<CodeForm> codeForms,
+    List<ChordForm> chordForms,
     AppLocalizations l10n,
   ) {
     final theme = Theme.of(context);
 
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: codeForms.length,
+      itemCount: chordForms.length,
       itemBuilder: (context, index) {
-        final codeForm = codeForms[index];
+        final chordForm = chordForms[index];
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           elevation: 2,
@@ -173,8 +173,8 @@ class CodeFormList extends HookConsumerWidget {
             onTap: () {
               // 詳細画面へ遷移
               context.push(
-                '/tuningList/codeFormList/$tuningId/codeFormDetail',
-                extra: codeForm.id,
+                '/tuningList/chordFormList/$tuningId/chordFormDetail',
+                extra: chordForm.id,
               );
             },
             child: Column(
@@ -189,25 +189,25 @@ class CodeFormList extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              codeForm.label ?? '',
+                              chordForm.label ?? '',
                               style: theme.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
+                              'フレットポジション: ${chordForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,
                                 ),
                               ),
                             ),
-                            if (codeForm.memo != null &&
-                                codeForm.memo!.isNotEmpty) ...[
+                            if (chordForm.memo != null &&
+                                chordForm.memo!.isNotEmpty) ...[
                               const SizedBox(height: 4),
                               Text(
-                                'メモ: ${codeForm.memo!}',
+                                'メモ: ${chordForm.memo!}',
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: theme.colorScheme.onSurface.withValues(
                                     alpha: 0.6,
@@ -223,15 +223,15 @@ class CodeFormList extends HookConsumerWidget {
                       InteractionButtons(
                         onEdit: () {
                           context.push(
-                            '/tuningList/codeFormList/$tuningId/codeFormEdit',
-                            extra: codeForm.id,
+                            '/tuningList/chordFormList/$tuningId/chordFormEdit',
+                            extra: chordForm.id,
                           );
                         },
                         onDelete: () {
                           showDialog(
                             context: context,
                             builder:
-                                (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                                (_) => ChordFormDeleteDialog(chordForm: chordForm),
                           );
                         },
                       ),
@@ -248,7 +248,7 @@ class CodeFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.registrationDate}: ${_formatDate(codeForm.createdAt)}',
+                      '${l10n.registrationDate}: ${_formatDate(chordForm.createdAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -263,7 +263,7 @@ class CodeFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.updateDate}: ${_formatDate(codeForm.updatedAt)}',
+                      '${l10n.updateDate}: ${_formatDate(chordForm.updatedAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -284,16 +284,16 @@ class CodeFormList extends HookConsumerWidget {
   Widget _buildDetailView(
     BuildContext context,
     WidgetRef ref,
-    List<CodeForm> codeForms,
+    List<ChordForm> chordForms,
     AppLocalizations l10n,
   ) {
     final theme = Theme.of(context);
 
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: codeForms.length,
+      itemCount: chordForms.length,
       itemBuilder: (context, index) {
-        final codeForm = codeForms[index];
+        final chordForm = chordForms[index];
         return Card(
           margin: const EdgeInsets.only(bottom: 16),
           elevation: 2,
@@ -315,14 +315,14 @@ class CodeFormList extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              codeForm.label ?? '',
+                              chordForm.label ?? '',
                               style: theme.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'フレットポジション: ${codeForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
+                              'フレットポジション: ${chordForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,
@@ -335,15 +335,15 @@ class CodeFormList extends HookConsumerWidget {
                       InteractionButtons(
                         onEdit: () {
                           context.push(
-                            '/tuningList/codeFormList/$tuningId/codeFormEdit',
-                            extra: codeForm.id,
+                            '/tuningList/chordFormList/$tuningId/chordFormEdit',
+                            extra: chordForm.id,
                           );
                         },
                         onDelete: () {
                           showDialog(
                             context: context,
                             builder:
-                                (_) => CodeFormDeleteDialog(codeForm: codeForm),
+                                (_) => ChordFormDeleteDialog(chordForm: chordForm),
                           );
                         },
                       ),
@@ -361,7 +361,7 @@ class CodeFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.registrationDate}: ${_formatDate(codeForm.createdAt)}',
+                      '${l10n.registrationDate}: ${_formatDate(chordForm.createdAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -376,7 +376,7 @@ class CodeFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.updateDate}: ${_formatDate(codeForm.updatedAt)}',
+                      '${l10n.updateDate}: ${_formatDate(chordForm.updatedAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -393,13 +393,13 @@ class CodeFormList extends HookConsumerWidget {
                     return tuningAsync.when(
                       data: (tunings) {
                         final tuning = tunings.firstWhere(
-                          (t) => t.id == codeForm.tuningId,
+                          (t) => t.id == chordForm.tuningId,
                           orElse: () => throw Exception('チューニングが見つかりません'),
                         );
 
                         final fretPositions = ValueNotifier<List<int>>(
-                          codeForm.fretPositions.contains(',')
-                              ? codeForm.fretPositions
+                          chordForm.fretPositions.contains(',')
+                              ? chordForm.fretPositions
                                   .split(',')
                                   .map(int.parse)
                                   .toList()

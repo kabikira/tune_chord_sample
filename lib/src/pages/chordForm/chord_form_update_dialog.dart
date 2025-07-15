@@ -3,22 +3,22 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 import 'package:tune_chord_sample/src/widgets/custom_text_field.dart';
 import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
 import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
 
-class CodeFormUpdateDialog extends HookConsumerWidget {
-  final CodeForm codeForm;
+class ChordFormUpdateDialog extends HookConsumerWidget {
+  final ChordForm chordForm;
 
-  const CodeFormUpdateDialog({super.key, required this.codeForm});
+  const ChordFormUpdateDialog({super.key, required this.chordForm});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // フレットポジションをリストに変換
     final initialPositions =
-        codeForm.fretPositions
+        chordForm.fretPositions
             .split(',')
             .map((s) => int.tryParse(s) ?? 0)
             .toList();
@@ -29,14 +29,14 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
 
     final fretPositions = useState<List<int>>(initialPositions);
     final selectedFret = useState<int>(0); // 表示するフレット位置
-    final labelController = useTextEditingController(text: codeForm.label);
-    final memoController = useTextEditingController(text: codeForm.memo ?? '');
+    final labelController = useTextEditingController(text: chordForm.label);
+    final memoController = useTextEditingController(text: chordForm.memo ?? '');
     final isSaving = useState(false);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
 
     // チューニング情報を取得
-    final tuningAsync = ref.watch(singleTuningProvider(codeForm.tuningId));
+    final tuningAsync = ref.watch(singleTuningProvider(chordForm.tuningId));
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -45,7 +45,7 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
           Icon(Icons.edit, color: theme.colorScheme.primary),
           const SizedBox(width: 8),
           Text(
-            l10n.codeFormEdit,
+            l10n.chordFormEdit,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -206,24 +206,24 @@ class CodeFormUpdateDialog extends HookConsumerWidget {
                     isSaving.value = true;
 
                     final fretString = fretPositions.value.join(',');
-                    final updatedCodeForm = CodeForm(
-                      id: codeForm.id,
-                      tuningId: codeForm.tuningId,
+                    final updatedChordForm = ChordForm(
+                      id: chordForm.id,
+                      tuningId: chordForm.tuningId,
                       fretPositions: fretString,
                       label: labelController.text,
                       memo:
                           memoController.text.isEmpty
                               ? null
                               : memoController.text,
-                      createdAt: codeForm.createdAt,
+                      createdAt: chordForm.createdAt,
                       updatedAt: DateTime.now(),
-                      isFavorite: codeForm.isFavorite,
-                      userId: codeForm.userId,
+                      isFavorite: chordForm.isFavorite,
+                      userId: chordForm.userId,
                     );
 
                     await ref
-                        .read(codeFormNotifierProvider.notifier)
-                        .updateCodeForm(updatedCodeForm);
+                        .read(chordFormNotifierProvider.notifier)
+                        .updateChordForm(updatedChordForm);
 
                     isSaving.value = false;
                     if (context.mounted) {

@@ -7,8 +7,8 @@ import 'package:path/path.dart' as p;
 import 'package:sqlite3/sqlite3.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 import 'package:drift/drift.dart';
-import 'package:tune_chord_sample/src/db/codeForms/code_forms.dart';
-import 'package:tune_chord_sample/src/db/code_form_tags/code_form_tags.dart';
+import 'package:tune_chord_sample/src/db/chordForms/chord_forms.dart';
+import 'package:tune_chord_sample/src/db/chord_form_tags/chord_form_tags.dart';
 import 'package:tune_chord_sample/src/db/tag/tab.dart';
 import 'package:tune_chord_sample/src/db/tuning_tags/tuning_tags.dart';
 import 'package:tune_chord_sample/src/db/tunings/tunings.dart';
@@ -19,7 +19,7 @@ final appDatabaseProvider = Provider<AppDatabase>((ref) {
   return AppDatabase();
 });
 
-@DriftDatabase(tables: [Tunings, CodeForms, Tags, TuningTags, CodeFormTags])
+@DriftDatabase(tables: [Tunings, ChordForms, Tags, TuningTags, ChordFormTags])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
@@ -36,14 +36,14 @@ class AppDatabase extends _$AppDatabase {
   Future<void> deleteTuning(int id) =>
       (delete(tunings)..where((t) => t.id.equals(id))).go();
 
-  // ---------- CodeForms ----------
-  Stream<List<CodeForm>> watchCodeForms() => select(codeForms).watch();
-  Future<List<CodeForm>> getAllCodeForms() => select(codeForms).get();
-  Future<int> addCodeForm(CodeFormsCompanion form) =>
-      into(codeForms).insert(form);
-  Future<bool> updateCodeForm(CodeForm form) => update(codeForms).replace(form);
-  Future<void> deleteCodeForm(int id) =>
-      (delete(codeForms)..where((t) => t.id.equals(id))).go();
+  // ---------- ChordForms ----------
+  Stream<List<ChordForm>> watchChordForms() => select(chordForms).watch();
+  Future<List<ChordForm>> getAllChordForms() => select(chordForms).get();
+  Future<int> addChordForm(ChordFormsCompanion form) =>
+      into(chordForms).insert(form);
+  Future<bool> updateChordForm(ChordForm form) => update(chordForms).replace(form);
+  Future<void> deleteChordForm(int id) =>
+      (delete(chordForms)..where((t) => t.id.equals(id))).go();
 
   // ---------- Tags ----------
   Stream<List<Tag>> watchTags() => select(tags).watch();
@@ -61,13 +61,13 @@ class AppDatabase extends _$AppDatabase {
   Future<void> deleteTuningTag(int id) =>
       (delete(tuningTags)..where((t) => t.id.equals(id))).go();
 
-  // ---------- CodeFormTags ----------
-  Stream<List<CodeFormTag>> watchCodeFormTags() => select(codeFormTags).watch();
-  Future<List<CodeFormTag>> getAllCodeFormTags() => select(codeFormTags).get();
-  Future<int> addCodeFormTag(CodeFormTagsCompanion tag) =>
-      into(codeFormTags).insert(tag);
-  Future<void> deleteCodeFormTag(int id) =>
-      (delete(codeFormTags)..where((t) => t.id.equals(id))).go();
+  // ---------- ChordFormTags ----------
+  Stream<List<ChordFormTag>> watchChordFormTags() => select(chordFormTags).watch();
+  Future<List<ChordFormTag>> getAllChordFormTags() => select(chordFormTags).get();
+  Future<int> addChordFormTag(ChordFormTagsCompanion tag) =>
+      into(chordFormTags).insert(tag);
+  Future<void> deleteChordFormTag(int id) =>
+      (delete(chordFormTags)..where((t) => t.id.equals(id))).go();
 
   // ---------- Helper Methods for Tags ----------
   Future<List<Tag>> getTagsForTuning(int tuningId) async {
@@ -79,10 +79,10 @@ class AppDatabase extends _$AppDatabase {
     return result.map((row) => row.readTable(tags)).toList();
   }
 
-  Future<List<Tag>> getTagsForCodeForm(int codeFormId) async {
+  Future<List<Tag>> getTagsForChordForm(int chordFormId) async {
     final query = select(tags).join([
-      innerJoin(codeFormTags, codeFormTags.tagId.equalsExp(tags.id)),
-    ])..where(codeFormTags.codeFormId.equals(codeFormId));
+      innerJoin(chordFormTags, chordFormTags.tagId.equalsExp(tags.id)),
+    ])..where(chordFormTags.chordFormId.equals(chordFormId));
     
     final result = await query.get();
     return result.map((row) => row.readTable(tags)).toList();

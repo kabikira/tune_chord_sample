@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/pages/codeForm/code_form_providers.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_providers.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 import 'package:tune_chord_sample/src/widgets/custom_text_field.dart';
 import 'package:tune_chord_sample/src/widgets/tuning_info_card.dart';
 import 'package:tune_chord_sample/src/widgets/fret_control_widget.dart';
-import 'package:tune_chord_sample/src/widgets/code_form_action_buttons.dart';
+import 'package:tune_chord_sample/src/widgets/chord_form_action_buttons.dart';
 
-class CodeFormWidget extends HookConsumerWidget {
+class ChordFormWidget extends HookConsumerWidget {
   final int tuningId;
   final String? initialLabel;
   final String? initialMemo;
@@ -22,7 +22,7 @@ class CodeFormWidget extends HookConsumerWidget {
   })
   onSubmit;
 
-  const CodeFormWidget({
+  const ChordFormWidget({
     super.key,
     required this.tuningId,
     required this.submitButtonText,
@@ -123,7 +123,7 @@ class CodeFormWidget extends HookConsumerWidget {
           const SizedBox(height: 32),
 
           // アクションボタン
-          CodeFormActionButtons(
+          ChordFormActionButtons(
             submitButtonText: submitButtonText,
             onSubmit: () async {
               final fretString = fretPositions.value.join(',');

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CodeFormActionButtons extends StatelessWidget {
+class ChordFormActionButtons extends StatelessWidget {
   final VoidCallback onSubmit;
   final String submitButtonText;
   final bool isEnabled;
 
-  const CodeFormActionButtons({
+  const ChordFormActionButtons({
     super.key,
     required this.onSubmit,
     required this.submitButtonText,

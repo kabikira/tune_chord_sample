@@ -4,36 +4,36 @@ import 'package:tune_chord_sample/src/db/app_database.dart';
 
 // TODO: AsyncNotifierに書き換え
 
-final codeFormNotifierProvider =
-    StateNotifierProvider<CodeFormNotifier, AsyncValue<List<CodeForm>>>((ref) {
+final chordFormNotifierProvider =
+    StateNotifierProvider<ChordFormNotifier, AsyncValue<List<ChordForm>>>((ref) {
       final db = ref.watch(appDatabaseProvider);
-      return CodeFormNotifier(db);
+      return ChordFormNotifier(db);
     });
 
-class CodeFormNotifier extends StateNotifier<AsyncValue<List<CodeForm>>> {
+class ChordFormNotifier extends StateNotifier<AsyncValue<List<ChordForm>>> {
   final AppDatabase db;
 
-  CodeFormNotifier(this.db) : super(const AsyncValue.loading()) {
-    _watchCodeForms();
+  ChordFormNotifier(this.db) : super(const AsyncValue.loading()) {
+    _watchChordForms();
   }
 
-  void _watchCodeForms() {
-    db.watchCodeForms().listen(
-      (codeForms) => state = AsyncValue.data(codeForms),
+  void _watchChordForms() {
+    db.watchChordForms().listen(
+      (chordForms) => state = AsyncValue.data(chordForms),
       onError:
           (error, stackTrace) => state = AsyncValue.error(error, stackTrace),
     );
   }
 
-  Future<void> addCodeForm({
+  Future<void> addChordForm({
     required int tuningId,
     required String fretPositions,
     String? label,
     String? memo,
   }) async {
     try {
-      await db.addCodeForm(
-        CodeFormsCompanion(
+      await db.addChordForm(
+        ChordFormsCompanion(
           tuningId: drift.Value(tuningId),
           fretPositions: drift.Value(fretPositions),
           label:
@@ -46,26 +46,26 @@ class CodeFormNotifier extends StateNotifier<AsyncValue<List<CodeForm>>> {
     }
   }
 
-  Future<void> updateCodeForm(CodeForm codeForm) async {
+  Future<void> updateChordForm(ChordForm chordForm) async {
     try {
-      await db.updateCodeForm(codeForm);
+      await db.updateChordForm(chordForm);
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);
     }
   }
 
-  Future<void> deleteCodeForm(int id) async {
+  Future<void> deleteChordForm(int id) async {
     try {
-      await db.deleteCodeForm(id);
+      await db.deleteChordForm(id);
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);
     }
   }
 
-  Future<List<CodeForm>> getCodeFormsByTuning(int tuningId) async {
+  Future<List<ChordForm>> getChordFormsByTuning(int tuningId) async {
     try {
-      final allCodeForms = await db.getAllCodeForms();
-      return allCodeForms.where((form) => form.tuningId == tuningId).toList();
+      final allChordForms = await db.getAllChordForms();
+      return allChordForms.where((form) => form.tuningId == tuningId).toList();
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);
       return [];

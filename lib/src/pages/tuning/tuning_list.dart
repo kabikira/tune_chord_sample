@@ -77,7 +77,7 @@ class TuningList extends HookConsumerWidget {
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
                         onTap: () {
-                          context.push('/tuningList/codeFormList/${tuning.id}');
+                          context.push('/tuningList/chordFormList/${tuning.id}');
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(16),
