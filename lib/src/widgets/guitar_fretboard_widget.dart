@@ -199,7 +199,7 @@ class StringWidget extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: () => _handleTap(),
-        onLongPress: currentFret == 0 ? () => _handleLongPress() : null,
+        onLongPress: () => _handleLongPress(),
         child: Container(
           height: 48,
           decoration: BoxDecoration(
@@ -300,10 +300,12 @@ class StringWidget extends StatelessWidget {
 
   void _handleLongPress() {
     const stringCount = 6;
+    final position = fretPositions.value[stringIndex];
+    
     final newPositions = [
       for (int i = 0; i < stringCount; i++)
         if (i == stringIndex)
-          fretPositions.value[i] == -1 ? 0 : -1
+          position == -1 ? 0 : -1  // ミュート状態なら解除、そうでなければミュート
         else
           fretPositions.value[i],
     ];
