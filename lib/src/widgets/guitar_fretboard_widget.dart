@@ -48,8 +48,8 @@ class TuningDisplayWidget extends StatelessWidget {
                     child: Text(
                       isStringMuted
                           ? 'X'
-                          : (reversedIndex < stringNames.length
-                              ? stringNames[reversedIndex]
+                          : (stringIndex < stringNames.length
+                              ? stringNames[stringIndex]
                               : ''),
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
@@ -483,7 +483,7 @@ class ChordCompositionWidget extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                fretPositions.value
+                fretPositions.value.reversed
                     .map((p) => p == -1 ? 'X' : p.toString())
                     .join(','),
                 style: theme.textTheme.titleMedium?.copyWith(
