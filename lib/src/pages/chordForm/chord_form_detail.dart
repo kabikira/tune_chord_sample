@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_providers.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
 
@@ -16,9 +17,25 @@ class ChordFormDetail extends HookConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     // chordFormNotifierProviderを使用してコードフォームデータを取得
     final chordFormsAsync = ref.watch(chordFormNotifierProvider);
+    final tuningAsync = ref.watch(
+      tuningStringsFromChordFormProvider(chordFormId),
+    );
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.chordFormDetail)),
+      appBar: AppBar(
+        title: tuningAsync.when(
+          data:
+              (tuning) =>
+                  Text('${tuningAsync.value} - ${l10n.chordFormDetail}'),
+          loading: () => Text(l10n.chordFormDetail),
+          error: (_, __) => Text(l10n.chordFormDetail),
+        ),
+        elevation: 0,
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+        ),
+      ),
       body: chordFormsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text(l10n.errorMessage(e.toString()))),
@@ -81,8 +98,9 @@ class ChordFormDetail extends HookConsumerWidget {
                               child: CircularProgressIndicator(),
                             ),
                         error:
-                            (error, stack) =>
-                                Center(child: Text(l10n.errorOccurred(error.toString()))),
+                            (error, stack) => Center(
+                              child: Text(l10n.errorOccurred(error.toString())),
+                            ),
                       );
                     },
                   ),
