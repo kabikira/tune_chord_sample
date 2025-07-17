@@ -8,6 +8,7 @@ import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/services.dart';
 import 'package:tune_chord_sample/src/config/validation_constants.dart';
+import 'package:tune_chord_sample/src/widgets/tuning_keyboard.dart';
 
 class TuningUpdateDialog extends HookConsumerWidget {
   final Tuning tuning;
@@ -18,6 +19,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final nameController = useTextEditingController(text: tuning.name);
     final stringsController = useTextEditingController(text: tuning.strings);
+    final stringsFocusNode = useFocusNode();
     final isSaving = useState(false);
     final selectedTagIds = useState<List<int>>([]);
     final stringsErrorMessage = useState<String?>(null);
@@ -97,6 +99,9 @@ class TuningUpdateDialog extends HookConsumerWidget {
             const Gap(8),
             TextField(
               controller: stringsController,
+              focusNode: stringsFocusNode,
+              readOnly: true,
+              showCursor: true,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(
                   ValidationConstants.maxTuningLength,
@@ -146,6 +151,21 @@ class TuningUpdateDialog extends HookConsumerWidget {
                   vertical: 14,
                 ),
               ),
+              onTap: () {
+                stringsFocusNode.requestFocus();
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.transparent,
+                  builder: (BuildContext context) {
+                    return TuningKeyboard(
+                      controller: stringsController,
+                      focusNode: stringsFocusNode,
+                      theme: theme,
+                      l10n: l10n,
+                    );
+                  },
+                );
+              },
             ),
             const Gap(24),
             Text(
