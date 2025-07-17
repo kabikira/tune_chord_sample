@@ -20,8 +20,20 @@ class TuningUpdateDialog extends HookConsumerWidget {
     final stringsController = useTextEditingController(text: tuning.strings);
     final isSaving = useState(false);
     final selectedTagIds = useState<List<int>>([]);
+    final stringsErrorMessage = useState<String?>(null);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+
+    // フォームバリデーション
+    void validateForm() {
+      final strings = stringsController.text.trim();
+      
+      // 弦のチューニングバリデーション
+      final stringValidation = ValidationConstants.validateTuningString(strings);
+      stringsErrorMessage.value = stringValidation != null 
+          ? ValidationConstants.getErrorMessage(stringValidation, l10n)
+          : null;
+    }
 
     // タグ一覧を取得
     final tagsAsync = ref.watch(tagsProvider);
@@ -41,6 +53,17 @@ class TuningUpdateDialog extends HookConsumerWidget {
 
       loadExistingTags();
       return null;
+    }, []);
+
+    // コントローラーのリスナー設定
+    useEffect(() {
+      void stringsListener() => validateForm();
+      
+      stringsController.addListener(stringsListener);
+      
+      return () {
+        stringsController.removeListener(stringsListener);
+      };
     }, []);
 
     return AlertDialog(
@@ -93,9 +116,30 @@ class TuningUpdateDialog extends HookConsumerWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide(
-                    color: theme.colorScheme.primary,
+                    color: stringsErrorMessage.value != null 
+                        ? theme.colorScheme.error 
+                        : theme.colorScheme.primary,
                     width: 2,
                   ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                errorText: stringsErrorMessage.value,
+                errorStyle: TextStyle(
+                  color: theme.colorScheme.error,
+                  fontSize: 12,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -249,7 +293,7 @@ class TuningUpdateDialog extends HookConsumerWidget {
                     // バリデーション強化
                     final stringValidation = ValidationConstants.validateTuningString(strings);
                     if (stringValidation != null) {
-                      ValidationConstants.showValidationError(context, theme, stringValidation, l10n);
+                      stringsErrorMessage.value = ValidationConstants.getErrorMessage(stringValidation, l10n);
                       return;
                     }
                     

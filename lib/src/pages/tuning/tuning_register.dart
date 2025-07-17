@@ -109,6 +109,7 @@ class TuningRegister extends HookConsumerWidget {
     final isSaving = useState(false);
     final selectedTagIds = useState<List<int>>([]);
     final isFormValid = useState(false);
+    final stringsErrorMessage = useState<String?>(null);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
 
@@ -119,6 +120,9 @@ class TuningRegister extends HookConsumerWidget {
       
       // 弦のチューニングバリデーション
       final stringValidation = ValidationConstants.validateTuningString(strings);
+      stringsErrorMessage.value = stringValidation != null 
+          ? ValidationConstants.getErrorMessage(stringValidation, l10n)
+          : null;
       
       // チューニング名の文字数バリデーション
       final nameValidation = name.length > ValidationConstants.maxTuningLength;
@@ -236,9 +240,30 @@ class TuningRegister extends HookConsumerWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide(
-                    color: theme.colorScheme.primary,
+                    color: stringsErrorMessage.value != null 
+                        ? theme.colorScheme.error 
+                        : theme.colorScheme.primary,
                     width: 2,
                   ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                errorText: stringsErrorMessage.value,
+                errorStyle: TextStyle(
+                  color: theme.colorScheme.error,
+                  fontSize: 12,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -425,7 +450,7 @@ class TuningRegister extends HookConsumerWidget {
                     // バリデーション強化
                     final stringValidation = ValidationConstants.validateTuningString(strings);
                     if (stringValidation != null) {
-                      ValidationConstants.showValidationError(context, theme, stringValidation, l10n);
+                      stringsErrorMessage.value = ValidationConstants.getErrorMessage(stringValidation, l10n);
                       return;
                     }
                     
