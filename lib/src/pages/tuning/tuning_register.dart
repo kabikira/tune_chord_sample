@@ -115,7 +115,15 @@ class TuningRegister extends HookConsumerWidget {
     // フォームバリデーション
     void validateForm() {
       final strings = stringsController.text.trim();
-      isFormValid.value = strings.isNotEmpty;
+      final name = nameController.text.trim();
+      
+      // 弦のチューニングバリデーション
+      final stringValidation = ValidationConstants.validateTuningString(strings);
+      
+      // チューニング名の文字数バリデーション
+      final nameValidation = name.length > ValidationConstants.maxTuningLength;
+      
+      isFormValid.value = stringValidation == null && !nameValidation;
     }
 
     // コントローラーのリスナー設定
@@ -415,13 +423,22 @@ class TuningRegister extends HookConsumerWidget {
                     final strings = stringsController.text.trim();
                     
                     // バリデーション強化
-                    if (strings.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('弦のチューニングを入力してください'),
-                          backgroundColor: theme.colorScheme.error,
-                        ),
-                      );
+                    final stringValidation = ValidationConstants.validateTuningString(strings);
+                    if (stringValidation != null) {
+                      ValidationConstants.showValidationError(context, theme, stringValidation, l10n);
+                      return;
+                    }
+                    
+                    // チューニング名の文字数バリデーション
+                    if (name.length > ValidationConstants.maxTuningLength) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(l10n.tuningNameTooLong(ValidationConstants.maxTuningLength)),
+                            backgroundColor: theme.colorScheme.error,
+                          ),
+                        );
+                      }
                       return;
                     }
 

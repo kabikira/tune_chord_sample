@@ -440,5 +440,35 @@
   "deleteDataDescription": "This action cannot be undone. All data will be permanently deleted.",
   "@deleteDataDescription": {
     "description": "Data deletion detailed description"
+  },
+  "tuningStringRequired": "Please enter the string tuning",
+  "@tuningStringRequired": {
+    "description": "Error message when tuning string is required"
+  },
+  "tuningStringTooLong": "String tuning is too long (maximum {maxLength} characters)",
+  "@tuningStringTooLong": {
+    "description": "Error message when tuning string exceeds maximum length",
+    "placeholders": {
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "tuningNameTooLong": "Tuning name is too long (maximum {maxLength} characters)",
+  "@tuningNameTooLong": {
+    "description": "Error message when tuning name exceeds maximum length",
+    "placeholders": {
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "tuningStringInvalidSharp": "Invalid sharp (#) pattern detected",
+  "@tuningStringInvalidSharp": {
+    "description": "Error message when invalid sharp pattern is detected"
+  },
+  "tuningStringInvalidNote": "Invalid note pattern detected",
+  "@tuningStringInvalidNote": {
+    "description": "Error message when invalid note pattern is detected"
   }
 }

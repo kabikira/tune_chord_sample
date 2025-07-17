@@ -362,4 +362,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteDataDescription => 'This action cannot be undone. All data will be permanently deleted.';
+
+  @override
+  String get tuningStringRequired => 'Please enter the string tuning';
+
+  @override
+  String tuningStringTooLong(int maxLength) {
+    return 'String tuning is too long (maximum $maxLength characters)';
+  }
+
+  @override
+  String tuningNameTooLong(int maxLength) {
+    return 'Tuning name is too long (maximum $maxLength characters)';
+  }
+
+  @override
+  String get tuningStringInvalidSharp => 'Invalid sharp (#) pattern detected';
+
+  @override
+  String get tuningStringInvalidNote => 'Invalid note pattern detected';
 }

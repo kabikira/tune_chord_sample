@@ -245,7 +245,26 @@ class TuningUpdateDialog extends HookConsumerWidget {
                   : () async {
                     final name = nameController.text.trim();
                     final strings = stringsController.text.trim();
-                    if (strings.isEmpty) return;
+                    
+                    // バリデーション強化
+                    final stringValidation = ValidationConstants.validateTuningString(strings);
+                    if (stringValidation != null) {
+                      ValidationConstants.showValidationError(context, theme, stringValidation, l10n);
+                      return;
+                    }
+                    
+                    // チューニング名の文字数バリデーション
+                    if (name.length > ValidationConstants.maxTuningLength) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(l10n.tuningNameTooLong(ValidationConstants.maxTuningLength)),
+                            backgroundColor: theme.colorScheme.error,
+                          ),
+                        );
+                      }
+                      return;
+                    }
 
                     isSaving.value = true;
                     await ref

@@ -426,5 +426,35 @@
   "deleteDataDescription": "この操作は取り消せません。すべてのデータが完全に削除されます。",
   "@deleteDataDescription": {
     "description": "データ削除の詳細説明"
+  },
+  "tuningStringRequired": "弦のチューニングを入力してください",
+  "@tuningStringRequired": {
+    "description": "弦のチューニングが必須の場合のエラーメッセージ"
+  },
+  "tuningStringTooLong": "弦のチューニングが長すぎます（最大{maxLength}文字）",
+  "@tuningStringTooLong": {
+    "description": "弦のチューニングが最大長を超えた場合のエラーメッセージ",
+    "placeholders": {
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "tuningNameTooLong": "チューニング名が長すぎます（最大{maxLength}文字）",
+  "@tuningNameTooLong": {
+    "description": "チューニング名が最大長を超えた場合のエラーメッセージ",
+    "placeholders": {
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "tuningStringInvalidSharp": "無効な#（シャープ）パターンが検出されました",
+  "@tuningStringInvalidSharp": {
+    "description": "無効な#パターンが検出された場合のエラーメッセージ"
+  },
+  "tuningStringInvalidNote": "無効な音名パターンが検出されました",
+  "@tuningStringInvalidNote": {
+    "description": "無効な音名パターンが検出された場合のエラーメッセージ"
   }
 }
