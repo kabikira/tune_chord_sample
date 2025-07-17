@@ -5,6 +5,35 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
+/// チューニング文字列をシャープ記号を考慮して解析する関数
+List<String> _parseStringNames(String strings) {
+  // コンマ区切りの場合はそのまま分割
+  if (strings.contains(',')) {
+    return strings.split(',');
+  }
+  
+  // シャープ記号を考慮して解析
+  final result = <String>[];
+  int i = 0;
+  
+  while (i < strings.length) {
+    final char = strings[i];
+    
+    // 次の文字がシャープ記号かチェック
+    if (i + 1 < strings.length && strings[i + 1] == '#') {
+      // シャープ記号を含む音名として結合
+      result.add('$char#');
+      i += 2; // 2文字分進める
+    } else {
+      // 通常の音名
+      result.add(char);
+      i += 1;
+    }
+  }
+  
+  return result;
+}
+
 class TuningDisplayWidget extends StatelessWidget {
   final AsyncValue<Tuning> tuningAsync;
   final ValueNotifier<List<int>> fretPositions;
@@ -22,10 +51,7 @@ class TuningDisplayWidget extends StatelessWidget {
 
     return tuningAsync.when(
       data: (tuning) {
-        final stringNames =
-            tuning.strings.contains(',')
-                ? tuning.strings.split(',')
-                : tuning.strings.split('');
+        final stringNames = _parseStringNames(tuning.strings);
         return Row(
           children: List.generate(stringCount, (stringIndex) {
             final reversedIndex = stringCount - 1 - stringIndex;
