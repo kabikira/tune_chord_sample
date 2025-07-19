@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ValidationConstants {
   static const int maxTuningLength = 32;
+  static const int maxTuningStringLength = 6;  // シャープを含めず6文字以内
   static const int maxTagLength = 32;
   
   static String? validateTuningString(String value) {
@@ -12,8 +13,9 @@ class ValidationConstants {
       return 'tuningStringRequired';
     }
     
-    // 文字数制限チェック（1文字以上）
-    if (trimmed.length > maxTuningLength) {
+    // 文字数制限チェック（シャープを含めず6文字以内）
+    final lengthWithoutSharps = trimmed.replaceAll('#', '').length;
+    if (lengthWithoutSharps > maxTuningStringLength) {
       return 'tuningStringTooLong';
     }
     
@@ -46,7 +48,7 @@ class ValidationConstants {
       case 'tuningStringRequired':
         return l10n.tuningStringRequired;
       case 'tuningStringTooLong':
-        return l10n.tuningStringTooLong(maxTuningLength);
+        return l10n.tuningStringTooLong(maxTuningStringLength);
       case 'tuningStringInvalidSharp':
         return l10n.tuningStringInvalidSharp;
       case 'tuningStringInvalidNote':

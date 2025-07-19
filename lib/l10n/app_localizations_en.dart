@@ -368,7 +368,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String tuningStringTooLong(int maxLength) {
-    return 'String tuning is too long (maximum $maxLength characters)';
+    return 'String tuning is too long (maximum $maxLength characters excluding #)';
   }
 
   @override

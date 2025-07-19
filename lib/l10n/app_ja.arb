@@ -431,7 +431,7 @@
   "@tuningStringRequired": {
     "description": "弦のチューニングが必須の場合のエラーメッセージ"
   },
-  "tuningStringTooLong": "弦のチューニングが長すぎます（最大{maxLength}文字）",
+  "tuningStringTooLong": "弦のチューニングが長すぎます（#を除いて最大{maxLength}文字）",
   "@tuningStringTooLong": {
     "description": "弦のチューニングが最大長を超えた場合のエラーメッセージ",
     "placeholders": {

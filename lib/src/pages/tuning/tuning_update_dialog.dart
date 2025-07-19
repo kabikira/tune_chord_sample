@@ -104,10 +104,10 @@ class TuningUpdateDialog extends HookConsumerWidget {
               showCursor: true,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(
-                  ValidationConstants.maxTuningLength,
+                  ValidationConstants.maxTuningStringLength * 2, // シャープを考慮した余裕を持たせる
                 ),
               ],
-              maxLength: ValidationConstants.maxTuningLength,
+              maxLength: ValidationConstants.maxTuningStringLength * 2, // シャープを考慮した余裕を持たせる
               decoration: InputDecoration(
                 hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,

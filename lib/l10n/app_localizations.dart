@@ -770,7 +770,7 @@ abstract class AppLocalizations {
   /// Error message when tuning string exceeds maximum length
   ///
   /// In en, this message translates to:
-  /// **'String tuning is too long (maximum {maxLength} characters)'**
+  /// **'String tuning is too long (maximum {maxLength} characters excluding #)'**
   String tuningStringTooLong(int maxLength);
 
   /// Error message when tuning name exceeds maximum length

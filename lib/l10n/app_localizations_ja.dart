@@ -368,7 +368,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String tuningStringTooLong(int maxLength) {
-    return '弦のチューニングが長すぎます（最大$maxLength文字）';
+    return '弦のチューニングが長すぎます（#を除いて最大$maxLength文字）';
   }
 
   @override

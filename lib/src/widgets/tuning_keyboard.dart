@@ -19,8 +19,10 @@ class TuningKeyboard extends HookWidget {
 
   void insertText(String text) {
     final currentText = controller.text;
-    if (currentText.length + text.length >
-        ValidationConstants.maxTuningLength) {
+    final currentLengthWithoutSharps = currentText.replaceAll('#', '').length;
+    final textLengthWithoutSharps = text.replaceAll('#', '').length;
+    if (currentLengthWithoutSharps + textLengthWithoutSharps >
+        ValidationConstants.maxTuningStringLength) {
       return;
     }
     final newText = currentText + text;

@@ -445,7 +445,7 @@
   "@tuningStringRequired": {
     "description": "Error message when tuning string is required"
   },
-  "tuningStringTooLong": "String tuning is too long (maximum {maxLength} characters)",
+  "tuningStringTooLong": "String tuning is too long (maximum {maxLength} characters excluding #)",
   "@tuningStringTooLong": {
     "description": "Error message when tuning string exceeds maximum length",
     "placeholders": {
