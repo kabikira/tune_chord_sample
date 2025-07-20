@@ -6,97 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:tune_chord_sample/src/config/validation_constants.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
-
-class TuningKeyboard extends HookWidget {
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final ThemeData theme;
-  final AppLocalizations l10n;
-
-  const TuningKeyboard({
-    required this.controller,
-    required this.focusNode,
-    required this.theme,
-    required this.l10n,
-    super.key,
-  });
-
-  void insertText(String text) {
-    final currentText = controller.text;
-    if (currentText.length + text.length >
-        ValidationConstants.maxTuningLength) {
-      return;
-    }
-    final newText = currentText + text;
-    controller.text = newText;
-    controller.selection = TextSelection.fromPosition(
-      TextPosition(offset: newText.length),
-    );
-  }
-
-  void deleteText() {
-    final currentText = controller.text;
-    if (currentText.isNotEmpty) {
-      final newText = currentText.substring(0, currentText.length - 1);
-      controller.text = newText;
-      controller.selection = TextSelection.fromPosition(
-        TextPosition(offset: newText.length),
-      );
-    }
-  }
-
-  Widget buildKey(String label, {VoidCallback? onTap}) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap ?? () => insertText(label),
-        child: Container(
-          margin: const EdgeInsets.all(4),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surfaceContainer.withValues(alpha: 0.3),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Center(
-            child: Text(
-              label,
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: theme.colorScheme.onSurface,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(children: [buildKey("A"), buildKey("B"), buildKey("C")]),
-          Row(children: [buildKey("D"), buildKey("E"), buildKey("F")]),
-          Row(children: [buildKey("G"), buildKey("#"), buildKey("")]),
-          Row(
-            children: [
-              buildKey("⌫", onTap: deleteText),
-              buildKey(" "),
-              buildKey(
-                l10n.complete,
-                onTap: () {
-                  focusNode.unfocus();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+import 'package:tune_chord_sample/src/widgets/tuning_keyboard.dart';
 
 class TuningRegister extends HookConsumerWidget {
   const TuningRegister({super.key});
@@ -109,13 +19,25 @@ class TuningRegister extends HookConsumerWidget {
     final isSaving = useState(false);
     final selectedTagIds = useState<List<int>>([]);
     final isFormValid = useState(false);
+    final stringsErrorMessage = useState<String?>(null);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
 
     // フォームバリデーション
     void validateForm() {
       final strings = stringsController.text.trim();
-      isFormValid.value = strings.isNotEmpty;
+      final name = nameController.text.trim();
+      
+      // 弦のチューニングバリデーション
+      final stringValidation = ValidationConstants.validateTuningString(strings);
+      stringsErrorMessage.value = stringValidation != null 
+          ? ValidationConstants.getErrorMessage(stringValidation, l10n)
+          : null;
+      
+      // チューニング名の文字数バリデーション
+      final nameValidation = name.length > ValidationConstants.maxTuningLength;
+      
+      isFormValid.value = stringValidation == null && !nameValidation;
     }
 
     // コントローラーのリスナー設定
@@ -211,10 +133,10 @@ class TuningRegister extends HookConsumerWidget {
               showCursor: true,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(
-                  ValidationConstants.maxTuningLength,
+                  ValidationConstants.maxTuningStringLength * 2, // シャープを考慮した余裕を持たせる
                 ),
               ],
-              maxLength: ValidationConstants.maxTuningLength,
+              maxLength: ValidationConstants.maxTuningStringLength * 2, // シャープを考慮した余裕を持たせる
               decoration: InputDecoration(
                 hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,
@@ -228,9 +150,30 @@ class TuningRegister extends HookConsumerWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide(
-                    color: theme.colorScheme.primary,
+                    color: stringsErrorMessage.value != null 
+                        ? theme.colorScheme.error 
+                        : theme.colorScheme.primary,
                     width: 2,
                   ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                errorText: stringsErrorMessage.value,
+                errorStyle: TextStyle(
+                  color: theme.colorScheme.error,
+                  fontSize: 12,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -415,13 +358,22 @@ class TuningRegister extends HookConsumerWidget {
                     final strings = stringsController.text.trim();
                     
                     // バリデーション強化
-                    if (strings.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('弦のチューニングを入力してください'),
-                          backgroundColor: theme.colorScheme.error,
-                        ),
-                      );
+                    final stringValidation = ValidationConstants.validateTuningString(strings);
+                    if (stringValidation != null) {
+                      stringsErrorMessage.value = ValidationConstants.getErrorMessage(stringValidation, l10n);
+                      return;
+                    }
+                    
+                    // チューニング名の文字数バリデーション
+                    if (name.length > ValidationConstants.maxTuningLength) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(l10n.tuningNameTooLong(ValidationConstants.maxTuningLength)),
+                            backgroundColor: theme.colorScheme.error,
+                          ),
+                        );
+                      }
                       return;
                     }
 

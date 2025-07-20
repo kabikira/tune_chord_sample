@@ -54,8 +54,8 @@ class TuningDeleteDialog extends HookConsumerWidget {
                 Expanded(
                   child: Text(
                     l10n.deleteConfirmationMessage(
-                      tuning.name,
-                    ), // 「{name}」を削除しますか？
+                      tuning.strings,
+                    ), // 「{tuning}」を削除しますか？
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),

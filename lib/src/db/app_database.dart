@@ -39,6 +39,8 @@ class AppDatabase extends _$AppDatabase {
   // ---------- ChordForms ----------
   Stream<List<ChordForm>> watchChordForms() => select(chordForms).watch();
   Future<List<ChordForm>> getAllChordForms() => select(chordForms).get();
+  Future<ChordForm> getChordFormById(int id) =>
+      (select(chordForms)..where((t) => t.id.equals(id))).getSingle();
   Future<int> addChordForm(ChordFormsCompanion form) =>
       into(chordForms).insert(form);
   Future<bool> updateChordForm(ChordForm form) => update(chordForms).replace(form);

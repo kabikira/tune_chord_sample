@@ -50,8 +50,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get deleteConfirmation => '削除確認';
 
   @override
-  String deleteConfirmationMessage(String name) {
-    return '「$name」を削除しますか？';
+  String deleteConfirmationMessage(String tuning) {
+    return '「$tuning」を削除しますか？';
   }
 
   @override
@@ -362,4 +362,23 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get deleteDataDescription => 'この操作は取り消せません。すべてのデータが完全に削除されます。';
+
+  @override
+  String get tuningStringRequired => '弦のチューニングを入力してください';
+
+  @override
+  String tuningStringTooLong(int maxLength) {
+    return '弦のチューニングが長すぎます（#を除いて最大$maxLength文字）';
+  }
+
+  @override
+  String tuningNameTooLong(int maxLength) {
+    return 'チューニング名が長すぎます（最大$maxLength文字）';
+  }
+
+  @override
+  String get tuningStringInvalidSharp => '無効な#（シャープ）パターンが検出されました';
+
+  @override
+  String get tuningStringInvalidNote => '無効な音名パターンが検出されました';
 }

@@ -24,7 +24,7 @@ class ChordDiagramWidget extends StatelessWidget {
   }
 
   Widget _buildSimpleChordDiagram(BuildContext context) {
-    final positions = codeForm.fretPositions.split('');
+    final positions = codeForm.fretPositions.split('').reversed.toList();
 
     return Container(
       height: 120,
@@ -60,7 +60,7 @@ class ChordDiagramWidget extends StatelessWidget {
 
   Widget _buildEnhancedChordDiagram(BuildContext context) {
     final theme = Theme.of(context);
-    final positions = codeForm.fretPositions.split('');
+    final positions = codeForm.fretPositions.split('').reversed.toList();
 
     return Container(
       height: 160,

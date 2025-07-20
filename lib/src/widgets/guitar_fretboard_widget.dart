@@ -5,6 +5,35 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 
+/// チューニング文字列をシャープ記号を考慮して解析する関数
+List<String> _parseStringNames(String strings) {
+  // コンマ区切りの場合はそのまま分割
+  if (strings.contains(',')) {
+    return strings.split(',');
+  }
+  
+  // シャープ記号を考慮して解析
+  final result = <String>[];
+  int i = 0;
+  
+  while (i < strings.length) {
+    final char = strings[i];
+    
+    // 次の文字がシャープ記号かチェック
+    if (i + 1 < strings.length && strings[i + 1] == '#') {
+      // シャープ記号を含む音名として結合
+      result.add('$char#');
+      i += 2; // 2文字分進める
+    } else {
+      // 通常の音名
+      result.add(char);
+      i += 1;
+    }
+  }
+  
+  return result;
+}
+
 class TuningDisplayWidget extends StatelessWidget {
   final AsyncValue<Tuning> tuningAsync;
   final ValueNotifier<List<int>> fretPositions;
@@ -22,10 +51,7 @@ class TuningDisplayWidget extends StatelessWidget {
 
     return tuningAsync.when(
       data: (tuning) {
-        final stringNames =
-            tuning.strings.contains(',')
-                ? tuning.strings.split(',')
-                : tuning.strings.split('');
+        final stringNames = _parseStringNames(tuning.strings);
         return Row(
           children: List.generate(stringCount, (stringIndex) {
             final reversedIndex = stringCount - 1 - stringIndex;
@@ -48,8 +74,8 @@ class TuningDisplayWidget extends StatelessWidget {
                     child: Text(
                       isStringMuted
                           ? 'X'
-                          : (reversedIndex < stringNames.length
-                              ? stringNames[reversedIndex]
+                          : (stringIndex < stringNames.length
+                              ? stringNames[stringIndex]
                               : ''),
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
@@ -199,7 +225,7 @@ class StringWidget extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: () => _handleTap(),
-        onLongPress: currentFret == 0 ? () => _handleLongPress() : null,
+        onLongPress: () => _handleLongPress(),
         child: Container(
           height: 48,
           decoration: BoxDecoration(
@@ -300,10 +326,12 @@ class StringWidget extends StatelessWidget {
 
   void _handleLongPress() {
     const stringCount = 6;
+    final position = fretPositions.value[stringIndex];
+    
     final newPositions = [
       for (int i = 0; i < stringCount; i++)
         if (i == stringIndex)
-          fretPositions.value[i] == -1 ? 0 : -1
+          position == -1 ? 0 : -1  // ミュート状態なら解除、そうでなければミュート
         else
           fretPositions.value[i],
     ];
@@ -481,7 +509,7 @@ class ChordCompositionWidget extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                fretPositions.value
+                fretPositions.value.reversed
                     .map((p) => p == -1 ? 'X' : p.toString())
                     .join(','),
                 style: theme.textTheme.titleMedium?.copyWith(

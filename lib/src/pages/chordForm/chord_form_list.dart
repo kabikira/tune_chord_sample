@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/pages/chordForm/chord_form_delete_dialog.dart';
 import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:tune_chord_sample/src/pages/chordForm/chord_form_providers.dart';
 import 'package:intl/intl.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
@@ -25,6 +26,7 @@ class ChordFormList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chordFormAsync = ref.watch(chordFormNotifierProvider);
+    final tuningAsync = ref.watch(singleTuningProvider(tuningId));
     final viewMode = ref.watch(viewModeProvider);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
@@ -32,7 +34,11 @@ class ChordFormList extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
       appBar: AppBar(
-        title: const Text('コードフォーム一覧'),
+        title: tuningAsync.when(
+          data: (tuning) => Text('${tuning.strings} - ${l10n.chordFormList}'),
+          loading: () => Text(l10n.chordFormList),
+          error: (_, __) => Text(l10n.chordFormList),
+        ),
         elevation: 0,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -73,7 +79,9 @@ class ChordFormList extends HookConsumerWidget {
           Expanded(
             child: chordFormAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Center(child: Text(l10n.errorOccurred(error.toString()))),
+              error:
+                  (error, _) =>
+                      Center(child: Text(l10n.errorOccurred(error.toString()))),
               data: (chordForms) {
                 // チューニングIDに基づいてコードフォームをフィルタリング
                 final filteredChordForms =
@@ -231,7 +239,8 @@ class ChordFormList extends HookConsumerWidget {
                           showDialog(
                             context: context,
                             builder:
-                                (_) => ChordFormDeleteDialog(chordForm: chordForm),
+                                (_) =>
+                                    ChordFormDeleteDialog(chordForm: chordForm),
                           );
                         },
                       ),
@@ -343,7 +352,8 @@ class ChordFormList extends HookConsumerWidget {
                           showDialog(
                             context: context,
                             builder:
-                                (_) => ChordFormDeleteDialog(chordForm: chordForm),
+                                (_) =>
+                                    ChordFormDeleteDialog(chordForm: chordForm),
                           );
                         },
                       ),

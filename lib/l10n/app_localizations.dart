@@ -176,8 +176,8 @@ abstract class AppLocalizations {
   /// No description provided for @deleteConfirmationMessage.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to delete \"{name}\"?'**
-  String deleteConfirmationMessage(String name);
+  /// **'Are you sure you want to delete \"{tuning}\"?'**
+  String deleteConfirmationMessage(String tuning);
 
   /// No description provided for @deleteWarningMessage.
   ///
@@ -760,6 +760,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This action cannot be undone. All data will be permanently deleted.'**
   String get deleteDataDescription;
+
+  /// Error message when tuning string is required
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the string tuning'**
+  String get tuningStringRequired;
+
+  /// Error message when tuning string exceeds maximum length
+  ///
+  /// In en, this message translates to:
+  /// **'String tuning is too long (maximum {maxLength} characters excluding #)'**
+  String tuningStringTooLong(int maxLength);
+
+  /// Error message when tuning name exceeds maximum length
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning name is too long (maximum {maxLength} characters)'**
+  String tuningNameTooLong(int maxLength);
+
+  /// Error message when invalid sharp pattern is detected
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid sharp (#) pattern detected'**
+  String get tuningStringInvalidSharp;
+
+  /// Error message when invalid note pattern is detected
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid note pattern detected'**
+  String get tuningStringInvalidNote;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

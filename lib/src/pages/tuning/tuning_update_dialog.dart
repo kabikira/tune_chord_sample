@@ -8,6 +8,7 @@ import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/services.dart';
 import 'package:tune_chord_sample/src/config/validation_constants.dart';
+import 'package:tune_chord_sample/src/widgets/tuning_keyboard.dart';
 
 class TuningUpdateDialog extends HookConsumerWidget {
   final Tuning tuning;
@@ -18,10 +19,23 @@ class TuningUpdateDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final nameController = useTextEditingController(text: tuning.name);
     final stringsController = useTextEditingController(text: tuning.strings);
+    final stringsFocusNode = useFocusNode();
     final isSaving = useState(false);
     final selectedTagIds = useState<List<int>>([]);
+    final stringsErrorMessage = useState<String?>(null);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+
+    // フォームバリデーション
+    void validateForm() {
+      final strings = stringsController.text.trim();
+      
+      // 弦のチューニングバリデーション
+      final stringValidation = ValidationConstants.validateTuningString(strings);
+      stringsErrorMessage.value = stringValidation != null 
+          ? ValidationConstants.getErrorMessage(stringValidation, l10n)
+          : null;
+    }
 
     // タグ一覧を取得
     final tagsAsync = ref.watch(tagsProvider);
@@ -41,6 +55,17 @@ class TuningUpdateDialog extends HookConsumerWidget {
 
       loadExistingTags();
       return null;
+    }, []);
+
+    // コントローラーのリスナー設定
+    useEffect(() {
+      void stringsListener() => validateForm();
+      
+      stringsController.addListener(stringsListener);
+      
+      return () {
+        stringsController.removeListener(stringsListener);
+      };
     }, []);
 
     return AlertDialog(
@@ -74,12 +99,15 @@ class TuningUpdateDialog extends HookConsumerWidget {
             const Gap(8),
             TextField(
               controller: stringsController,
+              focusNode: stringsFocusNode,
+              readOnly: true,
+              showCursor: true,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(
-                  ValidationConstants.maxTuningLength,
+                  ValidationConstants.maxTuningStringLength * 2, // シャープを考慮した余裕を持たせる
                 ),
               ],
-              maxLength: ValidationConstants.maxTuningLength,
+              maxLength: ValidationConstants.maxTuningStringLength * 2, // シャープを考慮した余裕を持たせる
               decoration: InputDecoration(
                 hintText: l10n.tuningExample, // 例: CGDGCD
                 filled: true,
@@ -93,15 +121,51 @@ class TuningUpdateDialog extends HookConsumerWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide(
-                    color: theme.colorScheme.primary,
+                    color: stringsErrorMessage.value != null 
+                        ? theme.colorScheme.error 
+                        : theme.colorScheme.primary,
                     width: 2,
                   ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
+                ),
+                errorText: stringsErrorMessage.value,
+                errorStyle: TextStyle(
+                  color: theme.colorScheme.error,
+                  fontSize: 12,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 14,
                 ),
               ),
+              onTap: () {
+                stringsFocusNode.requestFocus();
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.transparent,
+                  builder: (BuildContext context) {
+                    return TuningKeyboard(
+                      controller: stringsController,
+                      focusNode: stringsFocusNode,
+                      theme: theme,
+                      l10n: l10n,
+                    );
+                  },
+                );
+              },
             ),
             const Gap(24),
             Text(
@@ -245,7 +309,26 @@ class TuningUpdateDialog extends HookConsumerWidget {
                   : () async {
                     final name = nameController.text.trim();
                     final strings = stringsController.text.trim();
-                    if (strings.isEmpty) return;
+                    
+                    // バリデーション強化
+                    final stringValidation = ValidationConstants.validateTuningString(strings);
+                    if (stringValidation != null) {
+                      stringsErrorMessage.value = ValidationConstants.getErrorMessage(stringValidation, l10n);
+                      return;
+                    }
+                    
+                    // チューニング名の文字数バリデーション
+                    if (name.length > ValidationConstants.maxTuningLength) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(l10n.tuningNameTooLong(ValidationConstants.maxTuningLength)),
+                            backgroundColor: theme.colorScheme.error,
+                          ),
+                        );
+                      }
+                      return;
+                    }
 
                     isSaving.value = true;
                     await ref
