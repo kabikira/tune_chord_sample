@@ -50,8 +50,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get deleteConfirmation => '削除確認';
 
   @override
-  String deleteConfirmationMessage(String name) {
-    return '「$name」を削除しますか？';
+  String deleteConfirmationMessage(String tuning) {
+    return '「$tuning」を削除しますか？';
   }
 
   @override

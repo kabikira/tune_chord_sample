@@ -50,8 +50,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteConfirmation => 'Delete Confirmation';
 
   @override
-  String deleteConfirmationMessage(String name) {
-    return 'Are you sure you want to delete \"$name\"?';
+  String deleteConfirmationMessage(String tuning) {
+    return 'Are you sure you want to delete \"$tuning\"?';
   }
 
   @override

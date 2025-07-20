@@ -176,8 +176,8 @@ abstract class AppLocalizations {
   /// No description provided for @deleteConfirmationMessage.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to delete \"{name}\"?'**
-  String deleteConfirmationMessage(String name);
+  /// **'Are you sure you want to delete \"{tuning}\"?'**
+  String deleteConfirmationMessage(String tuning);
 
   /// No description provided for @deleteWarningMessage.
   ///

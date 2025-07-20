@@ -15,7 +15,7 @@
   "cancel": "キャンセル",
   "complete": "完了",
   "deleteConfirmation": "削除確認",
-  "deleteConfirmationMessage": "「{name}」を削除しますか？",
+  "deleteConfirmationMessage": "「{tuning}」を削除しますか？",
   "deleteWarningMessage": "この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。",
   "delete": "削除",
   "editTuning": "チューニングを編集",

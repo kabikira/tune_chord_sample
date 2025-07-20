@@ -22,10 +22,10 @@
   "cancel": "Cancel",
   "complete": "Complete",
   "deleteConfirmation": "Delete Confirmation",
-  "deleteConfirmationMessage": "Are you sure you want to delete \"{name}\"?",
+  "deleteConfirmationMessage": "Are you sure you want to delete \"{tuning}\"?",
   "@deleteConfirmationMessage": {
     "placeholders": {
-      "name": {
+      "tuning": {
         "type": "String"
       }
     }
