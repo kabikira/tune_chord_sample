@@ -26,11 +26,7 @@ class Splash extends HookWidget {
         decoration: BoxDecoration(
           gradient: AppThemeUtils.createGradientBackground(),
         ),
-        child: const Center(
-          child: SimpleResonanceIcon(
-            size: 80,
-          ),
-        ),
+        child: const Center(child: SimpleResonanceIcon(size: 250)),
       ),
     );
   }

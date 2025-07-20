@@ -12,7 +12,6 @@ import 'package:tune_chord_sample/src/widgets/chord_form_action_buttons.dart';
 import 'package:tune_chord_sample/src/widgets/resonance_icon.dart';
 import 'package:tune_chord_sample/src/db/app_database.dart';
 import 'package:tune_chord_sample/src/config/resonance_colors.dart';
-import 'package:tune_chord_sample/src/config/app_theme.dart';
 
 class WidgetGallery extends HookConsumerWidget {
   const WidgetGallery({super.key});
@@ -80,12 +79,20 @@ class WidgetGallery extends HookConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  
+
                   // コアカラー
                   _buildColorRow('プライマリ', ResonanceColors.primary, 'Primary'),
-                  _buildColorRow('セカンダリ', ResonanceColors.secondary, 'Secondary'),
-                  _buildColorRow('背景', ResonanceColors.background, 'Background'),
-                  
+                  _buildColorRow(
+                    'セカンダリ',
+                    ResonanceColors.secondary,
+                    'Secondary',
+                  ),
+                  _buildColorRow(
+                    '背景',
+                    ResonanceColors.background,
+                    'Background',
+                  ),
+
                   const SizedBox(height: 16),
                   Text(
                     'ギター弦カラー',
@@ -94,15 +101,19 @@ class WidgetGallery extends HookConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  
+
                   // ギター弦カラー
-                  _buildColorRow('High E (1弦)', ResonanceColors.highE, 'Coral Red'),
+                  _buildColorRow(
+                    'High E (1弦)',
+                    ResonanceColors.highE,
+                    'Coral Red',
+                  ),
                   _buildColorRow('B (2弦)', ResonanceColors.b, 'Turquoise'),
                   _buildColorRow('G (3弦)', ResonanceColors.g, 'Sky Blue'),
                   _buildColorRow('D (4弦)', ResonanceColors.d, 'Mint Green'),
                   _buildColorRow('A (5弦)', ResonanceColors.a, 'Yellow'),
                   _buildColorRow('Low E (6弦)', ResonanceColors.lowE, 'Purple'),
-                  
+
                   const SizedBox(height: 16),
                   Text(
                     'セマンティックカラー',
@@ -111,7 +122,7 @@ class WidgetGallery extends HookConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  
+
                   // セマンティックカラー
                   _buildColorRow('エラー', ResonanceColors.error, 'Error'),
                   _buildColorRow('成功', ResonanceColors.success, 'Success'),
@@ -403,10 +414,7 @@ class WidgetGallery extends HookConsumerWidget {
                 ),
                 Text(
                   '$labelEn • #${color.value.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                 ),
               ],
             ),
