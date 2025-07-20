@@ -1,15 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
 import 'package:tune_chord_sample/src/pages/settings/widget_gallery.dart';
+import 'package:tune_chord_sample/src/config/theme_provider.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends ConsumerWidget {
   const Settings({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+    final themeModeAsync = ref.watch(themeModeNotifierProvider);
+    final themeModeNotifier = ref.read(themeModeNotifierProvider.notifier);
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
@@ -59,24 +63,34 @@ class Settings extends StatelessWidget {
             const SizedBox(height: 24),
 
             // 外観設定セクション
-            // _buildSectionHeader(context, l10n.appearanceSettings),
-            // const SizedBox(height: 8),
-            // _buildSettingsCard(
-            //   context,
-            //   children: [
-            //     _buildSettingsItem(
-            //       context,
-            //       icon: Icons.dark_mode,
-            //       title: l10n.darkMode,
-            //       trailing: Switch.adaptive(
-            //         value: false, // 実際の値は状態管理で制御
-            //         onChanged: (value) {
-            //           // ダークモード切り替え処理
-            //         },
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            _buildSectionHeader(context, l10n.appearanceSettings),
+            const SizedBox(height: 8),
+            _buildSettingsCard(
+              context,
+              children: [
+                _buildSettingsItem(
+                  context,
+                  icon: Icons.dark_mode,
+                  title: l10n.darkMode,
+                  trailing: themeModeAsync.when(
+                    loading: () => const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    error: (_, __) => const Icon(Icons.error_outline),
+                    data: (themeMode) => Switch.adaptive(
+                      value: themeMode == ThemeMode.dark || 
+                             (themeMode == ThemeMode.system && 
+                              MediaQuery.of(context).platformBrightness == Brightness.dark),
+                      onChanged: (value) {
+                        themeModeNotifier.toggleDarkMode();
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 24),
 
             // 開発者セクション（デバッグ時のみ表示）

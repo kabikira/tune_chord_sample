@@ -232,8 +232,8 @@ class StringWidget extends StatelessWidget {
             border:
                 isFirstFret
                     ? null
-                    : const Border(
-                      right: BorderSide(color: Color(0xFFDDDDDD), width: 1),
+                    : Border(
+                      right: BorderSide(color: theme.dividerColor, width: 1),
                     ),
           ),
           child: Center(
@@ -244,8 +244,8 @@ class StringWidget extends StatelessWidget {
                   height: stringThickness,
                   color:
                       isMuted
-                          ? Colors.grey.withValues(alpha: 0.3)
-                          : const Color(0xFF666666),
+                          ? theme.disabledColor.withValues(alpha: 0.3)
+                          : theme.disabledColor,
                 ),
                 if (isMuted && currentFret == 0)
                   Container(

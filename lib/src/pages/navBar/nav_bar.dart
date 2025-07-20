@@ -46,10 +46,9 @@ class ScaffoldWithNavBar extends HookWidget {
                 navigationShell.goBranch(index);
               }
             },
-            backgroundColor: Colors.white,
             selectedItemColor: theme.colorScheme.primary,
             unselectedItemColor: theme.colorScheme.onSurface.withValues(
-              alpha: 153,
+              alpha: 0.6,
             ),
             selectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.w600,

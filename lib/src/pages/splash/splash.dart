@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tune_chord_sample/src/widgets/resonance_icon.dart';
+import 'package:tune_chord_sample/src/config/app_theme.dart';
 
 class Splash extends HookWidget {
   const Splash({super.key});
@@ -22,20 +24,11 @@ class Splash extends HookWidget {
       backgroundColor: theme.colorScheme.surface,
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              theme.colorScheme.primary.withValues(alpha: 0.05),
-              theme.colorScheme.surface,
-            ],
-          ),
+          gradient: AppThemeUtils.createGradientBackground(),
         ),
-        child: Center(
-          child: Icon(
-            Icons.music_note,
+        child: const Center(
+          child: SimpleResonanceIcon(
             size: 80,
-            color: theme.colorScheme.primary,
           ),
         ),
       ),
