@@ -1,8 +1,11 @@
 // Flutter imports:
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/config/app_theme.dart';
 import 'package:resonance/src/config/theme_provider.dart';
@@ -29,15 +32,26 @@ class MyApp extends ConsumerWidget {
           body: Center(child: CircularProgressIndicator()),
         ),
       ),
-      error: (error, stack) => MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        home: Scaffold(
-          body: Center(child: Text('Error: $error')),
-        ),
-      ),
+      error: (error, stack) {
+        if (kDebugMode) {
+          debugPrint('App initialization error: $error');
+          debugPrint('Stack trace: $stack');
+        }
+        return MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                final l10n = AppLocalizations.of(context);
+                return Center(child: Text(l10n?.generalError ?? 'An error occurred'));
+              },
+            ),
+          ),
+        );
+      },
       data: (themeMode) => MaterialApp.router(
         routerConfig: router,
         localizationsDelegates: AppLocalizations.localizationsDelegates,

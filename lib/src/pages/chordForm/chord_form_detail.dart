@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
@@ -41,7 +43,7 @@ class ChordFormDetail extends HookConsumerWidget {
       ),
       body: chordFormsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text(l10n.errorMessage(e.toString()))),
+        error: (e, _) => Center(child: Text(l10n.errorMessage)),
         data: (chordForms) {
           // 指定されたchordFormIdに一致するコードフォームを取得
           final chordForm = chordForms.firstWhere(
@@ -102,7 +104,7 @@ class ChordFormDetail extends HookConsumerWidget {
                             ),
                         error:
                             (error, stack) => Center(
-                              child: Text(l10n.errorOccurred(error.toString())),
+                              child: Text(l10n.errorOccurred),
                             ),
                       );
                     },

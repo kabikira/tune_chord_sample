@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
+// Project imports:
 import 'package:resonance/src/log/logger.dart';
 
 class RouterObserver extends NavigatorObserver {

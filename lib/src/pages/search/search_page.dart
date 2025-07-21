@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/search/search_notifier.dart';
@@ -335,7 +337,7 @@ class SearchPage extends HookConsumerWidget {
                             (error, stack) => _buildEmptyState(
                               theme,
                               Icons.error_outline,
-                              l10n.searchError(error.toString()),
+                              l10n.searchError,
                             ),
                       ),
             ),

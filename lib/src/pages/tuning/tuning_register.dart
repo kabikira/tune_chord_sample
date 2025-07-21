@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/config/validation_constants.dart';
 import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
@@ -332,7 +335,12 @@ class TuningRegister extends HookConsumerWidget {
                         }).toList(),
                   ),
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stackTrace) => Text('エラーが発生しました: $error'),
+              error: (error, stackTrace) {
+                if (kDebugMode) {
+                  debugPrint('Tag loading error: $error');
+                }
+                return Text(l10n.generalError);
+              },
             ),
           ],
         ),
@@ -391,10 +399,13 @@ class TuningRegister extends HookConsumerWidget {
                       }
                     } catch (e) {
                       isSaving.value = false;
+                      if (kDebugMode) {
+                        debugPrint('Tuning save error: $e');
+                      }
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('エラーが発生しました: ${e.toString()}'),
+                            content: Text(l10n.generalError),
                             backgroundColor: theme.colorScheme.error,
                           ),
                         );

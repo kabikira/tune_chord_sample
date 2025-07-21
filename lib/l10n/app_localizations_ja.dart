@@ -15,9 +15,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tuningManagement => 'チューニング管理';
 
   @override
-  String errorMessage(String error) {
-    return 'エラー: $error';
-  }
+  String get generalError => 'エラーが発生しました。しばらく待ってから再度お試しください。';
+
+  @override
+  String get errorMessage => 'エラーが発生しました';
 
   @override
   String get noTuningsRegistered => '登録されたチューニングがありません';
@@ -197,9 +198,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get confirm => '確認';
 
   @override
-  String errorOccurred(String error) {
-    return 'エラー: $error';
-  }
+  String get errorOccurred => 'エラーが発生しました';
 
   @override
   String get tuningNotFound => 'チューニングが見つかりません';
@@ -300,9 +299,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get noName => '名称なし';
 
   @override
-  String searchError(String error) {
-    return '検索中にエラーが発生しました: $error';
-  }
+  String get searchError => '検索中にエラーが発生しました';
 
   @override
   String get settings => '設定';

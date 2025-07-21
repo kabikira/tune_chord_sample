@@ -1,5 +1,7 @@
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/search/search_page.dart';
 

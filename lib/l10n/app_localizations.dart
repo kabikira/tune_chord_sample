@@ -107,11 +107,17 @@ abstract class AppLocalizations {
   /// **'Tuning Management'**
   String get tuningManagement;
 
+  /// No description provided for @generalError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred. Please try again later.'**
+  String get generalError;
+
   /// No description provided for @errorMessage.
   ///
   /// In en, this message translates to:
-  /// **'Error: {error}'**
-  String errorMessage(String error);
+  /// **'An error occurred'**
+  String get errorMessage;
 
   /// No description provided for @noTuningsRegistered.
   ///
@@ -458,8 +464,8 @@ abstract class AppLocalizations {
   /// Generic error message
   ///
   /// In en, this message translates to:
-  /// **'Error: {error}'**
-  String errorOccurred(String error);
+  /// **'An error occurred'**
+  String get errorOccurred;
 
   /// Error message when tuning is not found
   ///
@@ -644,8 +650,8 @@ abstract class AppLocalizations {
   /// Error message during search operation
   ///
   /// In en, this message translates to:
-  /// **'An error occurred during search: {error}'**
-  String searchError(String error);
+  /// **'An error occurred during search'**
+  String get searchError;
 
   /// Settings screen title
   ///
