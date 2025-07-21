@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_delete_dialog.dart';
@@ -12,6 +11,7 @@ import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
 import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
 import 'package:resonance/src/widgets/dialog_action_buttons.dart';
+import 'package:resonance/src/utils/date_utils.dart' as utils;
 import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
 
 // TODO:あとで分ける
@@ -260,7 +260,7 @@ class ChordFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.registrationDate}: ${_formatDate(chordForm.createdAt)}',
+                      '${l10n.registrationDate}: ${utils.DateUtils.formatDate(chordForm.createdAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -275,7 +275,7 @@ class ChordFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.updateDate}: ${_formatDate(chordForm.updatedAt)}',
+                      '${l10n.updateDate}: ${utils.DateUtils.formatDate(chordForm.updatedAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -374,7 +374,7 @@ class ChordFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.registrationDate}: ${_formatDate(chordForm.createdAt)}',
+                      '${l10n.registrationDate}: ${utils.DateUtils.formatDate(chordForm.createdAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -389,7 +389,7 @@ class ChordFormList extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${l10n.updateDate}: ${_formatDate(chordForm.updatedAt)}',
+                      '${l10n.updateDate}: ${utils.DateUtils.formatDate(chordForm.updatedAt)}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
@@ -443,9 +443,4 @@ class ChordFormList extends HookConsumerWidget {
     );
   }
 
-  // 日付をフォーマットするヘルパーメソッド
-  String _formatDate(DateTime date) {
-    final formatter = DateFormat('yyyy/MM/dd');
-    return formatter.format(date);
-  }
 }

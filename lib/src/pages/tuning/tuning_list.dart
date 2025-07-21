@@ -10,6 +10,7 @@ import 'package:resonance/src/pages/tuning/tuning_delete_dialog.dart';
 import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
 import 'package:resonance/src/pages/tuning/tuning_register.dart';
 import 'package:resonance/src/pages/tuning/tuning_update_dialog.dart';
+import 'package:resonance/src/utils/date_utils.dart' as utils;
 
 class TuningList extends HookConsumerWidget {
   const TuningList({super.key});
@@ -132,7 +133,7 @@ class TuningList extends HookConsumerWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    '${l10n.registrationDate}: ${_formatDate(tuning.createdAt)}', // 登録日
+                                    '${l10n.registrationDate}: ${utils.DateUtils.formatDate(tuning.createdAt)}', // 登録日
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: theme.colorScheme.onSurface
                                           .withValues(alpha: 0.5),
@@ -147,7 +148,7 @@ class TuningList extends HookConsumerWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    '${l10n.updateDate}: ${_formatDate(tuning.updatedAt)}', // 更新日
+                                    '${l10n.updateDate}: ${utils.DateUtils.formatDate(tuning.updatedAt)}', // 更新日
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       color: theme.colorScheme.onSurface
                                           .withValues(alpha: 0.5),
@@ -178,11 +179,6 @@ class TuningList extends HookConsumerWidget {
     );
   }
 
-  // 日付をフォーマットするヘルパーメソッド
-  String _formatDate(DateTime date) {
-    final formatter = DateFormat('yyyy/MM/dd');
-    return formatter.format(date);
-  }
 
   Widget _buildInteractionButtons(BuildContext context, dynamic tuning) {
     return Row(
