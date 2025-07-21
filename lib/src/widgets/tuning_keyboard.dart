@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:tune_chord_sample/src/config/validation_constants.dart';
+
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:tune_chord_sample/src/config/validation_constants.dart';
 
 class TuningKeyboard extends HookWidget {
   final TextEditingController controller;

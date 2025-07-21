@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/pages/settings/widget_gallery.dart';
 import 'package:tune_chord_sample/src/config/theme_provider.dart';
+import 'package:tune_chord_sample/src/pages/settings/widget_gallery.dart';
 
 class Settings extends ConsumerWidget {
   const Settings({super.key});

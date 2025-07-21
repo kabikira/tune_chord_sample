@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter/services.dart';
-import 'package:tune_chord_sample/src/config/validation_constants.dart';
+
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:tune_chord_sample/src/config/validation_constants.dart';
 import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
 import 'package:tune_chord_sample/src/widgets/tuning_keyboard.dart';
 

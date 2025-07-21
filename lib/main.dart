@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/router/router.dart';
 import 'package:tune_chord_sample/src/config/app_theme.dart';
 import 'package:tune_chord_sample/src/config/theme_provider.dart';
+import 'package:tune_chord_sample/src/router/router.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));

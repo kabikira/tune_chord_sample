@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:tune_chord_sample/src/config/resonance_colors.dart';
 
 /// アプリケーションのテーマを管理するクラス
