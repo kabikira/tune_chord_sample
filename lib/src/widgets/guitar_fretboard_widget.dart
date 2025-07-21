@@ -9,6 +9,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:resonance/src/config/resonance_colors.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 
@@ -273,7 +276,7 @@ class StringWidget extends StatelessWidget {
                       child: Text(
                         'X',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ResonanceColors.offWhite,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -299,7 +302,7 @@ class StringWidget extends StatelessWidget {
                       child: Text(
                         currentFret.toString(),
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: ResonanceColors.offWhite,
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
