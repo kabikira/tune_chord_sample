@@ -378,4 +378,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get tuningStringInvalidNote => '無効な音名パターンが検出されました';
+
+  @override
+  String get crashlyticsTest => 'Crashlyticsテスト';
+
+  @override
+  String get crashlyticsTestDescription => 'テスト用のクラッシュを発生させて、Firebase Crashlyticsが正常に動作しているかを確認できます。';
+
+  @override
+  String get testCrash => 'テストクラッシュを実行';
+
+  @override
+  String get crashlyticsTestTitle => 'Crashlyticsテスト';
+
+  @override
+  String get crashlyticsTestWarning => 'この操作によりアプリがクラッシュします。Firebase Consoleで確認できます。';
+
+  @override
+  String get proceedWithCrash => 'クラッシュを実行';
 }

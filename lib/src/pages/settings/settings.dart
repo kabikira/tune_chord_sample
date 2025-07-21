@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
@@ -115,6 +116,15 @@ class Settings extends ConsumerWidget {
                           builder: (context) => const WidgetGallery(),
                         ),
                       );
+                    },
+                  ),
+                  _buildDivider(),
+                  _buildSettingsItem(
+                    context,
+                    icon: Icons.bug_report,
+                    title: l10n.crashlyticsTest,
+                    onTap: () {
+                      _showCrashlyticsTestDialog(context);
                     },
                   ),
                 ],
@@ -288,6 +298,126 @@ class Settings extends ConsumerWidget {
             ],
           ),
     );
+  }
+
+  // Crashlyticsテストダイアログを表示
+  void _showCrashlyticsTestDialog(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Icon(Icons.bug_report, color: theme.colorScheme.primary),
+            const SizedBox(width: 8),
+            Text(l10n.crashlyticsTestTitle),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.errorContainer.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: theme.colorScheme.error.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: theme.colorScheme.error,
+                    size: 24,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      l10n.crashlyticsTestWarning,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.crashlyticsTestDescription,
+              style: theme.textTheme.bodyMedium,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              l10n.cancel,
+              style: TextStyle(color: theme.colorScheme.onSurface),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // テストクラッシュを実行
+              _executeCrashlyticsTest();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: theme.colorScheme.error,
+              foregroundColor: theme.colorScheme.onError,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text(l10n.proceedWithCrash),
+          ),
+        ],
+        actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      ),
+    );
+  }
+
+  // Crashlyticsテストを実行（recordError使用）
+  void _executeCrashlyticsTest() async {
+    try {
+      // Crashlyticsを明示的に有効化
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+      
+      // テストクラッシュ前にカスタム情報を記録
+      FirebaseCrashlytics.instance.setUserIdentifier("test-user-crashlytics");
+      FirebaseCrashlytics.instance.setCustomKey("test_crash", "initiated_from_settings");
+      FirebaseCrashlytics.instance.log("User initiated test crash from settings screen");
+      
+      // 意図的にエラーを発生
+      throw Exception('Test crash for Crashlytics verification');
+    } catch (error, stackTrace) {
+      // recordErrorで明示的にCrashlyticsに送信
+      await FirebaseCrashlytics.instance.recordError(
+        error,
+        stackTrace,
+        fatal: true,
+        information: ['Manual test crash from settings screen'],
+      );
+      
+      // デバッグログ出力
+      if (kDebugMode) {
+        print('Crashlytics test error recorded: $error');
+        print('Error sent to Firebase Crashlytics successfully');
+      }
+      
+      // ユーザーにフィードバック（アプリをクラッシュさせる）
+      rethrow;
+    }
   }
 
   // データ削除確認ダイアログを表示

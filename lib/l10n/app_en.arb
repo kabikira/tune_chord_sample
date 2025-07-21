@@ -454,5 +454,29 @@
   "tuningStringInvalidNote": "Invalid note pattern detected",
   "@tuningStringInvalidNote": {
     "description": "Error message when invalid note pattern is detected"
+  },
+  "crashlyticsTest": "Crashlytics Test",
+  "@crashlyticsTest": {
+    "description": "Label for Crashlytics test feature"
+  },
+  "crashlyticsTestDescription": "Generate a test crash to verify Firebase Crashlytics is working properly.",
+  "@crashlyticsTestDescription": {
+    "description": "Description of Crashlytics test feature"
+  },
+  "testCrash": "Execute Test Crash",
+  "@testCrash": {
+    "description": "Text for test crash button"
+  },
+  "crashlyticsTestTitle": "Crashlytics Test",
+  "@crashlyticsTestTitle": {
+    "description": "Title for Crashlytics test dialog"
+  },
+  "crashlyticsTestWarning": "This action will crash the app. You can verify it in Firebase Console.",
+  "@crashlyticsTestWarning": {
+    "description": "Warning message for Crashlytics test"
+  },
+  "proceedWithCrash": "Execute Crash",
+  "@proceedWithCrash": {
+    "description": "Text for proceed with crash button"
   }
 }

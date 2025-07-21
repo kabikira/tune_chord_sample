@@ -378,4 +378,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tuningStringInvalidNote => 'Invalid note pattern detected';
+
+  @override
+  String get crashlyticsTest => 'Crashlytics Test';
+
+  @override
+  String get crashlyticsTestDescription => 'Generate a test crash to verify Firebase Crashlytics is working properly.';
+
+  @override
+  String get testCrash => 'Execute Test Crash';
+
+  @override
+  String get crashlyticsTestTitle => 'Crashlytics Test';
+
+  @override
+  String get crashlyticsTestWarning => 'This action will crash the app. You can verify it in Firebase Console.';
+
+  @override
+  String get proceedWithCrash => 'Execute Crash';
 }

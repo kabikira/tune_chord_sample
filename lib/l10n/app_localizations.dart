@@ -796,6 +796,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid note pattern detected'**
   String get tuningStringInvalidNote;
+
+  /// Label for Crashlytics test feature
+  ///
+  /// In en, this message translates to:
+  /// **'Crashlytics Test'**
+  String get crashlyticsTest;
+
+  /// Description of Crashlytics test feature
+  ///
+  /// In en, this message translates to:
+  /// **'Generate a test crash to verify Firebase Crashlytics is working properly.'**
+  String get crashlyticsTestDescription;
+
+  /// Text for test crash button
+  ///
+  /// In en, this message translates to:
+  /// **'Execute Test Crash'**
+  String get testCrash;
+
+  /// Title for Crashlytics test dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Crashlytics Test'**
+  String get crashlyticsTestTitle;
+
+  /// Warning message for Crashlytics test
+  ///
+  /// In en, this message translates to:
+  /// **'This action will crash the app. You can verify it in Firebase Console.'**
+  String get crashlyticsTestWarning;
+
+  /// Text for proceed with crash button
+  ///
+  /// In en, this message translates to:
+  /// **'Execute Crash'**
+  String get proceedWithCrash;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

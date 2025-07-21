@@ -447,5 +447,29 @@
   "tuningStringInvalidNote": "無効な音名パターンが検出されました",
   "@tuningStringInvalidNote": {
     "description": "無効な音名パターンが検出された場合のエラーメッセージ"
+  },
+  "crashlyticsTest": "Crashlyticsテスト",
+  "@crashlyticsTest": {
+    "description": "Crashlyticsテスト機能のラベル"
+  },
+  "crashlyticsTestDescription": "テスト用のクラッシュを発生させて、Firebase Crashlyticsが正常に動作しているかを確認できます。",
+  "@crashlyticsTestDescription": {
+    "description": "Crashlyticsテスト機能の説明"
+  },
+  "testCrash": "テストクラッシュを実行",
+  "@testCrash": {
+    "description": "テストクラッシュボタンのテキスト"
+  },
+  "crashlyticsTestTitle": "Crashlyticsテスト",
+  "@crashlyticsTestTitle": {
+    "description": "Crashlyticsテストダイアログのタイトル"
+  },
+  "crashlyticsTestWarning": "この操作によりアプリがクラッシュします。Firebase Consoleで確認できます。",
+  "@crashlyticsTestWarning": {
+    "description": "Crashlyticsテストの警告メッセージ"
+  },
+  "proceedWithCrash": "クラッシュを実行",
+  "@proceedWithCrash": {
+    "description": "クラッシュ実行ボタンのテキスト"
   }
 }
