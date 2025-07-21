@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/config/resonance_colors.dart';
 import 'package:resonance/src/db/app_database.dart';
 
 class ChordDiagramWidget extends StatelessWidget {
@@ -68,7 +69,7 @@ class ChordDiagramWidget extends StatelessWidget {
     return Container(
       height: 160,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ResonanceColors.offWhite,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(

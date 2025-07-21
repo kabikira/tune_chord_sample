@@ -19,8 +19,7 @@ class AppTheme {
       primary: ResonanceColors.primary,
       secondary: ResonanceColors.secondary,
       error: ResonanceColors.error,
-      surface: Colors.white,
-      background: const Color(0xFFF2F4F8),
+      surface: ResonanceColors.offWhite,
     );
 
     return ThemeData(
@@ -56,7 +55,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: ResonanceColors.primary,
-          foregroundColor: Colors.white,
+          foregroundColor: ResonanceColors.offWhite,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(
@@ -158,7 +157,7 @@ class AppTheme {
       // Floating Action Button Theme
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: ResonanceColors.accent,
-        foregroundColor: Colors.white,
+        foregroundColor: ResonanceColors.offWhite,
         elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -185,7 +184,7 @@ class AppTheme {
       
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.white,
+        backgroundColor: ResonanceColors.offWhite,
         selectedItemColor: ResonanceColors.primary,
         unselectedItemColor: const Color(0xFF6E6E6E),
         elevation: 8,
@@ -213,9 +212,9 @@ class AppTheme {
       secondary: ResonanceColors.secondary,
       error: ResonanceColors.error,
       surface: ResonanceColors.background,
-      onSurface: Colors.white.withValues(alpha: 0.9),
-      onPrimary: Colors.white,
-      onSecondary: Colors.white,
+      onSurface: ResonanceColors.offWhite.withValues(alpha: 0.9),
+      onPrimary: ResonanceColors.offWhite,
+      onSecondary: ResonanceColors.offWhite,
     );
 
     return ThemeData(
@@ -226,8 +225,8 @@ class AppTheme {
       // Card Theme
       cardTheme: CardTheme(
         elevation: 6,
-        surfaceTintColor: Colors.white.withValues(alpha: 0.08),
-        color: Colors.white.withValues(alpha: 0.08),
+        surfaceTintColor: ResonanceColors.offWhite.withValues(alpha: 0.08),
+        color: ResonanceColors.offWhite.withValues(alpha: 0.08),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
@@ -239,11 +238,11 @@ class AppTheme {
         centerTitle: true,
         elevation: 0,
         backgroundColor: ResonanceColors.background,
-        foregroundColor: Colors.white.withValues(alpha: 0.9),
+        foregroundColor: ResonanceColors.offWhite.withValues(alpha: 0.9),
         titleTextStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.white.withValues(alpha: 0.9),
+          color: ResonanceColors.offWhite.withValues(alpha: 0.9),
         ),
       ),
       
@@ -251,7 +250,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: ResonanceColors.primary,
-          foregroundColor: Colors.white,
+          foregroundColor: ResonanceColors.offWhite,
           elevation: 2,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(
@@ -296,7 +295,7 @@ class AppTheme {
       // Input Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: Colors.white.withValues(alpha: 0.12),
+        fillColor: ResonanceColors.offWhite.withValues(alpha: 0.12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -318,7 +317,7 @@ class AppTheme {
           vertical: 14,
         ),
         hintStyle: TextStyle(
-          color: Colors.white.withValues(alpha: 0.6),
+          color: ResonanceColors.offWhite.withValues(alpha: 0.6),
           fontSize: 15,
         ),
       ),
@@ -328,16 +327,16 @@ class AppTheme {
         titleLarge: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
-          color: Colors.white.withValues(alpha: 0.9),
+          color: ResonanceColors.offWhite.withValues(alpha: 0.9),
         ),
         titleMedium: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
-          color: Colors.white.withValues(alpha: 0.9),
+          color: ResonanceColors.offWhite.withValues(alpha: 0.9),
         ),
-        bodyLarge: TextStyle(fontSize: 16, color: Colors.white.withValues(alpha: 0.9)),
-        bodyMedium: TextStyle(fontSize: 15, color: Colors.white.withValues(alpha: 0.9)),
-        bodySmall: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.7)),
+        bodyLarge: TextStyle(fontSize: 16, color: ResonanceColors.offWhite.withValues(alpha: 0.9)),
+        bodyMedium: TextStyle(fontSize: 15, color: ResonanceColors.offWhite.withValues(alpha: 0.9)),
+        bodySmall: TextStyle(fontSize: 13, color: ResonanceColors.offWhite.withValues(alpha: 0.7)),
       ),
       
       // Icon Theme
@@ -345,7 +344,7 @@ class AppTheme {
       
       // Divider Theme
       dividerTheme: DividerThemeData(
-        color: Colors.white.withValues(alpha: 0.2),
+        color: ResonanceColors.offWhite.withValues(alpha: 0.2),
         thickness: 1,
         space: 1,
       ),
@@ -353,7 +352,7 @@ class AppTheme {
       // Floating Action Button Theme
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: ResonanceColors.accent,
-        foregroundColor: Colors.white,
+        foregroundColor: ResonanceColors.offWhite,
         elevation: 6,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -371,7 +370,7 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: ResonanceColors.secondary.withValues(alpha: 0.2),
         selectedColor: ResonanceColors.secondary,
-        labelStyle: TextStyle(color: Colors.white.withValues(alpha: 0.9)),
+        labelStyle: TextStyle(color: ResonanceColors.offWhite.withValues(alpha: 0.9)),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -382,7 +381,7 @@ class AppTheme {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: ResonanceColors.background.withValues(alpha: 0.95),
         selectedItemColor: ResonanceColors.primary,
-        unselectedItemColor: Colors.white.withValues(alpha: 0.6),
+        unselectedItemColor: ResonanceColors.offWhite.withValues(alpha: 0.6),
         elevation: 8,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
@@ -445,7 +444,7 @@ class AppThemeUtils {
       end: Alignment.bottomCenter,
       colors: [
         (topColor ?? ResonanceColors.primary).withValues(alpha: topOpacity),
-        bottomColor ?? Colors.white,
+        bottomColor ?? ResonanceColors.offWhite,
       ],
     );
   }

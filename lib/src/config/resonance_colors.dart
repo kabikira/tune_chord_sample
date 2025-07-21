@@ -18,6 +18,13 @@ class ResonanceColors {
   /// セカンダリカラー（ターコイズ - B弦）
   static const Color secondary = Color(0xFF4ECDC4);
 
+  // === Surface Colors ===
+  /// オフホワイト（メインサーフェス）- 純白より柔らかい
+  static const Color offWhite = Color(0xFFFEFEFE);
+  
+  /// ウォームホワイト（アクセントサーフェス）- 暖かみのあるホワイト
+  static const Color warmWhite = Color(0xFFFFFBF8);
+
   // === Guitar String Colors ===
   /// High E弦（1弦）- コーラルレッド
   static const Color highE = Color(0xFFFF6B6B);
@@ -78,7 +85,7 @@ class ResonanceColors {
 
   /// カラーパレット全体のリスト（開発・デバッグ用）
   static List<Color> get allColors => [
-    background, primary, secondary, ...allStringColors
+    background, primary, secondary, offWhite, warmWhite, ...allStringColors
   ];
 
   /// カラー名のマッピング（開発・デバッグ用）
@@ -86,6 +93,8 @@ class ResonanceColors {
     'background': background,
     'primary': primary,
     'secondary': secondary,
+    'offWhite': offWhite,
+    'warmWhite': warmWhite,
     'highE': highE,
     'b': b,
     'g': g,
