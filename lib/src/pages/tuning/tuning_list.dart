@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/pages/tuning/tuning_delete_dialog.dart';
 import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
@@ -39,7 +41,7 @@ class TuningList extends HookConsumerWidget {
               loading: () => const Center(child: CircularProgressIndicator()),
               error:
                   (e, _) => Center(
-                    child: Text(l10n.errorMessage(e.toString())),
+                    child: Text(l10n.errorMessage),
                   ), // エラー: {error}
               data: (tunings) {
                 if (tunings.isEmpty) {

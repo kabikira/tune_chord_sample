@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
@@ -71,7 +73,7 @@ class ChordFormUpdateDialog extends HookConsumerWidget {
                       tuningStrings: tuning.strings,
                     ),
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, _) => Center(child: Text(l10n.errorOccurred(error.toString()))),
+                error: (error, _) => Center(child: Text(l10n.errorOccurred)),
               ),
 
               const SizedBox(height: 16),

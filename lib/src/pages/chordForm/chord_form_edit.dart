@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:drift/drift.dart' as drift;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
@@ -51,7 +53,7 @@ class ChordFormEdit extends ConsumerWidget {
 
             if (snapshot.hasError) {
               return Center(
-                child: Text(l10n.errorMessage(snapshot.error.toString())),
+                child: Text(l10n.errorMessage),
               );
             }
 

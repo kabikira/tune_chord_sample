@@ -1,5 +1,7 @@
 // Package imports:
 import 'package:drift/drift.dart';
+
+// Project imports:
 import 'package:resonance/src/db/tunings/tunings.dart';
 
 class ChordForms extends Table {

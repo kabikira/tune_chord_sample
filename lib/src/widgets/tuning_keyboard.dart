@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/config/validation_constants.dart';
 

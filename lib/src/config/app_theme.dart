@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
+// Project imports:
 import 'package:resonance/src/config/resonance_colors.dart';
 
 /// アプリケーションのテーマを管理するクラス

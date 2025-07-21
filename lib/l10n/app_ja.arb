@@ -4,7 +4,8 @@
     "description": "お決まりの挨拶"
   },
   "tuningManagement": "チューニング管理",
-  "errorMessage": "エラー: {error}",
+  "generalError": "エラーが発生しました。しばらく待ってから再度お試しください。",
+  "errorMessage": "エラーが発生しました",
   "noTuningsRegistered": "登録されたチューニングがありません",
   "registrationDate": "登録日",
   "updateDate": "更新日",
@@ -188,14 +189,9 @@
   "@confirm": {
     "description": "確認ボタンのテキスト"
   },
-  "errorOccurred": "エラー: {error}",
+  "errorOccurred": "エラーが発生しました",
   "@errorOccurred": {
-    "description": "一般的なエラーメッセージ",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
+    "description": "一般的なエラーメッセージ"
   },
   "tuningNotFound": "チューニングが見つかりません",
   "@tuningNotFound": {
@@ -337,14 +333,9 @@
   "@noName": {
     "description": "項目に名前がない場合のプレースホルダー"
   },
-  "searchError": "検索中にエラーが発生しました: {error}",
+  "searchError": "検索中にエラーが発生しました",
   "@searchError": {
-    "description": "検索操作中のエラーメッセージ",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
+    "description": "検索操作中のエラーメッセージ"
   },
   "settings": "設定",
   "@settings": {

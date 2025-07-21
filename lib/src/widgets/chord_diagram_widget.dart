@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 

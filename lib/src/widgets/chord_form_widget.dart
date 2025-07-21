@@ -1,9 +1,12 @@
 // Flutter imports:
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
 import 'package:resonance/src/widgets/chord_form_action_buttons.dart';
@@ -61,9 +64,12 @@ class ChordFormWidget extends HookConsumerWidget {
                   tuningStrings: tuning.strings,
                 ),
             loading: () => const Center(child: CircularProgressIndicator()),
-            error:
-                (error, _) =>
-                    Center(child: Text(l10n.errorMessage(error.toString()))),
+            error: (error, _) {
+              if (kDebugMode) {
+                debugPrint('Tuning loading error: $error');
+              }
+              return Center(child: Text(l10n.generalError));
+            },
           ),
 
           const SizedBox(height: 24),

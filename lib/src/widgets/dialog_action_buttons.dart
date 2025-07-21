@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 
 class DialogActionButtons extends StatelessWidget {

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';

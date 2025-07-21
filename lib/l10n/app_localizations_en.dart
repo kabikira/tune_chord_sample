@@ -15,9 +15,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tuningManagement => 'Tuning Management';
 
   @override
-  String errorMessage(String error) {
-    return 'Error: $error';
-  }
+  String get generalError => 'An error occurred. Please try again later.';
+
+  @override
+  String get errorMessage => 'An error occurred';
 
   @override
   String get noTuningsRegistered => 'No tunings registered';
@@ -197,9 +198,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirm => 'Confirm';
 
   @override
-  String errorOccurred(String error) {
-    return 'Error: $error';
-  }
+  String get errorOccurred => 'An error occurred';
 
   @override
   String get tuningNotFound => 'Tuning not found';
@@ -300,9 +299,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noName => 'No Name';
 
   @override
-  String searchError(String error) {
-    return 'An error occurred during search: $error';
-  }
+  String get searchError => 'An error occurred during search';
 
   @override
   String get settings => 'Settings';

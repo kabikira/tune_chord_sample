@@ -4,14 +4,8 @@
     "description": "Classic greeting"
   },
   "tuningManagement": "Tuning Management",
-  "errorMessage": "Error: {error}",
-  "@errorMessage": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
+  "generalError": "An error occurred. Please try again later.",
+  "errorMessage": "An error occurred",
   "noTuningsRegistered": "No tunings registered",
   "registrationDate": "Created",
   "updateDate": "Updated",
@@ -202,14 +196,9 @@
   "@confirm": {
     "description": "Text for confirm button"
   },
-  "errorOccurred": "Error: {error}",
+  "errorOccurred": "An error occurred",
   "@errorOccurred": {
-    "description": "Generic error message",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
+    "description": "Generic error message"
   },
   "tuningNotFound": "Tuning not found",
   "@tuningNotFound": {
@@ -351,14 +340,9 @@
   "@noName": {
     "description": "Placeholder text when item has no name"
   },
-  "searchError": "An error occurred during search: {error}",
+  "searchError": "An error occurred during search",
   "@searchError": {
-    "description": "Error message during search operation",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
+    "description": "Error message during search operation"
   },
   "settings": "Settings",
   "@settings": {
