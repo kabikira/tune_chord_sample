@@ -1,6 +1,8 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
+// Package imports:
+import 'package:resonance/l10n/app_localizations.dart';
 
 class FretControlWidget extends StatelessWidget {
   final int selectedFret;

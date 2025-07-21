@@ -728,7 +728,7 @@ abstract class AppLocalizations {
   /// Application name
   ///
   /// In en, this message translates to:
-  /// **'Chord Form Manager'**
+  /// **'Resonance'**
   String get appName;
 
   /// Application description

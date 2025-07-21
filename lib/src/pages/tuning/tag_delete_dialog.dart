@@ -1,9 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
+import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/db/app_database.dart';
 
 class TagDeleteDialog extends HookConsumerWidget {
   final Tag tag;

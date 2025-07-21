@@ -344,7 +344,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aboutAppTitle => 'アプリについて';
 
   @override
-  String get appName => 'コードフォーム管理アプリ';
+  String get appName => 'Resonance';
 
   @override
   String get appDescription => '変則チューニングのためのギターコードフォーム管理アプリです。様々なチューニングでのコードフォームを記録・管理できます。';

@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 /// Resonanceアイコンのカラーパレットに基づいたアプリケーション全体のカラー定義

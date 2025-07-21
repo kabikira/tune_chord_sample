@@ -344,7 +344,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutAppTitle => 'About App';
 
   @override
-  String get appName => 'Chord Form Manager';
+  String get appName => 'Resonance';
 
   @override
   String get appDescription => 'A guitar chord form management app for alternate tunings. Record and manage chord forms across various tunings.';

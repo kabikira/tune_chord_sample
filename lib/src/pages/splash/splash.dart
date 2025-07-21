@@ -1,10 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:tune_chord_sample/src/config/app_theme.dart';
-import 'package:tune_chord_sample/src/widgets/resonance_icon.dart';
+import 'package:resonance/src/config/app_theme.dart';
+import 'package:resonance/src/widgets/resonance_icon.dart';
 
 class Splash extends HookWidget {
   const Splash({super.key});

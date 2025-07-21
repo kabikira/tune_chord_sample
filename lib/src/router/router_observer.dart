@@ -1,6 +1,8 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
-import 'package:tune_chord_sample/src/log/logger.dart';
+// Package imports:
+import 'package:resonance/src/log/logger.dart';
 
 class RouterObserver extends NavigatorObserver {
   @override

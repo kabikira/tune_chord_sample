@@ -1,14 +1,15 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/pages/tuning/tuning_delete_dialog.dart';
-import 'package:tune_chord_sample/src/pages/tuning/tuning_notifier.dart';
-import 'package:tune_chord_sample/src/pages/tuning/tuning_register.dart';
-import 'package:tune_chord_sample/src/pages/tuning/tuning_update_dialog.dart';
+import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/pages/tuning/tuning_delete_dialog.dart';
+import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
+import 'package:resonance/src/pages/tuning/tuning_register.dart';
+import 'package:resonance/src/pages/tuning/tuning_update_dialog.dart';
 
 class TuningList extends HookConsumerWidget {
   const TuningList({super.key});

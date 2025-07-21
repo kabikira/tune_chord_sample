@@ -1,19 +1,20 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:resonance/src/config/resonance_colors.dart';
+import 'package:resonance/src/db/app_database.dart';
+import 'package:resonance/src/widgets/chord_diagram_widget.dart';
+import 'package:resonance/src/widgets/chord_form_action_buttons.dart';
+import 'package:resonance/src/widgets/custom_text_field.dart';
+import 'package:resonance/src/widgets/dialog_action_buttons.dart';
+import 'package:resonance/src/widgets/fret_control_widget.dart';
+import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
+import 'package:resonance/src/widgets/resonance_icon.dart';
 
-import 'package:tune_chord_sample/src/config/resonance_colors.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
-import 'package:tune_chord_sample/src/widgets/chord_form_action_buttons.dart';
-import 'package:tune_chord_sample/src/widgets/custom_text_field.dart';
-import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
-import 'package:tune_chord_sample/src/widgets/fret_control_widget.dart';
-import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
-import 'package:tune_chord_sample/src/widgets/resonance_icon.dart';
-
-import 'package:tune_chord_sample/src/widgets/tuning_info_card.dart'
+import 'package:resonance/src/widgets/tuning_info_card.dart'
     as new_tuning;
 
 class WidgetGallery extends HookConsumerWidget {

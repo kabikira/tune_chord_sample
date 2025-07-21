@@ -1,9 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:resonance/l10n/app_localizations.dart';
 
 class ScaffoldWithNavBar extends HookWidget {
   final StatefulNavigationShell navigationShell;

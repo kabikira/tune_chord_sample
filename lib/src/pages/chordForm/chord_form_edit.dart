@@ -1,13 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:drift/drift.dart' as drift;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
-import 'package:tune_chord_sample/src/pages/chordForm/chord_form_providers.dart';
-import 'package:tune_chord_sample/src/widgets/chord_form_widget.dart';
+import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/db/app_database.dart';
+import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
+import 'package:resonance/src/widgets/chord_form_widget.dart';
 
 class ChordFormEdit extends ConsumerWidget {
   final int chordFormId;

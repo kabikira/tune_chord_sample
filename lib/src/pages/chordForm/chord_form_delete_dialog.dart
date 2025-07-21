@@ -1,11 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/chordForm/chord_form_notifier.dart';
-import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
+import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/db/app_database.dart';
+import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:resonance/src/widgets/dialog_action_buttons.dart';
 
 class ChordFormDeleteDialog extends HookConsumerWidget {
   final ChordForm chordForm;
