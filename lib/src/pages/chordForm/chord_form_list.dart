@@ -84,9 +84,7 @@ class ChordFormList extends HookConsumerWidget {
           Expanded(
             child: chordFormAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error:
-                  (error, _) =>
-                      Center(child: Text(l10n.errorOccurred)),
+              error: (error, _) => Center(child: Text(l10n.errorOccurred)),
               data: (chordForms) {
                 // チューニングIDに基づいてコードフォームをフィルタリング
                 final filteredChordForms =
@@ -252,39 +250,46 @@ class ChordFormList extends HookConsumerWidget {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 14,
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${l10n.registrationDate}: ${utils.DateUtils.formatDate(chordForm.createdAt)}',
-                      style: theme.textTheme.bodySmall?.copyWith(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 16, 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(
+                        Icons.calendar_today,
+                        size: 14,
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Icon(
-                      Icons.update,
-                      size: 14,
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${l10n.updateDate}: ${utils.DateUtils.formatDate(chordForm.updatedAt)}',
-                      style: theme.textTheme.bodySmall?.copyWith(
+                      const SizedBox(width: 4),
+                      Text(
+                        '${l10n.registrationDate}: ${utils.DateUtils.formatDate(chordForm.createdAt)}',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurface.withValues(
+                            alpha: 0.5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Icon(
+                        Icons.update,
+                        size: 14,
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 4),
+                      Text(
+                        '${l10n.updateDate}: ${utils.DateUtils.formatDate(chordForm.updatedAt)}',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurface.withValues(
+                            alpha: 0.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -444,5 +449,4 @@ class ChordFormList extends HookConsumerWidget {
       },
     );
   }
-
 }
