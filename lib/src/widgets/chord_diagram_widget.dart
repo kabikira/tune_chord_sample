@@ -1,6 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
+
+// Package imports:
+import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/db/app_database.dart';
 
 class ChordDiagramWidget extends StatelessWidget {
   final ChordForm codeForm;

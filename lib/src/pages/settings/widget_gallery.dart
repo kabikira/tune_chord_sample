@@ -1,15 +1,21 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tune_chord_sample/src/widgets/chord_diagram_widget.dart';
-import 'package:tune_chord_sample/src/widgets/custom_text_field.dart';
-import 'package:tune_chord_sample/src/widgets/dialog_action_buttons.dart';
-import 'package:tune_chord_sample/src/widgets/guitar_fretboard_widget.dart';
-import 'package:tune_chord_sample/src/widgets/tuning_info_card.dart'
+import 'package:resonance/src/config/resonance_colors.dart';
+import 'package:resonance/src/db/app_database.dart';
+import 'package:resonance/src/widgets/chord_diagram_widget.dart';
+import 'package:resonance/src/widgets/chord_form_action_buttons.dart';
+import 'package:resonance/src/widgets/custom_text_field.dart';
+import 'package:resonance/src/widgets/dialog_action_buttons.dart';
+import 'package:resonance/src/widgets/fret_control_widget.dart';
+import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
+import 'package:resonance/src/widgets/resonance_icon.dart';
+
+import 'package:resonance/src/widgets/tuning_info_card.dart'
     as new_tuning;
-import 'package:tune_chord_sample/src/widgets/fret_control_widget.dart';
-import 'package:tune_chord_sample/src/widgets/chord_form_action_buttons.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
 
 class WidgetGallery extends HookConsumerWidget {
   const WidgetGallery({super.key});
@@ -57,6 +63,81 @@ class WidgetGallery extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Resonanceカラーパレット
+            _buildWidgetSection(
+              context,
+              title: 'Resonanceカラーパレット',
+              description: 'アプリ全体で使用されるResonanceカラーとギター弦カラー',
+              child: Column(
+                children: [
+                  // Resonanceアイコン
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SimpleResonanceIcon(size: 60),
+                      const SizedBox(width: 20),
+                      ResonanceIcon(
+                        size: 60,
+                        backgroundColor: ResonanceColors.background,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+
+                  // コアカラー
+                  _buildColorRow('プライマリ', ResonanceColors.primary, 'Primary'),
+                  _buildColorRow(
+                    'セカンダリ',
+                    ResonanceColors.secondary,
+                    'Secondary',
+                  ),
+                  _buildColorRow(
+                    '背景',
+                    ResonanceColors.background,
+                    'Background',
+                  ),
+
+                  const SizedBox(height: 16),
+                  Text(
+                    'ギター弦カラー',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // ギター弦カラー
+                  _buildColorRow(
+                    'High E (1弦)',
+                    ResonanceColors.highE,
+                    'Coral Red',
+                  ),
+                  _buildColorRow('B (2弦)', ResonanceColors.b, 'Turquoise'),
+                  _buildColorRow('G (3弦)', ResonanceColors.g, 'Sky Blue'),
+                  _buildColorRow('D (4弦)', ResonanceColors.d, 'Mint Green'),
+                  _buildColorRow('A (5弦)', ResonanceColors.a, 'Yellow'),
+                  _buildColorRow('Low E (6弦)', ResonanceColors.lowE, 'Purple'),
+
+                  const SizedBox(height: 16),
+                  Text(
+                    'セマンティックカラー',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // セマンティックカラー
+                  _buildColorRow('エラー', ResonanceColors.error, 'Error'),
+                  _buildColorRow('成功', ResonanceColors.success, 'Success'),
+                  _buildColorRow('警告', ResonanceColors.warning, 'Warning'),
+                  _buildColorRow('情報', ResonanceColors.info, 'Info'),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
             // ChordDiagramWidget
             _buildWidgetSection(
               context,
@@ -302,6 +383,47 @@ class WidgetGallery extends HookConsumerWidget {
             child,
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildColorRow(String labelJa, Color color, String labelEn) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: Colors.grey.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  labelJa,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  '$labelEn • #${color.value.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}',
+                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

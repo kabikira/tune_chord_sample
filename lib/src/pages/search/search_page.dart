@@ -1,9 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/search/search_notifier.dart';
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
+import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/db/app_database.dart';
+import 'package:resonance/src/pages/search/search_notifier.dart';
 
 // 検索対象の種類
 enum SearchType { tuning, chordForm, tag, both }
@@ -47,18 +50,11 @@ class SearchPage extends HookConsumerWidget {
         child: Column(
           children: [
             // 検索ボックス
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
+            Card(
+              elevation: 2,
+              margin: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
-                    blurRadius: 10,
-                    spreadRadius: 0,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
               child: TextField(
                 decoration: InputDecoration(
@@ -91,7 +87,7 @@ class SearchPage extends HookConsumerWidget {
                     vertical: 16,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: theme.cardColor,
                 ),
                 style: theme.textTheme.bodyMedium,
                 onChanged: (value) {
@@ -103,21 +99,15 @@ class SearchPage extends HookConsumerWidget {
             const SizedBox(height: 16),
 
             // 検索オプション
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
+            Card(
+              elevation: 2,
+              margin: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
-                    blurRadius: 10,
-                    spreadRadius: 0,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
-              padding: const EdgeInsets.all(16),
-              child: Column(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -162,7 +152,7 @@ class SearchPage extends HookConsumerWidget {
                                   ),
                                   elevation: 0,
                                   style: theme.textTheme.bodyMedium,
-                                  dropdownColor: Colors.white,
+                                  dropdownColor: theme.cardColor,
                                   borderRadius: BorderRadius.circular(12),
                                   onChanged: (value) {
                                     if (value != null) {
@@ -230,7 +220,7 @@ class SearchPage extends HookConsumerWidget {
                                   ),
                                   elevation: 0,
                                   style: theme.textTheme.bodyMedium,
-                                  dropdownColor: Colors.white,
+                                  dropdownColor: theme.cardColor,
                                   borderRadius: BorderRadius.circular(12),
                                   onChanged: (value) {
                                     if (value != null) {
@@ -266,6 +256,7 @@ class SearchPage extends HookConsumerWidget {
                     ],
                   ),
                 ],
+                ),
               ),
             ),
 
@@ -290,18 +281,11 @@ class SearchPage extends HookConsumerWidget {
                             );
                           }
 
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
+                          return Card(
+                            elevation: 2,
+                            margin: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.05),
-                                  blurRadius: 10,
-                                  spreadRadius: 0,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(16),

@@ -1,6 +1,7 @@
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tune_chord_sample/src/db/app_database.dart';
-import 'package:tune_chord_sample/src/pages/search/search_page.dart';
+import 'package:resonance/src/db/app_database.dart';
+import 'package:resonance/src/pages/search/search_page.dart';
 
 // タグ取得用プロバイダー
 final tuningTagsProvider = FutureProvider.family<List<Tag>, int>((ref, tuningId) async {

@@ -1,6 +1,7 @@
+// Package imports:
 import 'package:drift/drift.dart';
-import 'package:tune_chord_sample/src/db/tag/tab.dart';
-import 'package:tune_chord_sample/src/db/tunings/tunings.dart';
+import 'package:resonance/src/db/tag/tab.dart';
+import 'package:resonance/src/db/tunings/tunings.dart';
 
 class TuningTags extends Table {
   IntColumn get id => integer().autoIncrement()();

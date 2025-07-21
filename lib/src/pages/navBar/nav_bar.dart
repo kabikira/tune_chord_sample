@@ -1,7 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:tune_chord_sample/l10n/app_localizations.dart';
+
+// Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
+import 'package:resonance/l10n/app_localizations.dart';
 
 class ScaffoldWithNavBar extends HookWidget {
   final StatefulNavigationShell navigationShell;
@@ -46,10 +49,9 @@ class ScaffoldWithNavBar extends HookWidget {
                 navigationShell.goBranch(index);
               }
             },
-            backgroundColor: Colors.white,
             selectedItemColor: theme.colorScheme.primary,
             unselectedItemColor: theme.colorScheme.onSurface.withValues(
-              alpha: 153,
+              alpha: 0.6,
             ),
             selectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.w600,
