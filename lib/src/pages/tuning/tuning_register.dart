@@ -85,10 +85,11 @@ class TuningRegister extends HookConsumerWidget {
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
         content: SizedBox(
           width: 400,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
               Text(
                 '${l10n.tuningName}（任意）', // チューニング名（任意）
                 style: theme.textTheme.bodyMedium?.copyWith(
@@ -351,6 +352,7 @@ class TuningRegister extends HookConsumerWidget {
                 },
               ),
             ],
+            ),
           ),
         ),
         actionsPadding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
