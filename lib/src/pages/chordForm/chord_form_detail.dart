@@ -51,13 +51,14 @@ class ChordFormDetail extends HookConsumerWidget {
             orElse: () => throw Exception('コードフォームが見つかりません'),
           );
 
-          return Card(
-            margin: const EdgeInsets.all(8.0),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+          return SingleChildScrollView(
+            child: Card(
+              margin: const EdgeInsets.all(8.0),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   Text(
                     chordForm.label ?? '',
                     style: Theme.of(context).textTheme.titleLarge,
@@ -136,6 +137,7 @@ class ChordFormDetail extends HookConsumerWidget {
                     ],
                   ),
                 ],
+                ),
               ),
             ),
           );

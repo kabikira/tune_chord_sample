@@ -379,7 +379,7 @@ class SearchPage extends HookConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
-        context.push('/tuningList/chordFormList/${tuning.id}');
+        context.go('/tuningList/chordFormList/${tuning.id}');
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -445,7 +445,7 @@ class SearchPage extends HookConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
-        context.push(
+        context.go(
           '/tuningList/chordFormList/${chordForm.tuningId}/chordFormDetail',
           extra: chordForm.id,
         );
