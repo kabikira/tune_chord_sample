@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 // Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
@@ -56,11 +57,19 @@ class Settings extends ConsumerWidget {
                   context,
                   icon: Icons.update,
                   title: l10n.version,
-                  trailing: Text(
-                    '1.0.0',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                    ),
+                  trailing: FutureBuilder<PackageInfo>(
+                    future: PackageInfo.fromPlatform(),
+                    builder: (context, snapshot) {
+                      final version = snapshot.hasData
+                          ? '${snapshot.data!.version}+${snapshot.data!.buildNumber}'
+                          : '...';
+                      return Text(
+                        version,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
