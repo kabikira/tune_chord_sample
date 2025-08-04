@@ -10,6 +10,7 @@ import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
+import 'package:resonance/src/utils/fret_position_utils.dart';
 import 'package:resonance/src/widgets/chord_form_widget.dart';
 
 class ChordFormEdit extends ConsumerWidget {
@@ -63,11 +64,9 @@ class ChordFormEdit extends ConsumerWidget {
             }
 
             // fretPositionsを文字列からList<int>に変換
-            final fretPositions =
-                chordForm.fretPositions
-                    .split(',')
-                    .map((s) => int.tryParse(s) ?? 0)
-                    .toList();
+            final fretPositions = FretPositionUtils.parseFretPositions(
+              chordForm.fretPositions,
+            );
 
             return ChordFormWidget(
               tuningId: tuningId,

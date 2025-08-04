@@ -66,21 +66,21 @@ class SampleDataManager {
         chordForms = [
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('0,2,2,1,0,0'),
+            fretPositions: const Value('0,2,2,2,0,x'),
             label: const Value('A major'),
             memo: const Value('基本的なAメジャーコード'),
             isFavorite: const Value(true),
           ),
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('3,2,0,0,3,3'),
+            fretPositions: const Value('3,3,0,0,2,3'),
             label: const Value('G major'),
             memo: const Value('基本的なGメジャーコード'),
             isFavorite: const Value(false),
           ),
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('x,3,2,0,1,0'),
+            fretPositions: const Value('0,1,0,2,3,x'),
             label: const Value('C major'),
             memo: const Value('基本的なCメジャーコード'),
             isFavorite: const Value(false),
@@ -109,14 +109,14 @@ class SampleDataManager {
         chordForms = [
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('0,0,0,2,3,2'),
+            fretPositions: const Value('2,3,2,0,0,0'),
             label: const Value('D major'),
             memo: const Value('Drop DでのDメジャーコード'),
             isFavorite: const Value(true),
           ),
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('0,2,2,1,0,0'),
+            fretPositions: const Value('0,2,2,2,0,x'),
             label: const Value('A major'),
             memo: const Value('Drop DでのAメジャーコード'),
             isFavorite: const Value(false),

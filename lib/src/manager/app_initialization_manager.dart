@@ -10,6 +10,7 @@ part 'app_initialization_manager.g.dart';
 /// アプリケーション初期化の結果
 enum AppInitializationStatus { loading, firstLaunch, completed, error }
 
+// TODO;もっとわかりやすく修正したい
 /// アプリケーション初期化結果
 class AppInitializationResult {
   final AppInitializationStatus status;
