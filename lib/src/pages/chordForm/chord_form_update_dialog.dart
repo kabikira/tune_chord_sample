@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:resonance/src/utils/fret_position_utils.dart';
 import 'package:resonance/src/widgets/chord_diagram_widget.dart';
 import 'package:resonance/src/widgets/custom_text_field.dart';
 import 'package:resonance/src/widgets/dialog_action_buttons.dart';
@@ -22,12 +23,10 @@ class ChordFormUpdateDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // フレットポジションをリストに変換
-    final initialPositions =
-        chordForm.fretPositions
-            .split(',')
-            .map((s) => int.tryParse(s) ?? 0)
-            .toList();
-    // 足りない分を0で埋める
+    final initialPositions = FretPositionUtils.parseFretPositions(
+      chordForm.fretPositions,
+    );
+    // 足りない分を0で埋める（万が一の場合）
     while (initialPositions.length < 6) {
       initialPositions.add(0);
     }

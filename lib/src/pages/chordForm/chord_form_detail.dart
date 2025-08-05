@@ -10,6 +10,7 @@ import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
 import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
+import 'package:resonance/src/utils/fret_position_utils.dart';
 import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
 
 class ChordFormDetail extends HookConsumerWidget {
@@ -85,12 +86,9 @@ class ChordFormDetail extends HookConsumerWidget {
                           );
 
                           final fretPositions = ValueNotifier<List<int>>(
-                            chordForm.fretPositions.contains(',')
-                                ? chordForm.fretPositions
-                                    .split(',')
-                                    .map(int.parse)
-                                    .toList()
-                                : [0, 0, 0, 0, 0, 0],
+                            FretPositionUtils.parseFretPositions(
+                              chordForm.fretPositions,
+                            ),
                           );
 
                           return GuitarFretboardWidget(
