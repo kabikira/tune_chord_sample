@@ -12,8 +12,8 @@ import 'package:resonance/firebase_options.dart';
 import 'package:resonance/l10n/app_localizations.dart';
 import 'package:resonance/src/config/app_theme.dart';
 import 'package:resonance/src/config/theme_provider.dart';
-import 'package:resonance/src/router/router.dart';
 import 'package:resonance/src/manager/app_initialization_manager.dart';
+import 'package:resonance/src/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/config/left_handed_provider.dart';
 import 'package:resonance/src/db/app_database.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_delete_dialog.dart';
 import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
@@ -208,7 +209,12 @@ class ChordFormList extends HookConsumerWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'フレットポジション: ${chordForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
+                              () {
+                                final isLeftHanded = ref.watch(leftHandedNotifierProvider).value ?? false;
+                                final positions = chordForm.fretPositions.replaceAll('-1', 'X').split('');
+                                final displayPositions = isLeftHanded ? positions : positions.reversed;
+                                return 'フレットポジション: ${displayPositions.join('')}';
+                              }(),
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,
@@ -342,7 +348,12 @@ class ChordFormList extends HookConsumerWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'フレットポジション: ${chordForm.fretPositions.replaceAll('-1', 'X').split('').reversed.join('')}',
+                              () {
+                                final isLeftHanded = ref.watch(leftHandedNotifierProvider).value ?? false;
+                                final positions = chordForm.fretPositions.replaceAll('-1', 'X').split('');
+                                final displayPositions = isLeftHanded ? positions : positions.reversed;
+                                return 'フレットポジション: ${displayPositions.join('')}';
+                              }(),
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,

@@ -1,12 +1,16 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 // Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/config/left_handed_provider.dart';
 import 'package:resonance/src/config/resonance_colors.dart';
 import 'package:resonance/src/db/app_database.dart';
 
-class ChordDiagramWidget extends StatelessWidget {
+class ChordDiagramWidget extends ConsumerWidget {
   final ChordForm codeForm;
   final bool isEnhanced;
   final String? title;
@@ -19,16 +23,18 @@ class ChordDiagramWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     if (isEnhanced) {
-      return _buildEnhancedChordDiagram(context);
+      return _buildEnhancedChordDiagram(context, ref);
     } else {
-      return _buildSimpleChordDiagram(context);
+      return _buildSimpleChordDiagram(context, ref);
     }
   }
 
-  Widget _buildSimpleChordDiagram(BuildContext context) {
-    final positions = codeForm.fretPositions.split('').reversed.toList();
+  Widget _buildSimpleChordDiagram(BuildContext context, WidgetRef ref) {
+    final isLeftHanded = ref.watch(leftHandedNotifierProvider).value ?? false;
+    final splitPositions = codeForm.fretPositions.split('');
+    final positions = isLeftHanded ? splitPositions : splitPositions.reversed.toList();
 
     return Container(
       height: 120,
@@ -62,9 +68,11 @@ class ChordDiagramWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildEnhancedChordDiagram(BuildContext context) {
+  Widget _buildEnhancedChordDiagram(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final positions = codeForm.fretPositions.split('').reversed.toList();
+    final isLeftHanded = ref.watch(leftHandedNotifierProvider).value ?? false;
+    final splitPositions = codeForm.fretPositions.split('');
+    final positions = isLeftHanded ? splitPositions : splitPositions.reversed.toList();
 
     return Container(
       height: 160,

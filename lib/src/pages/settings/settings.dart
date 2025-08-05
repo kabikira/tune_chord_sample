@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 // Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/config/left_handed_provider.dart';
 import 'package:resonance/src/config/theme_provider.dart';
 import 'package:resonance/src/pages/settings/widget_gallery.dart';
 
@@ -21,6 +22,8 @@ class Settings extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final themeModeAsync = ref.watch(themeModeNotifierProvider);
     final themeModeNotifier = ref.read(themeModeNotifierProvider.notifier);
+    final leftHandedAsync = ref.watch(leftHandedNotifierProvider);
+    final leftHandedNotifier = ref.read(leftHandedNotifierProvider.notifier);
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.95),
@@ -100,6 +103,26 @@ class Settings extends ConsumerWidget {
                               MediaQuery.of(context).platformBrightness == Brightness.dark),
                       onChanged: (value) {
                         themeModeNotifier.toggleDarkMode();
+                      },
+                    ),
+                  ),
+                ),
+                _buildDivider(),
+                _buildSettingsItem(
+                  context,
+                  icon: Icons.swap_horiz,
+                  title: l10n.leftHandedDisplay,
+                  trailing: leftHandedAsync.when(
+                    loading: () => const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    error: (_, __) => const Icon(Icons.error_outline),
+                    data: (isLeftHanded) => Switch.adaptive(
+                      value: isLeftHanded,
+                      onChanged: (value) {
+                        leftHandedNotifier.setLeftHanded(value);
                       },
                     ),
                   ),

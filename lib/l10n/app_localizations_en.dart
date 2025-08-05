@@ -396,4 +396,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get proceedWithCrash => 'Execute Crash';
+
+  @override
+  String get leftHandedDisplay => 'Left-handed Display';
+
+  @override
+  String get leftHandedDisplayDescription => 'Reverse chord form string order for left-handed guitars';
 }

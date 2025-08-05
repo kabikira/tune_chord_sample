@@ -8,6 +8,7 @@ part 'preferences_manager.g.dart';
 /// SharedPreferencesを管理するマネージャークラス
 class PreferencesManager {
   static const String _isFirstLaunchKey = 'is_first_launch';
+  static const String _isLeftHandedKey = 'is_left_handed';
   
   final SharedPreferences _prefs;
   
@@ -24,6 +25,14 @@ class PreferencesManager {
   /// 初回起動フラグをリセット（開発・テスト用）
   Future<void> resetFirstLaunchFlag() async {
     await _prefs.remove(_isFirstLaunchKey);
+  }
+  
+  /// 左利き設定を取得
+  bool get isLeftHanded => _prefs.getBool(_isLeftHandedKey) ?? false;
+  
+  /// 左利き設定を保存
+  Future<void> setLeftHanded(bool isLeftHanded) async {
+    await _prefs.setBool(_isLeftHandedKey, isLeftHanded);
   }
 }
 

@@ -478,5 +478,13 @@
   "proceedWithCrash": "Execute Crash",
   "@proceedWithCrash": {
     "description": "Text for proceed with crash button"
+  },
+  "leftHandedDisplay": "Left-handed Display",
+  "@leftHandedDisplay": {
+    "description": "Label for left-handed display setting"
+  },
+  "leftHandedDisplayDescription": "Reverse chord form string order for left-handed guitars",
+  "@leftHandedDisplayDescription": {
+    "description": "Description for left-handed display setting"
   }
 }

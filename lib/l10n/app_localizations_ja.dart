@@ -396,4 +396,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get proceedWithCrash => 'クラッシュを実行';
+
+  @override
+  String get leftHandedDisplay => '左利き用表示';
+
+  @override
+  String get leftHandedDisplayDescription => 'コードフォームの弦順序を左利きギター用に反転します';
 }

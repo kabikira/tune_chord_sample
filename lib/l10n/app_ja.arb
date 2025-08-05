@@ -471,5 +471,13 @@
   "proceedWithCrash": "クラッシュを実行",
   "@proceedWithCrash": {
     "description": "クラッシュ実行ボタンのテキスト"
+  },
+  "leftHandedDisplay": "左利き用表示",
+  "@leftHandedDisplay": {
+    "description": "左利き用表示設定のラベル"
+  },
+  "leftHandedDisplayDescription": "コードフォームの弦順序を左利きギター用に反転します",
+  "@leftHandedDisplayDescription": {
+    "description": "左利き表示設定の説明"
   }
 }

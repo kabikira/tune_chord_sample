@@ -832,6 +832,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Execute Crash'**
   String get proceedWithCrash;
+
+  /// Label for left-handed display setting
+  ///
+  /// In en, this message translates to:
+  /// **'Left-handed Display'**
+  String get leftHandedDisplay;
+
+  /// Description for left-handed display setting
+  ///
+  /// In en, this message translates to:
+  /// **'Reverse chord form string order for left-handed guitars'**
+  String get leftHandedDisplayDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

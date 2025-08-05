@@ -9,10 +9,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/src/config/resonance_colors.dart';
-
-// Project imports:
 import 'package:resonance/l10n/app_localizations.dart';
+import 'package:resonance/src/config/left_handed_provider.dart';
+import 'package:resonance/src/config/resonance_colors.dart';
 import 'package:resonance/src/db/app_database.dart';
 
 /// チューニング文字列をシャープ記号を考慮して解析する関数
@@ -44,7 +43,7 @@ List<String> _parseStringNames(String strings) {
   return result;
 }
 
-class TuningDisplayWidget extends StatelessWidget {
+class TuningDisplayWidget extends ConsumerWidget {
   final AsyncValue<Tuning> tuningAsync;
   final ValueNotifier<List<int>> fretPositions;
 
@@ -55,17 +54,19 @@ class TuningDisplayWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const stringCount = 6;
     final theme = Theme.of(context);
 
     return tuningAsync.when(
       data: (tuning) {
         final stringNames = _parseStringNames(tuning.strings);
+        final isLeftHanded = ref.watch(leftHandedNotifierProvider).value ?? false;
         return Row(
           children: List.generate(stringCount, (stringIndex) {
             final reversedIndex = stringCount - 1 - stringIndex;
-            final position = fretPositions.value[reversedIndex];
+            final displayIndex = isLeftHanded ? stringIndex : reversedIndex;
+            final position = fretPositions.value[displayIndex];
             final isStringMuted = position == -1;
 
             return Expanded(
@@ -85,7 +86,7 @@ class TuningDisplayWidget extends StatelessWidget {
                       isStringMuted
                           ? 'X'
                           : (stringIndex < stringNames.length
-                              ? stringNames[stringIndex]
+                              ? stringNames[isLeftHanded ? stringIndex : (stringCount - 1 - stringIndex)]
                               : ''),
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
@@ -145,7 +146,7 @@ class MuteControlWidget extends StatelessWidget {
   }
 }
 
-class FretWidget extends StatelessWidget {
+class FretWidget extends ConsumerWidget {
   final int currentFret;
   final int startFret;
   final ValueNotifier<List<int>> fretPositions;
@@ -158,7 +159,7 @@ class FretWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const stringCount = 6;
     final theme = Theme.of(context);
 
@@ -190,9 +191,11 @@ class FretWidget extends StatelessWidget {
           Expanded(
             child: Row(
               children: List.generate(stringCount, (stringIndex) {
+                final isLeftHanded = ref.watch(leftHandedNotifierProvider).value ?? false;
                 final reversedIndex = stringCount - 1 - stringIndex;
+                final displayIndex = isLeftHanded ? stringIndex : reversedIndex;
                 return StringWidget(
-                  stringIndex: reversedIndex,
+                  stringIndex: displayIndex,
                   currentFret: currentFret,
                   fretPositions: fretPositions,
                   stringThickness:
@@ -493,7 +496,7 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
   }
 }
 
-class ChordCompositionWidget extends StatelessWidget {
+class ChordCompositionWidget extends ConsumerWidget {
   final ValueNotifier<List<int>> fretPositions;
   final VoidCallback? onHelpPressed;
 
@@ -504,7 +507,7 @@ class ChordCompositionWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
 
     return Container(
@@ -530,9 +533,13 @@ class ChordCompositionWidget extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                fretPositions.value.reversed
-                    .map((p) => p == -1 ? 'X' : p.toString())
-                    .join(','),
+                () {
+                  final isLeftHanded = ref.watch(leftHandedNotifierProvider).value ?? false;
+                  final positions = isLeftHanded ? fretPositions.value : fretPositions.value.reversed;
+                  return positions
+                      .map((p) => p == -1 ? 'X' : p.toString())
+                      .join(',');
+                }(),
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: theme.colorScheme.primary,
