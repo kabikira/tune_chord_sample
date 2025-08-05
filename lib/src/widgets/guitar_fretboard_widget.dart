@@ -21,14 +21,14 @@ List<String> _parseStringNames(String strings) {
   if (strings.contains(',')) {
     return strings.split(',');
   }
-  
+
   // シャープ記号を考慮して解析
   final result = <String>[];
   int i = 0;
-  
+
   while (i < strings.length) {
     final char = strings[i];
-    
+
     // 次の文字がシャープ記号かチェック
     if (i + 1 < strings.length && strings[i + 1] == '#') {
       // シャープ記号を含む音名として結合
@@ -40,7 +40,7 @@ List<String> _parseStringNames(String strings) {
       i += 1;
     }
   }
-  
+
   return result;
 }
 
@@ -145,7 +145,6 @@ class MuteControlWidget extends StatelessWidget {
   }
 }
 
-
 class FretWidget extends StatelessWidget {
   final int currentFret;
   final int startFret;
@@ -198,7 +197,9 @@ class FretWidget extends StatelessWidget {
                   fretPositions: fretPositions,
                   stringThickness:
                       1.0 +
-                      (0.5 * (stringCount - 1 - stringIndex) / (stringCount - 1)),
+                      (0.5 *
+                          (stringCount - 1 - stringIndex) /
+                          (stringCount - 1)),
                 );
               }),
             ),
@@ -207,7 +208,6 @@ class FretWidget extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class StringWidget extends StatelessWidget {
@@ -288,7 +288,10 @@ class StringWidget extends StatelessWidget {
                     width: 28,
                     height: 28,
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                      color:
+                          theme.brightness == Brightness.dark
+                              ? ResonanceColors.a.withValues(alpha: 0.7)
+                              : ResonanceColors.primary.withValues(alpha: 0.7),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
@@ -301,8 +304,11 @@ class StringWidget extends StatelessWidget {
                     child: Center(
                       child: Text(
                         currentFret.toString(),
-                        style: const TextStyle(
-                          color: ResonanceColors.offWhite,
+                        style: TextStyle(
+                          color:
+                              theme.brightness == Brightness.dark
+                                  ? ResonanceColors.background
+                                  : theme.colorScheme.onPrimary,
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
@@ -337,11 +343,13 @@ class StringWidget extends StatelessWidget {
   void _handleLongPress() {
     const stringCount = 6;
     final position = fretPositions.value[stringIndex];
-    
+
     final newPositions = [
       for (int i = 0; i < stringCount; i++)
         if (i == stringIndex)
-          position == -1 ? 0 : -1  // ミュート状態なら解除、そうでなければミュート
+          position == -1
+              ? 0
+              : -1 // ミュート状態なら解除、そうでなければミュート
         else
           fretPositions.value[i],
     ];
@@ -372,7 +380,7 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
   int _currentStartFret = 0;
   static const double fretHeight = 48.0;
   static const int visibleFrets = 5;
-  
+
   bool _isUpdatingFromExternal = false;
   bool _isUserScrolling = false;
   Timer? _debounceTimer;
@@ -393,13 +401,15 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
     if (oldWidget.startFret != widget.startFret && !_isUserScrolling) {
       _isUpdatingFromExternal = true;
       _currentStartFret = widget.startFret;
-      _scrollController.animateTo(
-        widget.startFret * fretHeight,
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
-      ).then((_) {
-        _isUpdatingFromExternal = false;
-      });
+      _scrollController
+          .animateTo(
+            widget.startFret * fretHeight,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+          )
+          .then((_) {
+            _isUpdatingFromExternal = false;
+          });
     }
   }
 
@@ -413,20 +423,22 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
 
   void _handleScroll() {
     if (_isUpdatingFromExternal) return;
-    
+
     _isUserScrolling = true;
     _debounceTimer?.cancel();
-    
-    final newStartFret = (_scrollController.offset / fretHeight).floor()
-        .clamp(0, widget.maxFrets - visibleFrets);
-    
+
+    final newStartFret = (_scrollController.offset / fretHeight).floor().clamp(
+      0,
+      widget.maxFrets - visibleFrets,
+    );
+
     if (newStartFret != _currentStartFret) {
       // 即座に内部状態を更新（リアルタイム表示用）
       setState(() => _currentStartFret = newStartFret);
-      
+
       // 外部コールバックは即座に呼び出し（FretControlWidget更新用）
       widget.onStartFretChanged?.call(_currentStartFret);
-      
+
       // ユーザースクロール状態は短いデバウンスで管理
       _debounceTimer = Timer(const Duration(milliseconds: 50), () {
         _isUserScrolling = false;
@@ -480,7 +492,6 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
     );
   }
 }
-
 
 class ChordCompositionWidget extends StatelessWidget {
   final ValueNotifier<List<int>> fretPositions;
@@ -566,7 +577,8 @@ class GuitarFretboardWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final internalStartFretNotifier = useState(0);
-    final effectiveStartFretNotifier = startFretNotifier ?? internalStartFretNotifier;
+    final effectiveStartFretNotifier =
+        startFretNotifier ?? internalStartFretNotifier;
 
     return Card(
       elevation: 2,
