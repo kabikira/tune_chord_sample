@@ -35,7 +35,7 @@ class SampleDataManager {
       ),
       TuningsCompanion(
         name: const Value('Csus2'),
-        strings: const Value('DGDGBD'),
+        strings: const Value('CGDGCD'),
         memo: const Value('Orkney/Sawmill'),
         isFavorite: const Value(false),
       ),
