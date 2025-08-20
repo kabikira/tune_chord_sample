@@ -64,8 +64,7 @@ class TuningDisplayWidget extends StatelessWidget {
         final stringNames = _parseStringNames(tuning.strings);
         return Row(
           children: List.generate(stringCount, (stringIndex) {
-            final reversedIndex = stringCount - 1 - stringIndex;
-            final position = fretPositions.value[reversedIndex];
+            final position = fretPositions.value[stringIndex]; // 6弦→1弦の並びに変更
             final isStringMuted = position == -1;
 
             return Expanded(
@@ -190,9 +189,8 @@ class FretWidget extends StatelessWidget {
           Expanded(
             child: Row(
               children: List.generate(stringCount, (stringIndex) {
-                final reversedIndex = stringCount - 1 - stringIndex;
                 return StringWidget(
-                  stringIndex: reversedIndex,
+                  stringIndex: stringIndex, // 6弦→1弦の並びに変更
                   currentFret: currentFret,
                   fretPositions: fretPositions,
                   stringThickness:
@@ -530,9 +528,9 @@ class ChordCompositionWidget extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                fretPositions.value.reversed
+                fretPositions.value
                     .map((p) => p == -1 ? 'X' : p.toString())
-                    .join(','),
+                    .join(','), // 6弦→1弦の並びに変更
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: theme.colorScheme.primary,

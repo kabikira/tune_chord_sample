@@ -65,19 +65,19 @@ class SampleDataManager {
         chordForms = [
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('0,2,2,2,0,x'),
+            fretPositions: const Value('x,0,2,2,2,0'), // A major（6弦→1弦）
             label: const Value('A major'),
             isFavorite: const Value(true),
           ),
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('3,3,0,0,2,3'),
+            fretPositions: const Value('3,2,0,0,3,3'), // G major（6弦→1弦）
             label: const Value('G major'),
             isFavorite: const Value(false),
           ),
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('0,1,0,2,3,x'),
+            fretPositions: const Value('x,3,2,0,1,0'), // C major（6弦→1弦）
             label: const Value('C major'),
             isFavorite: const Value(false),
           ),
@@ -87,7 +87,7 @@ class SampleDataManager {
         chordForms = [
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('0,0,0,15,15,x'),
+            fretPositions: const Value('x,15,15,0,0,0'), // intro（6弦→1弦）
             memo: const Value('intro'),
             isFavorite: const Value(true),
           ),
@@ -97,7 +97,7 @@ class SampleDataManager {
         chordForms = [
           ChordFormsCompanion(
             tuningId: Value(tuningId),
-            fretPositions: const Value('0,0,0,0,0,0'),
+            fretPositions: const Value('0,0,0,0,0,0'), // D5（6弦→1弦）
             label: const Value('D5'),
             isFavorite: const Value(true),
           ),

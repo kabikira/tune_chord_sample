@@ -28,7 +28,7 @@ class ChordDiagramWidget extends StatelessWidget {
   }
 
   Widget _buildSimpleChordDiagram(BuildContext context) {
-    final positions = codeForm.fretPositions.split('').reversed.toList();
+    final positions = codeForm.fretPositions.split(','); // 6弦→1弦の並びに変更
 
     return Container(
       height: 120,
@@ -39,32 +39,33 @@ class ChordDiagramWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: positions.map((pos) {
-          final displayText = (pos == 'X' || pos == '-1') ? 'X' : pos;
-          final isX = (pos == 'X' || pos == '-1');
-          return Column(
-            children: [
-              Text(
-                displayText,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: isX ? Colors.red : Colors.black,
-                ),
-              ),
-              Expanded(
-                child: Container(width: 2, color: Colors.grey.shade400),
-              ),
-            ],
-          );
-        }).toList(),
+        children:
+            positions.map((pos) {
+              final displayText = (pos == 'X' || pos == '-1') ? 'X' : pos;
+              final isX = (pos == 'X' || pos == '-1');
+              return Column(
+                children: [
+                  Text(
+                    displayText,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isX ? Colors.red : Colors.black,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(width: 2, color: Colors.grey.shade400),
+                  ),
+                ],
+              );
+            }).toList(),
       ),
     );
   }
 
   Widget _buildEnhancedChordDiagram(BuildContext context) {
     final theme = Theme.of(context);
-    final positions = codeForm.fretPositions.split('').reversed.toList();
+    final positions = codeForm.fretPositions.split(','); // 6弦→1弦の並びに変更
 
     return Container(
       height: 160,
@@ -93,37 +94,42 @@ class ChordDiagramWidget extends StatelessWidget {
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: positions.map((pos) {
-                final displayText = (pos == 'X' || pos == '-1') ? 'X' : pos;
-                final isX = (pos == 'X' || pos == '-1');
-                return Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: isX
-                            ? Colors.red.withValues(alpha: 0.1)
-                            : theme.colorScheme.primary.withValues(alpha: 0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        displayText,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: isX ? Colors.red : theme.colorScheme.primary,
+              children:
+                  positions.map((pos) {
+                    final displayText = (pos == 'X' || pos == '-1') ? 'X' : pos;
+                    final isX = (pos == 'X' || pos == '-1');
+                    return Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color:
+                                isX
+                                    ? Colors.red.withValues(alpha: 0.1)
+                                    : theme.colorScheme.primary.withValues(
+                                      alpha: 0.1,
+                                    ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            displayText,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  isX ? Colors.red : theme.colorScheme.primary,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: 2,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                  ],
-                );
-              }).toList(),
+                        Expanded(
+                          child: Container(
+                            width: 2,
+                            color: Colors.grey.shade400,
+                          ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
             ),
           ),
         ],
@@ -167,9 +173,7 @@ class FretPositionDisplay extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            fretPositions
-                .map((p) => p == -1 ? 'X' : p.toString())
-                .join(','),
+            fretPositions.map((p) => p == -1 ? 'X' : p.toString()).join(','),
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: theme.colorScheme.primary,
@@ -200,9 +204,7 @@ class TuningInfoCard extends StatelessWidget {
 
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
