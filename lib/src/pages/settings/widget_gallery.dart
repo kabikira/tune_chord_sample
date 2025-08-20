@@ -16,8 +16,7 @@ import 'package:resonance/src/widgets/fret_control_widget.dart';
 import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
 import 'package:resonance/src/widgets/resonance_icon.dart';
 
-import 'package:resonance/src/widgets/tuning_info_card.dart'
-    as new_tuning;
+import 'package:resonance/src/widgets/tuning_info_card.dart' as new_tuning;
 
 class WidgetGallery extends HookConsumerWidget {
   const WidgetGallery({super.key});
@@ -43,7 +42,7 @@ class WidgetGallery extends HookConsumerWidget {
     final sampleTuning = Tuning(
       id: 1,
       name: 'Standard',
-      strings: 'E,A,D,G,B,E',
+      strings: 'EADGBE',
       memo: 'スタンダードチューニング',
       isFavorite: false,
       createdAt: DateTime.now(),
