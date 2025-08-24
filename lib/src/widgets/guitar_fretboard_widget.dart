@@ -355,7 +355,7 @@ class StringWidget extends StatelessWidget {
   }
 }
 
-class FretboardGridWidget extends StatefulWidget {
+class FretboardGridWidget extends HookWidget {
   final ValueNotifier<List<int>> fretPositions;
   final int maxFrets;
   final int startFret;
@@ -370,83 +370,71 @@ class FretboardGridWidget extends StatefulWidget {
   });
 
   @override
-  State<FretboardGridWidget> createState() => _FretboardGridWidgetState();
-}
-
-class _FretboardGridWidgetState extends State<FretboardGridWidget> {
-  late ScrollController _scrollController;
-  int _currentStartFret = 0;
-  static const double fretHeight = 48.0;
-  static const int visibleFrets = 5;
-
-  bool _isUpdatingFromExternal = false;
-  bool _isUserScrolling = false;
-  Timer? _debounceTimer;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentStartFret = widget.startFret;
-    _scrollController = ScrollController(
-      initialScrollOffset: widget.startFret * fretHeight,
-    );
-    _scrollController.addListener(_handleScroll);
-  }
-
-  @override
-  void didUpdateWidget(FretboardGridWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.startFret != widget.startFret && !_isUserScrolling) {
-      _isUpdatingFromExternal = true;
-      _currentStartFret = widget.startFret;
-      _scrollController
-          .animateTo(
-            widget.startFret * fretHeight,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-          )
-          .then((_) {
-            _isUpdatingFromExternal = false;
-          });
-    }
-  }
-
-  @override
-  void dispose() {
-    _scrollController.removeListener(_handleScroll);
-    _scrollController.dispose();
-    _debounceTimer?.cancel();
-    super.dispose();
-  }
-
-  void _handleScroll() {
-    if (_isUpdatingFromExternal) return;
-
-    _isUserScrolling = true;
-    _debounceTimer?.cancel();
-
-    final newStartFret = (_scrollController.offset / fretHeight).floor().clamp(
-      0,
-      widget.maxFrets - visibleFrets,
-    );
-
-    if (newStartFret != _currentStartFret) {
-      // 即座に内部状態を更新（リアルタイム表示用）
-      setState(() => _currentStartFret = newStartFret);
-
-      // 外部コールバックは即座に呼び出し（FretControlWidget更新用）
-      widget.onStartFretChanged?.call(_currentStartFret);
-
-      // ユーザースクロール状態は短いデバウンスで管理
-      _debounceTimer = Timer(const Duration(milliseconds: 50), () {
-        _isUserScrolling = false;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    const double fretHeight = 48.0;
+    const int visibleFrets = 5;
+
     final theme = Theme.of(context);
+
+    // States and refs
+    final currentStartFret = useState<int>(startFret);
+    final isUpdatingFromExternal = useRef<bool>(false);
+    final isUserScrolling = useRef<bool>(false);
+    final debounceTimer = useRef<Timer?>(null);
+
+    // Scroll controller with initial offset
+    final scrollController = useScrollController(
+      initialScrollOffset: startFret * fretHeight,
+    );
+
+    // Scroll listener effect
+    useEffect(() {
+      void onScroll() {
+        if (isUpdatingFromExternal.value) return;
+
+        isUserScrolling.value = true;
+        debounceTimer.value?.cancel();
+
+        final newStartFret = (scrollController.offset / fretHeight)
+            .floor()
+            .clamp(0, maxFrets - visibleFrets);
+
+        if (newStartFret != currentStartFret.value) {
+          currentStartFret.value = newStartFret;
+          onStartFretChanged?.call(currentStartFret.value);
+
+          // Brief debounce to reset user scrolling state
+          debounceTimer.value =
+              Timer(const Duration(milliseconds: 50), () {
+            isUserScrolling.value = false;
+          });
+        }
+      }
+
+      scrollController.addListener(onScroll);
+      return () {
+        scrollController.removeListener(onScroll);
+        debounceTimer.value?.cancel();
+      };
+    }, [scrollController, maxFrets]);
+
+    // Sync external startFret changes
+    useEffect(() {
+      if (startFret != currentStartFret.value && !isUserScrolling.value) {
+        isUpdatingFromExternal.value = true;
+        currentStartFret.value = startFret;
+        scrollController
+            .animateTo(
+              startFret * fretHeight,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            )
+            .whenComplete(() {
+          isUpdatingFromExternal.value = false;
+        });
+      }
+      return null;
+    }, [startFret, scrollController]);
 
     return Container(
       decoration: BoxDecoration(
@@ -464,25 +452,27 @@ class _FretboardGridWidgetState extends State<FretboardGridWidget> {
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           if (scrollNotification is ScrollStartNotification) {
-            _isUserScrolling = true;
+            isUserScrolling.value = true;
           } else if (scrollNotification is ScrollEndNotification) {
-            // スクロール終了時により短い遅延でユーザースクロール状態をリセット
-            _debounceTimer?.cancel();
-            _debounceTimer = Timer(const Duration(milliseconds: 100), () {
-              _isUserScrolling = false;
-            });
+            debounceTimer.value?.cancel();
+            debounceTimer.value = Timer(
+              const Duration(milliseconds: 100),
+              () {
+                isUserScrolling.value = false;
+              },
+            );
           }
           return false;
         },
         child: ListView.builder(
-          controller: _scrollController,
+          controller: scrollController,
           physics: const BouncingScrollPhysics(),
-          itemCount: widget.maxFrets,
+          itemCount: maxFrets,
           itemBuilder: (context, index) {
             return FretWidget(
               currentFret: index,
-              startFret: _currentStartFret,
-              fretPositions: widget.fretPositions,
+              startFret: currentStartFret.value,
+              fretPositions: fretPositions,
             );
           },
         ),
