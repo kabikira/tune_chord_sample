@@ -126,36 +126,18 @@ class ChordFormList extends HookConsumerWidget {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                context.push(
-                  '/tuningList/chordFormList/$tuningId/chordFormRegister',
-                  extra: tuningId,
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 2,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.add, color: theme.colorScheme.onPrimary),
-                  const SizedBox(width: 8),
-                  Text(l10n.registerChordForm),
-                ],
-              ),
-            ),
-          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push(
+            '/tuningList/chordFormList/$tuningId/chordFormRegister',
+            extra: tuningId,
+          );
+        },
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: const Icon(Icons.add),
       ),
     );
   }
