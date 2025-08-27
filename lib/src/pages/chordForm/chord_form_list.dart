@@ -190,7 +190,12 @@ class ChordFormList extends HookConsumerWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'フレットポジション: ${FretPositionUtils.parseFretPositions(chordForm.fretPositions).map((p) => p == -1 ? 'X' : p.toString()).join(',')}',
+                              l10n.fretPositionLabel(
+                                FretPositionUtils
+                                    .parseFretPositions(chordForm.fretPositions)
+                                    .map((p) => p == -1 ? 'X' : p.toString())
+                                    .join(','),
+                              ),
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,
@@ -324,7 +329,12 @@ class ChordFormList extends HookConsumerWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'フレットポジション: ${FretPositionUtils.parseFretPositions(chordForm.fretPositions).map((p) => p == -1 ? 'X' : p.toString()).join(',')}',
+                              l10n.fretPositionLabel(
+                                FretPositionUtils
+                                    .parseFretPositions(chordForm.fretPositions)
+                                    .map((p) => p == -1 ? 'X' : p.toString())
+                                    .join(','),
+                              ),
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.7,
