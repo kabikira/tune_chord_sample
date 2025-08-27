@@ -191,8 +191,9 @@ class ChordFormList extends HookConsumerWidget {
                             const SizedBox(height: 8),
                             Text(
                               l10n.fretPositionLabel(
-                                FretPositionUtils
-                                    .parseFretPositions(chordForm.fretPositions)
+                                FretPositionUtils.parseFretPositions(
+                                      chordForm.fretPositions,
+                                    )
                                     .map((p) => p == -1 ? 'X' : p.toString())
                                     .join(','),
                               ),
@@ -330,8 +331,9 @@ class ChordFormList extends HookConsumerWidget {
                             const SizedBox(height: 4),
                             Text(
                               l10n.fretPositionLabel(
-                                FretPositionUtils
-                                    .parseFretPositions(chordForm.fretPositions)
+                                FretPositionUtils.parseFretPositions(
+                                      chordForm.fretPositions,
+                                    )
                                     .map((p) => p == -1 ? 'X' : p.toString())
                                     .join(','),
                               ),
@@ -407,7 +409,7 @@ class ChordFormList extends HookConsumerWidget {
                       data: (tunings) {
                         final tuning = tunings.firstWhere(
                           (t) => t.id == chordForm.tuningId,
-                          orElse: () => throw Exception('チューニングが見つかりません'),
+                          orElse: () => throw Exception('Not find tuning'),
                         );
 
                         final fretPositions = ValueNotifier<List<int>>(
@@ -428,7 +430,8 @@ class ChordFormList extends HookConsumerWidget {
                           () =>
                               const Center(child: CircularProgressIndicator()),
                       error:
-                          (error, stack) => Center(child: Text('エラー: $error')),
+                          (error, stack) =>
+                              Center(child: Text('error: $error')),
                     );
                   },
                 ),

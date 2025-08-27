@@ -49,7 +49,7 @@ class ChordFormDetail extends HookConsumerWidget {
           // 指定されたchordFormIdに一致するコードフォームを取得
           final chordForm = chordForms.firstWhere(
             (form) => form.id == chordFormId,
-            orElse: () => throw Exception('コードフォームが見つかりません'),
+            orElse: () => throw Exception('Not find chordForms'),
           );
 
           return SingleChildScrollView(
@@ -60,81 +60,85 @@ class ChordFormDetail extends HookConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text(
-                    chordForm.label ?? '',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-
-                  const SizedBox(height: 8),
-                  Text(l10n.chordFretPosition(chordForm.fretPositions)),
-                  if (chordForm.memo != null && chordForm.memo!.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(l10n.chordMemo(chordForm.memo!)),
+                    Text(
+                      chordForm.label ?? '',
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
 
-                  const SizedBox(height: 16),
-                  // ギターフレットボード表示の追加
-                  Consumer(
-                    builder: (context, ref, child) {
-                      final tuningAsync = ref.watch(tuningNotifierProvider);
-                      return tuningAsync.when(
-                        data: (tunings) {
-                          final tuning = tunings.firstWhere(
-                            (t) => t.id == chordForm.tuningId,
-                            orElse: () => throw Exception(l10n.tuningNotFound),
-                          );
-
-                          final fretPositions = ValueNotifier<List<int>>(
-                            FretPositionUtils.parseFretPositions(
-                              chordForm.fretPositions,
-                            ),
-                          );
-
-                          return GuitarFretboardWidget(
-                            fretPositions: fretPositions,
-                            tuningAsync: AsyncValue.data(tuning),
-                            showMuteControl: false,
-                          );
-                        },
-                        loading:
-                            () => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                        error:
-                            (error, stack) => Center(
-                              child: Text(l10n.errorOccurred),
-                            ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          // 編集画面へ遷移
-                          context.go(
-                            '/tuningList/chordFormList/${chordForm.tuningId}/chordFormEdit',
-                            extra: chordForm.id,
-                          );
-                        },
-                        child: Text(l10n.edit),
+                    const SizedBox(height: 8),
+                    Text(l10n.chordFretPosition(chordForm.fretPositions)),
+                    if (chordForm.memo != null && chordForm.memo!.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(l10n.chordMemo(chordForm.memo!)),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          // 削除確認ダイアログを表示
-                          _showDeleteConfirmDialog(context, ref, chordForm.id);
-                        },
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.red,
+
+                    const SizedBox(height: 16),
+                    // ギターフレットボード表示の追加
+                    Consumer(
+                      builder: (context, ref, child) {
+                        final tuningAsync = ref.watch(tuningNotifierProvider);
+                        return tuningAsync.when(
+                          data: (tunings) {
+                            final tuning = tunings.firstWhere(
+                              (t) => t.id == chordForm.tuningId,
+                              orElse:
+                                  () => throw Exception(l10n.tuningNotFound),
+                            );
+
+                            final fretPositions = ValueNotifier<List<int>>(
+                              FretPositionUtils.parseFretPositions(
+                                chordForm.fretPositions,
+                              ),
+                            );
+
+                            return GuitarFretboardWidget(
+                              fretPositions: fretPositions,
+                              tuningAsync: AsyncValue.data(tuning),
+                              showMuteControl: false,
+                            );
+                          },
+                          loading:
+                              () => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                          error:
+                              (error, stack) =>
+                                  Center(child: Text(l10n.errorOccurred)),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            // 編集画面へ遷移
+                            context.go(
+                              '/tuningList/chordFormList/${chordForm.tuningId}/chordFormEdit',
+                              extra: chordForm.id,
+                            );
+                          },
+                          child: Text(l10n.edit),
                         ),
-                        child: Text(l10n.delete),
-                      ),
-                    ],
-                  ),
-                ],
+                        TextButton(
+                          onPressed: () {
+                            // 削除確認ダイアログを表示
+                            _showDeleteConfirmDialog(
+                              context,
+                              ref,
+                              chordForm.id,
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.red,
+                          ),
+                          child: Text(l10n.delete),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -151,31 +155,32 @@ class ChordFormDetail extends HookConsumerWidget {
   ) {
     showDialog(
       context: context,
-
-      builder:
-          (context) => AlertDialog(
-            title: const Text('コードフォームの削除'),
-            content: const Text('このコードフォームを削除してもよろしいですか？'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('キャンセル'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // コードフォームを削除
-                  ref
-                      .read(chordFormNotifierProvider.notifier)
-                      .deleteChordForm(chordFormId);
-                  Navigator.of(context).pop();
-                  // 削除後に前の画面に戻る
-                  context.pop();
-                },
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-                child: const Text('削除'),
-              ),
-            ],
-          ),
+      builder: (context) {
+        final l10n = AppLocalizations.of(context)!;
+        return AlertDialog(
+          title: Text(l10n.deleteChordForm),
+          content: Text(l10n.deleteChordFormConfirmation),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.cancel),
+            ),
+            TextButton(
+              onPressed: () {
+                // コードフォームを削除
+                ref
+                    .read(chordFormNotifierProvider.notifier)
+                    .deleteChordForm(chordFormId);
+                Navigator.of(context).pop();
+                // 削除後に前の画面に戻る
+                context.pop();
+              },
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: Text(l10n.delete),
+            ),
+          ],
+        );
+      },
     );
   }
 }
