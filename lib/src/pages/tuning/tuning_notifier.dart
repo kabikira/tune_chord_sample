@@ -87,7 +87,7 @@ class TuningNotifier extends StateNotifier<AsyncValue<List<Tuning>>> {
       final tunings = await db.getAllTunings();
       final existingTuning = tunings.firstWhere(
         (tuning) => tuning.id == id,
-        orElse: () => throw Exception('チューニングが見つかりません'),
+        orElse: () => throw Exception('Untitled Tuning'),
       );
 
       // 空文字列の場合はデフォルト値を設定

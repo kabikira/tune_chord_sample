@@ -1,6 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
+import 'package:resonance/l10n/app_localizations.dart';
+
 class TuningInfoCard extends StatelessWidget {
   final String tuningName;
   final String tuningStrings;
@@ -14,6 +17,7 @@ class TuningInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Card(
       elevation: 0,
@@ -40,7 +44,7 @@ class TuningInfoCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'チューニング',
+                    l10n.navTuning,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                     ),

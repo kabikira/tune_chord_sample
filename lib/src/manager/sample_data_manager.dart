@@ -83,17 +83,17 @@ class SampleDataManager {
           ),
         ];
         break;
-      case 1: // オープンG
+      case 1:
         chordForms = [
           ChordFormsCompanion(
             tuningId: Value(tuningId),
             fretPositions: const Value('x,15,15,0,0,0'), // intro（6弦→1弦）
-            memo: const Value('intro'),
+            label: const Value('intro'),
             isFavorite: const Value(true),
           ),
         ];
         break;
-      case 2: // Drop D
+      case 2:
         chordForms = [
           ChordFormsCompanion(
             tuningId: Value(tuningId),
