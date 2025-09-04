@@ -1,6 +1,6 @@
-# tune_chord_sample
+# ChordFracture
 
-A new Flutter project.
+Alternate-tuning guitar chord form manager.
 
 ## Getting Started
 

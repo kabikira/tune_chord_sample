@@ -7,12 +7,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/pages/tuning/tuning_delete_dialog.dart';
-import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
-import 'package:resonance/src/pages/tuning/tuning_register.dart';
-import 'package:resonance/src/pages/tuning/tuning_update_dialog.dart';
-import 'package:resonance/src/utils/date_utils.dart' as utils;
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/pages/tuning/tuning_delete_dialog.dart';
+import 'package:chord_fracture/src/pages/tuning/tuning_notifier.dart';
+import 'package:chord_fracture/src/pages/tuning/tuning_register.dart';
+import 'package:chord_fracture/src/pages/tuning/tuning_update_dialog.dart';
+import 'package:chord_fracture/src/utils/date_utils.dart' as utils;
 
 class TuningList extends HookConsumerWidget {
   const TuningList({super.key});

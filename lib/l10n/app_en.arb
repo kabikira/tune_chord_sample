@@ -396,7 +396,7 @@
   "@aboutAppTitle": {
     "description": "About app dialog title"
   },
-  "appName": "Resonance",
+  "appName": "ChordFracture",
   "@appName": {
     "description": "Application name"
   },

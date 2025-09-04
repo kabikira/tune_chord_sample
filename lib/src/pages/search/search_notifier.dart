@@ -2,8 +2,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/src/db/app_database.dart';
-import 'package:resonance/src/pages/search/search_page.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
+import 'package:chord_fracture/src/pages/search/search_page.dart';
 
 // タグ取得用プロバイダー
 final tuningTagsProvider = FutureProvider.family<List<Tag>, int>((ref, tuningId) async {

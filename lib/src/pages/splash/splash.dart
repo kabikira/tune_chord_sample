@@ -6,8 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
 // Project imports:
-import 'package:resonance/src/config/app_theme.dart';
-import 'package:resonance/src/widgets/resonance_icon.dart';
+import 'package:chord_fracture/src/config/app_theme.dart';
+import 'package:chord_fracture/src/widgets/chord_fracture_icon.dart';
 
 class Splash extends HookWidget {
   const Splash({super.key});
@@ -31,7 +31,7 @@ class Splash extends HookWidget {
         decoration: BoxDecoration(
           gradient: AppThemeUtils.createGradientBackground(),
         ),
-        child: const Center(child: SimpleResonanceIcon(size: 250)),
+        child: const Center(child: SimpleChordFractureIcon(size: 250)),
       ),
     );
   }

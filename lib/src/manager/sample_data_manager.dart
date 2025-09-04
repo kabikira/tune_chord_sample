@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 // Project imports:
-import 'package:resonance/src/db/app_database.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
 
 part 'sample_data_manager.g.dart';
 

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
 
 class TuningInfoCard extends StatelessWidget {
   final String tuningName;

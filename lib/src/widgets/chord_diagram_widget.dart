@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/config/resonance_colors.dart';
-import 'package:resonance/src/db/app_database.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/config/chord_fracture_colors.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
 
 class ChordDiagramWidget extends StatelessWidget {
   final ChordForm codeForm;
@@ -70,7 +70,7 @@ class ChordDiagramWidget extends StatelessWidget {
     return Container(
       height: 160,
       decoration: BoxDecoration(
-        color: ResonanceColors.offWhite,
+        color: ChordFractureColors.offWhite,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(

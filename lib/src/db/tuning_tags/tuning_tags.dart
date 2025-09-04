@@ -2,8 +2,8 @@
 import 'package:drift/drift.dart';
 
 // Project imports:
-import 'package:resonance/src/db/tag/tab.dart';
-import 'package:resonance/src/db/tunings/tunings.dart';
+import 'package:chord_fracture/src/db/tag/tab.dart';
+import 'package:chord_fracture/src/db/tunings/tunings.dart';
 
 class TuningTags extends Table {
   IntColumn get id => integer().autoIncrement()();

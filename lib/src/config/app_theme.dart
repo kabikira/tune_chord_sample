@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:resonance/src/config/resonance_colors.dart';
+import 'package:chord_fracture/src/config/chord_fracture_colors.dart';
 
 /// アプリケーションのテーマを管理するクラス
-/// 
+///
 /// ResonanceColorsを使用してMaterial 3対応のテーマを生成し、
 /// アプリ全体で統一されたデザインシステムを提供します。
 class AppTheme {
@@ -14,21 +14,21 @@ class AppTheme {
   /// Resonanceカラーパレットを使用したライトテーマ
   static ThemeData get lightTheme {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: ResonanceColors.primary,
+      seedColor: ChordFractureColors.primary,
       brightness: Brightness.light,
-      primary: ResonanceColors.primary,
-      secondary: ResonanceColors.secondary,
-      error: ResonanceColors.error,
-      surface: ResonanceColors.offWhite,
+      primary: ChordFractureColors.primary,
+      secondary: ChordFractureColors.secondary,
+      error: ChordFractureColors.error,
+      surface: ChordFractureColors.offWhite,
     );
 
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: const Color(0xFFF2F4F8),
-      
+
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 3,
         surfaceTintColor: const Color(0xFFFEFEFE),
         color: const Color(0xFFFEFEFE),
@@ -37,7 +37,7 @@ class AppTheme {
         ),
         shadowColor: Colors.black.withValues(alpha: 0.08),
       ),
-      
+
       // AppBar Theme
       appBarTheme: const AppBarTheme(
         centerTitle: true,
@@ -50,53 +50,45 @@ class AppTheme {
           color: Color(0xFF2C2C2C),
         ),
       ),
-      
+
       // Button Themes
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: ResonanceColors.primary,
-          foregroundColor: ResonanceColors.offWhite,
+          backgroundColor: ChordFractureColors.primary,
+          foregroundColor: ChordFractureColors.offWhite,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
         ),
       ),
-      
+
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: ResonanceColors.primary,
-          side: BorderSide(color: ResonanceColors.primary.withValues(alpha: 0.8), width: 1.5),
+          foregroundColor: ChordFractureColors.primary,
+          side: BorderSide(
+            color: ChordFractureColors.primary.withValues(alpha: 0.8),
+            width: 1.5,
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
         ),
       ),
-      
+
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: ResonanceColors.primary,
+          foregroundColor: ChordFractureColors.primary,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
         ),
       ),
-      
+
       // Input Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -107,15 +99,15 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: ResonanceColors.primary, width: 2),
+          borderSide: BorderSide(color: ChordFractureColors.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: ResonanceColors.error, width: 2),
+          borderSide: BorderSide(color: ChordFractureColors.error, width: 2),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: ResonanceColors.error, width: 2),
+          borderSide: BorderSide(color: ChordFractureColors.error, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -126,7 +118,7 @@ class AppTheme {
           fontSize: 15,
         ),
       ),
-      
+
       // Text Theme
       textTheme: const TextTheme(
         titleLarge: TextStyle(
@@ -143,49 +135,45 @@ class AppTheme {
         bodyMedium: TextStyle(fontSize: 15, color: Color(0xFF2C2C2C)),
         bodySmall: TextStyle(fontSize: 13, color: Color(0xFF6E6E6E)),
       ),
-      
+
       // Icon Theme
-      iconTheme: IconThemeData(color: ResonanceColors.primary, size: 24),
-      
+      iconTheme: IconThemeData(color: ChordFractureColors.primary, size: 24),
+
       // Divider Theme
       dividerTheme: DividerThemeData(
         color: Colors.grey.withValues(alpha: 0.15),
         thickness: 1,
         space: 1,
       ),
-      
+
       // Floating Action Button Theme
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: ResonanceColors.accent,
-        foregroundColor: ResonanceColors.offWhite,
+        backgroundColor: ChordFractureColors.accent,
+        foregroundColor: ChordFractureColors.offWhite,
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
-      
+
       // Progress Indicator Theme
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: ResonanceColors.primary,
-        linearTrackColor: ResonanceColors.primary.withValues(alpha: 0.2),
-        circularTrackColor: ResonanceColors.primary.withValues(alpha: 0.2),
+        color: ChordFractureColors.primary,
+        linearTrackColor: ChordFractureColors.primary.withValues(alpha: 0.2),
+        circularTrackColor: ChordFractureColors.primary.withValues(alpha: 0.2),
       ),
-      
+
       // Chip Theme
       chipTheme: ChipThemeData(
-        backgroundColor: ResonanceColors.secondary.withValues(alpha: 0.1),
-        selectedColor: ResonanceColors.secondary,
-        labelStyle: TextStyle(color: ResonanceColors.secondary),
+        backgroundColor: ChordFractureColors.secondary.withValues(alpha: 0.1),
+        selectedColor: ChordFractureColors.secondary,
+        labelStyle: TextStyle(color: ChordFractureColors.secondary),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      
+
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: ResonanceColors.offWhite,
-        selectedItemColor: ResonanceColors.primary,
+        backgroundColor: ChordFractureColors.offWhite,
+        selectedItemColor: ChordFractureColors.primary,
         unselectedItemColor: const Color(0xFF6E6E6E),
         elevation: 8,
         type: BottomNavigationBarType.fixed,
@@ -206,182 +194,183 @@ class AppTheme {
   /// Resonanceカラーパレットを使用したダークテーマ（1a202c背景）
   static ThemeData get darkTheme {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: ResonanceColors.primary,
+      seedColor: ChordFractureColors.primary,
       brightness: Brightness.dark,
-      primary: ResonanceColors.primary,
-      secondary: ResonanceColors.secondary,
-      error: ResonanceColors.error,
-      surface: ResonanceColors.background,
-      onSurface: ResonanceColors.offWhite.withValues(alpha: 0.9),
-      onPrimary: ResonanceColors.offWhite,
-      onSecondary: ResonanceColors.offWhite,
+      primary: ChordFractureColors.primary,
+      secondary: ChordFractureColors.secondary,
+      error: ChordFractureColors.error,
+      surface: ChordFractureColors.background,
+      onSurface: ChordFractureColors.offWhite.withValues(alpha: 0.9),
+      onPrimary: ChordFractureColors.offWhite,
+      onSecondary: ChordFractureColors.offWhite,
     );
 
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: ResonanceColors.background,
-      
+      scaffoldBackgroundColor: ChordFractureColors.background,
+
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 6,
-        surfaceTintColor: ResonanceColors.offWhite.withValues(alpha: 0.08),
-        color: ResonanceColors.offWhite.withValues(alpha: 0.08),
+        surfaceTintColor: ChordFractureColors.offWhite.withValues(alpha: 0.08),
+        color: ChordFractureColors.offWhite.withValues(alpha: 0.08),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         shadowColor: Colors.black.withValues(alpha: 0.4),
       ),
-      
+
       // AppBar Theme
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: ResonanceColors.background,
-        foregroundColor: ResonanceColors.offWhite.withValues(alpha: 0.9),
+        backgroundColor: ChordFractureColors.background,
+        foregroundColor: ChordFractureColors.offWhite.withValues(alpha: 0.9),
         titleTextStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: ResonanceColors.offWhite.withValues(alpha: 0.9),
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.9),
         ),
       ),
-      
+
       // Button Themes
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: ResonanceColors.primary,
-          foregroundColor: ResonanceColors.offWhite,
+          backgroundColor: ChordFractureColors.primary,
+          foregroundColor: ChordFractureColors.offWhite,
           elevation: 2,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
         ),
       ),
-      
+
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: ResonanceColors.primary,
-          side: BorderSide(color: ResonanceColors.primary.withValues(alpha: 0.8), width: 1.5),
+          foregroundColor: ChordFractureColors.primary,
+          side: BorderSide(
+            color: ChordFractureColors.primary.withValues(alpha: 0.8),
+            width: 1.5,
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
         ),
       ),
-      
+
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: ResonanceColors.primary,
+          foregroundColor: ChordFractureColors.primary,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
         ),
       ),
-      
+
       // Input Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: ResonanceColors.offWhite.withValues(alpha: 0.12),
+        fillColor: ChordFractureColors.offWhite.withValues(alpha: 0.12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: ResonanceColors.primary, width: 2),
+          borderSide: BorderSide(color: ChordFractureColors.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: ResonanceColors.error, width: 2),
+          borderSide: BorderSide(color: ChordFractureColors.error, width: 2),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: ResonanceColors.error, width: 2),
+          borderSide: BorderSide(color: ChordFractureColors.error, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,
         ),
         hintStyle: TextStyle(
-          color: ResonanceColors.offWhite.withValues(alpha: 0.6),
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.6),
           fontSize: 15,
         ),
       ),
-      
+
       // Text Theme
       textTheme: TextTheme(
         titleLarge: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
-          color: ResonanceColors.offWhite.withValues(alpha: 0.9),
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.9),
         ),
         titleMedium: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
-          color: ResonanceColors.offWhite.withValues(alpha: 0.9),
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.9),
         ),
-        bodyLarge: TextStyle(fontSize: 16, color: ResonanceColors.offWhite.withValues(alpha: 0.9)),
-        bodyMedium: TextStyle(fontSize: 15, color: ResonanceColors.offWhite.withValues(alpha: 0.9)),
-        bodySmall: TextStyle(fontSize: 13, color: ResonanceColors.offWhite.withValues(alpha: 0.7)),
+        bodyLarge: TextStyle(
+          fontSize: 16,
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.9),
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 15,
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.9),
+        ),
+        bodySmall: TextStyle(
+          fontSize: 13,
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.7),
+        ),
       ),
-      
+
       // Icon Theme
-      iconTheme: IconThemeData(color: ResonanceColors.primary, size: 24),
-      
+      iconTheme: IconThemeData(color: ChordFractureColors.primary, size: 24),
+
       // Divider Theme
       dividerTheme: DividerThemeData(
-        color: ResonanceColors.offWhite.withValues(alpha: 0.2),
+        color: ChordFractureColors.offWhite.withValues(alpha: 0.2),
         thickness: 1,
         space: 1,
       ),
-      
+
       // Floating Action Button Theme
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: ResonanceColors.accent,
-        foregroundColor: ResonanceColors.offWhite,
+        backgroundColor: ChordFractureColors.accent,
+        foregroundColor: ChordFractureColors.offWhite,
         elevation: 6,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
-      
+
       // Progress Indicator Theme
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: ResonanceColors.primary,
-        linearTrackColor: ResonanceColors.primary.withValues(alpha: 0.3),
-        circularTrackColor: ResonanceColors.primary.withValues(alpha: 0.3),
+        color: ChordFractureColors.primary,
+        linearTrackColor: ChordFractureColors.primary.withValues(alpha: 0.3),
+        circularTrackColor: ChordFractureColors.primary.withValues(alpha: 0.3),
       ),
-      
+
       // Chip Theme
       chipTheme: ChipThemeData(
-        backgroundColor: ResonanceColors.secondary.withValues(alpha: 0.2),
-        selectedColor: ResonanceColors.secondary,
-        labelStyle: TextStyle(color: ResonanceColors.offWhite.withValues(alpha: 0.9)),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+        backgroundColor: ChordFractureColors.secondary.withValues(alpha: 0.2),
+        selectedColor: ChordFractureColors.secondary,
+        labelStyle: TextStyle(
+          color: ChordFractureColors.offWhite.withValues(alpha: 0.9),
         ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      
+
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: ResonanceColors.background.withValues(alpha: 0.95),
-        selectedItemColor: ResonanceColors.primary,
-        unselectedItemColor: ResonanceColors.offWhite.withValues(alpha: 0.6),
+        backgroundColor: ChordFractureColors.background.withValues(alpha: 0.95),
+        selectedItemColor: ChordFractureColors.primary,
+        unselectedItemColor: ChordFractureColors.offWhite.withValues(
+          alpha: 0.6,
+        ),
         elevation: 8,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
@@ -397,7 +386,6 @@ class AppTheme {
       ),
     );
   }
-
 }
 
 /// ギター弦用の特別なカラースキーム（ウィジェット用）
@@ -405,17 +393,17 @@ class GuitarStringTheme {
   GuitarStringTheme._();
 
   static const Map<int, Color> stringColors = {
-    0: ResonanceColors.highE,  // High E (1弦)
-    1: ResonanceColors.b,      // B (2弦)
-    2: ResonanceColors.g,      // G (3弦)
-    3: ResonanceColors.d,      // D (4弦)
-    4: ResonanceColors.a,      // A (5弦)
-    5: ResonanceColors.lowE,   // Low E (6弦)
+    0: ChordFractureColors.highE, // High E (1弦)
+    1: ChordFractureColors.b, // B (2弦)
+    2: ChordFractureColors.g, // G (3弦)
+    3: ChordFractureColors.d, // D (4弦)
+    4: ChordFractureColors.a, // A (5弦)
+    5: ChordFractureColors.lowE, // Low E (6弦)
   };
 
   /// 弦のインデックスに対応するカラーを取得
   static Color getStringColor(int stringIndex) {
-    return stringColors[stringIndex] ?? ResonanceColors.primary;
+    return stringColors[stringIndex] ?? ChordFractureColors.primary;
   }
 
   /// 弦カラーの薄い版（背景用）
@@ -443,8 +431,8 @@ class AppThemeUtils {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        (topColor ?? ResonanceColors.primary).withValues(alpha: topOpacity),
-        bottomColor ?? ResonanceColors.offWhite,
+        (topColor ?? ChordFractureColors.primary).withValues(alpha: topOpacity),
+        bottomColor ?? ChordFractureColors.offWhite,
       ],
     );
   }

@@ -1,12 +1,12 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-/// Resonanceアイコンのカラーパレットに基づいたアプリケーション全体のカラー定義
+/// ChordFractureアイコンのカラーパレットに基づいたアプリケーション全体のカラー定義
 /// 
-/// このクラスは、Resonanceアイコンで使用されている6色の波形カラーを
+/// このクラスは、ChordFractureアイコンで使用されている6色の波形カラーを
 /// アプリ全体で統一的に管理するためのカラーパレットを提供します。
-class ResonanceColors {
-  ResonanceColors._();
+class ChordFractureColors {
+  ChordFractureColors._();
 
   // === Core Colors ===
   /// 背景色（ダークネイビー）

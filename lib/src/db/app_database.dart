@@ -11,11 +11,11 @@ import 'package:sqlite3/sqlite3.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 // Project imports:
-import 'package:resonance/src/db/chordForms/chord_forms.dart';
-import 'package:resonance/src/db/chord_form_tags/chord_form_tags.dart';
-import 'package:resonance/src/db/tag/tab.dart';
-import 'package:resonance/src/db/tuning_tags/tuning_tags.dart';
-import 'package:resonance/src/db/tunings/tunings.dart';
+import 'package:chord_fracture/src/db/chordForms/chord_forms.dart';
+import 'package:chord_fracture/src/db/chord_form_tags/chord_form_tags.dart';
+import 'package:chord_fracture/src/db/tag/tab.dart';
+import 'package:chord_fracture/src/db/tuning_tags/tuning_tags.dart';
+import 'package:chord_fracture/src/db/tunings/tunings.dart';
 
 part 'app_database.g.dart';
 

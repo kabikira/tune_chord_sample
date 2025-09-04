@@ -6,14 +6,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/db/app_database.dart';
-import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
-import 'package:resonance/src/utils/fret_position_utils.dart';
-import 'package:resonance/src/widgets/chord_diagram_widget.dart';
-import 'package:resonance/src/widgets/custom_text_field.dart';
-import 'package:resonance/src/widgets/dialog_action_buttons.dart';
-import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
+import 'package:chord_fracture/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:chord_fracture/src/utils/fret_position_utils.dart';
+import 'package:chord_fracture/src/widgets/chord_diagram_widget.dart';
+import 'package:chord_fracture/src/widgets/custom_text_field.dart';
+import 'package:chord_fracture/src/widgets/dialog_action_buttons.dart';
+import 'package:chord_fracture/src/widgets/guitar_fretboard_widget.dart';
 
 class ChordFormUpdateDialog extends HookConsumerWidget {
   final ChordForm chordForm;

@@ -2,8 +2,8 @@
 import 'package:drift/drift.dart';
 
 // Project imports:
-import 'package:resonance/src/db/chordForms/chord_forms.dart';
-import 'package:resonance/src/db/tag/tab.dart';
+import 'package:chord_fracture/src/db/chordForms/chord_forms.dart';
+import 'package:chord_fracture/src/db/tag/tab.dart';
 
 class ChordFormTags extends Table {
   IntColumn get id => integer().autoIncrement()();

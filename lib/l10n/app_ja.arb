@@ -389,7 +389,7 @@
   "@aboutAppTitle": {
     "description": "アプリについてダイアログのタイトル"
   },
-  "appName": "Resonance",
+  "appName": "ChordFracture",
   "@appName": {
     "description": "アプリ名"
   },

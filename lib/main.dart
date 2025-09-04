@@ -8,12 +8,12 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/firebase_options.dart';
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/config/app_theme.dart';
-import 'package:resonance/src/config/theme_provider.dart';
-import 'package:resonance/src/router/router.dart';
-import 'package:resonance/src/manager/app_initialization_manager.dart';
+import 'package:chord_fracture/firebase_options.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/config/app_theme.dart';
+import 'package:chord_fracture/src/config/theme_provider.dart';
+import 'package:chord_fracture/src/router/router.dart';
+import 'package:chord_fracture/src/manager/app_initialization_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
