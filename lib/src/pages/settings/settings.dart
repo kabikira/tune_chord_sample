@@ -8,9 +8,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/config/theme_provider.dart';
-import 'package:resonance/src/pages/settings/widget_gallery.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/config/theme_provider.dart';
+import 'package:chord_fracture/src/pages/settings/widget_gallery.dart';
 
 class Settings extends ConsumerWidget {
   const Settings({super.key});

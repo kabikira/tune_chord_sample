@@ -6,17 +6,17 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/src/config/resonance_colors.dart';
-import 'package:resonance/src/db/app_database.dart';
-import 'package:resonance/src/widgets/chord_diagram_widget.dart';
-import 'package:resonance/src/widgets/chord_form_action_buttons.dart';
-import 'package:resonance/src/widgets/custom_text_field.dart';
-import 'package:resonance/src/widgets/dialog_action_buttons.dart';
-import 'package:resonance/src/widgets/fret_control_widget.dart';
-import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
-import 'package:resonance/src/widgets/resonance_icon.dart';
+import 'package:chord_fracture/src/config/chord_fracture_colors.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
+import 'package:chord_fracture/src/widgets/chord_diagram_widget.dart';
+import 'package:chord_fracture/src/widgets/chord_form_action_buttons.dart';
+import 'package:chord_fracture/src/widgets/custom_text_field.dart';
+import 'package:chord_fracture/src/widgets/dialog_action_buttons.dart';
+import 'package:chord_fracture/src/widgets/fret_control_widget.dart';
+import 'package:chord_fracture/src/widgets/guitar_fretboard_widget.dart';
+import 'package:chord_fracture/src/widgets/chord_fracture_icon.dart';
 
-import 'package:resonance/src/widgets/tuning_info_card.dart' as new_tuning;
+import 'package:chord_fracture/src/widgets/tuning_info_card.dart' as new_tuning;
 
 class WidgetGallery extends HookConsumerWidget {
   const WidgetGallery({super.key});
@@ -64,37 +64,37 @@ class WidgetGallery extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Resonanceカラーパレット
+            // ChordFractureカラーパレット
             _buildWidgetSection(
               context,
-              title: 'Resonanceカラーパレット',
-              description: 'アプリ全体で使用されるResonanceカラーとギター弦カラー',
+              title: 'ChordFractureカラーパレット',
+              description: 'アプリ全体で使用されるChordFractureカラーとギター弦カラー',
               child: Column(
                 children: [
-                  // Resonanceアイコン
+                  // ChordFractureアイコン
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SimpleResonanceIcon(size: 60),
+                      const SimpleChordFractureIcon(size: 60),
                       const SizedBox(width: 20),
-                      ResonanceIcon(
+                      ChordFractureIcon(
                         size: 60,
-                        backgroundColor: ResonanceColors.background,
+                        backgroundColor: ChordFractureColors.background,
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
 
                   // コアカラー
-                  _buildColorRow('プライマリ', ResonanceColors.primary, 'Primary'),
+                  _buildColorRow('プライマリ', ChordFractureColors.primary, 'Primary'),
                   _buildColorRow(
                     'セカンダリ',
-                    ResonanceColors.secondary,
+                    ChordFractureColors.secondary,
                     'Secondary',
                   ),
                   _buildColorRow(
                     '背景',
-                    ResonanceColors.background,
+                    ChordFractureColors.background,
                     'Background',
                   ),
 
@@ -110,14 +110,14 @@ class WidgetGallery extends HookConsumerWidget {
                   // ギター弦カラー
                   _buildColorRow(
                     'High E (1弦)',
-                    ResonanceColors.highE,
+                    ChordFractureColors.highE,
                     'Coral Red',
                   ),
-                  _buildColorRow('B (2弦)', ResonanceColors.b, 'Turquoise'),
-                  _buildColorRow('G (3弦)', ResonanceColors.g, 'Sky Blue'),
-                  _buildColorRow('D (4弦)', ResonanceColors.d, 'Mint Green'),
-                  _buildColorRow('A (5弦)', ResonanceColors.a, 'Yellow'),
-                  _buildColorRow('Low E (6弦)', ResonanceColors.lowE, 'Purple'),
+                  _buildColorRow('B (2弦)', ChordFractureColors.b, 'Turquoise'),
+                  _buildColorRow('G (3弦)', ChordFractureColors.g, 'Sky Blue'),
+                  _buildColorRow('D (4弦)', ChordFractureColors.d, 'Mint Green'),
+                  _buildColorRow('A (5弦)', ChordFractureColors.a, 'Yellow'),
+                  _buildColorRow('Low E (6弦)', ChordFractureColors.lowE, 'Purple'),
 
                   const SizedBox(height: 16),
                   Text(
@@ -129,10 +129,10 @@ class WidgetGallery extends HookConsumerWidget {
                   const SizedBox(height: 8),
 
                   // セマンティックカラー
-                  _buildColorRow('エラー', ResonanceColors.error, 'Error'),
-                  _buildColorRow('成功', ResonanceColors.success, 'Success'),
-                  _buildColorRow('警告', ResonanceColors.warning, 'Warning'),
-                  _buildColorRow('情報', ResonanceColors.info, 'Info'),
+                  _buildColorRow('エラー', ChordFractureColors.error, 'Error'),
+                  _buildColorRow('成功', ChordFractureColors.success, 'Success'),
+                  _buildColorRow('警告', ChordFractureColors.warning, 'Warning'),
+                  _buildColorRow('情報', ChordFractureColors.info, 'Info'),
                 ],
               ),
             ),

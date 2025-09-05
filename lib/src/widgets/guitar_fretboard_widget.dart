@@ -9,11 +9,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/src/config/resonance_colors.dart';
+import 'package:chord_fracture/src/config/chord_fracture_colors.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/db/app_database.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
 
 /// チューニング文字列をシャープ記号を考慮して解析する関数
 List<String> _parseStringNames(String strings) {
@@ -274,7 +274,7 @@ class StringWidget extends StatelessWidget {
                       child: Text(
                         'X',
                         style: TextStyle(
-                          color: ResonanceColors.offWhite,
+                          color: ChordFractureColors.offWhite,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -288,8 +288,8 @@ class StringWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       color:
                           theme.brightness == Brightness.dark
-                              ? ResonanceColors.a.withValues(alpha: 0.7)
-                              : ResonanceColors.primary.withValues(alpha: 0.7),
+                              ? ChordFractureColors.a.withValues(alpha: 0.7)
+                              : ChordFractureColors.primary.withValues(alpha: 0.7),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
@@ -305,7 +305,7 @@ class StringWidget extends StatelessWidget {
                         style: TextStyle(
                           color:
                               theme.brightness == Brightness.dark
-                                  ? ResonanceColors.background
+                                  ? ChordFractureColors.background
                                   : theme.colorScheme.onPrimary,
                           fontWeight: FontWeight.bold,
                           fontSize: 12,

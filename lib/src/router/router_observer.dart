@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:resonance/src/log/logger.dart';
+import 'package:chord_fracture/src/log/logger.dart';
 
 class RouterObserver extends NavigatorObserver {
   @override

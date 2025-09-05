@@ -1,4 +1,4 @@
-package com.example.tune_chord_sample
+package com.example.chordfracture
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -7,13 +7,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
-import 'package:resonance/src/widgets/chord_form_action_buttons.dart';
-import 'package:resonance/src/widgets/custom_text_field.dart';
-import 'package:resonance/src/widgets/fret_control_widget.dart';
-import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
-import 'package:resonance/src/widgets/tuning_info_card.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/pages/chordForm/chord_form_providers.dart';
+import 'package:chord_fracture/src/widgets/chord_form_action_buttons.dart';
+import 'package:chord_fracture/src/widgets/custom_text_field.dart';
+import 'package:chord_fracture/src/widgets/fret_control_widget.dart';
+import 'package:chord_fracture/src/widgets/guitar_fretboard_widget.dart';
+import 'package:chord_fracture/src/widgets/tuning_info_card.dart';
 
 class ChordFormWidget extends HookConsumerWidget {
   final int tuningId;

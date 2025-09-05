@@ -2,7 +2,7 @@
 import 'package:drift/drift.dart';
 
 // Project imports:
-import 'package:resonance/src/db/tunings/tunings.dart';
+import 'package:chord_fracture/src/db/tunings/tunings.dart';
 
 class ChordForms extends Table {
   IntColumn get id => integer().autoIncrement()();

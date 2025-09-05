@@ -2,8 +2,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 // Project imports:
-import 'package:resonance/src/manager/preferences_manager.dart';
-import 'package:resonance/src/manager/sample_data_manager.dart';
+import 'package:chord_fracture/src/manager/preferences_manager.dart';
+import 'package:chord_fracture/src/manager/sample_data_manager.dart';
 
 part 'app_initialization_manager.g.dart';
 

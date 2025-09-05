@@ -2,7 +2,7 @@
 import 'package:drift/drift.dart';
 
 // Project imports:
-import 'package:resonance/src/config/validation_constants.dart';
+import 'package:chord_fracture/src/config/validation_constants.dart';
 
 class Tunings extends Table {
   IntColumn get id => integer().autoIncrement()();

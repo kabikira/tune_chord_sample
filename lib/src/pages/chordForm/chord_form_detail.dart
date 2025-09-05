@@ -6,12 +6,12 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
-import 'package:resonance/src/pages/chordForm/chord_form_notifier.dart';
-import 'package:resonance/src/pages/chordForm/chord_form_providers.dart';
-import 'package:resonance/src/pages/tuning/tuning_notifier.dart';
-import 'package:resonance/src/utils/fret_position_utils.dart';
-import 'package:resonance/src/widgets/guitar_fretboard_widget.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
+import 'package:chord_fracture/src/pages/chordForm/chord_form_notifier.dart';
+import 'package:chord_fracture/src/pages/chordForm/chord_form_providers.dart';
+import 'package:chord_fracture/src/pages/tuning/tuning_notifier.dart';
+import 'package:chord_fracture/src/utils/fret_position_utils.dart';
+import 'package:chord_fracture/src/widgets/guitar_fretboard_widget.dart';
 
 class ChordFormDetail extends HookConsumerWidget {
   final int chordFormId;

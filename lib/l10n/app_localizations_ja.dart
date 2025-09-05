@@ -56,7 +56,8 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get deleteWarningMessage => 'この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。';
+  String get deleteWarningMessage =>
+      'この操作は取り消せません。チューニングに関連するコードフォームもすべて削除されます。';
 
   @override
   String get delete => '削除';
@@ -341,10 +342,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aboutAppTitle => 'アプリについて';
 
   @override
-  String get appName => 'Resonance';
+  String get appName => 'ChordFracture';
 
   @override
-  String get appDescription => '変則チューニングのためのギターコードフォーム管理アプリです。様々なチューニングでのコードフォームを記録・管理できます。';
+  String get appDescription =>
+      '変則チューニングのためのギターコードフォーム管理アプリです。様々なチューニングでのコードフォームを記録・管理できます。';
 
   @override
   String versionLabel(String version) {
@@ -383,7 +385,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get crashlyticsTest => 'Crashlyticsテスト';
 
   @override
-  String get crashlyticsTestDescription => 'テスト用のクラッシュを発生させて、Firebase Crashlyticsが正常に動作しているかを確認できます。';
+  String get crashlyticsTestDescription =>
+      'テスト用のクラッシュを発生させて、Firebase Crashlyticsが正常に動作しているかを確認できます。';
 
   @override
   String get testCrash => 'テストクラッシュを実行';
@@ -392,7 +395,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get crashlyticsTestTitle => 'Crashlyticsテスト';
 
   @override
-  String get crashlyticsTestWarning => 'この操作によりアプリがクラッシュします。Firebase Consoleで確認できます。';
+  String get crashlyticsTestWarning =>
+      'この操作によりアプリがクラッシュします。Firebase Consoleで確認できます。';
 
   @override
   String get proceedWithCrash => 'クラッシュを実行';

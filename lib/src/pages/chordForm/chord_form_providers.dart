@@ -2,7 +2,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/src/db/app_database.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
 
 // 単一のチューニングを取得するためのプロバイダー
 final singleTuningProvider = FutureProvider.family<Tuning, int>((

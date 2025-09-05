@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:resonance/l10n/app_localizations.dart';
+import 'package:chord_fracture/l10n/app_localizations.dart';
 
 class ErrorHandler {
   static void showSafeError(

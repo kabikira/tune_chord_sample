@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// Resonanceアプリのカスタムアイコンウィジェット
+/// ChordFractureアプリのカスタムアイコンウィジェット
 ///
 /// SVGデータを内蔵し、6つのギター弦を表現した波形アイコンを表示します。
 /// サイズとカラーはカスタマイズ可能です。
-class ResonanceIcon extends StatelessWidget {
+class ChordFractureIcon extends StatelessWidget {
   /// アイコンのサイズ（幅と高さ）
   final double size;
 
@@ -18,7 +18,7 @@ class ResonanceIcon extends StatelessWidget {
   /// 背景色（デフォルトは透明）
   final Color? backgroundColor;
 
-  const ResonanceIcon({
+  const ChordFractureIcon({
     super.key,
     this.size = 80,
     this.color,
@@ -27,7 +27,7 @@ class ResonanceIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 固定のSVGデータ（オリジナルのResonanceカラーを使用）
+    // 固定のSVGデータ（オリジナルのChordFractureカラーを使用）
     const svgData = '''
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
@@ -95,16 +95,16 @@ class ResonanceIcon extends StatelessWidget {
   }
 }
 
-/// シンプルなResonanceアイコン（背景なし、波形のみ）
-class SimpleResonanceIcon extends StatelessWidget {
+/// シンプルなChordFractureアイコン（背景なし、波形のみ）
+class SimpleChordFractureIcon extends StatelessWidget {
   final double size;
   final Color? color;
 
-  const SimpleResonanceIcon({super.key, this.size = 80, this.color});
+  const SimpleChordFractureIcon({super.key, this.size = 80, this.color});
 
   @override
   Widget build(BuildContext context) {
-    return ResonanceIcon(
+    return ChordFractureIcon(
       size: size,
       color: color,
       backgroundColor: Colors.transparent,

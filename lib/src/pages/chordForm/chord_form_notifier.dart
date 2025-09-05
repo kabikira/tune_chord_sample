@@ -3,7 +3,7 @@ import 'package:drift/drift.dart' as drift;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:resonance/src/db/app_database.dart';
+import 'package:chord_fracture/src/db/app_database.dart';
 
 // TODO: AsyncNotifierに書き換え
 
