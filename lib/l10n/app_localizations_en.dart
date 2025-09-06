@@ -405,4 +405,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get proceedWithCrash => 'Execute Crash';
+
+  @override
+  String get tuningLimitReachedTitle => 'Tuning limit reached';
+
+  @override
+  String get tuningLimitReachedShort =>
+      'On the free plan, you can register up to 10 tunings. Please delete unnecessary items or wait for a future update.';
+
+  @override
+  String get tuningLimitReachedPolite =>
+      'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.';
+
+  @override
+  String get chordFormLimitReachedTitle => 'Chord form limit reached';
+
+  @override
+  String get chordFormLimitReachedShort =>
+      'On the free plan, you can register up to 10 chord forms. Please delete unnecessary items or wait for a future update.';
+
+  @override
+  String get chordFormLimitReachedPolite =>
+      'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.';
+
+  @override
+  String get organize => 'Organize';
+
+  @override
+  String get ok => 'OK';
 }

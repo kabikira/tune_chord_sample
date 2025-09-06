@@ -172,6 +172,28 @@ class TuningList extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          final l10n = AppLocalizations.of(context)!;
+          final tunings = ref.read(tuningNotifierProvider).valueOrNull ?? [];
+          if (tunings.length >= 10) {
+            showDialog(
+              context: context,
+              builder: (dialogContext) => AlertDialog(
+                title: Text(l10n.tuningLimitReachedTitle),
+                content: Text(l10n.tuningLimitReachedShort),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(),
+                    child: Text(l10n.organize),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(),
+                    child: Text(l10n.ok),
+                  ),
+                ],
+              ),
+            );
+            return;
+          }
           showDialog(context: context, builder: (_) => const TuningRegister());
         },
         elevation: 4,

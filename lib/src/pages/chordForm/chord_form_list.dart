@@ -130,6 +130,29 @@ class ChordFormList extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          final l10n = AppLocalizations.of(context)!;
+          final forms = ref.read(chordFormNotifierProvider).valueOrNull ?? [];
+          final count = forms.where((f) => f.tuningId == tuningId).length;
+          if (count >= 10) {
+            showDialog(
+              context: context,
+              builder: (dialogContext) => AlertDialog(
+                title: Text(l10n.chordFormLimitReachedTitle),
+                content: Text(l10n.chordFormLimitReachedShort),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(),
+                    child: Text(l10n.organize),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(),
+                    child: Text(l10n.ok),
+                  ),
+                ],
+              ),
+            );
+            return;
+          }
           context.push(
             '/tuningList/chordFormList/$tuningId/chordFormRegister',
             extra: tuningId,
