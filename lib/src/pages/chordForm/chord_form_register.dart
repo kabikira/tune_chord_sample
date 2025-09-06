@@ -45,6 +45,26 @@ class ChordFormRegister extends ConsumerWidget {
             String? label,
             String? memo,
           }) async {
+            // 上限チェック（同一チューニングで10件まで）
+            final forms =
+                ref.read(chordFormNotifierProvider).valueOrNull ?? [];
+            final count = forms.where((f) => f.tuningId == tuningId).length;
+            if (count >= 10) {
+              await showDialog(
+                context: context,
+                builder: (dialogContext) => AlertDialog(
+                  title: Text(l10n.chordFormLimitReachedTitle),
+                  content: Text(l10n.chordFormLimitReachedShort),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(dialogContext).pop(),
+                      child: Text(l10n.ok),
+                    ),
+                  ],
+                ),
+              );
+              return;
+            }
             await ref
                 .read(chordFormNotifierProvider.notifier)
                 .addChordForm(

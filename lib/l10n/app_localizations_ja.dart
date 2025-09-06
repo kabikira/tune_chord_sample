@@ -400,4 +400,29 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get proceedWithCrash => 'クラッシュを実行';
+
+  @override
+  String get tuningLimitReachedTitle => 'チューニングの上限に達しました';
+
+  @override
+  String get tuningLimitReachedShort =>
+      '無料プランではチューニングは10件まで登録できます。不要な項目を削除するか、今後のアップデートをお待ちください。';
+
+  @override
+  String get tuningLimitReachedPolite =>
+      '無料プランの上限（10件）に達しました。整理して空きを作るか、上限拡張は今後のアップデートで提供予定です。';
+
+  @override
+  String get chordFormLimitReachedTitle => 'コードフォームの上限に達しました';
+
+  @override
+  String get chordFormLimitReachedShort =>
+      '無料プランではコードフォームは10件まで登録できます。不要な項目を削除するか、今後のアップデートをお待ちください。';
+
+  @override
+  String get chordFormLimitReachedPolite =>
+      '無料プランの上限（10件）に達しました。整理して空きを作るか、上限拡張は今後のアップデートで提供予定です。';
+
+  @override
+  String get ok => 'OK';
 }

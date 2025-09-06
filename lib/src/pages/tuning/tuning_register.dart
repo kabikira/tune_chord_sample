@@ -386,6 +386,25 @@ class TuningRegister extends HookConsumerWidget {
                 isSaving.value || !isFormValid.value
                     ? null
                     : () async {
+                      // 上限チェック（無料プラン10件）
+                      final existing =
+                          ref.read(tuningNotifierProvider).valueOrNull ?? [];
+                      if (existing.length >= 10) {
+                        await showDialog(
+                          context: context,
+                          builder: (dialogContext) => AlertDialog(
+                            title: Text(l10n.tuningLimitReachedTitle),
+                            content: Text(l10n.tuningLimitReachedShort),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(dialogContext).pop(),
+                                child: Text(l10n.ok),
+                              ),
+                            ],
+                          ),
+                        );
+                        return;
+                      }
                       final name = nameController.text.trim();
                       final strings = stringsController.text.trim();
 

@@ -471,5 +471,33 @@
   "proceedWithCrash": "クラッシュを実行",
   "@proceedWithCrash": {
     "description": "クラッシュ実行ボタンのテキスト"
+  },
+  "tuningLimitReachedTitle": "チューニングの上限に達しました",
+  "@tuningLimitReachedTitle": {
+    "description": "チューニング登録上限到達のダイアログタイトル"
+  },
+  "tuningLimitReachedShort": "無料プランではチューニングは10件まで登録できます。不要な項目を削除するか、今後のアップデートをお待ちください。",
+  "@tuningLimitReachedShort": {
+    "description": "チューニング登録上限到達の短い説明文"
+  },
+  "tuningLimitReachedPolite": "無料プランの上限（10件）に達しました。整理して空きを作るか、上限拡張は今後のアップデートで提供予定です。",
+  "@tuningLimitReachedPolite": {
+    "description": "チューニング登録上限到達の丁寧な説明文"
+  },
+  "chordFormLimitReachedTitle": "コードフォームの上限に達しました",
+  "@chordFormLimitReachedTitle": {
+    "description": "コードフォーム登録上限到達のダイアログタイトル"
+  },
+  "chordFormLimitReachedShort": "無料プランではコードフォームは10件まで登録できます。不要な項目を削除するか、今後のアップデートをお待ちください。",
+  "@chordFormLimitReachedShort": {
+    "description": "コードフォーム登録上限到達の短い説明文"
+  },
+  "chordFormLimitReachedPolite": "無料プランの上限（10件）に達しました。整理して空きを作るか、上限拡張は今後のアップデートで提供予定です。",
+  "@chordFormLimitReachedPolite": {
+    "description": "コードフォーム登録上限到達の丁寧な説明文"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OKボタンのテキスト"
   }
 }

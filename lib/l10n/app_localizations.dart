@@ -835,6 +835,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Execute Crash'**
   String get proceedWithCrash;
+
+  /// Dialog title when tuning registration limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Tuning limit reached'**
+  String get tuningLimitReachedTitle;
+
+  /// Short description when tuning limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'On the free plan, you can register up to 10 tunings. Please delete unnecessary items or wait for a future update.'**
+  String get tuningLimitReachedShort;
+
+  /// Polite description when tuning limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.'**
+  String get tuningLimitReachedPolite;
+
+  /// Dialog title when chord form registration limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Chord form limit reached'**
+  String get chordFormLimitReachedTitle;
+
+  /// Short description when chord form limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'On the free plan, you can register up to 10 chord forms. Please delete unnecessary items or wait for a future update.'**
+  String get chordFormLimitReachedShort;
+
+  /// Polite description when chord form limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.'**
+  String get chordFormLimitReachedPolite;
+
+  /// Text for OK button
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
 }
 
 class _AppLocalizationsDelegate
