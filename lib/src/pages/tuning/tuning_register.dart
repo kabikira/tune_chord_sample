@@ -397,15 +397,6 @@ class TuningRegister extends HookConsumerWidget {
                             content: Text(l10n.tuningLimitReachedShort),
                             actions: [
                               TextButton(
-                                onPressed: () {
-                                  Navigator.of(dialogContext).pop(); // 上限モーダル
-                                  if (Navigator.canPop(context)) {
-                                    Navigator.of(context).pop(); // 登録ダイアログ
-                                  }
-                                },
-                                child: Text(l10n.organize),
-                              ),
-                              TextButton(
                                 onPressed: () => Navigator.of(dialogContext).pop(),
                                 child: Text(l10n.ok),
                               ),

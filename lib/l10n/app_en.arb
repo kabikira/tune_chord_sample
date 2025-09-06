@@ -503,10 +503,6 @@
   "@chordFormLimitReachedPolite": {
     "description": "Polite description when chord form limit is reached"
   },
-  "organize": "Organize",
-  "@organize": {
-    "description": "Text for organize button"
-  },
   "ok": "OK",
   "@ok": {
     "description": "Text for OK button"

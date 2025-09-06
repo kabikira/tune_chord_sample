@@ -496,10 +496,6 @@
   "@chordFormLimitReachedPolite": {
     "description": "コードフォーム登録上限到達の丁寧な説明文"
   },
-  "organize": "整理する",
-  "@organize": {
-    "description": "整理するボタンのテキスト"
-  },
   "ok": "OK",
   "@ok": {
     "description": "OKボタンのテキスト"

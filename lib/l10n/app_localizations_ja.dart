@@ -424,8 +424,5 @@ class AppLocalizationsJa extends AppLocalizations {
       '無料プランの上限（10件）に達しました。整理して空きを作るか、上限拡張は今後のアップデートで提供予定です。';
 
   @override
-  String get organize => '整理する';
-
-  @override
   String get ok => 'OK';
 }

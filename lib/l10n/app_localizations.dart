@@ -872,12 +872,6 @@ abstract class AppLocalizations {
   /// **'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.'**
   String get chordFormLimitReachedPolite;
 
-  /// Text for organize button
-  ///
-  /// In en, this message translates to:
-  /// **'Organize'**
-  String get organize;
-
   /// Text for OK button
   ///
   /// In en, this message translates to:

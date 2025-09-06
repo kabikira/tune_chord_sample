@@ -429,8 +429,5 @@ class AppLocalizationsEn extends AppLocalizations {
       'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.';
 
   @override
-  String get organize => 'Organize';
-
-  @override
   String get ok => 'OK';
 }

@@ -142,10 +142,6 @@ class ChordFormList extends HookConsumerWidget {
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.of(dialogContext).pop(),
-                    child: Text(l10n.organize),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.of(dialogContext).pop(),
                     child: Text(l10n.ok),
                   ),
                 ],

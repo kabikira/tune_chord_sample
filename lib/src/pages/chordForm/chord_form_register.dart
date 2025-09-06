@@ -57,13 +57,6 @@ class ChordFormRegister extends ConsumerWidget {
                   content: Text(l10n.chordFormLimitReachedShort),
                   actions: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.of(dialogContext).pop(); // 上限モーダル
-                        Navigator.of(context).maybePop(); // 登録画面を閉じる
-                      },
-                      child: Text(l10n.organize),
-                    ),
-                    TextButton(
                       onPressed: () => Navigator.of(dialogContext).pop(),
                       child: Text(l10n.ok),
                     ),
