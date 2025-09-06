@@ -18,7 +18,13 @@ import 'package:chord_fracture/src/manager/app_initialization_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Android は google-services.json から自動解決できるため、
+  // オプション明示なしで初期化する。その他プラットフォームは明示オプションを使用。
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    await Firebase.initializeApp();
+  } else {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  }
 
   if (!kIsWeb) {
     FlutterError.onError = (errorDetails) {

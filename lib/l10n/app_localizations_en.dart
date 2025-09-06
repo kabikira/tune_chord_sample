@@ -56,8 +56,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get deleteWarningMessage =>
-      'This action cannot be undone. All chord forms associated with this tuning will also be deleted.';
+  String get deleteWarningMessage => 'This action cannot be undone. All chord forms associated with this tuning will also be deleted.';
 
   @override
   String get delete => 'Delete';
@@ -163,15 +162,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fretboardHelpOpenString => 'Fret 0 represents open strings';
 
   @override
-  String get fretboardHelpMuteString =>
-      'Long press at fret 0 to mute string (X)';
+  String get fretboardHelpMuteString => 'Long press at fret 0 to mute string (X)';
 
   @override
   String get fretboardHelpTapAgain => 'Tap the same position again to clear';
 
   @override
-  String get fretboardHelpArrowKeys =>
-      'Use left/right arrows to move fret positions';
+  String get fretboardHelpArrowKeys => 'Use left/right arrows to move fret positions';
 
   @override
   String get close => 'Close';
@@ -192,8 +189,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteChordForm => 'Delete Chord Form';
 
   @override
-  String get deleteChordFormConfirmation =>
-      'Are you sure you want to delete this chord form?';
+  String get deleteChordFormConfirmation => 'Are you sure you want to delete this chord form?';
 
   @override
   String get cannotBeUndone => 'This action cannot be undone.';
@@ -348,8 +344,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'ChordFracture';
 
   @override
-  String get appDescription =>
-      'A guitar chord form management app for alternate tunings. Record and manage chord forms across various tunings.';
+  String get appDescription => 'A guitar chord form management app for alternate tunings. Record and manage chord forms across various tunings.';
 
   @override
   String versionLabel(String version) {
@@ -360,12 +355,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteData => 'Delete Data';
 
   @override
-  String get deleteDataWarning =>
-      'All tuning and chord form data will be deleted';
+  String get deleteDataWarning => 'All tuning and chord form data will be deleted';
 
   @override
-  String get deleteDataDescription =>
-      'This action cannot be undone. All data will be permanently deleted.';
+  String get deleteDataDescription => 'This action cannot be undone. All data will be permanently deleted.';
 
   @override
   String get tuningStringRequired => 'Please enter the string tuning';
@@ -390,8 +383,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get crashlyticsTest => 'Crashlytics Test';
 
   @override
-  String get crashlyticsTestDescription =>
-      'Generate a test crash to verify Firebase Crashlytics is working properly.';
+  String get crashlyticsTestDescription => 'Generate a test crash to verify Firebase Crashlytics is working properly.';
 
   @override
   String get testCrash => 'Execute Test Crash';
@@ -400,8 +392,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get crashlyticsTestTitle => 'Crashlytics Test';
 
   @override
-  String get crashlyticsTestWarning =>
-      'This action will crash the app. You can verify it in Firebase Console.';
+  String get crashlyticsTestWarning => 'This action will crash the app. You can verify it in Firebase Console.';
 
   @override
   String get proceedWithCrash => 'Execute Crash';
@@ -410,23 +401,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tuningLimitReachedTitle => 'Tuning limit reached';
 
   @override
-  String get tuningLimitReachedShort =>
-      'On the free plan, you can register up to 10 tunings. Please delete unnecessary items or wait for a future update.';
+  String get tuningLimitReachedShort => 'On the free plan, you can register up to 10 tunings. Please delete unnecessary items or wait for a future update.';
 
   @override
-  String get tuningLimitReachedPolite =>
-      'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.';
+  String get tuningLimitReachedPolite => 'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.';
 
   @override
   String get chordFormLimitReachedTitle => 'Chord form limit reached';
 
   @override
-  String get chordFormLimitReachedShort =>
-      'On the free plan, you can register up to 10 chord forms. Please delete unnecessary items or wait for a future update.';
+  String get chordFormLimitReachedShort => 'On the free plan, you can register up to 10 chord forms. Please delete unnecessary items or wait for a future update.';
 
   @override
-  String get chordFormLimitReachedPolite =>
-      'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.';
+  String get chordFormLimitReachedPolite => 'You have reached the free plan limit (10). You can organize to free up space; we plan to offer limit expansion in a future update.';
 
   @override
   String get ok => 'OK';
